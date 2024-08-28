@@ -1,0 +1,1710 @@
+﻿
+@{
+    ViewBag.Title = "customerprof";
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.21.0/slimselect.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
+<style>
+    .image-preview {
+        max-width: 300px;
+        max-height: 300px;
+    }
+</style>
+<style>
+    /* Style for the modal-like div */
+    #customModal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        z-index: 999;
+        text-align: center;
+    }
+
+    #modalContent {
+        background-color: #fff;
+        width: 80%;
+        max-width: 341px;
+        margin: 100px auto;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Close button style */
+    #closeModal {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        cursor: pointer;
+    }
+    
+</style>
+<link rel="stylesheet" href="https://unpkg.com/cropperjs/dist/cropper.css">
+@model ViewModel
+<div class="user_page">
+    <div class="container">
+        <div class="row">
+
+            @Html.Partial("~/Views/Shared/Components/_CustomarProfile.cshtml", Model)
+           
+            <!-- /.col -->
+
+            <div class="col-md-9 d_view02" id="sourav">
+                <div class="tab-content" id="v-pills-tabContent">
+
+
+                    <!-- /.tab-pane -->
+
+                    <div class="card tab-pane fade active" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                        <div id="v-collapse-profile" class="collapse" role="tabpanel" aria-labelledby="v-collapse-heading-profile" data-parent="#v-pills-tabContent">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h4 class="mb-4">Profile Details</h4>
+                                        <h5 class="mb-3">Personal</h5>
+                                        <form>
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <label for="exampleTextarea">First Name <span style="color:#ed2323 ">*</span></label>
+                                                    <input class="field01 field04 rounded-0" id="First_Name" name="First_Name" value="@Model.company.First_Name" placeholder="" type="text" />
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <label for="exampleTextarea">Last Name <span style="color:#ed2323 ">*</span></label>
+                                                    <input class="field01 field04 rounded-0" placeholder="" id="Last_Name" name="Last_Name" value="@Model.company.Last_Name" type="text" />
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <label for="exampleTextarea">Email <span style="color:#ed2323 ">*</span></label>
+                                                    <input class="field01 field04 rounded-0" placeholder="" id="CompanyEmail" name="CompanyEmail" value="@Model.company.CompanyEmail" type="text" />
+                                                </div>
+                                                
+                                                <div class="col-sm-6">
+                                                    <label for="exampleTextarea">Contact</label>
+                                                  
+                                                    <ul>
+                                                        <li id="profile-contact-select">
+                                                            <select name="contact_options" id="id_contact_options">
+                                                                <option value="1">select contact type:</option>
+                                                                <option value="2">Phone</option>
+                                                                <option value="3">Fax</option>
+                                                                <option value="4">Land No</option>
+                                                            </select>
+                                                        </li>
+                                                        <li>
+                                                            <ul class="new_option decv">
+                                                                @if (Model.company.Fax != null && Model.company.Fax != "undefined" && Model.company.Fax != "")
+                                                                {
+                                                                    <li><label>Fax:</label></li>
+                                                                    <li><input type='text' id='fax_d' class='added_workphone' name='workphone' value='@Model.company.Fax' maxlength='20' /></li>
+                                                                }
+                                                                @if (Model.company.Phone != null && Model.company.Phone != "undefined" && Model.company.Phone != "")
+                                                                {
+                                                                    <li><label>Phone:</label></li>
+                                                                    <li><input type='tel' id='mobile_d' pattern='[0-9]{10}' class='added_mobilephone' name='mobilephone' value='@Model.company.Phone' maxlength='20' /></li>
+                                                                }
+                                                                
+                                                            </ul>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+
+                                                <div class="col-sm-12 mb-0">
+                                                    <h5>Address</h5>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <label for="exampleTextarea">Country <span style="color:#ed2323 ">*</span></label>
+                                                    <div class="">
+
+                                                        <select id="country" name="country" disabled>
+                                                            <option value="" selected="selected">Select Country</option>                                                          
+                                                            <option value="AF/AFG">Afghanistan</option>
+                                                            <option value="AL/ALB">Albania</option>
+                                                            <option value="DZ/DZA">Algeria</option>
+                                                            <option value="AS/ASM">American Samoa</option>
+                                                            <option value="AD/AND">Andorra</option>
+                                                            <option value="AO/AGO">Angola</option>
+                                                            <option value="AI/AIA">Anguilla</option>
+                                                            <option value="AQ/ATA">Antarctica</option>
+                                                            <option value="AG/ATG">Antigua and Barbuda</option>
+                                                            <option value="AR/ARG">Argentina</option>
+                                                            <option value="AM/ARM">Armenia</option>
+                                                            <option value="AW/ABW">Aruba</option>
+                                                            <option value="AU/AUS">Australia</option>
+                                                            <option value="AT/AUT">Austria</option>
+                                                            <option value="AZ/AZE">Azerbaijan</option>
+                                                            <option value="BS/BHS">Bahamas</option>
+                                                            <option value="BH/BHR">Bahrain</option>
+                                                            <option value="BD/BGD">Bangladesh</option>
+                                                            <option value="BB/BRB">Barbados</option>
+                                                            <option value="BY/BLR">Belarus</option>
+                                                            <option value="BE/BEL">Belgium</option>
+                                                            <option value="BZ/BLZ">Belize</option>
+                                                            <option value="BJ/BEN">Benin</option>
+                                                            <option value="BM/BMU">Bermuda</option>
+                                                            <option value="BT/BTN">Bhutan</option>
+                                                            <option value="BO/BOL">Bolivia</option>
+                                                            <option value="BA/BIH">Bosnia and Herzegovina</option>
+                                                            <option value="BW/BWA">Botswana</option>
+                                                            <option value="BR/BRA">Brazil</option>
+                                                            <option value="IO/IOT">British Indian Ocean Territory</option>
+                                                            <option value="BN/BRN">Brunei</option>
+                                                            <option value="BG/BGR">Bulgaria</option>
+                                                            <option value="BF/BFA">Burkina Faso</option>
+                                                            <option value="BI/BDI">Burundi</option>
+                                                            <option value="VG/VGB">British Virgin Islands</option>
+                                                            <option value="KH/KHM">Cambodia</option>
+                                                            <option value="CM/CMR">Cameroon</option>
+                                                            <option value="CA/CAN">Canada</option>
+                                                            <option value="CV/CPV">Cape Verde</option>
+                                                            <option value="KY/CYM">Cayman Islands</option>
+                                                            <option value="CF/CAF">Central African Republic</option>
+                                                            <option value="TD/TCD">Chad</option>
+                                                            <option value="CL/CHL">Chile</option>
+                                                            <option value="CN/CHN">China</option>
+                                                            <option value="CX/CXR">Christmas Island</option>
+                                                            <option value="CC/CCK">Cocos (Keeling) Islands</option>
+                                                            <option value="CO/COL">Colombia</option>
+                                                            <option value="KM/COM">Comoros</option>
+                                                            <option value="Congo">Congo</option>
+                                                           
+                                                            <option value="CK/COK">Cook Islands</option>
+                                                            <option value="CR/CRI">Costa Rica</option>
+                                                            <option value="Cote D'ivoire">Cote D'ivoire</option>
+                                                            <option value="HR/HRV">Croatia</option>
+                                                            <option value="CU/CUB">Cuba</option>
+                                                            <option value="CY/CYP">Cyprus</option>
+                                                            <option value="CZ/CZE">Czech Republic</option>
+                                                            <option value="DK/DNK">Denmark</option>
+                                                            <option value="DJ/DJI">Djibouti</option>
+                                                            <option value="DM/DMA">Dominica</option>
+                                                            <option value="DO/DOM">Dominican Republic</option>
+                                                            <option value="EC/ECU">Ecuador</option>
+                                                            <option value="EG/EGY">Egypt</option>
+                                                            <option value="SV/SLV">El Salvador</option>
+                                                            <option value="GQ/GNQ">Equatorial Guinea</option>
+                                                            <option value="ER/ERI">Eritrea</option>
+                                                            <option value="EE/EST">Estonia</option>
+                                                            <option value="ET/ETH">Ethiopia</option>
+                                                            <option value="FK/FLK">Falkland Islands (Malvinas)</option>
+                                                            <option value="FO/FRO">Faroe Islands</option>
+                                                            <option value="FJ/FJI">Fiji</option>
+                                                            <option value="FI/FIN">Finland</option>
+                                                            <option value="FR/FRA">France</option>
+                                                            <option value="French Guiana">French Guiana</option>
+                                                            <option value="PF/PYF">French Polynesia</option>
+                                                            @*<option value="French Southern Territories">French Southern Territories</option>*@
+                                                            <option value="GA/GAB">Gabon</option>
+                                                            <option value="GM/GMB">Gambia</option>
+                                                            <option value="GE/GEO">Georgia</option>
+                                                            <option value="DE/DEU">Germany</option>
+                                                            <option value="GH/GHA">Ghana</option>
+                                                            <option value="GI/GIB">Gibraltar</option>
+                                                            <option value="GR/GRC">Greece</option>
+                                                            <option value="GL/GRL">Greenland</option>
+                                                            <option value="GD/GRD">Grenada</option>
+                                                            <option value="GU/GUM">Guam</option>
+                                                            <option value="GT/GTM">Guatemala</option>
+                                                            <option value="GN/GIN">Guinea</option>
+                                                            <option value="GW/GNB">Guinea-bissau</option>
+                                                            <option value="GY/GUY">Guyana</option>
+                                                            <option value="HT/HTI">Haiti</option>
+                                                            @*<option value="Heard Island and Mcdonald Islands">Heard Island and Mcdonald Islands</option>
+                                                        <option value="Holy See (Vatican City State)">Holy See (Vatican City State)</option>*@
+                                                            <option value="HN/HND">Honduras</option>
+                                                            <option value="HK/HKG">Hong Kong</option>
+                                                            <option value="HU/HUN">Hungary</option>
+                                                            <option value="IS/ISL">Iceland</option>
+                                                            <option value="IN/IND">India</option>
+                                                            <option value="ID/IDN">Indonesia</option>
+                                                            <option value="IR/IRN">Iran, Islamic Republic of</option>
+                                                            <option value="IQ/IRQ">Iraq</option>
+                                                            <option value="IE/IRL">Ireland</option>
+                                                            <option value="IL/ISR">Israel</option>
+                                                            <option value="IT/ITA">Italy</option>
+                                                            <option value="JM/JAM">Jamaica</option>
+                                                            <option value="JP/JPN">Japan</option>
+                                                            <option value="JO/JOR">Jordan</option>
+                                                            <option value="KG/KGZ">Kazakhstan</option>
+                                                            <option value="KE/KEN">Kenya</option>
+                                                            <option value="KI/KIR">Kiribati</option>
+                                                            <option value="KW/KWT">Kuwait</option>
+                                                            <option value="KG/KGZ">Kyrgyzstan</option>
+                                                            <option value="LA/LAO">Laos</option>
+                                                            <option value="LV/LVA">Latvia</option>
+                                                            <option value="LB/LBN">Lebanon</option>
+                                                            <option value="LS/LSO">Lesotho</option>
+                                                            <option value="LR/LBR">Liberia</option>
+                                                            <option value="LY/LBY">Libya</option>
+                                                            <option value="LI/LIE">Liechtenstein</option>
+                                                            <option value="LT/LTU">Lithuania</option>
+                                                            <option value="LU/LUX">Luxembourg</option>
+                                                            <option value="MO/MAC">Macau</option>
+                                                            <option value="MK/MKD">Macedonia, The Former Yugoslav Republic of</option>
+                                                            <option value="MG/MDG">Madagascar</option>
+                                                            <option value="MW/MWI">Malawi</option>
+                                                            <option value="MY/MYS">Malaysia</option>
+                                                            <option value="MV/MDV">Maldives</option>
+                                                            <option value="ML/MLI">Mali</option>
+                                                            <option value="MT/MLT">Malta</option>
+                                                            <option value="MH/MHL">Marshall Islands</option>
+                                                            <option value="MR/MRT">Mauritania</option>
+                                                            <option value="MU/MUS">Mauritius</option>
+                                                            <option value="YT/MYT">Mayotte</option>
+                                                            <option value="MX/MEX">Mexico</option>
+                                                            <option value="FM/FSM">Micronesia, Federated States of</option>
+                                                            <option value="MD/MDA">Moldova, Republic of</option>
+                                                            <option value="MC/MCO">Monaco</option>
+                                                            <option value="MN/MNG">Mongolia</option>
+                                                            <option value="ME/MNE">Montenegro</option>
+                                                            <option value="MS/MSR">Montserrat</option>
+                                                            <option value="MA/MAR">Morocco</option>
+                                                            <option value="MZ/MOZ">Mozambique</option>
+                                                            <option value="MM/MMR">Myanmar</option>
+                                                            <option value="NA/NAM">Namibia</option>
+                                                            <option value="NR/NRU">Nauru</option>
+                                                            <option value="NP/NPL">Nepal</option>
+                                                            <option value="AN/ANT">Netherlands</option>
+                                                            <option value="AN/ANT">Netherlands Antilles</option>
+                                                            <option value="NC/NCL">New Caledonia</option>
+                                                            <option value="NZ/NZL">New Zealand</option>
+                                                            <option value="NI/NIC">Nicaragua</option>
+                                                            <option value="NE/NER">Niger</option>
+                                                            <option value="NG/NGA">Nigeria</option>
+                                                            <option value="NU/NIU">Niue</option>
+                                                            <option value="KP/PRK">North Korea</option>
+                                                            <option value="MP/MNP">Northern Mariana Islands</option>
+                                                            <option value="NO/NOR">Norway</option>
+                                                            <option value="OM/OMN">Oman</option>
+                                                            <option value="PK/PAK">Pakistan</option>
+                                                            <option value="PW/PLW">Palau</option>
+                                                            <option value="PS/PSE">Palestinian Territory, Occupied</option>
+                                                            <option value="PA/PAN">Panama</option>
+                                                            <option value="PG/PNG">Papua New Guinea</option>
+                                                            <option value="PY/PRY">Paraguay</option>
+                                                            <option value="PE/PER">Peru</option>
+                                                            <option value="PH/PHL">Philippines</option>
+                                                            <option value="PN/PCN">Pitcairn</option>
+                                                            <option value="PL/POL">Poland</option>
+                                                            <option value="PT/PRT">Portugal</option>
+                                                            <option value="PR/PRI">Puerto Rico</option>
+                                                            <option value="QA/QAT">Qatar</option>
+                                                            <option value="CG/COG">Republic of the Congo</option>
+                                                            <option value="RE/REU">Reunion</option>
+                                                            <option value="RO/ROU">Romania</option>
+                                                            <option value="RU/RUS">Russian Federation</option>
+                                                            <option value="RW/RWA">Rwanda</option>
+                                                            <option value="SH/SHN">Saint Helena</option>
+                                                            <option value="KN/KNA">Saint Kitts and Nevis</option>
+                                                            <option value="LC/LCA">Saint Lucia</option>
+                                                            <option value="PM/SPM">Saint Pierre and Miquelon</option>
+                                                            <option value="VC/VCT">Saint Vincent and The Grenadines</option>
+                                                            <option value="WS/WSM">Samoa</option>
+                                                            <option value="SM/SMR">San Marino</option>
+                                                            <option value="ST/STP">Sao Tome and Principe</option>
+                                                            <option value="SA/SAU">Saudi Arabia</option>
+                                                            <option value="SN/SEN">Senegal</option>
+                                                            <option value="RS/SRB">Serbia and Montenegro</option>
+                                                            <option value="SC/SYC">Seychelles</option>
+                                                            <option value="SL/SLE">Sierra Leone</option>
+                                                            <option value="SG/SGP">Singapore</option>
+                                                            <option value="SK/SVK">Slovakia</option>
+                                                            <option value="SI/SVN">Slovenia</option>
+                                                            <option value="SB/SLB">Solomon Islands</option>
+                                                            <option value="SO/SOM">Somalia</option>
+                                                            <option value="ZA/ZAF">South Africa</option>
+                                                            <option value="KR/KOR">South Korea</option>
+                                                            @*<option value="South Georgia and The South Sandwich Islands">South Georgia and The South Sandwich Islands</option>*@
+                                                            <option value="SS/SSD">South Sudan</option>
+                                                            <option value="ES/ESP">Spain</option>
+                                                            <option value="LK/LKA">Sri Lanka</option>
+                                                            <option value="SD/SDN">Sudan</option>
+                                                            <option value="SR/SUR">Suriname</option>
+                                                            <option value="SJ/SJM">Svalbard and Jan Mayen</option>
+                                                            <option value="SZ/SWZ">Swaziland</option>
+                                                            <option value="SE/SWE">Sweden</option>
+                                                            <option value="CH/CHE">Switzerland</option>
+                                                            <option value="SY/SYR">Syria</option>
+                                                            <option value="TW/TWN">Taiwan, Province of China</option>
+                                                            <option value="TJ/TJK">Tajikistan</option>
+                                                            <option value="TZ/TZA">Tanzania</option>
+                                                            <option value="TH/THA">Thailand</option>
+                                                            <option value="TG/TGO">Togo</option>
+                                                            <option value="TK/TKL">Tokelau</option>
+                                                            <option value="TO/TON">Tonga</option>
+                                                            <option value="TT/TTO">Trinidad and Tobago</option>
+                                                            <option value="TN/TUN">Tunisia</option>
+                                                            <option value="TR/TUR">Turkey</option>
+                                                            <option value="TM/TKM">Turkmenistan</option>
+                                                            <option value="TC/TCA">Turks and Caicos Islands</option>
+                                                            <option value="TV/TUV">Tuvalu</option>
+                                                            <option value="UG/UGA">Uganda</option>
+                                                            <option value="UA/UKR">Ukraine</option>
+                                                            <option value="AE/ARE">United Arab Emirates</option>
+                                                            <option value="GB/GBR">United Kingdom</option>
+                                                            <option value="US/USA">United States</option>
+                                                            <option value="UY/URY">Uruguay</option>
+                                                            <option value="UZ/UZB">Uzbekistan</option>
+                                                            <option value="VU/VUT">Vanuatu</option>
+                                                            <option value="VE/VEN">Venezuela</option>
+                                                            <option value="VN/VNM">Vietnam</option>
+                                                            <option value="WF/WLF">Wallis and Futuna</option>
+                                                            <option value="EH/ESH">Western Sahara</option>
+                                                            <option value="YE/YEM">Yemen</option>
+                                                            <option value="ZM/ZMB">Zambia</option>
+                                                            <option value="ZW/ZWE">Zimbabwe</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <label for="exampleTextarea">State <span style="color:#ed2323 ">*</span></label>
+                                                    <input class="field01 field04 rounded-0" placeholder="" value="@Model.company.State" name="State" id="State" type="text" />
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <label for="exampleTextarea">City <span style="color:#ed2323 ">*</span></label>
+                                                    <input class="field01 field04 rounded-0" placeholder="" name="City" id="City" value="@Model.company.City" type="text" />
+                                                </div>
+
+                                                <div class="col-sm-6">
+                                                    <label for="exampleTextarea">Zip <span style="color:#ed2323 ">*</span></label>
+                                                    <input class="field01 field04 rounded-0" placeholder="" value="@Model.company.Zip" name="Zip" id="Zip" type="text" />
+                                                </div>
+                                                <input type="hidden" id="ct1" value="@Model.company.Country" />
+                                                <div class="col-sm-12">
+                                                    <button type="button" id="btnprofile" class="save_btn">Save</button>
+                                                </div>
+                                            </div>
+
+                                        </form>
+                                        <form>
+                                            <h5 class="mb-0">Reset Password</h5>
+                                            <hr />
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <label for="exampleTextarea">Current Password <span style="color:#ed2323 ">*</span></label>
+                                                    <input class="field01 field04 rounded-0" id="Current_Password" name="Current_Password" placeholder="" type="password" />
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <label for="exampleTextarea">New Password <span style="color:#ed2323 ">*</span></label>
+                                                    <input class="field01 field04 rounded-0" placeholder="" id="Password" name="Password" type="password" />
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <label for="exampleTextarea">Confirm New Password <span style="color:#ed2323 ">*</span></label>
+                                                    <input class="field01 field04 rounded-0" placeholder="" id="Confirmpassword" name="Confirmpassword" type="password" />
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <button type="button" id="btnpassword" class="save_btn">Save</button>
+                                                </div>
+                                            </div>
+
+                                        </form>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /.tab-pane -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- // responsive view start new-->
+<div class="m_view02">
+    <div class="user_page pt-0">
+        <div class="container">
+            <ul class="accordion">
+                <li>
+                    <a class="toggle" href=#>Personal <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+                    <div class="inner">
+                        <form>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label for="exampleTextarea">First Name</label>
+                                    <input class="field01 field04 rounded-0" id="First_Name1" name="First_Name" value="@Model.company.First_Name" placeholder="" type="text" />
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="exampleTextarea">Last Name</label>
+                                    <input class="field01 field04 rounded-0" placeholder="" id="Last_Name1" name="Last_Name" value="@Model.company.Last_Name" type="text" />
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="exampleTextarea">Email</label>
+                                    <input class="field01 field04 rounded-0" placeholder="" id="CompanyEmail1" name="CompanyEmail" value="@Model.company.CompanyEmail" type="text" />
+                                </div>
+                                @*<div class="col-sm-6">
+                                        <label for="exampleTextarea">Website</label>
+                                        <input class="field01 field04 rounded-0" placeholder="" id="CompanyWebsite" name="CompanyWebsite" value="@Model.company.CompanyWebsite" type="text" />
+                                    </div>*@
+                                @*<div class="col-sm-6">
+                                        <label for="exampleTextarea">Contact Person Name</label>
+                                        <input class="field01 field04 rounded-0" placeholder="" value="@Model.company.Contact_Person" id="Contact_Person" name="Contact_Person" type="text" />
+                                    </div>*@
+                                @*<div class="col-sm-6">
+                                        <label for="exampleTextarea">Contact Person Position</label>
+                                        <input class="field01 field04 rounded-0" placeholder="" id="Person_Position" name="Person_Position" value="@Model.company.Person_Position" type="text" />
+                                    </div>*@
+                            <div class="col-sm-6">
+                                <label for="exampleTextarea">Contact</label>
+                                @*<input class="field01 field04 rounded-0" placeholder="" value="@Model.company.Phone" id="Phone" name="Phone" type="text" />*@
+                                <ul>
+                                    <li id="profile-contact-select">
+                                        <select name="contact_options" id="id_contact_options_m">
+                                            <option value="1">select contact type:</option>
+                                            <option value="2">Phone</option>
+                                            <option value="3">Fax</option>
+                                            <option value="4">Land No</option>
+                                        </select>
+                                    </li>
+                                    <li>
+                                        <ul class="new_option mond" id="Contact_d">
+                                            @if (Model.company.Fax != null && Model.company.Fax != "undefined" && Model.company.Fax != "")
+                                            {
+                                                <li><label>Fax:</label></li>
+                                                <li><input type='text' id='fax_m' class='added_workphone' name='workphone' value='@Model.company.Fax' maxlength='20' /></li>
+                                            }
+                                            @if (Model.company.Phone != null && Model.company.Phone != "undefined" && Model.company.Phone != "")
+                                            {
+                                                <li><label>Phone:</label></li>
+                                                <li><input type='tel' id='mobile_m' pattern='[0-9]{10}' class='added_mobilephone' name='mobilephone' value='@Model.company.Phone' maxlength='20' /></li>
+                                            }
+                                            @*@if (Model.company.land_no != null && Model.company.land_no != "undefined" && Model.company.land_no != "")
+                                            {
+                                                <li><label>Land No:</label></li>
+                                                <li><input type='tel' id='land_m' class='added_workemail' name='workemail' value='@Model.company.land_no' /></li>
+                                            }*@
+
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+
+                                @*<div class="col-sm-6">
+                                        <label for="exampleTextarea">Alternative Contact</label>
+                                        <input class="field01 field04 rounded-0" placeholder="" value="@Model.company.Alter_Contact" id="Alter_Contact" name="Alter_Contact" type="text" />
+                                    </div>*@
+
+
+                                
+                                <div class="col-sm-12">
+                                    <button type="button" id="btnprofile1" class="save_btn">Save</button>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </li>
+
+                <li>
+                    <a class="toggle" href=#>Address <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+                    <div class="inner">
+                        <form>
+                            <div class="row">
+
+                                <div class="col-sm-6">
+                                    <label for="exampleTextarea">Country</label>
+                                    <div class="">
+
+                                        <select id="country01" name="country">
+                                            <option value="" selected="selected">Select Country</option>
+                                            @*<option value="1">United States</option>
+                                                <option value="44">United Kingdom</option>*@
+                                            <option value="AF/AFG">Afghanistan</option>
+                                            <option value="AL/ALB">Albania</option>
+                                            <option value="DZ/DZA">Algeria</option>
+                                            <option value="AS/ASM">American Samoa</option>
+                                            <option value="AD/AND">Andorra</option>
+                                            <option value="AO/AGO">Angola</option>
+                                            <option value="AI/AIA">Anguilla</option>
+                                            <option value="AQ/ATA">Antarctica</option>
+                                            <option value="AG/ATG">Antigua and Barbuda</option>
+                                            <option value="AR/ARG">Argentina</option>
+                                            <option value="AM/ARM">Armenia</option>
+                                            <option value="AW/ABW">Aruba</option>
+                                            <option value="AU/AUS">Australia</option>
+                                            <option value="AT/AUT">Austria</option>
+                                            <option value="AZ/AZE">Azerbaijan</option>
+                                            <option value="BS/BHS">Bahamas</option>
+                                            <option value="BH/BHR">Bahrain</option>
+                                            <option value="BD/BGD">Bangladesh</option>
+                                            <option value="BB/BRB">Barbados</option>
+                                            <option value="BY/BLR">Belarus</option>
+                                            <option value="BE/BEL">Belgium</option>
+                                            <option value="BZ/BLZ">Belize</option>
+                                            <option value="BJ/BEN">Benin</option>
+                                            <option value="BM/BMU">Bermuda</option>
+                                            <option value="BT/BTN">Bhutan</option>
+                                            <option value="BO/BOL">Bolivia</option>
+                                            <option value="BA/BIH">Bosnia and Herzegovina</option>
+                                            <option value="BW/BWA">Botswana</option>
+                                            <option value="BR/BRA">Brazil</option>
+                                            <option value="IO/IOT">British Indian Ocean Territory</option>
+                                            <option value="BN/BRN">Brunei</option>
+                                            <option value="BG/BGR">Bulgaria</option>
+                                            <option value="BF/BFA">Burkina Faso</option>
+                                            <option value="BI/BDI">Burundi</option>
+                                            <option value="VG/VGB">British Virgin Islands</option>
+                                            <option value="KH/KHM">Cambodia</option>
+                                            <option value="CM/CMR">Cameroon</option>
+                                            <option value="CA/CAN">Canada</option>
+                                            <option value="CV/CPV">Cape Verde</option>
+                                            <option value="KY/CYM">Cayman Islands</option>
+                                            <option value="CF/CAF">Central African Republic</option>
+                                            <option value="TD/TCD">Chad</option>
+                                            <option value="CL/CHL">Chile</option>
+                                            <option value="CN/CHN">China</option>
+                                            <option value="CX/CXR">Christmas Island</option>
+                                            <option value="CC/CCK">Cocos (Keeling) Islands</option>
+                                            <option value="CO/COL">Colombia</option>
+                                            <option value="KM/COM">Comoros</option>
+                                            <option value="Congo">Congo</option>
+                                            @*<option value="Congo, The Democratic Republic of The">Congo, The Democratic Republic of The</option>*@
+                                            <option value="CK/COK">Cook Islands</option>
+                                            <option value="CR/CRI">Costa Rica</option>
+                                            <option value="Cote D'ivoire">Cote D'ivoire</option>
+                                            <option value="HR/HRV">Croatia</option>
+                                            <option value="CU/CUB">Cuba</option>
+                                            <option value="CY/CYP">Cyprus</option>
+                                            <option value="CZ/CZE">Czech Republic</option>
+                                            <option value="DK/DNK">Denmark</option>
+                                            <option value="DJ/DJI">Djibouti</option>
+                                            <option value="DM/DMA">Dominica</option>
+                                            <option value="DO/DOM">Dominican Republic</option>
+                                            <option value="EC/ECU">Ecuador</option>
+                                            <option value="EG/EGY">Egypt</option>
+                                            <option value="SV/SLV">El Salvador</option>
+                                            <option value="GQ/GNQ">Equatorial Guinea</option>
+                                            <option value="ER/ERI">Eritrea</option>
+                                            <option value="EE/EST">Estonia</option>
+                                            <option value="ET/ETH">Ethiopia</option>
+                                            <option value="FK/FLK">Falkland Islands (Malvinas)</option>
+                                            <option value="FO/FRO">Faroe Islands</option>
+                                            <option value="FJ/FJI">Fiji</option>
+                                            <option value="FI/FIN">Finland</option>
+                                            <option value="FR/FRA">France</option>
+                                            <option value="French Guiana">French Guiana</option>
+                                            <option value="PF/PYF">French Polynesia</option>
+                                            @*<option value="French Southern Territories">French Southern Territories</option>*@
+                                            <option value="GA/GAB">Gabon</option>
+                                            <option value="GM/GMB">Gambia</option>
+                                            <option value="GE/GEO">Georgia</option>
+                                            <option value="DE/DEU">Germany</option>
+                                            <option value="GH/GHA">Ghana</option>
+                                            <option value="GI/GIB">Gibraltar</option>
+                                            <option value="GR/GRC">Greece</option>
+                                            <option value="GL/GRL">Greenland</option>
+                                            <option value="GD/GRD">Grenada</option>
+                                            <option value="GU/GUM">Guam</option>
+                                            <option value="GT/GTM">Guatemala</option>
+                                            <option value="GN/GIN">Guinea</option>
+                                            <option value="GW/GNB">Guinea-bissau</option>
+                                            <option value="GY/GUY">Guyana</option>
+                                            <option value="HT/HTI">Haiti</option>
+                                            @*<option value="Heard Island and Mcdonald Islands">Heard Island and Mcdonald Islands</option>
+                                                <option value="Holy See (Vatican City State)">Holy See (Vatican City State)</option>*@
+                                            <option value="HN/HND">Honduras</option>
+                                            <option value="HK/HKG">Hong Kong</option>
+                                            <option value="HU/HUN">Hungary</option>
+                                            <option value="IS/ISL">Iceland</option>
+                                            <option value="IN/IND">India</option>
+                                            <option value="ID/IDN">Indonesia</option>
+                                            <option value="IR/IRN">Iran, Islamic Republic of</option>
+                                            <option value="IQ/IRQ">Iraq</option>
+                                            <option value="IE/IRL">Ireland</option>
+                                            <option value="IL/ISR">Israel</option>
+                                            <option value="IT/ITA">Italy</option>
+                                            <option value="JM/JAM">Jamaica</option>
+                                            <option value="JP/JPN">Japan</option>
+                                            <option value="JO/JOR">Jordan</option>
+                                            <option value="KG/KGZ">Kazakhstan</option>
+                                            <option value="KE/KEN">Kenya</option>
+                                            <option value="KI/KIR">Kiribati</option>
+                                            <option value="KW/KWT">Kuwait</option>
+                                            <option value="KG/KGZ">Kyrgyzstan</option>
+                                            <option value="LA/LAO">Laos</option>
+                                            <option value="LV/LVA">Latvia</option>
+                                            <option value="LB/LBN">Lebanon</option>
+                                            <option value="LS/LSO">Lesotho</option>
+                                            <option value="LR/LBR">Liberia</option>
+                                            <option value="LY/LBY">Libya</option>
+                                            <option value="LI/LIE">Liechtenstein</option>
+                                            <option value="LT/LTU">Lithuania</option>
+                                            <option value="LU/LUX">Luxembourg</option>
+                                            <option value="MO/MAC">Macau</option>
+                                            <option value="MK/MKD">Macedonia, The Former Yugoslav Republic of</option>
+                                            <option value="MG/MDG">Madagascar</option>
+                                            <option value="MW/MWI">Malawi</option>
+                                            <option value="MY/MYS">Malaysia</option>
+                                            <option value="MV/MDV">Maldives</option>
+                                            <option value="ML/MLI">Mali</option>
+                                            <option value="MT/MLT">Malta</option>
+                                            <option value="MH/MHL">Marshall Islands</option>
+                                            <option value="MR/MRT">Mauritania</option>
+                                            <option value="MU/MUS">Mauritius</option>
+                                            <option value="YT/MYT">Mayotte</option>
+                                            <option value="MX/MEX">Mexico</option>
+                                            <option value="FM/FSM">Micronesia, Federated States of</option>
+                                            <option value="MD/MDA">Moldova, Republic of</option>
+                                            <option value="MC/MCO">Monaco</option>
+                                            <option value="MN/MNG">Mongolia</option>
+                                            <option value="ME/MNE">Montenegro</option>
+                                            <option value="MS/MSR">Montserrat</option>
+                                            <option value="MA/MAR">Morocco</option>
+                                            <option value="MZ/MOZ">Mozambique</option>
+                                            <option value="MM/MMR">Myanmar</option>
+                                            <option value="NA/NAM">Namibia</option>
+                                            <option value="NR/NRU">Nauru</option>
+                                            <option value="NP/NPL">Nepal</option>
+                                            <option value="AN/ANT">Netherlands</option>
+                                            <option value="AN/ANT">Netherlands Antilles</option>
+                                            <option value="NC/NCL">New Caledonia</option>
+                                            <option value="NZ/NZL">New Zealand</option>
+                                            <option value="NI/NIC">Nicaragua</option>
+                                            <option value="NE/NER">Niger</option>
+                                            <option value="NG/NGA">Nigeria</option>
+                                            <option value="NU/NIU">Niue</option>
+                                            <option value="KP/PRK">North Korea</option>
+                                            <option value="MP/MNP">Northern Mariana Islands</option>
+                                            <option value="NO/NOR">Norway</option>
+                                            <option value="OM/OMN">Oman</option>
+                                            <option value="PK/PAK">Pakistan</option>
+                                            <option value="PW/PLW">Palau</option>
+                                            <option value="PS/PSE">Palestinian Territory, Occupied</option>
+                                            <option value="PA/PAN">Panama</option>
+                                            <option value="PG/PNG">Papua New Guinea</option>
+                                            <option value="PY/PRY">Paraguay</option>
+                                            <option value="PE/PER">Peru</option>
+                                            <option value="PH/PHL">Philippines</option>
+                                            <option value="PN/PCN">Pitcairn</option>
+                                            <option value="PL/POL">Poland</option>
+                                            <option value="PT/PRT">Portugal</option>
+                                            <option value="PR/PRI">Puerto Rico</option>
+                                            <option value="QA/QAT">Qatar</option>
+                                            <option value="CG/COG">Republic of the Congo</option>
+                                            <option value="RE/REU">Reunion</option>
+                                            <option value="RO/ROU">Romania</option>
+                                            <option value="RU/RUS">Russian Federation</option>
+                                            <option value="RW/RWA">Rwanda</option>
+                                            <option value="SH/SHN">Saint Helena</option>
+                                            <option value="KN/KNA">Saint Kitts and Nevis</option>
+                                            <option value="LC/LCA">Saint Lucia</option>
+                                            <option value="PM/SPM">Saint Pierre and Miquelon</option>
+                                            <option value="VC/VCT">Saint Vincent and The Grenadines</option>
+                                            <option value="WS/WSM">Samoa</option>
+                                            <option value="SM/SMR">San Marino</option>
+                                            <option value="ST/STP">Sao Tome and Principe</option>
+                                            <option value="SA/SAU">Saudi Arabia</option>
+                                            <option value="SN/SEN">Senegal</option>
+                                            <option value="RS/SRB">Serbia and Montenegro</option>
+                                            <option value="SC/SYC">Seychelles</option>
+                                            <option value="SL/SLE">Sierra Leone</option>
+                                            <option value="SG/SGP">Singapore</option>
+                                            <option value="SK/SVK">Slovakia</option>
+                                            <option value="SI/SVN">Slovenia</option>
+                                            <option value="SB/SLB">Solomon Islands</option>
+                                            <option value="SO/SOM">Somalia</option>
+                                            <option value="ZA/ZAF">South Africa</option>
+                                            <option value="KR/KOR">South Korea</option>
+                                            @*<option value="South Georgia and The South Sandwich Islands">South Georgia and The South Sandwich Islands</option>*@
+                                            <option value="SS/SSD">South Sudan</option>
+                                            <option value="ES/ESP">Spain</option>
+                                            <option value="LK/LKA">Sri Lanka</option>
+                                            <option value="SD/SDN">Sudan</option>
+                                            <option value="SR/SUR">Suriname</option>
+                                            <option value="SJ/SJM">Svalbard and Jan Mayen</option>
+                                            <option value="SZ/SWZ">Swaziland</option>
+                                            <option value="SE/SWE">Sweden</option>
+                                            <option value="CH/CHE">Switzerland</option>
+                                            <option value="SY/SYR">Syria</option>
+                                            <option value="TW/TWN">Taiwan, Province of China</option>
+                                            <option value="TJ/TJK">Tajikistan</option>
+                                            <option value="TZ/TZA">Tanzania</option>
+                                            <option value="TH/THA">Thailand</option>
+                                            <option value="TG/TGO">Togo</option>
+                                            <option value="TK/TKL">Tokelau</option>
+                                            <option value="TO/TON">Tonga</option>
+                                            <option value="TT/TTO">Trinidad and Tobago</option>
+                                            <option value="TN/TUN">Tunisia</option>
+                                            <option value="TR/TUR">Turkey</option>
+                                            <option value="TM/TKM">Turkmenistan</option>
+                                            <option value="TC/TCA">Turks and Caicos Islands</option>
+                                            <option value="TV/TUV">Tuvalu</option>
+                                            <option value="UG/UGA">Uganda</option>
+                                            <option value="UA/UKR">Ukraine</option>
+                                            <option value="AE/ARE">United Arab Emirates</option>
+                                            <option value="GB/GBR">United Kingdom</option>
+                                            <option value="US/USA">United States</option>
+                                            <option value="UY/URY">Uruguay</option>
+                                            <option value="UZ/UZB">Uzbekistan</option>
+                                            <option value="VU/VUT">Vanuatu</option>
+                                            <option value="VE/VEN">Venezuela</option>
+                                            <option value="VN/VNM">Vietnam</option>
+                                            <option value="WF/WLF">Wallis and Futuna</option>
+                                            <option value="EH/ESH">Western Sahara</option>
+                                            <option value="YE/YEM">Yemen</option>
+                                            <option value="ZM/ZMB">Zambia</option>
+                                            <option value="ZW/ZWE">Zimbabwe</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="exampleTextarea">State</label>
+                                    <input class="field01 field04 rounded-0" placeholder="" value="@Model.company.State" name="State" id="State1" type="text" />
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="exampleTextarea">City</label>
+                                    <input class="field01 field04 rounded-0" placeholder="" name="City" id="City1" value="@Model.company.City" type="text" />
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="exampleTextarea">Zip</label>
+                                    <input class="field01 field04 rounded-0" placeholder="" value="@Model.company.Zip" name="Zip" id="Zip1" type="text" />
+                                </div>
+                               
+                                <div class="col-sm-12">
+                                    <button type="button" id="btnprofile2" class="save_btn">Save</button>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </li>
+
+                <li>
+                    <a class="toggle" href=#>Reset Password <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+                    <div class="inner">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label for="exampleTextarea">Current Password</label>
+                                <input class="field01 field04 rounded-0" id="Current_Password1" name="Current_Password" placeholder="" type="password" />
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="exampleTextarea">New Password</label>
+                                <input class="field01 field04 rounded-0" placeholder="" id="Password1" name="Password" type="password" />
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="exampleTextarea">Confirm New Password</label>
+                                <input class="field01 field04 rounded-0" placeholder="" id="Confirmpassword1" name="Confirmpassword" type="password" />
+                            </div>
+                            <div class="col-sm-12">
+                                <button type="button" id="btnpassword1" class="save_btn">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- // responsive view new end-->
+<!-- Custom modal content -->
+<div id="customModal">
+    <div class="modal-500" id="modalContent">
+        <div class="image-preview">
+            <img id="croppedImage" src="" alt="Cropped Image">
+        </div>
+        <input type="button" class="save_btn" style="float: none;" id="cropImage" value="Crop & Save" />
+        <button type="button" class="save_btn btn-danger" style="float: none;" id="cropImagehide">Cancel</button>
+    </div>
+</div>
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="~/Content/Web//js/bootstrap.bundle.min.js"></script>
+<script src="~/Content/Web/js/myScript.js"></script>
+<script src="https://unpkg.com/cropperjs/dist/cropper.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.21.0/slimselect.js"></script>
+
+
+<script>
+                                                    /*
+* Single
+*/ $(document).ready(function () {
+
+        const country = new SlimSelect({
+            select: '#country'
+        });
+    const country01 = new SlimSelect({
+        select: '#country01'
+    });
+        var cont = $('#ct1').val();
+    country.set(cont);
+    country01.set(cont);
+    country.disable();
+
+});
+</script>
+<script>
+    $(document).ready(function () {
+
+        $("#cropImagehide").click(function () {
+            $("#customModal").hide();
+        });
+
+    })
+</script>
+<!-- // responsive view accordion start -->
+<script>
+    $('.toggle').click(function (e) {
+        e.preventDefault();
+
+        let $this = $(this);
+
+        if ($this.next().hasClass('show')) {
+            $this.next().removeClass('show');
+            $this.next().slideUp(350);
+        } else {
+            $this.parent().parent().find('li .inner').removeClass('show');
+            $this.parent().parent().find('li .inner').slideUp(350);
+            $this.next().toggleClass('show');
+            $this.next().slideToggle(350);
+        }
+    });
+    $(".toggle").click(function () {
+        $(this).toggleClass("down");
+    });
+</script>
+<!-- // responsive view accordion end -->
+<!-- // Contact Select Dropdown start -->
+<script>
+    var myphone = "<li><label>Phone:</label></li><li><input type='tel' id='mobile_d' pattern='[0-9]{10}' class='added_mobilephone' name='mobilephone' value='' maxlength='20' /></li>";
+    var workphone = "<li><label>Fax:</label></li><li><input type='text' id='fax_d' class='added_workphone' name='workphone' value='' maxlength='20' /></li>";
+    var myemail = "<li><label>Land No:</label></li><li><input type='tel' id='land_no_d' class='added_workemail' name='workemail' value='' /></li>";
+
+    var myphone_m = "<li><label>Phone:</label></li><li><input type='tel' id='mobile_m' pattern='[0-9]{10}' class='added_mobilephone' name='mobilephone' value='' maxlength='20' /></li>";
+    var Fax_m = "<li><label>Fax:</label></li><li><input type='text' id='fax_m' class='added_workphone' name='workphone' value='' maxlength='20' /></li>";
+    var Land_no_m = "<li><label>Land No:</label></li><li><input type='tel' id='land_m' class='added_workemail' name='workemail' value='' /></li>";
+
+
+    		$('#id_contact_options').unbind('change').bind('change', function() {
+    var v = $(this).val();
+    switch (v) {
+      case '2':
+        console.log('created phone input');
+            $('.decv').append(myphone);
+        //$('.added_mobilephone').mask('(999) 999-9999? 9');
+        //$('.added_mobilephone').keypress(function(event){
+
+        //  if (this.value.trim().length > 10) {
+        //    console.log('this.value = '+this.value.trim());
+        //    console.log('greater then 10');
+        //    $('.added_mobilephone').mask('99999999999999999999');
+        //  }
+
+        //  if (this.value.length < 9) {
+        //    console.log(this.value);
+        //    console.log('less then 10');
+        //    $('.added_mobilephone').mask('(999) 999-9999? 9999999999');
+        //  } else if (this.value.length > 9) {
+        //    console.log(this.value);
+        //    console.log('greater then 10');
+        //    $('.added_mobilephone').mask('99999999999999999999');
+        //  }
+        //});
+        break;
+      case '3':
+            $('.decv').append(workphone);
+      /*  $('.added_workphone').mask('(999) 999-9999? 9999999999');*/
+        break;
+      case '4':
+        console.log('created email input');
+            $('.decv').append(myemail);
+        //$('#my_email').blur('blur', function() {
+        //  console.log('inside live');
+        //  if (this.value.length > 0) {
+        //    validateEmail(this.value);
+        //  }
+        //});
+        break;
+    };
+            });
+
+    $('#id_contact_options_m').unbind('change').bind('change', function () {
+        var v = $(this).val();
+        switch (v) {
+            case '2':
+                console.log('created phone input');
+                $('.mond').append(myphone_m);
+                //$('.added_mobilephone').mask('(999) 999-9999? 9');
+                //$('.added_mobilephone').keypress(function(event){
+
+                //  if (this.value.trim().length > 10) {
+                //    console.log('this.value = '+this.value.trim());
+                //    console.log('greater then 10');
+                //    $('.added_mobilephone').mask('99999999999999999999');
+                //  }
+
+                //  if (this.value.length < 9) {
+                //    console.log(this.value);
+                //    console.log('less then 10');
+                //    $('.added_mobilephone').mask('(999) 999-9999? 9999999999');
+                //  } else if (this.value.length > 9) {
+                //    console.log(this.value);
+                //    console.log('greater then 10');
+                //    $('.added_mobilephone').mask('99999999999999999999');
+                //  }
+                //});
+                break;
+            case '3':
+                $('.mond').append(Fax_m);
+                /*  $('.added_workphone').mask('(999) 999-9999? 9999999999');*/
+                break;
+            case '4':
+                console.log('created email input');
+                $('.mond').append(Land_no_m);
+                //$('#my_email').blur('blur', function() {
+                //  console.log('inside live');
+                //  if (this.value.length > 0) {
+                //    validateEmail(this.value);
+                //  }
+                //});
+                break;
+        };
+    });
+</script>
+<!-- // Contact Select Dropdown end -->
+
+
+
+<script>
+
+
+    $(document).ready(function () {
+
+
+
+
+
+
+
+
+        // Show the custom modal when the button is clicked
+        $('#showModalButton').on('click', function () {
+            $('#customModal').fadeIn();
+        });
+
+        // Close the custom modal when the close button or the background is clicked
+        // $('#closeModal, #customModal').on('click', function () {
+        //     $('#customModal').fadeOut();
+        // });
+
+        // Prevent modal content from closing the modal when clicked
+        $('#modalContent').on('click', function (e) {
+            e.stopPropagation();
+        });
+    })
+
+
+</script>
+
+
+
+<!--  progress script -->
+<script>
+    const progress = document.querySelector(".progress-done");
+
+    /* progress.style.width = progress.getAttribute("data-done") + "%";*/
+    /* progress.style.opacity = 1;*/
+</script>
+
+<!--  tab script -->
+<script>
+    const tabsBtns = Array.from(document.querySelectorAll("[data-tab-id]"));
+    const tabs = Array.from(document.querySelectorAll("[data-tab]"));
+
+    /*let selectedTab = tabsBtns[0].dataset.tabId;*/
+
+    const hideTabs = () => {
+        tabs
+            .filter((tab) => tab.dataset.tab !== selectedTab)
+            .forEach((tab) => {
+                tab.classList.add("tabs__tab--hide");
+            });
+
+        tabsBtns
+            .filter((tab) => tab.dataset.tabId !== selectedTab)
+            .forEach((tab) => {
+                tab.classList.add("tabs__tab-btn--not-selected");
+            });
+    };
+    hideTabs();
+
+    const handleSelectTab = (e) => {
+        selectedTab = e.target.dataset.tabId;
+
+        tabs.forEach((tab) => {
+            tab.classList.remove("tabs__tab--hide");
+        });
+
+        tabsBtns.forEach((tab) => {
+            tab.classList.remove("tabs__tab-btn--not-selected");
+        });
+
+        hideTabs();
+    };
+
+    tabsBtns.forEach((btn) => {
+        btn.addEventListener("click", handleSelectTab);
+    });
+
+</script>
+
+
+<script>
+    $(document).ready(function () {
+
+        $("#btnprofile").click(function () {
+            const fd = new FormData();
+
+            fd.append('First_Name', $('#First_Name').val());
+            fd.append('Last_Name', $('#Last_Name').val());
+            /*  fd.append('CompanyWebsite', $('#CompanyWebsite').val());*/
+            //fd.append('Twitter', $('#Twitter').val());
+            //fd.append('LinkedIn', $('#LinkedIn').val());
+            fd.append('Phone', $('#mobile_d').val());
+            //fd.append('Contact_Person', $('#Contact_Person').val());
+            //fd.append('Person_Position', $('#Person_Position').val());
+            //fd.append('Alter_Contact', $('#Alter_Contact').val());
+            fd.append('Fax', $('#fax_d').val());
+            fd.append('land_no', $('#land_no_d').val());
+            fd.append('Address', $('#Address').val());
+            fd.append('country_code', $('#country').val());
+            fd.append('Country', $(`#country option:selected`).text());
+            fd.append('Zip', $('#Zip').val());
+            fd.append('City', $('#City').val());
+            fd.append('State', $('#State').val());
+            fd.append('CompanyEmail', $('#CompanyEmail').val());
+
+            $.ajax({
+                url: '/Profile/customer_profileupdate',
+                method: 'POST',
+                async: true,
+                contentType: false,
+                cache: false,
+                processData: false,
+                data: fd,
+                success: function (data, textStatus, xhr) {
+                    if (data.code == 200) {
+
+                        swal({
+                            title: "Success",
+                            text: "Profile updated successfully",
+                            type: "success"
+                        }, function () {
+                            window.location.reload();
+                        });
+
+                    }
+                    else if (data.code == 400) {
+                        swal({
+                            title: "Oops!",
+                            text: "Something went wrong!",
+                            type: "error"
+                        });
+                    }
+                    else if (data.code == 500) {
+                        swal({
+                            title: "Oops!",
+                            text: "Something went wrong!",
+                            type: "error"
+                        }, function () {
+                            window.location = data.url;
+                        });
+                    }
+
+                },
+                error: function (xhr, textStatus, errorThrown) {
+
+                    swal({
+                        title: "Oops!",
+                        text: "Something went wrong!",
+                        type: "error"
+                    });
+                }
+            })
+        })
+        $("#btnprofile1").click(function () {
+            const fd = new FormData();
+            fd.append('First_Name', $('#First_Name1').val());
+            fd.append('Last_Name', $('#Last_Name1').val());
+            fd.append('Phone', $('#mobile_m').val());
+            fd.append('country_code', $('#country01').val());
+            fd.append('Country', $(`#country01 option:selected`).text());
+            fd.append('Zip', $('#Zip1').val());
+            fd.append('City', $('#City1').val());
+            fd.append('State', $('#State1').val());
+            fd.append('CompanyEmail', $('#CompanyEmail1').val());
+            fd.append('Fax', $('#fax_m').val());
+            fd.append('land_no', $('#land_m').val());
+            $.ajax({
+                url: '/Profile/customer_profileupdate',
+                method: 'POST',
+                async: true,
+                contentType: false,
+                cache: false,
+                processData: false,
+                data: fd,
+                success: function (data, textStatus, xhr) {
+                    if (data.code == 200) {
+
+                        swal({
+                            title: "Success",
+                            text: "Profile updated successfully",
+                            type: "success"
+                        }, function () {
+                            window.location.reload();
+                        });
+
+                    }
+                    else if (data.code == 400) {
+                        swal({
+                            title: "Oops!",
+                            text: "Something went wrong!",
+                            type: "error"
+                        });
+                    }
+                    else if (data.code == 500) {
+                        swal({
+                            title: "Oops!",
+                            text: "Something went wrong!",
+                            type: "error"
+                        }, function () {
+                            window.location = data.url;
+                        });
+                    }
+
+                },
+                error: function (xhr, textStatus, errorThrown) {
+
+                    swal({
+                        title: "Oops!",
+                        text: "Something went wrong!",
+                        type: "error"
+                    });
+                }
+            })
+
+
+
+
+
+        })
+        $("#btnprofile2").click(function () {
+            const fd = new FormData();
+            fd.append('First_Name', $('#First_Name1').val());
+            fd.append('Last_Name', $('#Last_Name1').val());
+            fd.append('Phone', $('#mobile_m').val());
+            fd.append('country_code', $('#country01').val());
+            fd.append('Country', $(`#country01 option:selected`).text());
+            fd.append('Zip', $('#Zip1').val());
+            fd.append('City', $('#City1').val());
+            fd.append('State', $('#State1').val());
+            fd.append('CompanyEmail', $('#CompanyEmail1').val());
+            fd.append('Fax', $('#fax_m').val());
+            fd.append('land_no', $('#land_m').val());
+          
+            $.ajax({
+                url: '/Profile/customer_profileupdate',
+                method: 'POST',
+                async: true,
+                contentType: false,
+                cache: false,
+                processData: false,
+                data: fd,
+                success: function (data, textStatus, xhr) {
+                    if (data.code == 200) {
+
+                        swal({
+                            title: "Success",
+                            text: "Profile updated successfully",
+                            type: "success"
+                        }, function () {
+                            window.location.reload();
+                        });
+
+                    }
+                    else if (data.code == 400) {
+                        swal({
+                            title: "Oops!",
+                            text: "Something went wrong!",
+                            type: "error"
+                        });
+                    }
+                    else if (data.code == 500) {
+                        swal({
+                            title: "Oops!",
+                            text: "Something went wrong!",
+                            type: "error"
+                        }, function () {
+                            window.location = data.url;
+                        });
+                    }
+
+                },
+                error: function (xhr, textStatus, errorThrown) {
+
+                    swal({
+                        title: "Oops!",
+                        text: "Something went wrong!",
+                        type: "error"
+                    });
+                }
+            })
+
+
+
+
+
+        })
+        $("#btnpassword").click(function () {
+
+
+            var Current_password = $("#Current_Password").val();
+            var Password = $("#Password").val();
+            var Confirmpassword = $("#Confirmpassword").val();
+            if (Current_password == "") {
+                swal({
+                    title: "Oops!",
+                    text: " Please enter current password!",
+                    type: "error"
+                });
+            }
+            else if (Password == "") {
+                swal({
+                    title: "Oops!",
+                    text: " Please enter new password! ",
+                    type: "error"
+                });
+            }
+            else if (Confirmpassword == "") {
+                swal({
+                    title: "Oops!",
+                    text: " Please re-enter new password!",
+                    type: "error"
+                });
+
+            }
+            else if (Confirmpassword != Password) {
+                swal({
+                    title: "Oops!",
+                    text: "Password doesn't  match",
+                    type: "error"
+                });
+
+            }
+            else {
+
+                const fd = new FormData();
+                fd.append('Current_Password', $('#Current_Password').val());
+                fd.append('Password', $('#Password').val());
+                $.ajax({
+                    url: '/Profile/ResetPassword',
+                    method: 'POST',
+                    async: true,
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    data: fd,
+                    success: function (data, textStatus, xhr) {
+                        if (data.code == 200) {
+                            swal({
+                                title: "Success",
+                                text: "Password updated successfully",
+                                type: "success"
+                            }, function () {
+                                window.location = data.url;
+                            });
+
+                        }
+                        else if (data.code == 400) {
+                            swal({
+                                title: "Oops!",
+                                text: "You enter wrong current password!",
+                                type: "error"
+                            });
+                        }
+                        else if (data.code == 500) {
+                            swal({
+                                title: "Oops!",
+                                text: "Something went wrong!",
+                                type: "error"
+                            }, function () {
+                                window.location = data.url;
+                            });
+                        }
+
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+
+                        swal({
+                            title: "Oops!",
+                            text: "Something went wrong!",
+                            type: "error"
+                        });
+                    }
+                })
+
+
+            }
+
+
+        })
+        $("#btnpassword1").click(function () {
+
+
+            var Current_password = $("#Current_Password1").val();
+            var Password = $("#Password1").val();
+            var Confirmpassword = $("#Confirmpassword1").val();
+
+            if (Current_password == "") {
+                swal({
+                    title: "Information!",
+                    text: "Please enter current password!",
+                    type: "info"
+                });
+            }
+            else if (Password == "") {
+                swal({
+                    title: "Information!",
+                    text: "Please enter new password!",
+                    type: "info"
+                });
+            }
+            else if (Confirmpassword == "") {
+                swal({
+                    title: "Information!",
+                    text: "Please re-enter new password!",
+                    type: "info"
+                });
+
+            }
+            else if (Confirmpassword != Password) {
+                swal({
+                    title: "Information!",
+                    text: "Password doesn't match",
+                    type: "info"
+                });
+
+            }
+            else {
+
+                const fd = new FormData();
+                fd.append('Current_Password', $('#Current_Password1').val());
+                fd.append('Password', $('#Password1').val());
+                $.ajax({
+                    url: '/Profile/ResetPassword',
+                    method: 'POST',
+                    async: true,
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    data: fd,
+                    success: function (data, textStatus, xhr) {
+                        if (data.code == 200) {
+
+                            swal({
+                                title: "Success",
+                                text: "Password updated successfully",
+                                type: "success"
+                            }, function () {
+                                window.location = data.url;
+                            });
+
+                        }
+                        else if (data.code == 400) {
+                            swal({
+                                title: "Oops!",
+                                text: "You enter wrong current password!",
+                                type: "error"
+                            });
+                        }
+                        else if (data.code == 500) {
+                            swal({
+                                title: "Oops!",
+                                text: "Something went wrong!",
+                                type: "error"
+                            }, function () {
+                                window.location = data.url;
+                            });
+                        }
+
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+
+                        swal({
+                            title: "Oops!",
+                            text: "Something went wrong!",
+                            type: "error"
+                        });
+                    }
+                })
+
+
+            }
+
+
+        })
+
+    })
+</script>
+@*<script>
+        $(document).on("change", ".uploadProfileInput", function (e) {
+            var a = e.target;
+            var triggerInput = this;
+            var currentImg = $(this).closest(".pic-holder").find(".pic").attr("src");
+            var holder = $(this).closest(".pic-holder");
+            var wrapper = $(this).closest(".profile-pic-wrapper");
+            $(wrapper).find('[role="alert"]').remove();
+            triggerInput.blur();
+            var files = !!this.files ? this.files : [];
+            if (!files.length || !window.FileReader) {
+                return;
+            }
+            if (/^image/.test(files[0].type)) {
+                // only image file
+                var reader = new FileReader(); // instance of the FileReader
+                reader.readAsDataURL(files[0]); // read the local file
+
+                reader.onloadend = function () {
+                    console.log(this.result);
+                    $(holder).addClass("uploadInProgress");
+                    $(holder).find(".pic").attr("src", this.result);
+                    $(holder).append(
+                        '<div class="upload-loader"><div class="spinner-border text-primary" role="status"><span class="sr-only">Loading...</span></div></div>'
+                    );
+
+                    // Dummy timeout; call API or AJAX below
+                    setTimeout(() => {
+                        $(holder).removeClass("uploadInProgress");
+                        $(holder).find(".upload-loader").remove();
+                        // If upload successful
+                        if (Math.random() < 0.9) {
+                            $(wrapper).append(
+                                '<div class="snackbar show" role="alert"><i class="fa fa-check-circle text-success"></i> Profile image updated successfully</div>'
+                            );
+
+                            // Clear input after upload
+                            $(triggerInput).val("");
+
+                            setTimeout(() => {
+                                $(wrapper).find('[role="alert"]').remove();
+                            }, 3000);
+                        } else {
+                            $(holder).find(".pic").attr("src", currentImg);
+                            $(wrapper).append(
+                                '<div class="snackbar show" role="alert"><i class="fa fa-times-circle text-danger"></i> There is an error while uploading! Please try again later.</div>'
+                            );
+
+                            // Clear input after upload
+                            $(triggerInput).val("");
+                            setTimeout(() => {
+                                $(wrapper).find('[role="alert"]').remove();
+                            }, 3000);
+                        }
+                    }, 1500);
+                };
+            } else {
+                $(wrapper).append(
+                    '<div class="alert alert-danger d-inline-block p-2 small" role="alert">Please choose the valid image.</div>'
+                );
+                setTimeout(() => {
+                    $(wrapper).find('role="alert"').remove();
+                }, 3000);
+            }
+        });
+
+    </script>*@
+
+<script>
+    var imageFile
+    const imageInput = document.getElementById('newProfilePhoto');
+    const croppedImage = document.getElementById('croppedImage');
+    let cropper;
+    let fileTarget;
+    // Initialize Cropper.js when an image is selected
+    imageInput.addEventListener('change', function (e) {
+        fileTarget = e.target;
+        const file = this.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                if (cropper) {
+                    cropper.destroy();
+                }
+                croppedImage.src = e.target.result;
+                cropper = new Cropper(croppedImage, {
+                    aspectRatio: 1, // You can set the aspect ratio you need
+                });
+            };
+            reader.readAsDataURL(file);
+        }
+        $('#customModal').fadeIn();
+    });
+    $('#cropImage').click(function () {
+        const croppedCanvas = cropper.getCroppedCanvas();
+        const imageData = croppedCanvas.toDataURL('image/jpeg');
+        console.log(fileTarget);
+        var triggerInput = fileTarget;
+        var currentImg = $(fileTarget).closest(".pic-holder").find(".pic").attr("src");
+        var holder = $(fileTarget).closest(".pic-holder");
+        var wrapper = $(fileTarget).closest(".profile-pic-wrapper");
+        $(wrapper).find('[role="alert"]').remove();
+        triggerInput.blur();
+        var files = !!fileTarget.files ? fileTarget.files : [];
+        if (!files.length || !window.FileReader) {
+            return;
+        }
+        if (/^image/.test(files[0].type)) {
+            // only image file
+            var reader = new FileReader(); // instance of the FileReader
+            reader.readAsDataURL(files[0]); // read the local file
+
+            reader.onloadend = function () {
+                $('#customModal').fadeOut();
+                $(holder).addClass("uploadInProgress");
+                $(holder).find(".pic").attr("src", imageData);
+                $(holder).append(
+                    '<div class="upload-loader"><div class="spinner-border text-primary" role="status"><span class="sr-only">Loading...</span></div></div>'
+                );
+
+                //Dummy timeout; call API or AJAX below
+                //setTimeout(() => {
+                //    $(holder).removeClass("uploadInProgress");
+                //    $(holder).find(".upload-loader").remove();
+                //    // If upload successful
+                //    if (Math.random() < 0.9) {
+                //        $(wrapper).append(
+                //            '<div class="snackbar show" role="alert"><i class="fa fa-check-circle text-success"></i> Profile image updated successfully</div>'
+                //        );
+
+                //        // Clear input after upload
+                //        $(triggerInput).val("");
+                //        setTimeout(() => {
+                //            $(wrapper).find('[role="alert"]').remove();
+                //        }, 3000);
+                //    } else {
+                //        $(holder).find(".pic").attr("src", currentImg);
+                //        $(wrapper).append(
+                //            '<div class="snackbar show" role="alert"><i class="fa fa-times-circle text-danger"></i> There is an error while uploading! Please try again later.</div>'
+                //        );
+
+                //        // Clear input after upload
+                //        $(triggerInput).val("");
+                //        setTimeout(() => {
+                //            $(wrapper).find('[role="alert"]').remove();
+                //        }, 3000);
+                //    }
+                //}, 1500);
+            };
+
+        } else {
+            $(wrapper).append(
+                '<div class="alert alert-danger d-inline-block p-2 small" role="alert">Please choose the valid image.</div>'
+            );
+            setTimeout(() => {
+                $(wrapper).find('role="alert"').remove();
+            }, 3000);
+        }
+
+        console.log(imageData)
+
+        var base64Image = imageData.split(",")[1]; // Remove the "data:image/jpeg;base64," prefix
+
+        // Convert base64 data to a blob
+        var blob = dataURItoBlob(base64Image);
+        var file = new File([blob], Date.now() + ".jpg");
+
+        // Set the File object as the value of the file input
+        imageFile = file;
+
+        var formData = new FormData();
+        formData.append('CompanyImage', imageFile);
+
+
+        $.ajax({
+            url: '/Profile/SaveImage', // Use the appropriate URL for your route
+            type: 'POST',
+            data: formData,
+            cache: false,
+            contentType: false,
+            enctype: 'multipart/form-data',
+            processData: false,
+            success: function (response) {
+                if (response.code == 200) {
+                    $(holder).removeClass("uploadInProgress");
+                    $(holder).find(".upload-loader").remove();
+                    $(wrapper).append(
+                        '<div class="snackbar show" role="alert"><i class="fa fa-check-circle text-success"></i> Profile image updated successfully</div>'
+                    );
+                    $(triggerInput).val("");
+                    setTimeout(() => {
+                        $(wrapper).find('[role="alert"]').remove();
+                    }, 3000);
+                    window.location.reload();
+                }
+                else if (response.code == 400) {
+                    $(holder).removeClass("uploadInProgress");
+                    $(holder).find(".upload-loader").remove();
+                    $(holder).find(".pic").attr("src", currentImg);
+                    $(wrapper).append(
+                        '<div class="snackbar show" role="alert"><i class="fa fa-times-circle text-danger"></i> There is an error while uploading! Please try again later.</div>'
+                    );
+                    $(triggerInput).val("");
+                    setTimeout(() => {
+                        $(wrapper).find('[role="alert"]').remove();
+                    }, 3000);
+                }
+
+                else {
+                    $(holder).removeClass("uploadInProgress");
+                    $(holder).find(".upload-loader").remove();
+                    $(holder).find(".pic").attr("src", currentImg);
+                    $(wrapper).append(
+                        '<div class="snackbar show" role="alert"><i class="fa fa-times-circle text-danger"></i> There is an error while uploading! Please try again later.</div>'
+                    );
+                    $(triggerInput).val("");
+                    setTimeout(() => {
+                        $(wrapper).find('[role="alert"]').remove();
+                    }, 3000);
+                }
+            },
+            error: function (error) {
+                // Handle any errors that occur during the AJAX request
+            }
+        });
+        //You can send the canvas data to your server for saving.
+        //Example: croppedCanvas.toDataURL('image/jpeg')
+    });
+
+
+    function dataURItoBlob(dataURI) {
+        var byteString = atob(dataURI);
+        var ab = new ArrayBuffer(byteString.length);
+        var ia = new Uint8Array(ab);
+        for (var i = 0; i < byteString.length; i++) {
+            ia[i] = byteString.charCodeAt(i);
+        }
+        return new Blob([ab], { type: "image/jpeg" });
+    }
+</script>
+
+@if (TempData["UpdateAddress"] != null && TempData["UpdateAddress"].ToString() == "Update your address details!")
+{
+    <script>
+        swal({
+            title: "Oops!",
+            text: "Update your address details!",
+            type: "error"
+        });
+    </script>
+}
+

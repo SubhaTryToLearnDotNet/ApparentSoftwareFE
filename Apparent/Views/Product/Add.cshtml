@@ -1,0 +1,1101 @@
+﻿@model ViewModel
+
+@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .image-preview {
+        max-width: 300px;
+        max-height: 300px;
+    }
+</style>
+<style>
+    /* Style for the modal-like div */
+    #customModal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        z-index: 999;
+        text-align: center;
+    }
+
+    #modalContent {
+        background-color: #fff;
+        width: 80%;
+        max-width: 341px;
+        margin: 100px auto;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Close button style */
+    #closeModal {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        cursor: pointer;
+    }
+</style>
+<style>
+    .video-upload {
+        width: 300px;
+        height: 175px;
+        padding: 0.25rem;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+
+    .video-child {
+        display: inline-block;
+        height: 175px !important;
+    }
+
+    .image-preview {
+        position: relative;
+        display: inline-block;
+        margin-right: 10px;
+    }
+
+    .cancel-icon {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        cursor: pointer;
+        color: #fff;
+        font-size: 16px;
+        background-color: rgba(0, 0, 0, 0.7);
+        padding: 6px;
+        border-radius: 50%;
+        width: 32px;
+        height: 32px;
+        text-align: center;
+    }
+</style>
+<link rel="stylesheet" href="https://unpkg.com/cropperjs/dist/cropper.css">
+
+
+
+<div class="container">
+    <div class="row text-center">
+        <div class="loader_box" id="loder01">
+            <div class="d-flex justify-content-center align-items-center ">
+                <div class="loader-content">
+                    <div class="loader_title">Please Wait</div>
+                    <div class="loader--spinner">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="banner" style="background-position: 0px 350px;">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-5 col-md-6 col-12 order-2 order-md-1">
+                <h1 class="heading01">Welcome!</h1>
+                <p class="paragraph banner_para">You are just a few steps away, Please fill out the required information fields to start selling</p>
+                <p class="paragraph small_para"></p>
+                @*<a href="#" class="request_btn mt-3">Contact Us</a>*@
+            </div>
+            <!-- // -->
+            <div class="col-lg-7 col-md-6 col-12 order-1 order-md-2">
+                <img src="~/Content/Web/images/seller_banner03.png" alt="" />
+            </div>
+        </div>
+        <!-- // -->
+        <div class="features_row upload_software text-left">
+            <form id="" method="post" action="" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <ul class="progressbar">
+                            <li>Product Details</li>
+                            <li>Features</li>
+                            <li>Pricing/Packages</li>
+                        </ul>
+                    </div>
+                    <!-- // -->
+                    <div class="col-lg-12">
+
+                        <div class="row">
+                            @*<div class="col-lg-6 col-md-6 col-12">
+                                    <label>Select An Idustry</label>
+                                    <div class="custom-select">
+                                        <select id="Idustry">
+                                            <option value="0">Web development</option>
+                                            <option value="1">Audi</option>
+                                            <option value="2">BMW</option>
+                                            <option value="3">Citroen</option>
+                                            <option value="4">Ford</option>
+                                            <option value="5">Honda</option>
+                                            <option value="6">Volvo</option>
+                                        </select>
+                                    </div>
+                                </div>*@
+                            <div class="col-lg-6 col-md-6 col-12">
+                                <label>Product Name <span style="color:#ed2323 ">*</span></label>
+                                <input type="text" class="field01 field04 rounded-0" placeholder="Product" name="ProductName" id="ProductName" />
+                            </div>
+                            @*<div class="col-lg-6 col-md-6 col-12">
+                                    <label>Select A Category</label>
+                                    <div class="custom-select">
+                                        <select id="Category" name="Category">
+                                            <option value="Select">Select</option>
+                                            <option value="Web development">Web development</option>
+                                            <option value="e-learning">e-learning</option>
+                                            <option value="Banking">Banking</option>
+                                            <option value="Games">Games</option>
+                                            <option value="Books">Books</option>
+                                            <option value="Ecommerce">Ecommerce</option>
+                                            <option value="Food">Food</option>
+
+                                        </select>
+                                    </div>
+                                </div>*@
+
+
+                            <div class="col-lg-6 col-md-6 col-12">
+                                <label class="software_label">Category <span style="color:#ed2323 ">*</span></label>
+                                <div class="ding">
+                                    <select name="Category" id="Category" multiple>
+                                        @foreach (var category in Model.company.Category_list)
+                                        {
+                                            <option value="@(category)">@category</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-12">
+                                <h6>Product Logo <span style="color:#ed2323 ">*</span></h6>
+                                <!-- // -->
+                                <!-- <label class="software_label">Upload Video</label> -->
+                                <div class="drop-zone">
+                                    <span class="drop-zone__prompt">
+                                        <img id="IdImg" src="~/Content/Web/images/pdf.png" alt="" /> <br />
+                                        Upload Logo
+                                    </span>
+                                    <input type="file" name="ProductImage" id="ProductImage" accept="image/png, image/gif, image/jpeg" class="drop-zone__input" />
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- // -->
+                        <h3>Product/Software Details</h3>
+                        <h6>Overview</h6>
+                        <!-- // -->
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-12">
+
+                                <label class="software_label">What is Your Software? <span style="color:#ed2323 ">*</span></label>
+                                <textarea class="field01 field03 rounded-0 mb-0" placeholder="Write here" id="AboutProduct" name="AboutProduct"></textarea>
+
+                            </div>
+                        </div>
+                        <!-- // -->
+                        @*<button type="button" class="submit01 save_btn" onclick="ProductSubmit()">Save</button>*@
+                    </div>
+                </div>
+                <!-- // -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h6>Details</h6>
+                        <!-- // -->
+
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-12">
+                                <label class="software_label">Website <span style="color:#ed2323 ">*</span></label>
+                                <input type="text" class="field01 field04 rounded-0" placeholder="Paste URL here" name="Website" id="Website" />
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-12">
+                                <label class="software_label">Languages Supported <span style="color:#ed2323 ">*</span></label>
+                                <div class="ding">
+                                    <select name="Languages" id="multiple" multiple>
+                                        <option value="English">English</option>
+                                        <option value="Romanian">Romanian</option>
+                                        @*<option value="Bengali">Bengali</option>*@
+                                        <option value="Spanish">Spanish</option>
+                                        <option value="Greek">Greek</option>
+                                        <option value="German">German</option>
+                                        <option value="Hungarian">Hungarian</option>
+                                        <option value="Ukrainian">Ukrainian</option>
+                                        <option value="Chinese">Chinese </option>
+                                        <option value="Korean">Korean</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12 col-md-12 col-12">
+                                <label class="software_label">Product Description <span style="color:#ed2323 ">*</span></label>
+                                <textarea class="field01 field03 rounded-0 mb-0" placeholder="Write here" name="Description" id="Description"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- // -->
+                        @*<button type="button" class="submit01 save_btn">Save</button>*@
+                    </div>
+                </div>
+                <!-- // -->
+                <div class="row" id="sellerDetailss">
+                    <div class="col-lg-12">
+                        <h6>Seller Details</h6>
+                        <!-- // -->
+
+                        <div class="row">
+                            @*<div class="col-lg-12 col-md-12 col-12 mb-0">
+                                    <label class="software_label"><img src="~/Content/Web/images/icon04.png" alt="" /> Seller:</label>
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6 col-12">
+                                            <input type="text" class="field01 field04 rounded-0" placeholder="Name" name="CompanyName" id="CompanyName" />
+                                        </div>
+
+                                        <div class="col-lg-6 col-md-6 col-12">
+
+                                        </div>
+                                    </div>
+                                </div>*@
+
+                            <div class="col-lg-6 col-md-6 col-12">
+                                <label class="software_label"><img src="~/Content/Web/images/icon04.png" alt="" /> Seller <span style="color:#ed2323 ">*</span></label>
+                                <input type="text" class="field01 field04 rounded-0" placeholder="Seller" name="CompanyName" value="@Model.company.CompanyName" id="CompanyName" />
+                            </div>
+
+                            <div class="col-lg-6 col-md-6 col-12">
+                                <label class="software_label"><img src="~/Content/Web/images/email.png" alt="" /> Email <span style="color:#ed2323 ">*</span></label>
+                                <input type="text" class="field01 field04 rounded-0" placeholder="Email" value="@Model.company.CompanyEmail" name="CompanyEmail" id="CompanyEmail" />
+                            </div>
+
+                            <div class="col-lg-6 col-md-6 col-12">
+                                <label class="software_label"><img src="~/Content/Web/images/icon05.png" alt="" /> HQ Location </label>
+                                <input type="text" class="field01 field04 rounded-0" value="@string.Join(", ", new[] { Model.company.City, Model.company.State, Model.company.Country }.Where(s => !string.IsNullOrEmpty(s)))" name="HQLocation" id="HQLocation" readonly />
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-12">
+                                <label class="software_label"><img src="~/Content/Web/images/icon06.png" alt="" /> Company Website <span style="color:#ed2323 ">*</span></label>
+                                <input type="text" class="field01 field04 rounded-0" placeholder="" value="@Model.company.CompanyWebsite" name="CompanyWebsite" id="CompanyWebsite" />
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-12">
+                                <label class="software_label"><img src="~/Content/Web/images/icon07.png" alt="" /> Twitter</label>
+                                <input type="text" class="field01 field04 rounded-0" placeholder="" name="Twitter" value="@Model.company.Twitter" id="Twitter" />
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-12">
+                                <label class="software_label"><img src="~/Content/Web/images/icon08.png" alt="" /> Phone <span style="color:#ed2323 ">*</span></label>
+                                <div class="wrapper">
+                                    <div class="search_box">
+                                        <div class="dropdown">
+                                            <div class="default_option">+92</div>
+                                            <ul>
+                                                <li>+91</li>
+                                                <li>+95</li>
+                                                <li>+96</li>
+                                            </ul>
+                                        </div>
+                                        <div class="search_field">
+                                            <input type="text" class="input field01" id="Phone" placeholder="" value="@Model.company.Phone" name="Phone" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-12">
+                                <label class="software_label"><img src="~/Content/Web/images/icon09.png" alt="" /> LinkedIn Page</label>
+                                <input type="text" class="field01 field04 rounded-0" placeholder="" value="@Model.company.LinkedIn" name="LinkedIn" id="LinkedIn" />
+                            </div>
+                        </div>
+
+                        <!-- // -->
+                        @*<button type="button" class="submit01 save_btn">Save</button>*@
+                    </div>
+                </div>
+                <!-- // -->
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-12">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-12">
+                                <h6>Videos</h6>
+
+                                <label class="software_label">Upload Video <span style="color:#ed2323 ">*</span></label>
+
+                                <div class="drop-zone" id="DivVideoUpld">
+                                    <span class="drop-zone__prompt" id="Video01">
+                                        <img src="~/Content/Web/images/video.png" alt="" /> <br />
+                                        Upload Video
+                                    </span>
+                                    <input type="file" name="FileName[]" id="FileName" accept="video/mp4" class="drop-zone__input" multiple />
+
+                                    @*<div id="videoPreviewContainer"></div>*@
+                                </div>
+
+
+
+                                <div class="video-parent" id="videoPreviewContainer">
+
+
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                        <!-- // -->
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-12">
+                                <h6>Screenshots <span style="color:#ed2323 ">*</span></h6>
+                                <!-- // -->
+                                <!-- <label class="software_label">Upload Video</label> -->
+                                <div class="drop-zone" id="DivImageUpld">
+                                    <span class="drop-zone__prompt">
+                                        <img src="~/Content/Web/images/photo.png" alt="" /> <br />
+                                        Upload Photos
+                                    </span>
+                                    <input type="file" name="ScreenshotFile[]" id="ScreenshotFile" accept="image/*" class="drop-zone__input" multiple />
+
+                                </div>
+                                <div class="video-parent" id="imagePreviewContainer"></div>
+                            </div>
+                        </div>
+                        <!-- // -->
+                        @*<div class="row">
+                                <div class="col-lg-12 col-md-12 col-12">
+                                    <h6>Details PDF</h6>
+                                    <div class="drop-zone">
+                                        <span class="drop-zone__prompt">
+                                            <img src="~/Content/Web/images/pdf.png" alt="" /> <br />
+                                            Upload PDF
+                                        </span>
+                                        <input type="file" name="PDF[]" id="myFile" accept="application/pdf" class="drop-zone__input" multiple />
+                                        <div id="pdfPreviewContainer"></div>
+                                    </div>
+                                </div>
+                            </div>*@
+
+                        @*<div class="row">
+                                <div class="col-lg-12 col-md-12 col-12">
+
+                                    <label class="software_label">Comment</label>
+                                    <textarea class="field01 field03 rounded-0 mb-0" name="Notes" id="Notes" placeholder="Write here"></textarea>
+
+                                </div>
+                            </div>*@
+                    </div>
+
+                </div>
+                @*<div class="col-lg-6 col-md-6 col-12" style="display: flex; align-items:center; justify-content:right;">
+                        <button type="button" class="submit01 save_btn" onclick="Fileupload()">Next</button>
+                    </div>*@
+                <button type="button" onclick="vaildation()" class="submit011 save_btn">Next</button>
+                @*<button type="button" class="submit01 save_btn" data-toggle="modal" data-target="#successModal">model</button>*@
+            </form>
+        </div>
+
+    </div>
+    <input type="hidden" name="Notes" id="Notes" />
+</section>
+<!-- // footer chat box -->
+<button class="open-button" onclick="openForm()"><img src="~/Content/Web/images/comment02.png" alt="" /></button>
+<div class="chat-popup" id="myForm">
+    <form class="form-container">
+        <div class="chathead">
+            <h3>Product Details Comments</h3>
+            <button type="button" class="cancel" onclick="closeForm()"><img src="~/Content/Web/images/close.png" alt="" /></button>
+        </div>
+        <div class="chatbody product">
+            @*<div class="in_avtar">B</div>
+                <div class="incoming">
+                    <div class="bubble">
+                        <p>Hey, Father's Day is coming up..</p>
+                    </div>
+                    <small class="timeSec">01:15 PM</small>
+                    <div class="bubble">
+                        <p>What are you getting.. Oh, oops sorry dude.</p>
+                    </div>
+                    <small class="timeSec">01:15 PM</small>
+                </div>*@
+            @*<div class="out_avtar">S</div>
+                <div class="outgoing">*@
+            @*<div class="bubble lower">
+                    <p>Nah, it's cool.</p>
+                </div>
+                <small class="timeSec02">01:15 PM</small>
+                <div class="bubble">
+                    <p>Well you should get your Dad a cologne. Here smell it. Oh wait! ...</p>
+                </div>
+                <small class="timeSec02">01:15 PM</small>*@
+            @*</div>*@
+            @*<div class="in_avtar">B</div>*@
+            @*<div class="incoming">
+                    <div class="bubble">
+                    <p>Hey, Father's Day is coming up..</p>
+                </div>
+                <div class="bubble">
+                    <p>What are you getting.. Oh, oops sorry dude.</p>
+                </div>
+                </div>*@
+            @*<div class="typing">
+                    <div class="bubble">
+                        <div class="ellipsis dot_1"></div>
+                        <div class="ellipsis dot_2"></div>
+                        <div class="ellipsis dot_3"></div>
+                    </div>
+                </div>*@
+        </div>
+
+        <div class="foot">
+            <input type="hidden" name="product_comment" id="product_comment" />
+            <input type="text" class="msg" id="productchatbox" placeholder="Type a message..." />
+            <button type="button" onclick="productchatButtonClick();" class="cmnt_send"><img src="~/Content/Web/images/send.png" alt="" /></button>
+        </div>
+
+        <!-- <label for="msg">Message</label>
+            <textarea placeholder="Type message.." name="msg" required></textarea> -->
+        <!-- <button type="submit" class="btn">Send</button>
+            <button type="button" class="btn cancel" onclick="closeForm()">Close</button> -->
+    </form>
+</div>
+<!-- // footer chat box -->
+<div class="container">
+    <!-- The Modal -->
+    <div class="modal" id="successModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <!-- <div class="modal-header">
+                    <h4 class="modal-title">Modal Heading</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div> -->
+                <!-- Modal body -->
+                <div class="modal-body pt_40">
+                    @*<center><img src="assets/images/success.png" alt="" /></center>
+                        <div class="progress mt-4">
+                            <div class="progress-bar progress-bar-danger" style="width: 100%;"></div>
+                        </div>*@
+
+                    <ul class="progressbar">
+                        <li class="active">Product Details</li>
+                        <li>Features</li>
+                        <li>Pricing/Packages</li>
+                    </ul>
+
+                    <h4 class="modal-title text-center mt-4 mb-3">Success</h4>
+                    <p class="text-center">Product details added</p>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer pb_50">
+                    <button type="button" onclick="featuresfun()" class="btn okBtn" data-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Custom modal content -->
+<div id="customModal">
+    <div class="modal-500" id="modalContent">
+        <div class="image-preview">
+            <img id="croppedImage" src="" alt="Cropped Image">
+        </div>
+        <input type="button" class="save_btn" style="float: none;" id="cropImage" value="Crop & Save" />
+        <button type="button" class="save_btn btn-danger" style="float: none;" id="cropImagehide">Cancel</button>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://unpkg.com/cropperjs/dist/cropper.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.21.0/slimselect.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
+
+
+
+
+
+<script>
+
+    $(document).ready(function () {
+        ($("#loder01").css("display", "block"));
+        $("#loder01").hide()
+        $(document).ajaxStart(function () {
+            ($("#loder01").css("display", "block"));
+        });
+
+        $(document).ajaxStop(function () {
+            $("#loder01").hide()
+        });
+
+    })
+
+
+
+
+    var allVideoFiles = [];
+    var allImageFiles = [];
+
+    var ImageCount = 0;
+    var VideoCount = 0;
+    $(document).ready(function () {
+
+        // Show the custom modal when the button is clicked
+        $('#showModalButton').on('click', function () {
+
+            $('#customModal').fadeIn();
+        });
+
+        // Close the custom modal when the close button or the background is clicked
+        // $('#closeModal, #customModal').on('click', function () {
+        //     $('#customModal').fadeOut();
+        // });
+
+        // Prevent modal content from closing the modal when clicked
+        $('#modalContent').on('click', function (e) {
+            e.stopPropagation();
+        });
+
+        $('#FileName').change(function () {
+            var files = $(this)[0].files;
+            // Get the selected files
+            var videos = this.files;
+            // Check if any files were selected
+            if (videos.length === 0) {
+                return;
+            }
+            for (var i = 0; i < videos.length; i++) {
+                var file = videos[i];
+
+                // Check file size (max 500KB)
+                if (file.size > 800 * 1024) {
+                    alert('File ' + file.name + ' size should be less than 800KB.');
+                    // Clear the input field for the specific file
+                    $('#videoInput').val('');
+                    return;
+                }
+                // Check if the file type is a video (you can specify allowed video formats)
+                if (!file.type.includes("video")) {
+                    alert('Please select a valid video file.');
+                    // Clear the input field for the specific file
+                    $('#videoInput').val('');
+                    return;
+                }
+            }
+            for (var i = 0; i < files.length; i++) {
+
+                var file = files[i];
+                allVideoFiles.push(files[i])
+                var videoPlayer = $('<div class="image-preview video-upload">')
+                    .append($('<video class="video-child img-responsive img-fluid picProper" controls="true">').attr('src', URL.createObjectURL(file)))
+                    .append($('<span class="cancel-icon" onclick="cancelVideo(' + VideoCount + ')">').html('&#10006;'));
+                $('#videoPreviewContainer').append(videoPlayer);
+                VideoCount++;
+
+            }
+            console.log(allVideoFiles);
+        });
+
+        $('#ScreenshotFile').change(function () {
+            var files = $(this)[0].files;
+            debugger;
+            var images = this.files;
+            // Check if any files were selected
+            if (images.length === 0) {
+                return;
+            }
+
+            for (var i = 0; i < images.length; i++) {
+                var file = images[i];
+
+                // Check file size (max 100KB)
+                if (file.size > 500 * 1024) {
+                    alert('File ' + file.name + ' size should be less than 100KB.');
+                    // Clear the input field for the specific file
+                    $('#imageInput').val('');
+                    return;
+                }
+
+                // Create an Image object to check image dimensions
+                var img = new Image();
+                debugger;
+                img.onload = function () {
+                    // Check image dimensions
+                    if (this.width <= 1000 && this.height <= 1000) {
+                        var previewContainer = $('#imagePreviewContainer');
+                        //previewContainer.empty();
+                        for (var i = 0; i < files.length; i++) {
+                            console.log('this start')
+                            console.log(this.width);
+                            console.log('files start')
+                            console.log(this);
+                            let file = files[i];
+                            allImageFiles.push(files[i]);
+                            console.log(file);
+                            var reader = new FileReader();
+
+                            reader.onload = function (e) {
+                                var imageSrc = e.target.result;
+
+                                /* var previewImage = $('<img class="video-upload video-child">').attr('src', imageSrc);*/
+                                var previewImage = $('<div class="image-preview video-upload">')
+                                    .append($('<img class="video-child img-responsive img-fluid picProper">').attr('src', imageSrc))
+                                    .append($('<span class="cancel-icon" onclick="cancelImage(' + ImageCount + ')">').html('&#10006;')); // &#10006; is the cancel icon (X)
+
+                                previewContainer.append(previewImage);
+                                ImageCount++;
+
+                            };
+
+                            reader.readAsDataURL(file);
+                        }
+                    } else {
+                        alert('Image ' + file.name + ' dimensions should be 600x600 pixels');
+                        // Clear the input field for the specific file
+                        $('#imageInput').val('');
+                        return;
+                    }
+                };
+                img.src = URL.createObjectURL(file);
+            };
+
+
+            //$('#DivImageUpld').hide();
+            //$("#ScreenshotFile").val("");
+        });
+
+        /*$('#ProductImage').change(function () {
+
+        var file = $(this)[0].files[0];
+
+        if (file) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+        var imageSrc = e.target.result;
+        $('#IdImg').attr('src', imageSrc);
+        };
+
+        reader.readAsDataURL(file);
+        } else {
+        // Handle the case when no file is selected
+        $('#IdImg').removeAttr('src');
+        }
+        });*/
+    });
+    function cancelImage(index) {
+        debugger;
+        // Remove the canceled image from the array
+        allImageFiles.splice(index, 1);
+
+        // Re-render the preview container
+        renderPreview();
+    }
+
+    function renderPreview() {
+        var previewContainer = $('#imagePreviewContainer');
+        previewContainer.empty();
+        ImageCount = 0;
+        // Iterate through all selected files
+        for (var i = 0; i < allImageFiles.length; i++) {
+
+            let currentFile = allImageFiles[i];
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                var imageSrc = e.target.result;
+                var previewImage = $('<div class="image-preview video-upload">')
+                    .append($('<img class="video-child img-responsive img-fluid picProper">').attr('src', imageSrc))
+                    .append($('<span class="cancel-icon" onclick="cancelImage(' + ImageCount + ')">').html('&#10006;')); // &#10006; is the cancel icon (X)
+
+                previewContainer.append(previewImage);
+                ImageCount++;
+            };
+
+            reader.readAsDataURL(currentFile);
+        }
+    }
+
+
+    function cancelVideo(index) {
+        debugger;
+
+        // Remove the canceled image from the array
+        allVideoFiles.splice(index, 1);
+
+        // Re-render the preview container
+        console.log(allVideoFiles);
+        videopreview();
+    }
+
+    function videopreview() {
+
+
+        var previewContainer = $('#videoPreviewContainer');
+        previewContainer.empty();
+        VideoCount = 0;
+        for (var i = 0; i < allVideoFiles.length; i++) {
+
+            var vdfile = allVideoFiles[i];
+
+            var videoPlayer = $('<div class="image-preview video-upload">')
+                .append($('<video class="video-child img-responsive img-fluid picProper" controls="true">').attr('src', URL.createObjectURL(vdfile)))
+                .append($('<span class="cancel-icon" onclick="cancelVideo(' + VideoCount + ')">').html('&#10006;'));
+            $('#videoPreviewContainer').append(videoPlayer);
+            VideoCount++;
+        }
+    }
+</script>
+
+
+<script>
+    var pro_id;
+    function vaildation() {
+        var selectedValues01 = [];
+        var selectedcategory = [];
+        $("#multiple :selected").each(function () {
+            selectedValues01.push($(this).val());
+        });
+        $("#Category :selected").each(function () {
+            selectedcategory.push($(this).val());
+        });
+        var languages = selectedValues01.join(",");
+        var Category = selectedcategory.join(",");
+        var AboutProduct = $("#AboutProduct").val();
+        var ProductName = $("#ProductName").val();
+        var Website = $("#Website").val();
+        var Description = $("#Description").val();
+        var CompanyName = $("#CompanyName").val();
+        var CompanyEmail = $("#CompanyEmail").val();
+        var HQLocation = $("#HQLocation").val();
+        var CompanyWebsite = $("#CompanyWebsite").val();
+        var Twitter = $("#Twitter").val();
+        var Phone = $("#Phone").val();
+        var LinkedIn = $("#LinkedIn").val();
+        var Notes = $("#product_comment").val();
+        //var ProductImage = $('#ProductImage')[0].files[0];
+        var ProductImage = imageFile;
+        if (ProductName == "") {
+            swal({
+                title: "Information!",
+                text: " Please enter product name",
+                type: "info"
+            });
+            return;
+        }
+        else if (ProductImage == "") {
+            swal({
+                title: "Information!",
+                text: "Please upload product logo",
+                type: "info"
+            });
+            return;
+
+        }
+
+        else if (languages == "") {
+            swal({
+                title: "Information!",
+                text: " Please select product languages",
+                type: "info"
+            });
+            return;
+        }
+        else if (Category == "") {
+            swal({
+                title: "Information!",
+                text: " Please select product category",
+                type: "info"
+            });
+            return;
+        }
+        else if (AboutProduct == "") {
+            swal({
+                title: "Information!",
+                text: " Please enter what is your software?",
+                type: "info"
+            });
+            return;
+        }
+        else if (Website == "") {
+            swal({
+                title: "Information!",
+                text: "Please enter product website ",
+                type: "info"
+            });
+            return;
+
+        }
+        else if (Description == "") {
+            swal({
+                title: "Information!",
+                text: " Please write product description ",
+                type: "info"
+            });
+            return;
+
+        }
+        else if (CompanyName == "") {
+            swal({
+                title: "Information!",
+                text: "Please enter company name ",
+                type: "info"
+            });
+            return;
+
+        }
+        else if (CompanyEmail == "") {
+            swal({
+                title: "Information!",
+                text: "Please enter company email ",
+                type: "info"
+            });
+            return;
+
+        }
+        else if (CompanyWebsite == "") {
+            swal({
+                title: "Information!",
+                text: "Please enter company  website",
+                type: "info"
+            });
+            return;
+
+        }
+        else if (CompanyWebsite == "") {
+            swal({
+                title: "Information!",
+                text: "Please enter company  website",
+                type: "info"
+            });
+            return;
+
+        }
+        else if (allVideoFiles.length == 0) {
+            swal({
+                title: "Information!",
+                text: "Please add videos",
+                type: "info"
+            });
+            return;
+
+        }
+        else if (allImageFiles.length == 0) {
+            swal({
+                title: "Information!",
+                text: "Please add images",
+                type: "info"
+            });
+            return;
+
+        }
+            var formData = new FormData();
+            formData.append('ProductName', ProductName);
+            formData.append('Category', Category);
+            formData.append('Website', Website);
+            formData.append('AboutProduct', AboutProduct);
+            formData.append('Description', Description);
+            formData.append('CompanyName', CompanyName);
+            formData.append('CompanyEmail', CompanyEmail);
+            /*formData.append('HQLocation', HQLocation);*/
+            formData.append('CompanyWebsite', CompanyWebsite);
+            formData.append('Twitter', Twitter);
+            formData.append('Phone', Phone);
+            formData.append('LinkedIn', LinkedIn);
+            formData.append('FirstName', Notes);
+            formData.append('LastName', Notes);
+            formData.append('Company_Email', Notes);
+            for (var k = 0; allVideoFiles.length > k; k++) {
+                formData.append('FileName' + k, allVideoFiles[k]);
+            }
+            
+            for (var k = 0; allImageFiles.length > k; k++) {
+                formData.append('ScreenshotFile' + k, allImageFiles[k]);
+            }
+            formData.append('SupportLanguages', languages);
+            formData.append('ProductImage', ProductImage);
+            ProductSubmit(formData);
+
+    }
+    function ProductSubmit(formData) {
+        $.ajax({
+            url: '/Product/AddProduct',
+            type: 'POST',
+            data: formData,
+            cache: false,
+            contentType: false,
+            enctype: 'multipart/form-data',
+            processData: false,
+            success: function (data) {
+                if (data.respons_result == "success") {
+                    pro_id = data.ProductId;
+                    $('#successModal').modal('toggle');
+
+                }
+                else {
+                    swal({
+                        title: "Error",
+                        text: "Something worng",
+                        type: "error"
+                    },
+                        function () {
+                            var url = "/SignIn";
+                            window.location = url;
+                        });
+                }
+
+            }
+        });
+    }
+    function featuresfun() {
+        $('#successModal').modal('hide');
+        var url = "/Product/Addfeatures?ProductId=" + pro_id;
+        window.location = url;
+
+    }
+</script>
+<!-- // footer chat box -->
+<script>
+    function openForm() {
+        document.getElementById("myForm").style.display = "block";
+    }
+    function closeForm() {
+        document.getElementById("myForm").style.display = "none";
+    }
+    function productchatButtonClick() {
+        pValues = [];
+        // Create a new div element with the specified content
+        var msg = $("#productchatbox").val();
+        var adskuy = document.createElement("div");
+        adskuy.className = "out_avtar";
+        adskuy.textContent = "S"
+        var newoutgoing = document.createElement("div");
+        newoutgoing.className = "outgoing otgproduct";
+        var newBubble = document.createElement("div");
+        newBubble.className = "bubble";
+        var newP = document.createElement("p");
+        newP.textContent = msg;
+
+        // Append the new elements to the existing 'incoming' div
+        newBubble.appendChild(newP);
+        newoutgoing.appendChild(newBubble);
+        document.querySelector(".product").appendChild(adskuy);
+        document.querySelector(".product").appendChild(newoutgoing);
+        $(".otgproduct p").each(function () {
+            pValues.push($(this).text());
+        });
+        var comtext = pValues.join("~");
+        $("#productchatbox").val("");
+        $("#product_comment").val(comtext);
+    }
+    
+</script>
+
+
+<script>
+    var imageFile;
+    const imageInput = document.getElementById('ProductImage');
+    const croppedImage = document.getElementById('croppedImage');
+    let cropper;
+    let fileTarget;
+    // Initialize Cropper.js when an image is selected
+    imageInput.addEventListener('change', function (e) {
+        fileTarget = e.target;
+        const file = this.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                if (cropper) {
+                    cropper.destroy();
+                }
+                croppedImage.src = e.target.result;
+                cropper = new Cropper(croppedImage, {
+                    aspectRatio: 1, // You can set the aspect ratio you need
+                });
+            };
+            reader.readAsDataURL(file);
+        }
+        $('#customModal').fadeIn();
+    });
+    $('#cropImage').click(function () {
+        const croppedCanvas = cropper.getCroppedCanvas();
+        const imageData = croppedCanvas.toDataURL('image/jpeg');
+        console.log(fileTarget);
+        $('#IdImg').attr('src', imageData);
+        $('#customModal').fadeOut();
+        $('#ProductImage').val("");
+
+        var base64Image = imageData.split(",")[1]; // Remove the "data:image/jpeg;base64," prefix
+
+        // Convert base64 data to a blob
+        var blob = dataURItoBlob(base64Image);
+        var file = new File([blob], Date.now() + ".jpg");
+
+        // Set the File object as the value of the file input
+        imageFile = file;
+    });
+
+    $("#cropImagehide").click(function () {
+        $('#customModal').fadeOut();
+    });
+
+
+
+
+    function dataURItoBlob(dataURI) {
+        var byteString = atob(dataURI);
+        var ab = new ArrayBuffer(byteString.length);
+        var ia = new Uint8Array(ab);
+        for (var i = 0; i < byteString.length; i++) {
+            ia[i] = byteString.charCodeAt(i);
+        }
+        return new Blob([ab], { type: "image/jpeg" });
+    }
+
+    //This finction will validate a input type file, If file size max *KB and width-hight
+    function checkImage(file, maxSize, width, hight) {
+        console.log(file);
+        if (file.length == 1) {
+            // Check file size (max 100KB)
+            if (file.files[0].size > maxSize * 1024) {
+                alert('File size should be less than 100KB.');
+                // Clear the input field
+                $('#imageInput').val('');
+                return;
+            }
+
+            // Create an Image object to check image dimensions
+            var img = new Image();
+
+            //img.onload = function () {
+            //    // Check image dimensions for passport size (e.g., 2x2 inches or 600x600 pixels)
+            //    if (file.width <= width && file.height <= hight) {
+            //        alert('Image size and dimensions are valid.');
+            //    } else {
+            //        alert('Image dimensions should be 600x600 pixels (passport size).');
+            //        // Clear the input field
+            //        $('#imageInput').val('');
+            //    }
+            //};
+
+            return 1;
+        }
+    }
+</script>
+
+
+
+

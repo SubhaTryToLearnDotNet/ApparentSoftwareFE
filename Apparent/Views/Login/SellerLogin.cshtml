@@ -1,0 +1,155 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE" />
+    <title>Sign In</title>
+    <link href="~/Content/Web/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/Web/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="~/Content/Web/css/all.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet" type="text/css" />
+    <!-- <link href="assets/css/font-awesome.min.css" rel="stylesheet" type="text/css"/> -->
+    <link href="~/Content/Admin/css/responsive.css" rel="stylesheet" type="text/css" />
+    <script src="https://kit.fontawesome.com/91cafd3f0a.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <!-- ====================================================================================================
+      start signin
+    ====================================================================================================== -->
+
+    <section class="signin">
+        <div class="container">
+            <a href="index.html"> <img src="~/Content/Web/images/main_logo.svg" class="mb-4" alt="" /> </a>
+            <div class="row align-items-center">
+                <div class="col-lg-7 col-md-6 col-12">
+                    <img src="~/Content/Web/images/signin.png" alt="" />
+                </div>
+                <div class="col-lg-5 col-md-6 col-12">
+                    <div class="signin_right">
+                        <h2 class="heading02">Sign In</h2>
+                        <ul>
+                            <li><a href="#">New user?</a></li>
+                            <li><a href="~/Seller/SignUp" class="text-primary">Create an account</a></li>
+                        </ul>
+                        <form id="logfrm01" method="post" action="~/Signin/SellerSingin">
+                            <input type="text" class="field01 field04 rounded-0 mb-3" placeholder="Username or email" name="Email" id="Email" />
+                            @*<input type="password" class="field01 field04 rounded-0 mb-3" name="Password" id="Password" placeholder="Password" />*@
+                            <input id="Password" type="password" class="form-control field01 field04 rounded-0 mb-3 eyePadding" name="Password" placeholder="Password" />
+                            <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password2"></span>
+
+                            @*<div class="comment-form-cookies-consent mb-3">
+                                <input id="wp-comment-cookies-consent" name="wp-comment-cookies-consent" type="checkbox" value="yes" />
+                                <label for="wp-comment-cookies-consent">Keep me signed in</label>
+                            </div>*@
+                            <button type="button" id="Btn02" class="submit01 save_btn w-100 mt-0 mb-3" style="float: none;">Sign In</button>
+                            <div class="media_box">
+                                <h6>Or sign in with</h6>
+                                <a href="#"><img src="~/Content/Web/images/media01.png" alt="" /></a>
+                                <a href="#"><img src="~/Content/Web/images/media02.png" alt="" /></a>
+                                <a href="#"><img src="~/Content/Web/images/media03.png" alt="" /></a>
+                                <a href="#"><img src="~/Content/Web/images/media04.png" alt="" /></a>
+                            </div>
+                        </form>
+                    </div>
+                    <p class="paragraph">Copyright &copy; 2021 Apparent. All Rights Reserved.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================================================================================================
+      start script
+    ====================================================================================================== -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="~/Content/Web//js/bootstrap.bundle.min.js"></script>
+    <script src="~/Content/Web/js/myScript.js"></script>
+</body>
+</html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
+<script>
+
+    $(document).ready(function () {
+
+        $("#Btn02").click(function () {
+            Logsubmit()
+
+        })
+
+    });
+    function Logsubmit() {
+        var email = $("#Email").val();
+
+        var Password = $("#Password").val();
+        if (email == "") {
+            swal({
+                title: "error",
+                text: "Enter Username or Email",
+                type: "error"
+            });
+        }
+        else if (Password == "") {
+            swal({
+                title: "error",
+                text: "Please Enter Password",
+                type: "error"
+            });
+        }
+        else {
+            $("#logfrm01").submit();
+        }
+
+    }</script>
+<script>
+    $(".toggle-password2").click(function () {
+        debugger
+        $(this).toggleClass("fa-eye fa-eye-slash");
+        var input = $("#Password");
+        if (input.attr("type") === "password") {
+            input.attr("type", "text");
+        } else {
+            input.attr("type", "password");
+        }
+    });
+</script>
+
+
+@if (TempData["SignUpMSG"] != null && TempData["SignUpMSG"].ToString() == "Selller Signup Successful")
+{
+    <script>
+        swal({
+            title: "",
+            text: "Selller Signup Successful",
+            type: "success"
+        });
+    </script>
+}
+
+@if (TempData["SignUpExistsMSG"] != null && TempData["SignUpExistsMSG"].ToString() == "Selller Already Exists")
+{
+    <script>
+        swal({
+            title: "",
+            text: "Seller Already Exists",
+            type: "error"
+        });
+    </script>
+}
+    @if (TempData["ErrorMsg"] != null && TempData["ErrorMsg"].ToString() == "Username  or password does not match")
+    {
+        <script>
+            swal({
+                title: "error",
+                text: "Username  or password does not match",
+                type: "error"
+            });
+        </script>
+    }

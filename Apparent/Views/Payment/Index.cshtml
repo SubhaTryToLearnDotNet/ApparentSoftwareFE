@@ -1,0 +1,1805 @@
+﻿@model ViewModel
+@{
+       Layout = "~/Views/Shared/LayoutPayment.cshtml";
+    }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>APay</title>
+    <link rel="stylesheet" href="~/Content/Web/css/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Content/Web/css/css/all.min.css" />
+    <link rel="stylesheet" href="~/Content/Web/css/css/style.css" />
+
+    <link href="~/Content/Web/css/css/bootstrap-datepicker.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
+    <link rel="mainfest" href="mainfest.html" />
+
+    <style>
+        [class^=col-] {
+            margin-bottom: 0px;
+        }
+    </style>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .loader-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999; /* Make sure the loader is on top of everything else */
+            opacity: 0; /* Initially hidden */
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .loader {
+            border: 8px solid #f3f3f3; /* Light grey */
+            border-top: 8px solid #3498db; /* Blue */
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite; /* Rotate spinner indefinitely */
+        }
+
+        @@keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Show loader when the class 'loading' is added to the body */
+        body.loading .loader-wrapper {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .form-group input {
+            padding: 0;
+            height: initial;
+            width: initial;
+            margin-bottom: 0;
+            display: block;
+            cursor: pointer;
+        }
+
+        .select-pay-body {
+            margin-top: 20px;
+            transition: height 1s linear;
+        }
+
+            /*.form-control {
+            display: block;
+            width: 100%;
+            height: calc(1.5em + 0.75rem + 2px);
+            padding: 0.375rem 0.75rem;
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #495057;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid #ced4da;
+            border-radius: 0.25rem;
+            transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+        }*/
+
+            .select-pay-body .form-control {
+                border: 1px solid #A3A3A3;
+                display: block;
+                width: 100%;
+                height: 42px;
+                padding: 0.375rem 0.75rem;
+                font-size: 1rem;
+                font-weight: 400;
+                line-height: 1.5;
+                color: #495057;
+                background-color: #fff;
+                background-clip: padding-box;
+                border: 1px solid #ced4da;
+                border-radius: 0.25rem;
+                transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+            }
+
+        .pay-details {
+            color: #A3A3A3;
+            line-height: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+            .form-group label:before {
+                display: none;
+            }
+
+        .select-pay-card label {
+            margin-top: 5px;
+            font-size: 15px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Loader wrapper -->
+    <div class="loader-wrapper">
+        <!-- Loader spinner -->
+        <div class="loader"></div>
+    </div>
+
+
+    <div class="container">
+        <div class="row text-center">
+            <div class="loader_box" id="loder01">
+                <div class="d-flex justify-content-center align-items-center ">
+                    <div class="loader-content">
+                        <div class="loader_title">Please Wait</div>
+                        <div class="loader--spinner">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*<header class="header-sidebar">
+            <div class="container">
+                <nav class="navbar navbar-expand-lg">
+                    <a class="navbar-brand" href="login.html"><img src="~/Content/Web/images/img/logo.svg" alt="" class="img-fluid logo" /></a>
+
+                    <div class="ml-lg-auto" id="navbarNavDropdown">
+                        <ul class="navbar-nav ml-lg-auto">
+                            <li class="nav-item region">Region</li>
+                            <li class="nav-item select-region">
+                                <form>
+                                    <div class="form-item">
+                                        <input id="country_selector" type="text" class="d-none" />
+                                    </div>
+                                    <div class="form-item" style="display: none;">
+                                        <input type="text" id="country_selector_code" name="country_selector_code" data-countrycodeinput="1" readonly="readonly" placeholder="Selected country code will appear here" />
+                                        <label for="country_selector_code">...and the selected country code will be updated here</label>
+                                    </div>
+                                    <button type="submit" style="display: none;">Submit</button>
+                                </form>
+                            </li>
+
+                            <li class="nav-item dropdown notification">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="far fa-bell"></i>
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="#">Something</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Something</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Something</a>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <img src="~/Content/Web/images/img/img1.jpg" alt="" class="prf-pic" />
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Username
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
+                                    <a class="dropdown-item" href="#">Profile</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Wallet</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Balance:344</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Sign out</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </header>*@
+
+    <div class="nav-side-menu d-none">
+        <div class="brand">Press Curing Control</div>
+        <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+
+        <div class="menu-list">
+            <ul id="menu-content" class="menu-content collapse out">
+                <li>
+                    <a href="#"> <i class="fa fa-dashboard fa-lg"></i> Dashboard </a>
+                </li>
+
+                <li data-toggle="collapse" data-target="#products" class="collapsed active">
+                    <a href="#"><i class="fa fa-gift fa-lg"></i> Anlagenauswahl <span class="arrow"></span></a>
+                </li>
+                <ul class="sub-menu collapse" id="products">
+                    <li class="active"><a href="#">RFT-H1</a></li>
+                    <li><a href="#">RFT-H2</a></li>
+                    <li><a href="#">BTB-H1</a></li>
+                    <li><a href="#">BTB-H2</a></li>
+                </ul>
+
+                <li data-toggle="collapse" data-target="#service" class="collapsed">
+                    <a href="#"><i class="fa fa-globe fa-lg"></i> Auswertungen <span class="arrow"></span></a>
+                </li>
+                <ul class="sub-menu collapse" id="service">
+                    <li>Trendmonitoring</li>
+                    <li>Alarmmonitoring</li>
+                    <li>Audit-Trail</li>
+                </ul>
+
+                <li data-toggle="collapse" data-target="#new" class="collapsed">
+                    <a href="#"><i class="fa fa-car fa-lg"></i> Reporting <span class="arrow"></span></a>
+                </li>
+                <ul class="sub-menu collapse" id="new">
+                    <li>Alarmstatistik</li>
+                    <li>Prozessfähigkeit</li>
+                </ul>
+
+                <li>
+                    <a href="#"> <i class="fa fa-user fa-lg"></i> Profile </a>
+                </li>
+
+                <li data-toggle="collapse" data-target="#new" class="collapsed">
+                    <a href="#"><i class="fa fa-car fa-lg"></i> Service <span class="arrow"></span></a>
+                </li>
+                <ul class="sub-menu collapse" id="new">
+                    <li>Sensorkonfiguration</li>
+                    <li>Betriebsarten</li>
+                </ul>
+            </ul>
+        </div>
+    </div>
+
+    <section class="payment-banner">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 my-auto">
+                    <h1>Making A Payments Easier</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur consequuntur sapiente iste laboriosam eum? Nostrum ipsa repellat magni fuga doloribus.</p>
+                    @*<a href="#" class="btn-2">Make a payment</a>*@
+                </div>
+                <div class="col-lg-6">
+                    <img src="~/Content/Web/images/img/payment.svg" alt="" class="img-fluid" />
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section-pay">
+        <div class="container">
+            <div class="row no-gutter">
+                <div class="col-lg-12 crypto-card">
+                    <div class="section-heading-payment payBgClr">
+                        <h4 class="mt-2">Payment Amount</h4>
+
+                        <h3><b style="color: #0193D9;">$ @Model.payment_master.Price</b> <span><small style="font-size: 50%;">AUD</small></span></h3>
+                    </div>
+
+
+                </div>
+                <div class="col-lg-4">
+                    <div class="section-heading-payment">
+                        <h4 class="mt-2">International</h4>
+                    </div>
+                    @if (Model.payment_master.InternationalPayment.Count > 0)
+                    {
+                        for (int i = 0; Model.payment_master.InternationalPayment.Count > i; i++)
+                        {
+                            if (Model.payment_master.InternationalPayment[i] == "VISA")
+                            {
+                                <div class="set select-pay-card mt-3">
+                                    <a>
+                                        <div class="select-pay-head">
+                                            <div class="row">
+                                                <div class="col-10  d-flex">
+                                                    <img src="~/Content/Web/images/img/visa.svg" class=" img-fluid">
+                                                    <h6 class="my-auto ml-2">VISA</h6>
+                                                </div>
+                                                <div class="col-2 my-auto">
+                                                    <i class="fas fa-chevron-down float-right"></i>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+
+                                    </a>
+                                    <div class="content">
+                                        <div class="select-pay-body">
+                                            <form>
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-12">
+
+                                                        <input type="text" class="form-control creditCardText" id="visa_card_number" name="visa_card_number" placeholder="Card Number">
+                                                        <label for="inputEmail4" class="pay-details">Enter Digits Without Spaces</label>
+                                                        <div class="line"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-6">
+
+                                                        <input type="text" class="form-control datepicker-m" placeholder="Select Month" id="visa_month" name="visa_month">
+
+                                                        <div class="line"></div>
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+
+                                                        <input type="text" class="form-control datepicker-y" placeholder="Select Years" id="visa_year" name="visa_year">
+
+                                                        <div class="line"></div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <input type="password" class="form-control" id="visa_cvv" name="visa_cvv" placeholder="CVV">
+                                                    <label for="inputEmail4" class="pay-details">Last Three Digits On Your Card Back</label>
+                                                    <div class="line"></div>
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-12">
+                                                        <input type="text" class="form-control" id="visa_card_holder" name="visa_card_holder" placeholder="Card Holder name">
+                                                        <label for="inputEmail4" class="pay-details">Leave The filed Blank If Card Has No Name</label>
+                                                        <div class="line"></div>
+                                                    </div>
+
+
+                                                </div>
+                                                @*<div class="form-group col-md-12 text-right"><a href="payment-advanced.html" class="btn-3 mr-0">Make a payment</a></div>*@
+                                                <div class="form-row mb-3">
+                                                    <div class="col-md-12 text-right">
+                                                        <a href="#" onclick="visacardpaymentsubmit()" class="btn-3 mr-0 text-white">Make a payment</a>
+                                                        @*<a href="#"  class="btn-2 btn-primary">Make a payment</a>*@
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            else if (Model.payment_master.InternationalPayment[i] == "Master Card")
+                            {
+                                <div class="set select-pay-card mt-3">
+                                    <a>
+                                        <div class="select-pay-head">
+                                            <div class="row">
+                                                <div class="col-10 d-flex">
+                                                    <img src="~/Content/Web/images/img/mastercard.svg" class="img-fluid" />
+                                                    <h6 class="my-auto ml-2">Master Card</h6>
+                                                </div>
+                                                <div class="col-2 my-auto">
+                                                    <i class="fas fa-chevron-down float-right"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <div class="content">
+                                        <div class="select-pay-body">
+                                            <form>
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-12">
+                                                        <input type="text" class="form-control creditCardText" id="inputEmail1" name="master_card_number" placeholder="Card Number" />
+                                                        <label for="inputEmail4" class="pay-details">Enter Digits Without Spaces</label>
+                                                        <div class="line"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-6">
+                                                        <input type="text" class="form-control datepicker-m" name="master_month" placeholder="Select Month" id="master_month" />
+
+                                                        <div class="line"></div>
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        <input type="text" class="form-control datepicker-y" name="master_year" placeholder="Select Years" id="master_year" />
+
+                                                        <div class="line"></div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <input type="password" class="form-control" id="inputEmail2" name="master_cvv" placeholder="CVV" />
+                                                    <label for="inputEmail4" class="pay-details">Last Three Digits On Your Card Back</label>
+                                                    <div class="line"></div>
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-12">
+                                                        <input type="text" class="form-control" id="inputEmail3" name="master_card_holder" placeholder="Card Holder Name" />
+                                                        <label for="inputEmail4" class="pay-details">Leave The filed Blank If Card Has No Name</label>
+                                                        <div class="line"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-row mb-3">
+                                                    <div class="col-md-12 text-right">
+                                                        <a href="#" onclick="mastercardpaymentsubmit()" class="btn-3 mr-0 text-white">Make a payment</a>
+                                                        @*<a href="#" onclick="mastercardpaymentsubmit()" class="btn-2 btn-primary">Make a payment</a>*@
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            else if (Model.payment_master.InternationalPayment[i] == "American Express")
+                            {
+                                <div class="set select-pay-card mt-3">
+                                    <a>
+                                        <div class="select-pay-head">
+                                            <div class="row">
+                                                <div class="col-10 d-flex">
+                                                    <img src="~/Content/Web/images/img/American-Express.png" class="img-fluid" />
+                                                    <h6 class="my-auto ml-2">American Express</h6>
+                                                </div>
+                                                <div class="col-2 my-auto">
+                                                    <i class="fas fa-chevron-down float-right"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <div class="content">
+                                        <div class="select-pay-body">
+                                            <form>
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-12">
+                                                        <input type="text" class="form-control creditCardText" id="inputEmail7" name="American_Express_card_number" placeholder="Card Number" />
+                                                        <label for="inputEmail4" class="pay-details">Enter Digits Without Spaces</label>
+                                                        <div class="line"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-6">
+                                                        <input type="text" class="form-control datepicker-m" name="American_Express_month" placeholder="Select Month" id="American_Express_month" />
+
+                                                        <div class="line"></div>
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        <input type="text" class="form-control datepicker-y" name="American_Express_year" placeholder="Select Years" id="American_Express_year" />
+
+                                                        <div class="line"></div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <input type="password" class="form-control" id="inputEmail8" name="American_Express_cvv" placeholder="CVV" />
+                                                    <label for="inputEmail4" class="pay-details">Last Three Digits On Your Card Back</label>
+                                                    <div class="line"></div>
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-12">
+                                                        <input type="text" class="form-control" id="inputEmail9" name="American_Express_card_holder" placeholder="Card Holder Name" />
+                                                        <label for="inputEmail4" class="pay-details">Leave The filed Blank If Card Has No Name</label>
+                                                        <div class="line"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-row mb-3">
+                                                    <div class="col-md-12 text-right">
+                                                        <a href="#" onclick="americanexpress_cardpayment_submit()" class="btn-3 mr-0 text-white">Make a payment</a>
+                                                        @*<a href="#" onclick="americanexpress_cardpayment_submit()" class="btn-2 btn-primary">Make a payment</a>*@
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+
+                            else if (Model.payment_master.InternationalPayment[i] == "Square")
+                            {
+                                <div class="set select-pay-card mt-3">
+                                    <a>
+                                        <div class="select-pay-head">
+                                            <div class="row">
+                                                <div class="col-10 d-flex">
+                                                    <img src="~/Content/Web/images/img/Square_logo.svg" class="img-fluid" />
+                                                    <h6 class="my-auto ml-2">Square</h6>
+                                                </div>
+                                                <div class="col-2 my-auto">
+                                                    <i class="fas fa-chevron-down float-right"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <div class="content">
+                                        <div class="select-pay-body">
+                                            <form>
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-12">
+                                                        <input type="text" class="form-control" id="inputEmail11" placeholder="Email" />
+                                                        <label for="inputEmail4" class="pay-details">Enter Email Or Square ID</label>
+                                                        <div class="line"></div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" id="inputEmail12" placeholder="Name" />
+                                                    <label for="inputEmail4" class="pay-details">Enter Your Name</label>
+                                                    <div class="line"></div>
+                                                </div>
+                                                <div class="form-row mb-3">
+                                                    <div class="col-md-12 text-right">
+                                                        <a href="#" class="btn-3 mr-0 text-white">Make a payment</a>
+                                                        @*<a href="#" onclick="americanexpress_cardpayment_submit()" class="btn-2 btn-primary">Make a payment</a>*@
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            else if (Model.payment_master.InternationalPayment[i] == "PayPal")
+                            {
+                                <div class="set select-pay-card mt-3">
+                                    <a>
+                                        <div class="select-pay-head">
+                                            <div class="row">
+                                                <div class="col-10 d-flex">
+                                                    <img src="~/Content/Web/images/img/paypal.svg" class="img-fluid" />
+                                                    <h6 class="my-auto ml-2">PayPal</h6>
+                                                </div>
+                                                <div class="col-2 my-auto">
+                                                    <i class="fas fa-chevron-down float-right"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <div class="content">
+                                        <div class="select-pay-body">
+                                            <form>
+                                                @*<div class="form-row">
+                                            <div class="form-group col-md-12">
+                                                <input type="text" class="form-control" id="inputEmail4" placeholder="Email" />
+                                                <label for="inputEmail4" class="pay-details">Enter Email Or Paypal ID</label>
+                                                <div class="line"></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="inputEmail4" placeholder="Name" />
+                                            <label for="inputEmail4" class="pay-details">Enter Your Name</label>
+                                            <div class="line"></div>
+                                        </div>*@
+                                                <div class="form-row mb-3">
+                                                    <div class="col-md-12 text-right">
+                                                        <a href="#" onclick="Paypalpayment_submit();" class="btn-3 mr-0 text-white">Make a payment</a>
+                                                    </div>
+                                                    @*<a href="#" onclick="Paypalpayment_submit();" class="btn-2 btn-primary">Make a payment</a>*@
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            else if (Model.payment_master.InternationalPayment[i] == "Western Union")
+                            {
+                                <div class="set select-pay-card mt-3">
+                                    <a>
+                                        <div class="select-pay-head">
+                                            <div class="row">
+                                                <div class="col-10 d-flex">
+                                                    <img src="~/Content/Web/images/img/westernunion.svg" class="img-fluid" />
+                                                    <h6 class="my-auto ml-2">Western Union</h6>
+                                                </div>
+                                                <div class="col-2 my-auto">
+                                                    <i class="fas fa-chevron-down float-right"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <div class="content">
+                                        <div class="select-pay-body">
+                                            <form>
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-12">
+                                                        <h6><strong>Contact us for transfer details at:</strong></h6>
+                                                        <label for="inputEmail4" class="pay-details">westernunion@ghostpayx.com</label>
+                                                        <div class="line"></div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            else if (Model.payment_master.InternationalPayment[i] == "Moneygram")
+                            {
+                                <div class="set select-pay-card mt-3">
+                                    <a>
+                                        <div class="select-pay-head">
+                                            <div class="row">
+                                                <div class="col-10 d-flex">
+                                                    <img src="~/Content/Web/images/img/moneygram.svg" class="img-fluid" />
+                                                    <h6 class="my-auto ml-2">Moneygram</h6>
+                                                </div>
+                                                <div class="col-2 my-auto">
+                                                    <i class="fas fa-chevron-down float-right"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <div class="content">
+                                        <div class="select-pay-body">
+                                            <form>
+                                                <h6><strong>Contact us for transfer details at:</strong></h6>
+                                                <label for="inputEmail4" class="pay-details">moneygram@ghostpayx.com</label>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    }
+
+                </div>
+                @if (Model.payment_master.CryptoPayment.Count > 0)
+                {
+                    <div class="col-lg-4 crypto-card">
+                        <div class="section-heading-payment">
+                            <h4 class="mt-2">Crypto</h4>
+                        </div>
+                        <div class="set select-pay-card mt-3 crp">
+                            <a>
+                                <div class="select-pay-head">
+                                    <div class="row">
+                                        <div class="col-10 d-flex">
+                                            <img src="~/Content/Web/images/AppPay.png" class="img-fluid" />
+                                            <h6 class="my-auto ml-2">App Pay</h6>
+                                        </div>
+                                        <div class="col-2 my-auto">
+                                            <i class="fas fa-chevron-down float-right"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                            <div class="content">
+                                <div class="select-pay-body">
+                                    <form class="crpfrom" action="/Payment/CryptoIndex" method="post">
+                                        <div class="col-md-12 text-right">
+                                            <input type="hidden" value="@Model.payment_master.ProductId" name="id" />
+                                            <input type="hidden" value="@Model.payment_master.Plan_Name" name="plan" />
+                                            <input type="hidden" value="@Model.payment_master.Plan_tenure" name="tenure" />
+                                            <input type="hidden" value="@Model.payment_master.Price" name="price" />
+                                            <input class="btn-3 mr-0 text-white" type="submit" value="Make a payment" />
+                                            @*<a href="#" class="btn-3 mr-0 text-white">Make a payment</a>*@
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="set select-pay-card mt-3 crp">
+                            <a>
+                                <div class="select-pay-head">
+                                    <div class="row">
+                                        <div class="col-10 d-flex">
+                                            <img src="~/Content/Web/images/img/Tether.jpg" class="img-fluid" />
+                                            <h6 class="my-auto ml-2">USDT</h6>
+                                        </div>
+                                        <div class="col-2 my-auto">
+                                            <i class="fas fa-chevron-down float-right"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                            <div class="content">
+                                <div class="select-pay-body">
+                                    <form class="crpfrom" action="/Payment/CryptoIndex" method="post">
+                                        <div class="col-md-12 text-right">
+                                            <input type="hidden" value="@Model.payment_master.ProductId" name="id" />
+                                            <input type="hidden" value="@Model.payment_master.Plan_Name" name="plan" />
+                                            <input type="hidden" value="@Model.payment_master.Plan_tenure" name="tenure" />
+                                            <input type="hidden" value="@Model.payment_master.Price" name="price" />
+                                            <input class="btn-3 mr-0 text-white" type="submit" value="Make a payment" />
+                                            @*<a href="#" class="btn-3 mr-0 text-white">Make a payment</a>*@
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="set select-pay-card mt-3 crp">
+                            <a>
+                                <div class="select-pay-head">
+                                    <div class="row">
+                                        <div class="col-10 d-flex">
+                                            <img src="~/Content/Web/images/img/USD_Coin.jpg" class="img-fluid" />
+                                            <h6 class="my-auto ml-2">USDC</h6>
+                                        </div>
+                                        <div class="col-2 my-auto">
+                                            <i class="fas fa-chevron-down float-right"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                            <div class="content">
+                                <div class="select-pay-body">
+                                    <form class="crpfrom" action="/Payment/CryptoIndex" method="post">
+                                        <div class="col-md-12 text-right">
+                                            <input type="hidden" value="@Model.payment_master.ProductId" name="id" />
+                                            <input type="hidden" value="@Model.payment_master.Plan_Name" name="plan" />
+                                            <input type="hidden" value="@Model.payment_master.Plan_tenure" name="tenure" />
+                                            <input type="hidden" value="@Model.payment_master.Price" name="price" />
+                                            <input class="btn-3 mr-0 text-white" type="submit" value="Make a payment" />
+                                            @*<a href="#" class="btn-3 mr-0 text-white">Make a payment</a>*@
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        @for (int a = 0; Model.payment_master.CryptoPayment.Count > a; a++)
+                        {
+                            if (Model.payment_master.CryptoPayment[a] == "GhostPayX")
+                            {
+                                @*<div class="set select-pay-card mt-3">
+                            <a>
+                                <div class="select-pay-head">
+                                    <div class="row">
+                                        <div class="col-10 d-flex">
+                                            <img src="~/Content/Web/images/img/ghostpay.svg" class="img-fluid" />
+                                            <h6 class="my-auto ml-2">APay</h6>
+                                        </div>
+                                        <div class="col-2 my-auto">
+                                            <i class="fas fa-chevron-down float-right"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                            <div class="content">
+                                <div class="select-pay-body">
+                                    <form>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-12">
+                                                <label for="inputEmail4" class="pay-details">GhostPayX Address</label>
+                                                <div class="form-row">
+                                                    <div class="col-md-4"><img src="~/Content/Web/images/img/qr-code.png" class="img-fluid" /></div>
+                                                    <div class="col-md-8 my-auto">
+                                                        <h6 class="pay-details">Amount</h6>
+
+                                                        <h6 class="pay-details">0.00002312323 GhostPayX</h6>
+                                                    </div>
+                                                </div>
+                                                <div class="line"></div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-12">
+                                                <label for="inputEmail4" class="pay-details">Click on the QR code above to open in the wallet</label>
+                                                <i class="far fa-clipboard"></i>
+                                                <input type="text" class="form-control" placeholder="" />
+
+                                                <div class="line"></div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>*@
+                            }
+                            else if (Model.payment_master.CryptoPayment[a] == "Bitcoin")
+                            {
+                                <div class="set select-pay-card mt-3 crp">
+                                    <a>
+                                        <div class="select-pay-head">
+                                            <div class="row">
+                                                <div class="col-10 d-flex">
+                                                    <img src="~/Content/Web/images/img/btc.svg" class="img-fluid" />
+                                                    <h6 class="my-auto ml-2">Bitcoin</h6>
+                                                </div>
+                                                <div class="col-2 my-auto">
+                                                    <i class="fas fa-chevron-down float-right"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <div class="content">
+                                        <div class="select-pay-body">
+                                            <form class="crpfrom" action="/Payment/CryptoIndex" method="post">
+                                                <div class="col-md-12 text-right">
+                                                    <input type="hidden" value="@Model.payment_master.ProductId" name="id" />
+                                                    <input type="hidden" value="@Model.payment_master.Plan_Name" name="plan" />
+                                                    <input type="hidden" value="@Model.payment_master.Plan_tenure" name="tenure" />
+                                                    <input type="hidden" value="@Model.payment_master.Price" name="price" />
+                                                    <input class="btn-3 mr-0 text-white" type="submit" value="Make a payment" />
+                                                    @*<a href="#" class="btn-3 mr-0 text-white">Make a payment</a>*@
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            else if (Model.payment_master.CryptoPayment[a] == "Ethereum")
+                            {
+                                <div class="set select-pay-card mt-3 crp">
+                                    <a>
+                                        <div class="select-pay-head">
+                                            <div class="row">
+                                                <div class="col-10 d-flex">
+                                                    <img src="~/Content/Web/images/img/ethereum.svg" class="img-fluid" />
+                                                    <h6 class="my-auto ml-2">Ethereum</h6>
+                                                </div>
+                                                <div class="col-2 my-auto">
+                                                    <i class="fas fa-chevron-down float-right"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <div class="content">
+                                        <div class="select-pay-body">
+                                            <form class="crpfrom" action="/Payment/CryptoIndex" method="post">
+                                                <div class="col-md-12 text-right">
+                                                    <input type="hidden" value="@Model.payment_master.ProductId" name="id" />
+                                                    <input type="hidden" value="@Model.payment_master.Plan_Name" name="plan" />
+                                                    <input type="hidden" value="@Model.payment_master.Plan_tenure" name="tenure" />
+                                                    <input type="hidden" value="@Model.payment_master.Price" name="price" />
+                                                    <input class="btn-3 mr-0 text-white" type="submit" value="Make a payment" />
+                                                    @*<a href="#" class="btn-3 mr-0 text-white">Make a payment</a>*@
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            else if (Model.payment_master.CryptoPayment[a] == "Litecoin")
+                            {
+                                @*<div class="set select-pay-card mt-3">
+                            <a>
+                                <div class="select-pay-head">
+                                    <div class="row">
+                                        <div class="col-10 d-flex">
+                                            <img src="~/Content/Web/images/img/litecoin.svg" class="img-fluid" />
+                                            <h6 class="my-auto ml-2">Litecoin</h6>
+                                        </div>
+                                        <div class="col-2 my-auto">
+                                            <i class="fas fa-chevron-down float-right"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                            <div class="content">
+                                <div class="select-pay-body">
+                                    <form>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-12">
+                                                <label for="inputEmail4" class="pay-details">Litecoin Address</label>
+                                                <div class="form-row">
+                                                    <div class="col-md-4"><img src="~/Content/Web/images/img/qr-code.png" class="img-fluid" /></div>
+                                                    <div class="col-md-8 my-auto">
+                                                        <h6>Amount</h6>
+
+                                                        <h6>0.00002312323 Litecoin</h6>
+                                                    </div>
+                                                </div>
+                                                <div class="line"></div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-12">
+                                                <label for="inputEmail4" class="pay-details">Click on the QR code above to open in the wallet</label>
+                                                <i class="far fa-clipboard"></i>
+                                                <input type="text" class="form-control" placeholder="" />
+
+                                                <div class="line"></div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>*@
+                            }
+
+                            else if (Model.payment_master.CryptoPayment[a] == "Binance Coin")
+                            {
+                                @*<div class="set select-pay-card mt-3">
+                            <a>
+                                <div class="select-pay-head">
+                                    <div class="row">
+                                        <div class="col-10 d-flex">
+                                            <img src="~/Content/Web/images/img/binance.svg" class="img-fluid" />
+                                            <h6 class="my-auto ml-2">Binance Coin</h6>
+                                        </div>
+                                        <div class="col-2 my-auto">
+                                            <i class="fas fa-chevron-down float-right"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                            <div class="content">
+                                <div class="select-pay-body">
+                                    <form>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-12">
+                                                <label for="inputEmail4" class="pay-details">Binance Address</label>
+                                                <div class="form-row">
+                                                    <div class="col-md-4"><img src="~/Content/Web/images/img/qr-code.png" class="img-fluid" /></div>
+                                                    <div class="col-md-8 my-auto">
+                                                        <h6 class="pay-details">Amount</h6>
+
+                                                        <h6 class="pay-details">0.00002312323 Binance Coin</h6>
+                                                    </div>
+                                                </div>
+                                                <div class="line"></div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-12">
+                                                <label for="inputEmail4" class="pay-details">Click on the QR code above to open in the wallet</label>
+                                                <i class="far fa-clipboard"></i>
+                                                <input type="text" class="form-control" placeholder="" />
+
+                                                <div class="line"></div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>*@
+                            }
+                            else if (Model.payment_master.CryptoPayment[a] == "Doge Coin")
+                            {
+                                @*<div class="set select-pay-card mt-3">
+                            <a>
+                                <div class="select-pay-head">
+                                    <div class="row">
+                                        <div class="col-10 d-flex">
+                                            <img src="~/Content/Web/images/img/doge.svg" class="img-fluid" />
+                                            <h6 class="my-auto ml-2">Doge Coin</h6>
+                                        </div>
+                                        <div class="col-2 my-auto">
+                                            <i class="fas fa-chevron-down float-right"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                            <div class="content">
+                                <div class="select-pay-body">
+                                    <form>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-12">
+                                                <label for="inputEmail4" class="pay-details">Doge Coin Address</label>
+                                                <div class="form-row">
+                                                    <div class="col-md-4"><img src="~/Content/Web/images/img/qr-code.png" class="img-fluid" /></div>
+                                                    <div class="col-md-8 my-auto">
+                                                        <h6 class="pay-details">Amount</h6>
+
+                                                        <h6 class="pay-details">0.00002312323 Doge Coin</h6>
+                                                    </div>
+                                                </div>
+                                                <div class="line"></div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-12">
+                                                <label for="inputEmail4" class="pay-details">Click on the QR code above to open in the wallet</label>
+                                                <i class="far fa-clipboard"></i>
+                                                <input type="text" class="form-control" placeholder="" />
+
+                                                <div class="line"></div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>*@
+                            }
+
+
+
+                        }
+                    </div>
+                }
+
+                @{
+                    if (Model.payment_master.CountryWisePayment.Count > 0)
+                    {
+                        <div class="col-lg-4 local-card">
+                            <div class="section-heading-payment">
+                                <h4>Local</h4>
+                            </div>
+                            @foreach (var countryWise in Model.payment_master.CountryWisePayment)
+                            {
+                                <div class="set select-pay-card mt-3">
+                                    <a>
+                                        <div class="select-pay-head">
+                                            <div class="row">
+                                                <div class="col-10 d-flex">
+                                                    <img src="@(countryWise.Payment_icon)" class="img-fluid" />
+                                                    <h6 class="my-auto ml-2">@countryWise.Payment_Name</h6>
+                                                </div>
+                                                <div class="col-2 my-auto">
+                                                    <i class="fas fa-chevron-down float-right"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <div class="content">
+                                        <div class="select-pay-body">
+                                            <form>
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-12">
+                                                        <label for="" class="pay-details">Scan the QR code and make the payment</label>
+                                                        <div class="line"></div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-6">
+                                                        <div class="form-row">
+                                                            <div class="form-group my-auto col-md-9">
+                                                                <img src="~/Content/Web/images/img/qr-code.png" alt="" class="img-fluid" />
+                                                            </div>
+                                                            <div class="form-group col-md-3 my-auto">
+                                                                <h4 class="pay-details">OR</h4>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="line"></div>
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        <label class="pay-details">Pay directly in Account using Easypaisa App</label>
+                                                        <br />
+                                                        <h4><strong>Account Number:</strong></h4>
+                                                        <h4 class="pay-details">1234568790</h4>
+                                                        <div class="line"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-12">
+                                                        <label class="pay-details">Enter the transaction ID here to load the payment in your wallet</label>
+                                                        <input type="tel" class="form-control" id="" placeholder="Enter Transaction Reference Number Here" />
+
+                                                        <div class="line"></div>
+                                                    </div>
+                                                    <div class="form-group col-md-12 text-right"><a href="payment-advanced.html" class="btn-3 mr-0">Load</a></div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            }
+                            @*<div class="set select-pay-card mt-3">
+                        <a>
+                            <div class="select-pay-head">
+                                <div class="row">
+                                    <div class="col-10 d-flex">
+                                        <img src="~/Content/Web/images/img/jazzcash.svg" class="img-fluid" />
+                                        <h6 class="my-auto ml-2">Jazz Cash</h6>
+                                    </div>
+                                    <div class="col-2 my-auto">
+                                        <i class="fas fa-chevron-down float-right"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="content">
+                            <div class="select-pay-body">
+                                <form>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            <label for="" class="pay-details">Scan the QR code and make the payment</label>
+                                            <div class="line"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <div class="form-row">
+                                                <div class="form-group my-auto col-md-9">
+                                                    <img src="~/Content/Web/images/img/qr-code.png" alt="" class="img-fluid" />
+                                                </div>
+                                                <div class="form-group col-md-3 my-auto">
+                                                    <h4 class="pay-details">OR</h4>
+                                                </div>
+                                            </div>
+
+                                            <div class="line"></div>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label class="pay-details">Pay directly in Account using Jazz Cash App</label>
+                                            <br />
+                                            <h4><strong>Account Number:</strong></h4>
+                                            <h4 class="pay-details">1234568790</h4>
+                                            <div class="line"></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            <label class="pay-details">Enter the transaction ID here to load the payment in your wallet</label>
+                                            <input type="tel" class="form-control" id="" placeholder="Enter Transaction Reference Number Here" />
+
+                                            <div class="line"></div>
+                                        </div>
+                                        <div class="form-group col-md-12 text-right"><a href="payment-advanced.html" class="btn-3 mr-0">Load</a></div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="set select-pay-card mt-3">
+                        <a>
+                            <div class="select-pay-head">
+                                <div class="row">
+                                    <div class="col-10 d-flex">
+                                        <img src="~/Content/Web/images/img/cheque.svg" class="img-fluid" />
+                                        <h6 class="my-auto ml-2">Pay by Cheque</h6>
+                                    </div>
+                                    <div class="col-2 my-auto">
+                                        <i class="fas fa-chevron-down float-right"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="content">
+                            <div class="select-pay-body">
+                                <form>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            <h6><strong>In Person</strong></h6>
+                                            <label for="inputEmail4" class="pay-details">73 Jail Road, Gulberg9th Floor, Tricon Corporate Center, Lahore, 5400</label>
+
+                                            <div class="line"></div>
+                                        </div>
+
+                                        <div class="form-group col-md-12">
+                                            <h6><strong>By Mail</strong></h6>
+                                            <h6 for="inputEmail4" class="pay-details">Ghost Pay X</h6>
+                                            <h6 for="inputEmail4" class="pay-details">
+                                                Cantt GPO Lahore
+                                            </h6>
+                                            <h6 for="inputEmail4" class="pay-details">
+                                                Sarfaraz Rafiqul Rd, Lahore, Punjab, Pakistan
+                                            </h6>
+
+                                            <div class="line"></div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="set select-pay-card mt-3">
+                        <a>
+                            <div class="select-pay-head">
+                                <div class="row">
+                                    <div class="col-10 d-flex">
+                                        <img src="~/Content/Web/images/img/inperson.svg" class="img-fluid" />
+                                        <h6 class="my-auto ml-2">Pay in person</h6>
+                                    </div>
+                                    <div class="col-2 my-auto">
+                                        <i class="fas fa-chevron-down float-right"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="content">
+                            <div class="select-pay-body">
+                                <form>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            <h6><strong>Address</strong></h6>
+                                            <div class="line"></div>
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                            <div class="d-flex">
+                                                <i class="fas fa-map-marker-alt mt-1 mr-3"></i>
+                                                <h4 class="pay-details">73 Jail Road, Gulberg9th Floor, Tricon Corporate Center, Lahore, 5400</h4>
+                                            </div>
+
+                                            <div style="width: 100%;">
+                                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3400.274203450864!2d74.3817120151512!3d31.544088581361763!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39190555edcce6a7%3A0xd4572e646714cdf!2sRegus%20-%20Lahore%2C%20Tricon%20Corporate%20Centre!5e0!3m2!1sen!2sin!4v1624607437669!5m2!1sen!2sin"
+                                                        width="100%"
+                                                        height="200"
+                                                        style="border: 0;"
+                                                        allowfullscreen=""
+                                                        loading="lazy"></iframe>
+                                            </div>
+
+                                            <div class="line"></div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="set select-pay-card mt-3">
+                        <a>
+                            <div class="select-pay-head">
+                                <div class="row">
+                                    <div class="col-10 d-flex">
+                                        <img src="~/Content/Web/images/img/bank.svg" class="img-fluid" />
+                                        <h6 class="my-auto ml-2">Bank Transfer</h6>
+                                    </div>
+                                    <div class="col-2 my-auto">
+                                        <i class="fas fa-chevron-down float-right"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="content">
+                            <div class="select-pay-body">
+                                <form>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <h4><strong>Name on account:&nbsp;</strong></h4>
+                                            <div class="line"></div>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <h4><span class="pay-details"> Ghost Pay X PTY LTD</span></h4>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <h4><strong>Bank Name:&nbsp;</strong></h4>
+                                            <div class="line"></div>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <h4><span class="pay-details"> The Bank Of Punjab</span></h4>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <h4><strong>Bank Address:&nbsp;</strong></h4>
+                                            <div class="line"></div>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <h4><span class="pay-details">BOP Tower, 10B, Block E-II, Main Boulevard Gulberg III Lahore, 54000</span></h4>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <h4><strong>IBAN:&nbsp;</strong></h4>
+                                            <div class="line"></div>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <h4><span class="pay-details">GB80 TWRI 2314 7094 0280 39</span></h4>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <h4><strong>BIC/SWIFT:&nbsp;</strong></h4>
+                                            <div class="line"></div>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <h4><span class="pay-details">BPUNPKKA052</span></h4>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>*@
+
+
+                        </div>
+                    }
+                }
+
+                <input type="hidden" id="ProductId" name="ProductId" value="@Model.payment_master.ProductId" />
+                <input type="hidden" id="Plan_Type" name="Plan_Type" value="@Model.payment_master.Plan_Name" />
+                <input type="hidden" id="Plan_Tenure" name="Plan_Tenure" value="@Model.payment_master.Plan_tenure" />
+                <input type="hidden" id="PlanId" name="PlanId" value="@Model.payment_master.PlanId" />
+                <input type="hidden" id="token" name="token" value="@Model.payment_master.token" />
+            </div>
+        </div>
+    </section>
+
+    @*<footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 text-center-mob">
+                        <img src="~/Content/Web/images/img/logo-white.svg" alt="" class="img-fluid logo-footer" />
+                    </div>
+                    <div class="col-md-4 text-center my-auto order-2 order-lg-1">
+                        <p>All Rights Reserved © GhostPayX</p>
+                    </div>
+                    <div class="col-md-4 order-1 order-lg-2">
+                        <ul class="d-flex">
+                            <li>
+                                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fab fa-instagram"></i></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>*@
+
+</body>
+</html>
+
+
+
+<script src="~/Content/Web/js/jquery-3.6.0.js"></script>
+<script src="~/Content/Web/js/bootstrap.bundle.min.js"></script>
+<script src="~/Content/Web/js/all.min.js"></script>
+<script src="~/Content/Web/js/main.js"></script>
+<script src="~/Content/Web/js/main.js"></script>
+<script src="~/Content/Web/js/countrySelect.min.js"></script>
+<script src="~/Content/Web/js/bootstrap-datepicker.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.21.0/slimselect.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.js"></script>
+
+<script>
+    $(document).ready(function () {
+        ($("#loder01").css("display", "block"));
+        $("#loder01").hide()
+        $(document).ajaxStart(function () {
+            ($("#loder01").css("display", "block"));
+        });
+
+        $(document).ajaxStop(function () {
+            $("#loder01").hide()
+        });
+
+
+
+
+    })
+
+
+    $("#country_selector").countrySelect({});
+</script>
+<script>
+    $(".datepicker-y").datepicker({
+        format: "yyyy",
+        viewMode: "years",
+        minViewMode: "years",
+    });
+
+    $(".datepicker-m").datepicker({
+        format: "mm",
+        viewMode: "months",
+        minViewMode: "months",
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        $(".set > a").on("click", function () {
+            if ($(this).hasClass("active")) {
+                $(this).removeClass("active");
+                $(this).siblings(".content").slideUp(200);
+            } else {
+                $(".set > a").removeClass("active");
+                $(this).addClass("active");
+                $(".content").slideUp(200);
+                $(this).siblings(".content").slideDown(200);
+            }
+        });
+
+        $(".crp > a").off("click").on("click", function () {
+            $(this).parent().find('.crpfrom').submit()
+        });
+        $('.creditCardText').keyup(function () {
+            // Remove non-numeric characters
+            var foo = $(this).val().replace(/\D/g, '');
+
+            // Limit the length to 16 characters
+            foo = foo.substring(0, 16);
+
+            // Insert a hyphen after every four digits
+            if (foo.length > 0) {
+                foo = foo.match(new RegExp('.{1,4}', 'g')).join(" ");
+            }
+
+            // Update the input value
+            $(this).val(foo);
+        });
+    });
+</script>
+
+<script>
+
+
+    function visacardpaymentsubmit() {
+
+
+        var card_number = $('input[name="visa_card_number"]').val();
+        var card_holder = $('input[name="visa_card_holder"]').val();
+        var cvv = $('input[name="visa_cvv"]').val();
+        var month = $('input[name="visa_month"]').val();
+        var year = $('input[name="visa_year"]').val();
+        var amount = $('input[name="amount"]').val();
+        var Plan_Type = $('input[name="Plan_Type"]').val();
+        var PlanId = $('input[name="PlanId"]').val();
+        var Plan_Tenure = $('input[name="Plan_Tenure"]').val();
+        var ProductId = $('input[name="ProductId"]').val();
+        if (card_number == '') {
+            swal({
+                title: "Oops!",
+                text: "Enter card number",
+                type: "error"
+            });
+            return;
+        }
+        else if (month == '') {
+            swal({
+                title: "Oops!",
+                text: "Select expiry month",
+                type: "error"
+            });
+            return;
+        }
+        else if (year == '') {
+            swal({
+                title: "Oops!",
+                text: "Select expiry year",
+                type: "error"
+            });
+            return;
+        }
+        else if (card_holder == '') {
+            swal({
+                title: "Oops!",
+                text: "Enter card holder",
+                type: "error"
+            });
+            return;
+        }
+
+        document.body.classList.add("loading")//Loader start
+        const fd = new FormData();
+        fd.append('card_number', card_number);
+        fd.append('card_holder', card_holder);
+        fd.append('cvv', cvv);
+        fd.append('month', month);
+        fd.append('year', year);
+        fd.append('amount', amount);
+        fd.append('ProductId', ProductId);
+        fd.append('Plan_Type', Plan_Type);
+        fd.append('Plan_Tenure', Plan_Tenure);
+        fd.append('PlanId', PlanId);
+        fd.append('token', $('input[name="token"]').val());
+        $.ajax({
+            url: '/Payment/card_payment',
+            method: 'POST',
+            async: true,
+            contentType: false,
+            cache: false,
+            processData: false,
+            data: fd,
+            success: function (data) {
+                document.body.classList.remove("loading")//Loader stop
+                if (data.code == 200 && data.msg == 'Payment Successfully Done.') {
+
+                    swal({
+                        title: "Success!",
+                        text: data.msg,
+                        type: "success"
+                    }, function () {
+
+                        window.location = "/Profile/my_product";
+                    });
+
+                }
+                else if (data.code == 200 && data.msg == 'Declined') {
+                    swal({
+                        title: "Oops!",
+                        text: data.msg,
+                        type: "error"
+                    });
+                }
+                else if (data.code == 400) {
+                    swal({
+                        title: "Oops!",
+                        text: data.msg,
+                        type: "error"
+                    });
+                }
+
+                else if (data.code == 500) {
+                    swal({
+                        title: "Oops!",
+                        text: "Something went wrong!",
+                        type: "error"
+                    }, function () {
+
+                        window.location = data.url;
+                    });
+                }
+
+            }
+        });
+
+
+
+    }
+
+    function mastercardpaymentsubmit() {
+
+
+
+
+        var card_number = $('input[name="master_card_number"]').val();
+        var card_holder = $('input[name="master_card_holder"]').val();
+        var cvv = $('input[name="master_cvv"]').val();
+        var month = $('input[name="master_month"]').val();
+        var year = $('input[name="master_year"]').val();
+        var amount = $('input[name="amount"]').val();
+        var Plan_Type = $('input[name="Plan_Type"]').val();
+        var Plan_Tenure = $('input[name="Plan_Tenure"]').val();
+        var ProductId = $('input[name="ProductId"]').val();
+
+        if (card_number == '') {
+            swal({
+                title: "Oops!",
+                text: "Enter card number",
+                type: "error"
+            });
+            return;
+        }
+        else if (month == '') {
+            swal({
+                title: "Oops!",
+                text: "Select expiry month",
+                type: "error"
+            });
+            return;
+        }
+        else if (year == '') {
+            swal({
+                title: "Oops!",
+                text: "Select expiry year",
+                type: "error"
+            });
+            return;
+        }
+        else if (card_holder == '') {
+            swal({
+                title: "Oops!",
+                text: "Enter card holder",
+                type: "error"
+            });
+            return;
+        }
+
+        document.body.classList.add("loading")//Loader start
+        const fd = new FormData();
+        fd.append('card_number', card_number);
+        fd.append('card_holder', card_holder);
+        fd.append('cvv', cvv);
+        fd.append('month', month);
+        fd.append('year', year);
+        fd.append('amount', amount);
+        fd.append('ProductId', ProductId);
+        fd.append('Plan_Type', Plan_Type);
+        fd.append('Plan_Tenure', Plan_Tenure);
+        $.ajax({
+            url: '/Payment/card_payment',
+            method: 'POST',
+            async: true,
+            contentType: false,
+            cache: false,
+            processData: false,
+            data: fd,
+            success: function (data) {
+                document.body.classList.remove("loading")//Loader stop
+                if (data.code == 200 && data.msg == 'Payment Successfully Done.') {
+
+                    swal({
+                        title: "Success!",
+                        text: data.msg,
+                        type: "success"
+                    }, function () {
+
+                        window.location = "/Profile/my_product";
+                    });
+
+                }
+                else if (data.code == 400) {
+                    swal({
+                        title: "Oops!",
+                        text: data.msg,
+                        type: "error"
+                    });
+                }
+
+                else if (data.code == 500) {
+                    swal({
+                        title: "Oops!",
+                        text: "Something went wrong!",
+                        type: "error"
+                    }, function () {
+
+                        window.location = data.url;
+                    });
+                }
+            }
+        });
+
+
+
+    }
+
+    function americanexpress_cardpayment_submit() {
+
+
+
+
+        var card_number = $('input[name="American_Express_card_number"]').val();
+        var card_holder = $('input[name="American_Express_card_holder"]').val();
+        var cvv = $('input[name="American_Express_cvv"]').val();
+        var month = $('input[name="American_Express_month"]').val();
+        var year = $('input[name="American_Express_year"]').val();
+        var amount = $('input[name="amount"]').val();
+        var Plan_Type = $('input[name="Plan_Type"]').val();
+        var Plan_Tenure = $('input[name="Plan_Tenure"]').val();
+        var ProductId = $('input[name="ProductId"]').val();
+
+        if (card_number == '') {
+            swal({
+                title: "Oops!",
+                text: "Enter card number",
+                type: "error"
+            });
+            return;
+        }
+        else if (month == '') {
+            swal({
+                title: "Oops!",
+                text: "Select expiry month",
+                type: "error"
+            });
+            return;
+        }
+        else if (year == '') {
+            swal({
+                title: "Oops!",
+                text: "Select expiry year",
+                type: "error"
+            });
+            return;
+        }
+        else if (card_holder == '') {
+            swal({
+                title: "Oops!",
+                text: "Enter card holder",
+                type: "error"
+            });
+            return;
+        }
+
+        document.body.classList.add("loading")//Loader start
+        const fd = new FormData();
+        fd.append('card_number', card_number);
+        fd.append('card_holder', card_holder);
+        fd.append('cvv', cvv);
+        fd.append('month', month);
+        fd.append('year', year);
+        fd.append('amount', amount);
+        fd.append('ProductId', ProductId);
+        fd.append('Plan_Type', Plan_Type);
+        fd.append('Plan_Tenure', Plan_Tenure);
+        $.ajax({
+            url: '/Payment/card_payment',
+            method: 'POST',
+            async: true,
+            contentType: false,
+            cache: false,
+            processData: false,
+            data: fd,
+            success: function (data) {
+                document.body.classList.remove("loading")//Loader stop
+                if (data.code == 200 && data.msg == 'Payment Successfully Done.') {
+
+                    swal({
+                        title: "Success!",
+                        text: data.msg,
+                        type: "success"
+                    }, function () {
+
+                        window.location = "/Profile/my_product";
+                    });
+
+                }
+                else if (data.code == 400) {
+                    swal({
+                        title: "Oops!",
+                        text: data.msg,
+                        type: "error"
+                    });
+                }
+
+                else if (data.code == 500) {
+                    swal({
+                        title: "Oops!",
+                        text: "Something went wrong!",
+                        type: "error"
+                    }, function () {
+
+                        window.location = data.url;
+                    });
+                }
+            }
+        });
+
+
+
+    }
+    function Paypalpayment_submit() {
+        document.body.classList.add("loading")//Loader start
+
+        var amount = $("#amount").val();
+        var Plan_Type = $("#Plan_Type").val();
+        var Plan_Tenure = $("#Plan_Tenure").val();
+        var ProductId = $("#ProductId").val();
+        const fd = new FormData();
+        fd.append('amount', amount);
+        fd.append('ProductId', ProductId);
+        fd.append('Plan_Type', Plan_Type);
+        fd.append('Plan_Tenure', Plan_Tenure);
+        $.ajax({
+            url: '/PayPalPayment/CreatePayment',
+            method: 'POST',
+            async: true,
+            contentType: false,
+            cache: false,
+            processData: false,
+            data: fd,
+            success: function (data) {
+                document.body.classList.remove("loading"); //loader stop
+                if (data.redirectTo) {
+                    window.location.href = data.redirectTo;
+                } else {
+                    swal({
+                        title: "Oops!",
+                        text: "Something went wrong!",
+                        type: "error"
+                    });
+                }
+                //if (data.code == 200) {
+
+                //    swal({
+                //        title: "success!",
+                //        text: data.msg,
+                //        type: "success"
+                //    }, function () {
+
+                //        window.location.reload();
+                //    });
+
+                //}
+                //else if (data.code == 400) {
+                //    swal({
+                //        title: "OOPS!",
+                //        text: data.msg,
+                //        type: "error"
+                //    });
+                //}
+
+                //else if (data.code == 500) {
+                //    swal({
+                //        title: "OOPS!",
+                //        text: "Something went wrong!",
+                //        type: "error"
+                //    }, function () {
+
+                //        window.location = data.url;
+                //    });
+                //}
+            }
+        });
+
+
+
+    }
+</script>

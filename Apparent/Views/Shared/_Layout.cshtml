@@ -1,0 +1,523 @@
+﻿@{
+    int currentYear = DateTime.Now.Year;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE" />
+    <title>Apparent</title>
+    <!-- // favicon and fonts-->
+    <link rel="icon" href="~/Content/favicon.ico" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet" />
+    <!-- // -->
+    <!-- //  cdn start-->
+    <!-- // -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/line-awesome/1.3.0/line-awesome/css/line-awesome.min.css" rel="stylesheet" type="text/css" media="all" />
+    <!-- // -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.21.0/slimselect.css" rel="stylesheet" type="text/css" />
+    <!-- <link href="~/Content/assets/css/font-awesome.min.css" rel="stylesheet" type="text/css"/> -->
+
+    <script src="https://kit.fontawesome.com/91cafd3f0a.js" crossorigin="anonymous"></script>
+    <link href="~/Content/Web/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/Web/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="~/Content/Web/css/all.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="~/Content/assets/css/all.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="~/Content/assets/css/style_new.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="~/Content/assets/css/ace.min.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="~/Content/assets/css/responsive.css" rel="stylesheet" type="text/css" />
+    <style>
+        .nav-link.active {
+            color: darkgray;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ====================================================================================================
+      start header
+    ====================================================================================================== -->
+
+    <header class="topHead py1 m0">
+        <!-- <div class="burger pointer flex flex-column justify-between mr2 d-none">
+                <span class="bg-white"></span>
+                <span class="bg-white"></span>
+                <span class="bg-white"></span>
+            </div> -->
+        <div class="container-fluid">
+            <!-- <a class="white caps text-decoration-none h3 bold" href="#">Logo</a> -->
+
+            <nav class="menus" id="dynamic-menu">
+                <a href="/"><img src="~/Content/assets/images/main_logo.svg" alt="" /></a>
+                <!-- // -->
+                <ul class="list-reset m0 d-block" id="menu">
+                    <li class="inline-block nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="inline-block nav-item">
+                        <a class="nav-link" href="/aboutus">About us</a>
+                    </li>
+                    <li class="inline-block nav-item">
+                        <a class="nav-link" href="/buyers">For Buyers</a>
+                    </li>
+                    <li class="inline-block nav-item">
+                        <a class="nav-link" href="/sellers">For Sellers</a>
+                    </li>
+                    <li class="inline-block nav-item">
+                        <a class="nav-link" href="/faq">FAQ</a>
+                    </li>
+                    <li class="inline-block nav-item">
+                        <a class="nav-link" href="/blog">Blog</a>
+                    </li>
+                    <li class="inline-block nav-item">
+                        <a class="nav-link" href="/contact">Contact us</a>
+                    </li>
+
+
+                </ul>
+                <div class="menuPoint">
+                    @{
+                        if (ViewBag.CompanyId != null && (Session["Type"] != null && Session["Type"].ToString() == "Customer"))
+                        {
+                            @*<a href="~/Profile/customerprof" class="nav-link request_btn" style="color: #fff !important;">User</a>*@
+                            <div class="header_dropdown">
+                                <div class="navbar navbar-expand-lg ">
+                                    <ul class="navbar-nav ml-auto nav-flex-icons">
+                                        <li class="nav-item dropdown">
+                                            @{
+                                                var Name = Session["FirstName"].ToString();
+                                                var CompanyIcon = Session["CompanyIcon"].ToString();
+                                                if (CompanyIcon != "" && CompanyIcon != null)
+                                                {
+                                                    <a class="nav-link dropdown-toggle mb-2" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <img src="@CompanyIcon" />
+                                                    </a>
+                                                }
+                                                else
+                                                {
+                                                    <div class="lyprofile-container userPicD  mb-2">
+                                                        @Name.Substring(0, 1)
+                                                    </div>
+                                                }
+                                            }
+
+                                            <div class="dropdown-menu dropdown-menu-right dropdown-unique" aria-labelledby="navbarDropdownMenuLink">
+                                                <a class="dropdown-item" href="~/">Home</a>
+                                                <a class="dropdown-item" href="~/Profile/Index">Profile</a>
+                                                <a class="dropdown-item" href="~/SignOut/Index">Sign Out</a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                @*<div class="admin_content">*@
+                                @*<div class="admin_data">*@
+                                <!-- <div class="image"> <img src="images/logo.jpg" width="40" height="40"> </div> -->
+                                @*<div class="admin_name">
+                                        @{
+                                            var Name = Session["FirstName"].ToString();
+                                            var CompanyIcon = Session["CompanyIcon"].ToString();
+                                            if (CompanyIcon != null && CompanyIcon != "")
+                                            {
+                                                <a href="javascript:void(0);">
+                                                    <div class="userPicD">
+                                                        <img src="@CompanyIcon" alt="" />
+                                                    </div>
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <div class="lyprofile-container userPicD">
+                                                    @Name.Substring(0, 1)
+                                                </div>
+                                            }
+                                        }
+                                    </div>*@
+                                <!-- <div class="admin_dropdown_icon">
+                                  <i class="fas fa-sort-down"></i>
+                                </div> -->
+                                @*</div>
+                                    </div>*@
+                                <!--<div class="account_dropdown">
+                                <div class="account_dropdown_body">
+                                    <div class="account_dropdown_item">
+                                        <a href="~/Home">Home</a>
+                                    </div>
+                                    <div class="account_dropdown_item">
+                                        <a href="~/Profile/customerprof">Profile</a>
+                                    </div>-->
+                                @*<div class="account_dropdown_item">
+                                        <a href="#">Setting</a>
+                                    </div>*@
+                                <!--<div class="account_dropdown_item">
+                                            <a href="~/SignOut/Index">Sign Out</a>
+                                        </div>
+                                    </div>
+                                </div>-->
+                            </div>
+
+
+                        }
+
+                        else if (ViewBag.CompanyId != null && (Session["Type"] != null && Session["Type"].ToString() == "Seller"))
+                        {
+                            @*<a href="~/Profile/Index" class="nav-link request_btn" style="color: #fff !important;">User</a>*@
+                            <div class="header_dropdown">
+                                <div class="navbar navbar-expand-lg ">
+                                    <ul class="navbar-nav ml-auto nav-flex-icons">
+                                        <li class="nav-item dropdown">
+                                            @{
+                                                var CompanyName = Session["CompanyName"].ToString();
+                                                var CompanyIcon = Session["CompanyIcon"].ToString();
+                                                if (CompanyIcon != "" && CompanyIcon != null)
+                                                {
+                                                    <a class="nav-link dropdown-toggle mb-2" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <img src="@CompanyIcon" />
+                                                    </a>
+                                                }
+                                                else
+                                                {
+                                                    <div class="lyprofile-container userPicD  mb-2">
+                                                        @CompanyName.Substring(0, 1)
+                                                    </div>
+                                                }
+                                            }
+
+                                            <div class="dropdown-menu dropdown-menu-right dropdown-unique" aria-labelledby="navbarDropdownMenuLink">
+                                                <a class="dropdown-item" href="~/">Home</a>
+                                                <a class="dropdown-item" href="~/Profile/Index">Profile</a>
+                                                <a class="dropdown-item" href="~/SignOut/Index">Sign Out</a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!--<div class="admin_content">
+                                <div class="admin_data">
+                                    <!-- <div class="image"> <img src="images/logo.jpg" width="40" height="40"> </div> -->
+                                <!--<div class="admin_name">
+                                    @{
+                                        //var CompanyName = Session["CompanyName"].ToString();
+                                        //var CompanyIcon = Session["CompanyIcon"].ToString();
+                                        //if (CompanyIcon != "" && CompanyIcon != null)
+                                        //{
+                                            <a href="javascript:void(0);">
+                                                <div class="userPicD">
+
+                                                    <img src="@CompanyIcon" alt="" />
+
+                                                </div>
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <div class="lyprofile-container userPicD">
+                                                @CompanyName.Substring(0, 1)
+                                            </div>
+                                        }
+                                    }
+                                </div>-->
+                                <!-- <div class="admin_dropdown_icon">
+                                  <i class="fas fa-sort-down"></i>
+                                </div> -->
+                                <!--</div>
+                                </div>
+                                <div class="account_dropdown">
+                                    <div class="account_dropdown_body">
+                                        <div class="account_dropdown_item">
+                                            <a href="~/Home">Home</a>
+                                        </div>
+                                        <div class="account_dropdown_item">
+                                            <a href="~/Profile/Index">Profile</a>
+                                        </div>
+                                        <div class="account_dropdown_item">
+                                                <a href="#">Setting</a>
+                                            </div>
+                                        <div class="account_dropdown_item">
+                                            <a href="~/SignOut/Index">Sign Out</a>
+                                        </div>
+                                    </div>
+                                </div>-->
+                            </div>
+                        }
+                        else
+                        {
+                            <a href="https://my.apparent.software/" class="join">
+                                Join or Sign In<span><img src="~/Content/assets/images/join.png" alt="" /></span>
+                            </a>
+                        }
+                    }
+                    @{ if (ViewBag.Account != null && ViewBag.Account == "Both")
+                        {
+
+                            <li class="nav-item dropdown" style="cursor:pointer;">
+                                @if (Session["Type"].ToString() == "Seller")
+                                {
+                                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Seller</a>
+                                }
+                                else
+                                {
+                                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Customer</a>
+                                }
+                                <div class="dropdown-menu dropdown-menu-right dropdown-cyan" aria-labelledby="navbarDropdownMenuLink-4">
+                                    <a class="dropdown-item" href="javascript:void(0);" onclick="SellerAC('Seller')">Seller</a>
+                                    <a class="dropdown-item" href="javascript:void(0);" onclick="CustomerAC('Customer')">Customer</a>
+                                </div>
+                            </li>
+                        }
+                    }
+                    <label for="menu-toggle" class="menu-hide"><i class="fa fa-times"></i></label>
+                    <!-- // -->
+                    <div class="burger pointer flex justify-between d-none">
+                        <div class="burger">
+                            <span class="bg-white"></span>
+                            <span class="bg-white mt-1 mb-1"></span>
+                            <span class="bg-white"></span>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div id="overlay" class="fixed z3 top-0 left-0 bg-darken-4"></div>
+
+    <div id="sidenav" class="fixed z4 top-0 left-0 bg-white p2">
+        <div class="close flex items-center justify-center relative pointer mb2 right">
+            <div class="absolute cross bg-gray left"></div>
+            <div class="absolute cross bg-gray right"></div>
+        </div>
+
+        <a href="#"><img class="img-fluid mb-5" src="~/Content/assets/images/main_logo.svg" style="width: 150px;" alt="" /></a>
+
+        <ul class="list-reset m0">
+            <!-- // add menu accordion start -->
+            <!-- <div class="accordion">
+                <ul>
+                    <li class="pagenav">
+                        <h4><a href="javascript:void(0);">Services</a> <i class="fa fa-angle-right"></i></h4>
+                        <ul>
+                            <li class="page_item"><a href="#">Action</a></li>
+                            <li class="page_item"><a href="#">Another action</a></li>
+                            <li class="page_item"><a href="#">Something else here</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div> -->
+            <!-- // add menu accordion end -->
+            <li class="pointer"><a href="/" class="m_menu">Home</a></li>
+            <li class="pointer"><a href="/aboutus" class="m_menu">About us</a></li>
+            <li class="pointer"><a href="/buyers" class="m_menu">For Buyers</a></li>
+            <li class="pointer"><a href="/sellers" class="m_menu">For Sellers</a></li>
+            <li class="pointer"><a href="/faq" class="m_menu">FAQ</a></li>
+            <li class="pointer"><a href="/blog" class="m_menu">Blog</a></li>
+            <li class="pointer"><a href="/contact" class="m_menu">Contact us</a></li>
+        </ul>
+    </div>
+
+    @RenderBody()
+
+
+    <footer>
+        <div class="footr">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                        <a href="#"><img src="~/Content/assets/images/main_logo.svg" alt="" /></a>
+                        <div class="f_media">
+                            <a href="#"><img src="~/Content/assets/images/media01.png" alt="" /></a>
+                            <a href="#"><img src="~/Content/assets/images/media02.png" alt="" /></a>
+                            <a href="#"><img src="~/Content/assets/images/media03.png" alt="" /></a>
+                            <a href="#"><img src="~/Content/assets/images/media04.png" alt="" /></a>
+                            <a href="#"><img src="~/Content/assets/images/media05.png" alt="" /></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                        <h6>Important Links</h6>
+                        <div class="underline01"></div>
+                        <ul>
+                            <li><a href="#">Artists</a></li>
+                            <li><a href="/blog">Blog</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                        <h6>For Sellers</h6>
+                        <div class="underline01"></div>
+                        <ul>
+                            <li><a href="#">Join</a></li>
+                            <li><a href="#">How it works</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                        <h6>For Buyers</h6>
+                        <div class="underline01"></div>
+                        <ul>
+                            <li><a href="#">Uploads</a></li>
+                            <li><a href="#">Account Settings</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- // -->
+        <div class="copyRight">
+            <p>Copyright &copy; @currentYear.ToString() Apparent Software. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- ====================================================================================================
+      start script
+    ====================================================================================================== -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    @*<script src="~/Content/assets/js/bootstrap.bundle.min.js"></script>*@
+    <!-- // -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.js"></script>
+    <!-- // -->
+    @*<script src="~/Content/assets/js/myScript.js"></script>*@
+    <script src="~/Content/Web/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Content/Web/js/myScript.js"></script>
+    <script src="~/Content/Web/js/util.js"></script>
+    <!-- // menu js start -->
+    <script>
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', function () {
+                // Remove 'active' class from all <a> elements
+                navLinks.forEach(link => link.classList.remove('active'));
+
+                // Add 'active' class to the clicked <a> element
+                this.classList.add('active');
+            });
+
+            // Set initial active state based on current URL
+            if (window.location.pathname === link.getAttribute('href')) {
+                link.classList.add('active');
+            }
+        });
+    </script>
+    <script>
+        let burger = document.querySelector(".burger");
+        let close = document.querySelector(".close");
+        let sidenav = document.querySelector("#sidenav");
+        let overlay = document.querySelector("#overlay");
+
+        let classOpen = [sidenav, overlay];
+        burger.addEventListener("click", function (e) {
+            classOpen.forEach((e) => e.classList.add("active"));
+        });
+
+        let classCloseClick = [overlay, close];
+        classCloseClick.forEach(function (el) {
+            el.addEventListener("click", function (els) {
+                classOpen.forEach((els) => els.classList.remove("active"));
+            });
+        });
+
+        // add menu accordion start //
+        $(".pagenav li").each(function (i, el) {
+            if ($(el).hasClass("current_page_item")) {
+                $(el).parent().show().parent().addClass("open");
+            }
+        });
+
+        $(".accordion h4").click(function (event) {
+            $(".accordion > ul > li > ul:visible").not($(this).nextAll("ul")).stop().hide(200).parent().removeClass("open"); //
+            $(this)
+                .nextAll("ul")
+                .slideToggle(200, function () {
+                    $(this).parent(".pagenav").toggleClass("open");
+                });
+        });
+        // add menu accordion end //
+    </script>
+    <!-- // menu js end -->
+
+    <script>
+        $(document).ready(function () {
+            $('.admin_content').on('click', function (event) {
+                event.preventDefault();
+                $(this).closest('.header_dropdown').find('.account_dropdown').toggle();
+            });
+            $(document).on('click', function (e) {
+                if ($(e.target).closest('.header_dropdown').length === 0) {
+                    $('.account_dropdown').hide();
+                }
+            });
+
+        });
+
+        function CustomerAC(value) {
+
+            const fd = new FormData();
+            fd.append('Accountvalue', value);
+            $.ajax({
+                url: '/Account/SwitchAccount',
+                method: 'POST',
+                async: true,
+                contentType: false,
+                cache: false,
+                processData: false,
+                data: fd,
+                success: function (data, textStatus, xhr) {
+
+                    if (data.Msg == "Seller") {
+                        window.location = data.url;
+                    }
+                    else if (data.Msg == "Customer") {
+                        window.location = data.url;
+                    }
+
+                },
+                error: function (xhr, textStatus, errorThrown) {
+
+                    swal({
+                        title: "Oops!",
+                        text: "Something went wrong!",
+                        type: "error"
+                    });
+                }
+            })
+
+        }
+        function SellerAC(value) {
+
+            const fd = new FormData();
+            fd.append('Accountvalue', value);
+            $.ajax({
+                url: '/Account/SwitchAccount',
+                method: 'POST',
+                async: true,
+                contentType: false,
+                cache: false,
+                processData: false,
+                data: fd,
+                success: function (data, textStatus, xhr) {
+                    if (data.Msg == "Seller") {
+                        window.location = data.url;
+                    }
+                    else if (data.Msg == "Customer") {
+                        window.location = data.url;
+                    }
+                },
+                error: function (xhr, textStatus, errorThrown) {
+
+                    swal({
+                        title: "Oops!",
+                        text: "Something went wrong!",
+                        type: "error"
+                    });
+                }
+            })
+
+        }
+
+    </script>
+
+    @RenderSection("Scripts", required: false)
+
+</body>
+</html>

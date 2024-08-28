@@ -1,0 +1,253 @@
+﻿@model Apparent.Model.SellerMaster
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<main class="app-content">
+    <div class="row">
+        <form id="frmdtld" method="post" >
+            <div class="col-md-6">
+                <div class="tile shadow_none">
+                    <h3 class="tile-title">Details Change</h3>
+                    <p>Profile Photo</p>
+                    <div class="row align-items-center">
+                        <div class="col-lg-4 col-md-12 col-sm-12 col-12">
+                            <div class="profile-pic-wrapper">
+                                <div class="pic-holder">
+                                    <img id="ImagePath" class="pic" src="@((Model.SellerDt.Rows[0]["Imagepath"].ToString()=="")?"/Content/Admin/images/upload.png":Model.SellerDt.Rows[0]["Imagepath"].ToString())">
+                                    <Input class="uploadProfileInput" type="file" name="NewAbc" id="NewAbc" style="opacity: 0;" />
+                                    <label for="NewAbc" class="upload-file-block"> </label>
+                                        <!-- <div class="camera"><img src="images/camera.png" alt=""></div> -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-8 col-md-12 col-sm-12 col-12" id="optionSec">
+                            <p class="para01">Select an option</p>
+
+                            <div class="form-group">
+                                <input type="checkbox" id="html">
+                                <label for="html">Company</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="checkbox" id="css">
+                                <label for="css">Individual</label>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12 mt-4">
+                            <label for="exampleTextarea">First Name <span style="color: #000;">*</span></label>
+                            <input class="input_field01" placeholder="First name here" value="@Model.SellerDt.Rows[0]["FirstName"].ToString()" name="FirstName" id="FirstName" type="text">
+                        </div>
+                        <div class="col-sm-12">
+                            <label for="exampleTextarea">Last Name <span style="color: #000;">*</span></label>
+                            <input class="input_field01" placeholder="Last name here" value="@Model.SellerDt.Rows[0]["LastName"].ToString()" name="LastName" id="LastName" type="text">
+                        </div>
+                        <div class="col-sm-12">
+                            <label for="exampleTextarea">Email <span style="color: #000;">*</span></label>
+                            <input class="input_field01" placeholder="Email address here" value="@Model.SellerDt.Rows[0]["Email"].ToString()" name="Email" id="Email" type="text">
+                        </div>
+                        <div class="col-sm-12">
+                            <label for="exampleTextarea">About <span style="color: #000;">*</span></label>
+                            <textarea class="input_field01 field03" name="About" id="About" placeholder="Enter 100 words">@Model.SellerDt.Rows[0]["About"].ToString()</textarea>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="tile shadow_none">
+                    <h3 class="tile-title">Password Change</h3>
+
+                    <div class="row">
+                        <div class="col-sm-12 mt-4">
+                            <label for="exampleTextarea">Current Password (Leave blank to keep it unchanged)</label>
+                            <input class="input_field01" placeholder="Current Password" name="CurrentPassword" id="CurrentPassword" type="Password">
+                        </div>
+                        <div class="col-sm-12">
+                            <label for="exampleTextarea">New Password (Leave blank to keep it unchanged)</label>
+                            <input class="input_field01" name="NewPassword" id="NewPassword" placeholder="New Password" type="Password">
+                        </div>
+                        <div class="col-sm-12">
+                            <label for="exampleTextarea">Confirm New Password</label>
+                            <input class="input_field01" placeholder="New Password" name="ConfirmPassword" id="ConfirmPassword" type="Password">
+                        </div>
+                        <input type="hidden" value="@Model.SellerDt.Rows[0]["SellerId"].ToString()" name="SellerId" id="SellerId" />
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-lg-12" align="right">
+                <button type="button" class="save_btn" onclick="fromvalidation()">Save Changes</button>
+            </div>
+        </form>
+    </div>
+
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
+
+<script>
+    
+</script>
+<script>
+    function fromvalidation() {
+
+        var firstname = $("#FirstName").val();
+        var lastname = $("#LastName").val();
+        var email = $("#Email").val();
+        var mailformat = /^(([^<>()[\]\\.,;:\s@@\"]+(\.[^<>()[\]\\.,;:\s@@\"]+)*)|(\".+\"))@@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        var about = $("#About").val();
+        var oldpassword = $("#CurrentPassword").val();
+        var newpassword = $("#NewPassword").val();
+        var confirmpassword = $("#ConfirmPassword").val();
+        var sellerId = $("#SellerId").val();
+        var imagepath = $("#ImagePath")[0].src;
+        console.log($('#NewAbc')[0].files[0])
+        var ProfilePic = $('#NewAbc')[0].files[0];
+        
+        debugger;
+        if (firstname == "") {
+            swal({
+                title: "OOPS!",
+                text: "Enter first name",
+                type: "error"
+            });
+        }
+        else if (lastname == "") {
+            swal({
+                title: "OOPS!",
+                text: "Enter last name",
+                type: "error"
+            });
+
+        }
+        else if (email == "") {
+            swal({
+                title: "OOPS!",
+                text: "Enter email",
+                type: "error"
+            });
+        }
+        else if (!mailformat.test(email)) {
+            swal({
+                title: "OOPS!",
+                text: "Enter a valid email",
+                type: "error"
+            });
+
+        }
+
+        //else if (oldpassword == "") {
+        //    swal({
+        //        title: "OOPS!",
+        //        text: "Enter current password",
+        //        type: "error"
+        //    });
+
+        //}
+        //else if (newpassword == "") {
+        //    swal({
+        //        title: "OOPS!",
+        //        text: "Enter New Password",
+        //        type: "error"
+        //    });
+        //}
+        //else if (confirmpassword == "") {
+        //    swal({
+        //        title: "OOPS!",
+        //        text: "Enter Confirm Password",
+        //        type: "error"
+        //    });
+        //}
+        //else if (newpassword != confirmpassword) {
+        //    swal({
+        //        title: "OOPS!",
+        //        text: "Passwords did not match",
+        //        type: "error"
+        //    });
+
+        //}
+        else {
+
+
+            var formData = new FormData();
+
+
+            formData.append('ProfilePic', ProfilePic);
+            formData.append('FirstName', firstname);
+            formData.append('Email', email);
+            formData.append('LastName', lastname);
+            formData.append('About', about);
+            formData.append('SellerId', sellerId);
+            formData.append('CurrentPassword', oldpassword);
+            formData.append('Password', confirmpassword);
+            formData.append('Imagepath', imagepath);
+
+            UpdateSellerinfo(formData);
+
+        }
+
+
+
+    }
+    function UpdateSellerinfo(formData) {
+        $.ajax
+            ({
+                url: "/Seller/UpdateDetails",
+                type: 'POST',
+                data: formData,
+                async: false,
+                cache: false,
+                contentType: false,
+                enctype: 'multipart/form-data',
+                processData: false,
+                success: function (data) {
+                    if (data.Result != null && data.Result =="Update Successful" ) {
+                        swal({
+                            title: "Success",
+                            text: "Profile update successfull",
+                            type: "success"
+                        }, function () {
+
+                            location.reload();
+                        }
+
+                        );
+                    }
+                    else if (data.Result != null && data.Result == "Password Update Successful") {
+                        swal({
+                            title: "Success",
+                            text: "Profile update successfull",
+                            type: "success"
+                        }, function () {
+
+                            location.reload();
+                        }
+
+                        );
+
+                    }
+                    else if (data.Result != null && data.Result == "Enter wrong password") {
+                        swal({
+                            title: "OOPS!",
+                            text: "Current password doesn't exists ",
+                            type: "error"
+                        });
+                    }
+                    else {
+                        swal({
+                            title: "OOPS!",
+                            text: "Some thing wrong ",
+                            type: "error"
+                        });
+
+                    }
+                }
+
+            })
+
+    }
+</script>

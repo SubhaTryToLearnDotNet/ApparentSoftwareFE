@@ -1,0 +1,170 @@
+﻿@model  Apparent.Model.CardMasterModel
+@{
+    ViewBag.Title = "Payment";
+    Layout = null;
+}
+
+@{
+    var monthNames = new[]
+    {
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    };
+
+    int currentYear = DateTime.Now.Year;
+
+    List<SelectListItem> months = new List<SelectListItem>();
+    for (int i = 1; i <= 12; i++)
+    {
+        months.Add(new SelectListItem { Value = i.ToString(), Text = monthNames[i - 1] });
+    }
+
+    List<SelectListItem> years = new List<SelectListItem>();
+    for (int i = currentYear; i <= currentYear + 10; i++)
+    {
+        years.Add(new SelectListItem { Value = i.ToString(), Text = i.ToString() });
+    }
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Payment</title>
+    <!-- Link to your CSS file -->
+    <link href="~/Content/Web/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/Web/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="~/Content/Web/css/all.css" rel="stylesheet" type="text/css" media="all" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" type="text/css" media="all" />
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet" type="text/css" />
+    <!-- <link href="assets/css/font-awesome.min.css" rel="stylesheet" type="text/css"/> -->
+    <link href="~/Content/Web//css/responsive.css" rel="stylesheet" type="text/css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://kit.fontawesome.com/91cafd3f0a.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" async></script>
+    <script src="~/Content/Web/js/ServicePayment.js" type="text/javascript"></script>
+    <script src="~/Content/Web/js/util.js"></script>
+
+    <link rel="shortcut icon" type="image/png" href="~/Content/Web/images/favi.png">
+</head>
+<body>
+    <section class="paymentSec" style="background: linear-gradient(-45deg, rgb(56 145 215 / 49%), rgb(56 145 215 / 36%)), url(/Content/Web/images/payment_pic.jpg);">
+        <div class="container">
+            <article class="card">
+                <div class="card-title">
+                    <center><h2>Payment VISA or MASTERCARD</h2></center>
+                </div>
+                <div class="card-body">
+                    <div class="payment-type">
+                        @*<h4 class="text-center">Payment VISA or MASTERCARD</h4>*@
+                        <div class="types flex justify-content-center">
+                            <div class="type selected">
+                                <div class="logo mr-3">
+                                    <img src="~/Content/Web/images/visa.png" alt="" />
+                                </div>
+                            </div>
+                            <div class="type">
+                                <div class="logo ml-3">
+                                    <img src="~/Content/Web/images/mastercard.png" alt="" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="payment-info">
+                        <div class="row">
+                            <div class="col-lg-6 pr-5">
+                                <div class="column billing">
+                                    <div class="title">
+                                        <div class="num">1</div>
+                                        <h4 class="mb-0">User Info</h4>
+                                    </div>
+                                    <div class="field full">
+                                        <label for="name">Full Name</label>
+                                        @Html.TextBoxFor(model => model.User_Name, new { @id = "User_Name", placeholder = "Enter Full Name Here" })
+                                    </div>
+                                    <div class="field full">
+                                        <label for="address">Email</label>
+                                        @Html.TextBoxFor(model => model.Email, new { @id = "Email", placeholder = "Enter Email Here" })
+                                    </div>
+
+                                    <div class="field full">
+                                        <label for="address">Amount (AUD)</label>
+                                        @Html.TextBoxFor(model => model.Amount, new { @id = "Amount", placeholder = "Enter Amount Here" })
+                                    </div>
+                                    <div class="field full">
+                                        <label for="address">Add Notes</label>
+                                        @Html.TextAreaFor(model => model.Notes, new { @id = "Notes" })
+                                        @*<textarea placeholder="Message to us"></textarea>*@
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 pl-5">
+                                <div class="column shipping">
+                                    <div class="title">
+                                        <div class="num">2</div>
+                                        <h4 class="mb-0">Credit Card Info</h4>
+                                    </div>
+                                    <div class="field full">
+                                        <label for="name">Card Holder Name</label>
+                                        @Html.TextBoxFor(model => model.CardholderName, new { @id = "CardholderName", placeholder = "Enter Card Holder Name Here" })
+                                    </div>
+                                    <div class="field full">
+                                        <label for="address">Card Number</label>
+                                        @Html.TextBoxFor(model => model.CardNumber, new { @id = "CardNumber", placeholder = "XXXX-XXXX-XXXX-XXXX" })
+                                    </div>
+                                    <div class="flex justify-space-between">
+                                        <div class="field half">
+                                            <label for="city">Exp. Month</label>
+                                           @Html.DropDownListFor(model => model.month, months, "Select Month", new { @id = "month" })
+                                        </div>
+                                        <div class="field half">
+                                            <label for="state">Exp. Year</label>
+                                            @Html.DropDownListFor(model => model.year, years, "Select Year", new { @id = "year" })
+                                        </div>
+                                    </div>
+                                    <div class="field full">
+                                        <label for="zip">CVV Number</label>
+                                        @Html.TextBoxFor(model => model.CVV, new { @id = "CVV", placeholder = "Enter CVV Here" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="button" id="btnPayment" class="save_btn mt-2">Make Payment</button>
+                    <a href="/Home" class="save_btn mt-2 mr-3">Back</a>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="row text-center">
+            <div class="loader_box" id="loder01">
+                <div class="d-flex justify-content-center align-items-center ">
+                    <div class="loader-content">
+                        <div class="loader_title">Please Wait</div>
+                        <div class="loader--spinner">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

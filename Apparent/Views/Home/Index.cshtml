@@ -1,0 +1,194 @@
+﻿@model Apparent.Model.ProductMaster
+@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- ====================================================================================================
+  start everyoneSec
+====================================================================================================== -->
+
+<section class="everyoneSec">
+    <div class="container-fluid">
+        <h1 class="heading01">Softwares For Everyone</h1>
+        <p class="para01">Discover, trade, innovate—our platform connects software enthusiasts worldwide, facilitating seamless transactions and fostering innovation.</p>
+        <a href="https://my.apparent.software/" class="common_btn01">Sign up Now</a>
+    </div>
+</section>
+
+<!-- ====================================================================================================
+  start brandRow
+====================================================================================================== -->
+
+<section class="brandRow" style="background-image: url(Content/assets/images/banner02.png);">
+    <div class="container-fluid">
+        <div class="brandRowIn">
+            <div class="row show-grid">
+                @for (int s = 0; s < Model.DtProductList.Rows.Count; s++)
+                {
+                    string image = Model.DtProductList.Rows[s]["ProductIcon"].ToString();
+                    <div class="col-sm-6 col-md-4-5 col-lg-1-5">
+
+                        <a href="/Product/Details?ProductId=@Model.DtProductList.Rows[s]["ProductId"].ToString()">
+                            <span class="">
+                                @Model.DtProductList.Rows[s]["ProductName"].ToString()
+                                <div class="brandRow_btm">
+                                    <div class="brandRow_btm_pic">
+                                        <img src="@image" alt="" />
+                                    </div>
+                                </div>
+                            </span>
+                        </a>
+                        <div class="shadows"><img src="~/Content/assets/images/shadow.png" alt="" /></div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ====================================================================================================
+  start buyApparen
+====================================================================================================== -->
+
+<section class="buyApparen">
+    <div class="container-fluid">
+        <h1 class="heading01"><span>Why</span> Buy <span>With Apparent</span></h1>
+        <div class="buyApparenIn">
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-md-6 col-12">
+                    <img src="~/Content/assets/images/pic03.webp" alt="" />
+                </div>
+                <div class="col-lg-6 col-md-6 col-12 text-left">
+                    <div class="buyApparen_right">
+                        <h4 class="heading04">For Buyers</h4>
+                        <p class="para01">
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+                            scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+                        </p>
+                        <p class="para01">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+                        <a href="#" class="common_btn01 mt-3">Learn more</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ====================================================================================================
+  start sellApparen
+====================================================================================================== -->
+
+<section class="buyApparen sellApparen">
+    <div class="container-fluid">
+        <h1 class="heading01"><span>Why</span> Sell <span>With Apparent</span></h1>
+        <div class="buyApparenIn">
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-md-6 col-12 order-2 order-md-1 text-left mb-0">
+                    <div class="buyApparen_left">
+                        <h4 class="heading04">For Sellers</h4>
+                        <p class="para01">
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+                            scrambled it to make a type specimen book.
+                        </p>
+                        <p class="para01">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+                        <a href="#" class="common_btn01 mt-3">Learn more</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-12 order-1 order-md-2 mb-0">
+                    <img src="~/Content/assets/images/pic04.webp" alt="" />
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ====================================================================================================
+  start joinNow
+====================================================================================================== -->
+
+<section class="joinNow">
+    <div class="container-fluid">
+        <div class="joinNow_in">
+            <article>
+                <h2 class="heading02">Join Now</h2>
+                <p class="para01">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+            </article>
+            <a href="https://my.apparent.software/" class="common_btn01">Sign up</a>
+        </div>
+    </div>
+</section>
+@section Scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
+    <script>
+
+
+        function CategoryProduct(Category) {
+            var formData = new FormData();
+            formData.append('ProductCategory', Category);
+            $.ajax
+                ({
+                    url: "/Product/TopCategory",
+                    type: 'POST',
+                    data: formData,
+                    async: false,
+                    cache: false,
+                    contentType: false,
+
+                    processData: false,
+                    success: function (respons) {
+
+                        if (respons != null) {
+                            $('#categoriesEdit').empty()
+                            $(respons).each(function () {
+                                $('#categoriesEdit').append(
+                                    //                                `<div class="col-sm-6 col-md-4-5 col-lg-1-5">
+                                    //    <span class="">
+                                    //        <a href="/Product/Details?ProductId=`+ this.ProductId + `"><img src="/Content/Web/ProductLogo/` + (this.ProductIcon != "" ? this.ProductIcon : "defaultimage.jpg") + `" class="img-fluid" alt="" /></a>
+                                    //    </span>
+                                    //</div>`
+
+                                    `<div class="col-lg-3 col-md-3 col-sm-6 col-12">
+
+                                                            <a href="/Product/Details?ProductId=`+ this.ProductId + `">
+                                                                <div class="categories_box" style="background-color: #fff;">
+                                                                    <div class="categories_top">
+                                                                        <h4 style="color: #000;">`+ this.ProductName + `</h4>
+
+                                                                    </div>
+                                                                    <div class="categories_btm">
+                                                                        <div class="categories_btm_pic">
+
+                                                                            <img src="` + (this.ProductIcon != "" ? this.ProductIcon : "") + `" class="img-fluid" alt="" />
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </a>
+                                                            </div>`
+                                )
+
+
+                            }
+
+
+                            )
+                        }
+
+                    }
+                })
+        }
+    </script>
+
+}
+@if (TempData["NetworkeErrorMSg"] != null && TempData["NetworkeErrorMSg"].ToString() == "Something went wrong, try after some times")
+{
+    <script>
+        swal({
+            title: "Oops!",
+            text: "Something went wrong, try after some times",
+            type: "error"
+        });
+    </script>
+}

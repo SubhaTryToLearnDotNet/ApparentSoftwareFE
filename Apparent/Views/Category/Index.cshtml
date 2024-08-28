@@ -1,0 +1,362 @@
+﻿@model ViewModel
+    @{ 
+//var CompanyIcon = Session["CompanyIcon"].ToString();
+//var CompanyName = Session["CompanyName"].ToString();
+    }
+<div class="user_page">
+    <div class="container">
+        <div class="row">
+            @Html.Partial("~/Views/Shared/Components/_SellerProfile.cshtml", Model)
+            <!-- /.col -->
+
+            <div class="col-md-9">
+                <div class="tab-content" id="v-pills-tabContent">
+                    <div class="card tab-pane fade active" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+                        @*<a data-toggle="collapse" href="#v-collapse-messages" aria-expanded="false" aria-controls="v-collapse-messages">
+                        <div class="card-header" role="tab" id="v-collapse-heading-messages">Reviews <i class="fa fa-angle-down" aria-hidden="true"></i></div>
+                    </a>*@
+                        @*<div id="v-collapse-messages" class="collapse" role="tabpanel" aria-labelledby="v-collapse-heading-messages" data-parent="#v-pills-tabContent">*@
+                        <div class="card-body">
+                            <!-- // -->
+                            <h4 class="mb-4">Categories</h4>
+                            <div class="col-md-12 pl-0 pr-0">
+                                <div class="table-responsive">
+
+                                    <div class="category_panel pb-0">
+
+                                        <div class="category_top">
+                                            @*<h4 class="heading04 mb-0">Category</h4>*@
+                                            <a href="#" class="request_btn" data-toggle="modal" data-target="#addNew"> <img src="~/Content/Web/images/addnew.png" alt="" /> Add New</a>
+                                        </div>
+                                        <table class="table table-bordered table-hover">
+                                            @if (Model.Category != null && Model.Category.Count > 0)
+                                            {
+                                                <thead class="thead-dark">
+                                                    <tr>
+                                                        <th scope="col">Name</th>
+                                                        <th scope="col" class="text-center">Published</th>
+
+                                                        <th scope="col" class="text-center">Updated Date</th>
+                                                        <th scope="col" class="text-center">Comments</th>
+                                                        <th scope="col" class="text-center">Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach (Apparent.Model.Category category in Model.Category)
+                                                    {
+                                                        <tr>
+
+                                                            <td>@category.category_name</td>
+                                                            @if (category.status == "Keep" && (category.suggestion_IsActive != "" && category.suggestion_IsActive != "True"))
+                                                            {
+                                                                <td class="text-center"><span class="badge badge-pill bg-yellow">Pending</span></td>
+                                                            }
+                                                            else if (category.status == "Keep" && (category.suggestion_IsActive != "" && category.suggestion_IsActive == "True"))
+                                                            {
+                                                                <td class="text-center"><span class="badge badge-pill bg-yellow">Need Changes</span></td>
+                                                            }
+
+                                                            else
+                                                            {
+                                                                <td class="text-center"><span class="badge badge-pill badge-success">Published</span></td>
+                                                            }
+
+                                                            <td class="text-center">@category.created_date.</td>
+                                                            @if (category.suggestion_IsActive != "" && category.suggestion_IsActive == "True")
+                                                            {
+                                                                <td class="text-center">@category.cat_suggestion</td>
+                                                            }
+                                                            else
+                                                            {
+                                                                <td class="text-center">No Comments</td>
+                                                            }@if (category.suggestion_IsActive != "" && category.suggestion_IsActive == "True")
+                                                            {
+                                                                <td class="text-center"><a href="#" onclick="open_editBox('@category.category_id','@category.category_name')"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+                                                            }
+                                                            else if (category.status == "Keep" && (category.suggestion_IsActive != "" && category.suggestion_IsActive != "True"))
+                                                            {
+                                                                <td class="text-center"><i class="fa fa-codiepie" aria-hidden="true"></i></td>
+                                                            }
+                                                            else
+                                                            {
+                                                                <td class="text-center"><i class="fa fa-check" aria-hidden="true"></i></td>
+                                                            }
+                                                        </tr>
+                                                    }
+
+                                                </tbody>
+                                            }
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        @*</div>*@
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- modal -->
+<div class="container">
+    <div class="modal" id="addNew">
+        <div class="modal-dialog modalDialog" style="max-width: 40%;">
+            <div class="modal-content">
+                <div class="modal-header border-0 pt-4">
+                    <h4 class="modal-title">Add New</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body" style="line-height:inherit;">
+                    <label class="mb-2">Add Category</label>
+                    <input type="text" class="field01 field04 rounded-0" placeholder="Category name here" name="category_name" id="category_name">
+                    <button type="button" class="save_btn mb-4" onclick="addcategory()">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="editcat">
+        <div class="modal-dialog modalDialog" style="max-width: 40%;">
+            <div class="modal-content">
+                <div class="modal-header border-0 pt-4">
+                    <h4 class="modal-title">Edit Category</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body" style="line-height:inherit;">
+                    @*<label class="mb-2">Add Category</label>*@
+                    <input type="text" class="field01 field04 rounded-0" value="" name="cat_name" id="cat_name">
+                    <input type="hidden"  name="cat_id" id="cat_id">
+                    <button type="button" class="save_btn mb-4" onclick="update_category()">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- modal -->
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.21.0/slimselect.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
+
+
+
+<!--  progress script -->
+<script>
+    const progress = document.querySelector(".progress-done");
+
+    progress.style.width = progress.getAttribute("data-done") + "%";
+    progress.style.opacity = 1;
+</script>
+
+<!--  tab script -->
+<script>
+    const tabsBtns = Array.from(document.querySelectorAll("[data-tab-id]"));
+    const tabs = Array.from(document.querySelectorAll("[data-tab]"));
+
+    let selectedTab = tabsBtns[0].dataset.tabId;
+
+    const hideTabs = () => {
+        tabs
+            .filter((tab) => tab.dataset.tab !== selectedTab)
+            .forEach((tab) => {
+                tab.classList.add("tabs__tab--hide");
+            });
+
+        tabsBtns
+            .filter((tab) => tab.dataset.tabId !== selectedTab)
+            .forEach((tab) => {
+                tab.classList.add("tabs__tab-btn--not-selected");
+            });
+    };
+    hideTabs();
+
+    const handleSelectTab = (e) => {
+        selectedTab = e.target.dataset.tabId;
+
+        tabs.forEach((tab) => {
+            tab.classList.remove("tabs__tab--hide");
+        });
+
+        tabsBtns.forEach((tab) => {
+            tab.classList.remove("tabs__tab-btn--not-selected");
+        });
+
+        hideTabs();
+    };
+
+    tabsBtns.forEach((btn) => {
+        btn.addEventListener("click", handleSelectTab);
+    });
+
+</script>
+
+
+<script>
+    function open_editBox(categoryid,category_name ) {
+        $('#editcat').modal('show');
+        var inputElement1 = document.getElementById("cat_id");
+        var inputElement2 = document.getElementById("cat_name");
+        inputElement1.value = categoryid;
+        inputElement2.value = category_name;       
+    }
+
+
+    function update_category() {
+
+        if ($("#cat_name").val() == "") {
+            swal({
+                title: "Oops!",
+                text: "Please enter category name!",
+                type: "error"
+            });
+
+        }
+
+        else {
+            const fd = new FormData();
+            fd.append('category_name', $("#cat_name").val());
+            fd.append('category_id', $("#cat_id").val());
+
+            $.ajax({
+                url: '/Category/update_category',
+                method: 'POST',
+                async: true,
+                contentType: false,
+                cache: false,
+                processData: false,
+                data: fd,
+                success: function (data, textStatus, xhr) {
+
+                    if (data.code == 200) {
+                        swal({
+                            title: "Success!",
+                            text: data.msg,
+                            type: "success"
+                        }, function () {
+
+                            window.location.reload();
+                        });
+                    }
+                    else if (data.code == 400) {
+                        swal({
+                            title: "Oops!",
+                            text: data.msg,
+                            type: "error"
+                        });
+                    }
+                    else if (data.code == 500) {
+                        swal(
+                            {
+                                title: "Oops!",
+                                text: data.msg,
+                                type: "error"
+                            });
+                    }
+
+                },
+                error: function (xhr, textStatus, errorThrown) {
+
+                    //swal({
+                    //    title: "OOPS!",
+                    //    text: "something wrong!",
+                    //    type: "error"
+                    //});
+                }
+            });
+        }
+
+
+    }
+
+
+
+
+    function addcategory() {
+
+        if ($("#category_name").val() == "") {
+            swal({
+                title: "Oops!",
+                text: "Please enter category name!",
+                type: "error"
+            });
+
+        }
+
+        else {
+            const fd = new FormData();
+            fd.append('category_name', $("#category_name").val());
+
+
+            $.ajax({
+                url: '/Category/add_category',
+                method: 'POST',
+                async: true,
+                contentType: false,
+                cache: false,
+                processData: false,
+                data: fd,
+                success: function (data, textStatus, xhr) {
+
+                    if (data.code == 200) {
+                        swal({
+                            title: "Success!",
+                            text: data.msg,
+                            type: "success"
+                        }, function () {
+
+                            window.location.reload();
+                        });
+                    }
+                    else if (data.code == 400) {
+                        swal({
+                            title: "Oops!",
+                            text: data.msg,
+                            type: "error"
+                        });
+                    }
+                    else if (data.code == 500) {
+                        swal(
+                            {
+                                title: "Oops!",
+                                text: data.msg,
+                                type: "error"
+                            });
+                    }
+
+                },
+                error: function (xhr, textStatus, errorThrown) {
+
+                    //swal({
+                    //    title: "OOPS!",
+                    //    text: "something wrong!",
+                    //    type: "error"
+                    //});
+                }
+            });
+        }
+
+
+    }
+</script>
+@if (TempData["updatemsg"] != null && TempData["updatemsg"].ToString() == "Product updated successful")
+{
+
+    <script>
+
+        swal({
+            title: "Success",
+            text: "Product updated successful",
+            type: "success"
+        })
+    </script>
+
+}

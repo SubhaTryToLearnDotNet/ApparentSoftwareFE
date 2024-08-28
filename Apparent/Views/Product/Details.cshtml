@@ -1,0 +1,1524 @@
+﻿@model Apparent.Model.ProductMaster
+@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!-- ====================================================================================================
+  start banner
+====================================================================================================== -->
+
+<section class="single_seller" style="background-image: url(/Content/Web//images/banner.png);">
+    <div class="container">
+        <a href="#"><i class="fa-regular fa-heart"></i> Favourite</a>
+    </div>
+</section>  
+<!-- // -->
+<div class="seller_box">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-4 col-md-4 col-12 mb-0">
+                @*<i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i>*@
+                @*<i class="fa fa-star-half-o" aria-hidden="true"></i><br />
+                    <span class="text-white">(150) 4.5 out of 5</span>*@
+            </div>
+            <div class="col-lg-4 col-md-4 col-12 mb-0 minus_margin">
+                @*@{
+
+                        string image = Model.DtProductDetails.Rows[0]["ProductIcon"].ToString();
+                        string serverPath = System.Web.Hosting.HostingEnvironment.MapPath("/Content/Web/ProductLogo/" + image);
+                        if (!string.IsNullOrEmpty(image))
+                        {
+                            if (!File.Exists(serverPath))
+                            {
+                                image = "brand04.png";
+                            }
+                        }
+                        else
+                        {
+                            image = "brand04.png";
+                        }
+                    }*@
+                <div class="seller_name">
+                    <img src="@(Model.DtProductDetails.Rows[0]["ProductIcon"].ToString())" alt="" />
+                </div>
+                <h3>@Model.ProductName.ToString()</h3>
+            </div>
+            @{
+                var companyid = "";
+                if(Session["CompanyId"] != null)
+                {
+                    companyid = Session["CompanyId"].ToString();
+            }
+            }
+            <div class="col-lg-4 col-md-4 col-12 mb-0">
+                    <a href="https://my.apparent.software/" id="pricesecactive" class="request_btn white_btn mt-2 align_right">Buy Now</a>
+                    @*<a href="#" class="request_btn white_btn mt-2 align_right">Update Info</a>*@
+                </div>
+        </div>
+    </div>
+</div>
+
+<!-- ====================================================================================================
+  start software_sec
+====================================================================================================== -->
+
+<section class="software_sec" id="softwareSecD">
+    <div class="container">
+        <ul class="tabs mt-0 tabCenter_h">
+            <div class="tabCenter">
+            <li class="active" rel="tab1">Product Information</li>
+            @*<li rel="tab2">Reviews</li>*@
+            <li rel="tab4">Freatures</li>
+            <li rel="tab3">Pricing</li>
+    </div>
+    </ul>
+
+
+
+
+    <div class="tab_container">
+        <h3 class="d_active tab_drawer_heading" rel="tab1">Product Information <i class="fa fa-angle-down" aria-hidden="true"></i></h3>
+        <div id="tab1" class="tab_content">
+            <div class="r_box product_info">
+                <h5>Product Details</h5>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h4 class="small_font01">@Model.DtProductDetails.Rows[0]["ProductName"].ToString() Overview</h4>
+                        <p class="paragraph">What is @Model.ProductName?</p>
+                        <p class="paragraph">
+                            @Model.DtProductDetails.Rows[0]["AboutProduct"].ToString()
+                        </p>
+                        <small>
+                            <span id="show-more">Load more <i class="fa fa-angle-down" aria-hidden="true" style="vertical-align: middle;"></i></span>
+                        </small>
+                        <div id="show-more-content">
+                            <p class="paragraph">What is @Model.ProductName?</p>
+                            <p class="paragraph">
+                                @Model.DtProductDetails.Rows[0]["AboutProduct"].ToString()
+                            </p>
+                            <small>
+                                <span id="show-less">Show less</span>
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <!-- // -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h4 class="small_font01">@Model.DtProductDetails.Rows[0]["Website"].ToString() Details</h4>
+                        <div class="details_panel">
+                            <h6><img src="~/Content/Web/images/icon06.png" alt="" /><b> Website:</b> @Model.DtProductDetails.Rows[0]["Website"].ToString()</h6>
+                            <h6><img src="~/Content/Web/images/icon10.png" alt="" /><b>Discussion:</b> @Model.ProductName Community</h6>
+                            <h6>
+                                <img src="~/Content/Web/images/icon11.png" alt="" /> @Model.DtProductDetails.Rows[0]["SupportLanguages"].ToString()
+                            </h6>
+                        </div>
+                        <p class="paragraph mt-4"><strong>Product Description</strong></p>
+                        <p class="paragraph">
+                            @Model.DtProductDetails.Rows[0]["Description"].ToString()
+                        </p>
+                    </div>
+                </div> 
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h4 class="small_font01">@Model.ProductName Videos</h4>
+                        <div class="row mt-4">
+                            @for (int z = 0; Model.VideoList.Rows.Count > z; z++)
+                            {
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+                                    <video class="video-upload video-child" controls id="videoPlayer_0"
+                                           src="@(Model.VideoList.Rows[z]["FilePath"].ToString())" style="width: 100%; height: 100%;"></video>
+
+                                </div>
+                            }
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- // -->
+                @if (@Model.ImagesList != null)
+                {
+                    <div class="row">
+
+
+                        <div class="col-lg-12">
+                            <h4 class="small_font01">@Model.ProductName Screenshots</h4>
+
+                            <div class="row mt-4">
+                                @for (int ab = 0; Model.ImagesList.Rows.Count > ab; ab++)
+                                {
+                                    <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+                                        <div class="video_pic">
+                                            <a target="_blank" href="@Model.ImagesList.Rows[ab]["Images"].ToString()">   <img src="@(Model.ImagesList.Rows[ab]["Images"].ToString())" alt="" /></a>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+
+                        </div>
+
+                    </div>
+                }
+                
+                <!-- // -->
+                <!-- // -->
+                <!--<div class="row" id="reviewSec">
+    <div class="col-lg-12">
+        <h4 class="small_font01">DocuSign Reviews</h4>
+        <div class="row mt-4">
+            <div class="col-lg-3 col-md-4 col-12">
+                <div class="comment-form-cookies-consent">
+                    <label for="wp-comment-cookies-consent01"><img src="~/Content/Web/images/icon12.png" alt="" /></label><br />
+                    <input id="wp-comment-cookies-consent01" name="wp-comment-cookies-consent01" type="checkbox" value="yes" />
+                </div>
+                <div class="comment-form-cookies-consent">
+                    <label for="wp-comment-cookies-consent02"><img src="~/Content/Web/images/icon13.png" alt="" /></label><br />
+                    <input id="wp-comment-cookies-consent02" name="wp-comment-cookies-consent02" type="checkbox" value="yes" />
+                </div>
+                <div class="comment-form-cookies-consent">
+                    <label for="wp-comment-cookies-consent03"><img src="~/Content/Web/images/icon14.png" alt="" /></label><br />
+                    <input id="wp-comment-cookies-consent03" name="wp-comment-cookies-consent03" type="checkbox" value="yes" />
+                </div>
+                <div class="comment-form-cookies-consent">
+                    <label for="wp-comment-cookies-consent04"><img src="~/Content/Web/images/icon15.png" alt="" /></label><br />
+                    <input id="wp-comment-cookies-consent04" name="wp-comment-cookies-consent04" type="checkbox" value="yes" />
+                </div>
+                <div class="comment-form-cookies-consent">
+                    <label for="wp-comment-cookies-consent05"><img src="~/Content/Web/images/icon16.png" alt="" /></label><br />
+                    <input id="wp-comment-cookies-consent05" name="wp-comment-cookies-consent05" type="checkbox" value="yes" />
+                </div>
+            </div>-->
+                <!-- // -->
+                <!--<div class="col-lg-6 col-md-4 col-12">
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-12">
+                <select class="select2">
+                    <option value="1">Company Size</option>
+                    <option value="2">Option 2</option>
+                    <option value="3">Option 3</option>
+                    <option value="4">Option 4</option>
+                    <option value="5">Option 5</option>
+                    <option value="6">Option 6</option>
+                    <option value="7">Option 7</option>
+                    <option value="8">Option 8</option>
+                </select>
+            </div>
+            <div class="col-lg-4 col-md-4 col-12">
+                <select class="select2">
+                    <option value="1">User Role</option>
+                    <option value="2">Option 2</option>
+                    <option value="3">Option 3</option>
+                    <option value="4">Option 4</option>
+                    <option value="5">Option 5</option>
+                    <option value="6">Option 6</option>
+                    <option value="7">Option 7</option>
+                    <option value="8">Option 8</option>
+                </select>
+            </div>
+            <div class="col-lg-4 col-md-4 col-12">
+                <select class="select2">
+                    <option value="1">For Category</option>
+                    <option value="2">Option 2</option>
+                    <option value="3">Option 3</option>
+                    <option value="4">Option 4</option>
+                    <option value="5">Option 5</option>
+                    <option value="6">Option 6</option>
+                    <option value="7">Option 7</option>
+                    <option value="8">Option 8</option>
+                </select>
+            </div>
+            <div class="col-lg-4 col-md-4 col-12">
+                <select class="select2">
+                    <option value="1">All Industries</option>
+                    <option value="2">Option 2</option>
+                    <option value="3">Option 3</option>
+                    <option value="4">Option 4</option>
+                    <option value="5">Option 5</option>
+                    <option value="6">Option 6</option>
+                    <option value="7">Option 7</option>
+                    <option value="8">Option 8</option>
+                </select>
+            </div>
+            <div class="col-lg-4 col-md-4 col-12">
+                <select class="select2">
+                    <option value="1">Region</option>
+                    <option value="2">Option 2</option>
+                    <option value="3">Option 3</option>
+                    <option value="4">Option 4</option>
+                    <option value="5">Option 5</option>
+                    <option value="6">Option 6</option>
+                    <option value="7">Option 7</option>
+                    <option value="8">Option 8</option>
+                </select>
+            </div>
+        </div>
+    </div>-->
+                <!-- // -->
+                <!--<div class="col-lg-3 col-md-4 col-12">
+        <div class="form-group mr-2" style="display: inline-block;">
+            <input type="checkbox" id="check61" />
+            <label for="check61">Text Reviews</label>
+        </div>
+        <div class="form-group" style="display: inline-block;">
+            <input type="checkbox" id="check62" />
+            <label for="check62">Video Reviews</label>
+        </div>
+    </div>-->
+                <!-- // -->
+                <!--</div>
+        </div>
+    </div>-->
+                <!-- // -->
+
+            </div>
+        </div>
+        <!-- #tab1 -->
+        <!--<h3 class="tab_drawer_heading" rel="tab2">Reviews <i class="fa fa-angle-down" aria-hidden="true"></i></h3>
+        <div id="tab2" class="tab_content">
+            <div class="r_box product_info">
+                <h5>DocuSign Reviews & Product Details</h5>-->
+        <!-- // -->
+        <!--<div class="row" id="reviewSec">
+        <div class="col-lg-12 mb-0">
+            <div class="row">
+                <div class="col-lg-3 col-md-4 col-12">
+                    <h4 class="small_font01">DocuSign Reviews</h4>
+                </div>
+                <div class="col-lg-5 col-md-4 col-12">
+                    <small class="mt_02">Showing X,XX DocuSign reviews</small>
+                    <div class="recent_box">
+                        <small class="fSize01"><b>Sort</b></small>
+                        <select name="cat" id="original" class="postform">
+                            <option value="-1">Most Recent</option>
+                            <option class="level-0" value="29">2007</option>
+                            <option class="level-0" value="26">2008</option>
+                            <option class="level-0" value="23">2009</option>
+                            <option class="level-0" value="20">2010</option>
+                            <option class="level-0" value="17">2011</option>
+                            <option class="level-0" value="14">2012</option>
+                            <option class="level-0" value="11">2013</option>
+                            <option class="level-0" value="8">2014</option>
+                            <option class="level-0" value="5">2015</option>
+                            <option class="level-0" value="2">2016</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-12">
+                    <div class="search mt-0">
+                        <input type="text" class="searchTerm" placeholder="Search X,XX Reviews" />
+                        <button type="submit" class="searchButton">Search</button>
+                    </div>
+                </div>
+            </div>
+            <small class="fSize01">Filter reviews</small>
+            <div class="row mt-4">
+
+                <div class="col-lg-3 col-md-4 col-12 mt_01">
+                    <div class="comment-form-cookies-consent">
+                        <label for="wp-comment-cookies-consent06"><img src="assets/images/icon12.png" alt="" /></label><br />
+                        <input id="wp-comment-cookies-consent06" name="wp-comment-cookies-consent06" type="checkbox" value="yes" />
+                    </div>
+                    <div class="comment-form-cookies-consent">
+                        <label for="wp-comment-cookies-consent07"><img src="~/Content/Web/images/icon13.png" alt="" /></label><br />
+                        <input id="wp-comment-cookies-consent07" name="wp-comment-cookies-consent07" type="checkbox" value="yes" />
+                    </div>
+                    <div class="comment-form-cookies-consent">
+                        <label for="wp-comment-cookies-consent08"><img src="~/Content/Web/images/icon14.png" alt="" /></label><br />
+                        <input id="wp-comment-cookies-consent08" name="wp-comment-cookies-consent08" type="checkbox" value="yes" />
+                    </div>
+                    <div class="comment-form-cookies-consent">
+                        <label for="wp-comment-cookies-consent09"><img src="~/Content/Web/images/icon15.png" alt="" /></label><br />
+                        <input id="wp-comment-cookies-consent09" name="wp-comment-cookies-consent09" type="checkbox" value="yes" />
+                    </div>
+                    <div class="comment-form-cookies-consent">
+                        <label for="wp-comment-cookies-consent10"><img src="~/Content/Web/images/icon16.png" alt="" /></label><br />
+                        <input id="wp-comment-cookies-consent10" name="wp-comment-cookies-consent10" type="checkbox" value="yes" />
+                    </div>
+                </div>-->
+        <!-- // -->
+        <!--<div class="col-lg-9 col-md-8 col-12">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                    <select class="select2">
+                        <option value="1">Company Size</option>
+                        <option value="2">Option 2</option>
+                        <option value="3">Option 3</option>
+                        <option value="4">Option 4</option>
+                        <option value="5">Option 5</option>
+                        <option value="6">Option 6</option>
+                        <option value="7">Option 7</option>
+                        <option value="8">Option 8</option>
+                    </select>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                    <select class="select2">
+                        <option value="1">User Role</option>
+                        <option value="2">Option 2</option>
+                        <option value="3">Option 3</option>
+                        <option value="4">Option 4</option>
+                        <option value="5">Option 5</option>
+                        <option value="6">Option 6</option>
+                        <option value="7">Option 7</option>
+                        <option value="8">Option 8</option>
+                    </select>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                    <select class="select2">
+                        <option value="1">For Category</option>
+                        <option value="2">Option 2</option>
+                        <option value="3">Option 3</option>
+                        <option value="4">Option 4</option>
+                        <option value="5">Option 5</option>
+                        <option value="6">Option 6</option>
+                        <option value="7">Option 7</option>
+                        <option value="8">Option 8</option>
+                    </select>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                    <div class="form-group mr-2" style="display: inline-block;">
+                        <input type="checkbox" id="check65" />
+                        <label for="check65">Text Reviews</label>
+                    </div>
+                    <div class="form-group" style="display: inline-block;">
+                        <input type="checkbox" id="check66" />
+                        <label for="check66">Video Reviews</label>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                    <select class="select2">
+                        <option value="1">All Industries</option>
+                        <option value="2">Option 2</option>
+                        <option value="3">Option 3</option>
+                        <option value="4">Option 4</option>
+                        <option value="5">Option 5</option>
+                        <option value="6">Option 6</option>
+                        <option value="7">Option 7</option>
+                        <option value="8">Option 8</option>
+                    </select>
+                </div>
+
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                    <select class="select2">
+                        <option value="1">Region</option>
+                        <option value="2">Option 2</option>
+                        <option value="3">Option 3</option>
+                        <option value="4">Option 4</option>
+                        <option value="5">Option 5</option>
+                        <option value="6">Option 6</option>
+                        <option value="7">Option 7</option>
+                        <option value="8">Option 8</option>
+                    </select>
+                </div>
+                <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+                    <div class="search mt-0">
+                        <input type="text" class="searchTerm" placeholder="Search Reviews" />
+                        <button type="submit" class="searchButton">Search</button>
+                    </div>
+                </div>
+            </div>
+        </div>-->
+        <!-- // -->
+        <!--</div>
+            </div>
+        </div>-->
+        <!-- // -->
+        <!--</div>
+        </div>-->
+        <!-- #tab3 -->
+        <h3 class="tab_drawer_heading" rel="tab4">Freatures <i class="fa fa-angle-down" aria-hidden="true"></i></h3>
+        <div id="tab4" class="tab_content">
+            <div class="row selected_features">
+                <div class="col-lg-9">
+                    <div class="r_box">
+                        <h5>Features</h5>
+                        <div class="row">
+                            @{
+                                if (Model.Features1 != null && Model.Features1.Count > 0)
+                                {
+                                    <div class="col-lg-12">
+                                        <h4 class="small_font01">Platform</h4>
+
+                                        <div class="row">
+
+
+                                            @foreach (var i in Model.Features1)
+                                            {
+                                                <div class="col-lg-4 col-md-4 col-12 mb-0">
+                                                    <ul>
+                                                        <li>@i</li>
+
+                                                    </ul>
+                                                </div>
+                                            }
+
+                                        </div>
+
+                                    </div>
+                                }
+
+
+                            }
+                            @{
+                                if (Model.Features2 != null && Model.Features2.Count > 0)
+                                {
+                                    <div class="col-lg-12">
+                                        <h4 class="small_font01">Signature Process</h4>
+                                        <div class="row">
+
+
+                                            @foreach (var a in Model.Features2)
+                                            {
+                                                <div class="col-lg-4 col-md-4 col-12 mb-0">
+                                                    <ul>
+                                                        <li>@a</li>
+
+                                                    </ul>
+                                                </div>
+                                            }
+
+                                        </div>
+                                    </div>
+                                }
+
+
+                            }
+                            @{
+                                if (Model.Features3 != null && Model.Features3.Count > 0)
+                                {
+                                    <div class="col-lg-12">
+                                        <h4 class="small_font01">Feature Category 3</h4>
+                                        <div class="row">
+
+
+                                            @foreach (var r in Model.Features3)
+                                            {
+                                                <div class="col-lg-4 col-md-4 col-12 mb-0">
+                                                    <ul>
+                                                        <li>@r</li>
+
+                                                    </ul>
+                                                </div>
+                                            }
+
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        </div>
+
+                    </div>
+                </div>
+                
+                <!-- // -->
+                <!--<div class="col-lg-3">
+    <div class="l_box">
+        <div class="user_ratings">
+            <h5>Docusign User Ratings</h5>
+            <span class="small_font02">Ease of Use</span>
+            <div class="progressWrapper progressColor">
+                <span class="tooltip"></span>
+                <progress max="100" value="0" data-value="56" class="progressColor"></progress>
+            </div>
+            <span class="small_font02">Quality of Support</span>
+            <div class="progressWrapper progressColor">
+                <span class="tooltip"></span>
+                <progress max="100" value="0" data-value="78" class="progressColor"></progress>
+            </div>
+            <span class="small_font02">Ease of Setup</span>
+            <div class="progressWrapper progressColor">
+                <span class="tooltip"></span>
+                <progress max="100" value="0" data-value="40" class="progressColor"></progress>
+            </div>
+        </div>-->
+                <!-- // -->
+                <!--<div class="user_ratings">
+    <h5>Similar Software Recommendations</h5>
+    <div class="software_card">
+        <div class="software_card_l">
+            <img src="~/Content/Web/images/software01.png" alt="" />
+        </div>
+        <div class="software_card_r">
+            <h6>Software Name</h6>
+            <p class="paragraph para04">Sub heading here</p>
+        </div>
+    </div>-->
+                <!-- // -->
+                <!--<div class="software_card">
+        <div class="software_card_l">
+            <img src="~/Content/Web/images/software01.png" alt="" />
+        </div>
+        <div class="software_card_r">
+            <h6>Software Name</h6>
+            <p class="paragraph para04">Sub heading here</p>
+        </div>
+    </div>-->
+                <!-- // -->
+                <!--<div class="software_card">
+        <div class="software_card_l">
+            <img src="~/Content/Web/images/software01.png" alt="" />
+        </div>
+        <div class="software_card_r">
+            <h6>Software Name</h6>
+            <p class="paragraph para04">Sub heading here</p>
+        </div>
+    </div>-->
+                <!-- // -->
+                <!--<div class="software_card">
+        <div class="software_card_l">
+            <img src="~/Content/Web/images/software01.png" alt="" />
+        </div>
+        <div class="software_card_r">
+            <h6>Software Name</h6>
+            <p class="paragraph para04">Sub heading here</p>
+        </div>
+    </div>-->
+                <!-- // -->
+                <!--<div class="software_card">
+                    <div class="software_card_l">
+                        <img src="~/Content/Web/images/software01.png" alt="" />
+                    </div>
+                    <div class="software_card_r">
+                        <h6>Software Name</h6>
+                        <p class="paragraph para04">Sub heading here</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>-->
+            </div>
+        </div>
+        <!-- #tab2 -->
+
+        <h3 id="priceh3id" class="tab_drawer_heading" rel="tab3">Pricing <i class="fa fa-angle-down" aria-hidden="true"></i></h3>
+        <div id="tab3" class="tab_content">
+            <div class="r_box product_info">
+                <!-- // -->
+                <div class="row" id="reviewSec">
+                    <div class="col-lg-12 mb-0">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-4 col-12">
+                                <h4 class="small_font01" style="color: #0193d9;">Pricing</h4>
+                            </div>
+
+                            @*<div class="col-lg-6 col-md-4 col-12" align="right">
+                        <a href="#" class="request_btn mt-2">Get a Custom Quote</a>
+                    </div>*@
+                        </div>
+                    </div>
+                </div>
+                <!-- // -->
+                '<div class="price_area">
+                    <div class="price_pkg">
+                        <div class="package-container">
+                            @if (Model.subscriptions != null && Model.subscriptions.Count > 0)
+                            {
+
+
+                                for (int i = 0; Model.subscriptions.Count > i; i++)
+                                {
+                                    if (Model.subscriptions[i].Price > 0)
+                                    {
+                                        <div class="packages">
+                                            <h1>@Model.subscriptions[i].Plan_Name</h1>
+                                            <h2 class="text1">
+                                                &dollar;@Model.subscriptions[i].Price/<span><sub>@Model.subscriptions[i].Plan_tenure</sub></span>
+                                            </h2>
+
+                                            <ul class="list">
+                                                @for (int j  = 0; Model.subscriptions[i].AdditionalFeatures.Length > j; j++) {
+                                                    if (j == 0)
+                                                    {
+
+                                                <li class="first"><i class="fa-solid fa-check"></i> @Model.subscriptions[i].AdditionalFeatures[j]</li>
+                                                    }
+                                                    else
+                                                    {
+                                                <<li><i class="fa-solid fa-check"></i> @Model.subscriptions[i].AdditionalFeatures[j]</li>
+                                                    }
+                                                }
+                                            </ul>
+                                            <a href="https://my.apparent.software/"  class="button button1">Buy Now</a>
+
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="packages">
+                                            <h1>@Model.subscriptions[i].Plan_Name</h1>
+                                            <h2 class="text1">
+                                                &dollar;@Model.subscriptions[i].Price/<span><sub>@Model.subscriptions[i].Plan_tenure</sub></span>
+                                            </h2>
+
+                                            <ul class="list">
+                                                @for (int j = 0; Model.subscriptions[i].AdditionalFeatures.Length > j; j++)
+                                                {
+                                                    if (j == 0)
+                                                    {
+
+                                                        <li class="first"><i class="fa-solid fa-check"></i> @Model.subscriptions[i].AdditionalFeatures[j]</li>
+                                                    }
+                                                    else
+                                                    {
+                                                        <
+                                                        <li><i class="fa-solid fa-check"></i> @Model.subscriptions[i].AdditionalFeatures[j]</li>
+                                                    }
+                                                }
+                                            </ul>
+                                            <a  href="https://my.apparent.software/"class="button button1">Try Now</a>
+
+                                        </div>
+                                    }
+
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>'
+
+                @*<div class="price_area">
+                    <div class="show-grid" style="margin: 0 auto; text-align: center;">
+                
+                        @if (Model.subscriptions != null && Model.subscriptions.Count > 0)
+                        {
+
+
+                            for (int i = 0; Model.subscriptions.Count > i; i++)
+                            {
+
+
+
+
+                                if (Model.subscriptions[i].Price > 0)
+                                {
+
+
+                                    <div class="price_card">
+                                        <div class="price_card_top">
+                                            <h5>@Model.subscriptions[i].Plan_Name</h5>
+                                        </div>
+                                        <h2>
+                                            $@Model.subscriptions[i].Price<small style="font-size: 28%;">USD</small>
+                                        </h2>
+
+                                        <span><b>@Model.subscriptions[i].Plan_tenure</b></span>
+                                        <p class="pl-2 pr-2">@Model.subscriptions[i].Description</p>
+                                        <div class="price_card_btm mt-3">
+                                           
+                                            <a href="~/Payment/Index?ProductId=@Model.DtProductDetails.Rows[0]["ProductId"].ToString()&Plan_Name=@Model.subscriptions[i].Plan_Name&Price=@Model.subscriptions[i].Price&Plan_tenure=@Model.subscriptions[i].Plan_tenure" class="request_btn mt-2 mb-3">Buy Now</a>
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="price_card">
+                                        <div class="price_card_top">
+                                            <h5>@Model.subscriptions[i].Plan_Name</h5>
+                                        </div>
+                                        <h2>
+                                            $@Model.subscriptions[i].Price<small style="font-size: 28%;">USD</small>
+                                        </h2>
+
+                                        <span><b>@Model.subscriptions[i].Plan_tenure</b></span>
+                                        <p class="pl-2 pr-2">@Model.subscriptions[i].Description</p>
+                                        <div class="price_card_btm mt-3">
+                                           
+                                            <a href="~/Payment/Index?ProductId=@Model.DtProductDetails.Rows[0]["ProductId"].ToString()&Plan_Name=@Model.subscriptions[i].Plan_Name&Price=@Model.subscriptions[i].Price&Plan_tenure=@Model.subscriptions[i].Plan_tenure" class="request_btn mt-2 mb-3">Try Now</a>
+                                        </div>
+                                    </div>
+                                }
+
+
+
+
+
+
+                            }
+                        }
+
+                    </div>
+                </div>*@
+            </div>
+        </div>
+
+    </div>
+    </div>
+</section>
+
+<!-- // responsive view start new-->
+<section class="software_sec m_view02">
+    <div class="container">
+
+        
+        <!--//-->
+        <ul class="accordion">
+            <li>
+                <a class="toggle" href=#>Product Information <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+                <div class="r_box product_info inner">
+                    <h5>@Model.ProductName Reviews & Product Details</h5>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h4 class="small_font01">@Model.DtProductDetails.Rows[0]["ProductName"].ToString() Overview</h4>
+                            <p class="paragraph">What is @Model.ProductName?</p>
+                            <p class="paragraph">
+                                @Model.DtProductDetails.Rows[0]["AboutProduct"].ToString()
+                            </p>
+                            <small>
+                                <span id="show-more">Load more <i class="fa fa-angle-down" aria-hidden="true" style="vertical-align: middle;"></i></span>
+                            </small>
+                            <div id="show-more-content">
+                                <p class="paragraph">What is @Model.ProductName?</p>
+                                <p class="paragraph">
+                                    @Model.DtProductDetails.Rows[0]["AboutProduct"].ToString()
+                                </p>
+                                <small>
+                                    <span id="show-less">Show less</span>
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- // -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h4 class="small_font01">@Model.DtProductDetails.Rows[0]["Website"].ToString() Details</h4>
+                            <div class="details_panel">
+                                <h6><img src="~/Content/Web/images/icon06.png" alt="" /><b> Website:</b> @Model.DtProductDetails.Rows[0]["Website"].ToString()</h6>
+                                <h6><img src="~/Content/Web/images/icon10.png" alt="" /><b>Discussion:</b> @Model.ProductName Community</h6>
+                                <h6>
+                                    <img src="~/Content/Web/images/icon11.png" alt="" /> @Model.DtProductDetails.Rows[0]["SupportLanguages"].ToString()
+                                </h6>
+                            </div>
+                            <p class="paragraph mt-4"><strong>Product Description</strong></p>
+                            <p class="paragraph">
+                                @Model.DtProductDetails.Rows[0]["Description"].ToString()
+                            </p>
+                        </div>
+                    </div>
+                    <!-- // -->
+                    <!--<div class="row">
+    <div class="col-lg-12">
+        <h4 class="small_font01">Seller Details</h4>
+        <div class="details_panel">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-12">
+                    <h6><img src="~/Content/Web/images/icon04.png" alt="" /> <b>Seller:</b>@Model.DtProductDetails.Rows[0]["CompanyName"].ToString()</h6>
+                </div>
+                <div class="col-lg-4 col-md-6 col-12">
+                    <h6><img src="~/Content/Web/images/icon06.png" alt="" /> <b>Company Website:</b>@Model.DtProductDetails.Rows[0]["CompanyWebsite"].ToString()</h6>
+                </div>
+                <div class="col-lg-4 col-md-6 col-12">
+                    <h6><img src="~/Content/Web/images/icon08.png" alt="" /><b>Phone:</b>@Model.DtProductDetails.Rows[0]["Phone"].ToString()</h6>
+                </div>
+                <div class="col-lg-4 col-md-6 col-12">
+                    <h6><img src="~/Content/Web/images/icon05.png" alt="" /> <b>HQ Location:</b>@Model.DtProductDetails.Rows[0]["City"].ToString(), @Model.DtProductDetails.Rows[0]["State"].ToString(), @Model.DtProductDetails.Rows[0]["Country"].ToString()</h6>
+                </div>
+                <div class="col-lg-4 col-md-6 col-12">
+                    <h6><img src="~/Content/Web/images/icon07.png" alt="" /> <b>Twitter:</b>@Model.DtProductDetails.Rows[0]["Twitter"].ToString()</h6>
+                </div>
+                <div class="col-lg-4 col-md-6 col-12">
+                    <h6 style="display: block;"><img style="vertical-align: text-bottom;" src="~/Content/Web/images/icon09.png" alt="" />&nbsp;&nbsp;<b>LinkedIn:</b>&nbsp; @Model.DtProductDetails.Rows[0]["LinkedIn"].ToString()<br /><span class="pt-2 pl02">5,819 employees on LinkedIn</span></h6>
+                </div>
+            </div>
+        </div>-->
+                    @*<p class="paragraph"><strong>Product Description</strong></p>
+        <p class="paragraph">
+            @Model.DtProductDetails.Rows[0]["Description"].ToString()
+        </p>*@
+                    <!--</div>
+    </div>-->
+                    <!-- // -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h4 class="small_font01">@Model.ProductName Videos</h4>
+                            <div class="row mt-4">
+                                @for (int z = 0; Model.VideoList.Rows.Count > z; z++)
+                                {
+                                    <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+                                        <video class="video-upload video-child" controls id="videoPlayer_0"
+                                               src="@(Model.VideoList.Rows[z]["FilePath"].ToString())" style="width: 100%; height: 100%;"></video>
+
+                                    </div>
+                                }
+
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- // -->
+                    @if (@Model.ImagesList != null)
+                    {
+                        <div class="row">
+
+
+                            <div class="col-lg-12">
+                                <h4 class="small_font01">@Model.ProductName Screenshots</h4>
+
+                                <div class="row mt-4">
+                                    @for (int ab = 0; Model.ImagesList.Rows.Count > ab; ab++)
+                                    {
+                                        <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+                                            <div class="video_pic">
+                                                <a target="_blank" href="@Model.ImagesList.Rows[ab]["Images"].ToString()">   <img src="@(Model.ImagesList.Rows[ab]["Images"].ToString())" alt="" /></a>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+
+                            </div>
+
+                        </div>
+                    }
+                    <!-- // -->
+                    <!-- // -->
+                    <!--<div class="row" id="reviewSec">
+    <div class="col-lg-12">
+        <h4 class="small_font01">DocuSign Reviews</h4>
+        <div class="row mt-4">
+            <div class="col-lg-3 col-md-4 col-12">
+                <div class="comment-form-cookies-consent">
+                    <label for="wp-comment-cookies-consent01"><img src="~/Content/Web/images/icon12.png" alt="" /></label><br />
+                    <input id="wp-comment-cookies-consent01" name="wp-comment-cookies-consent01" type="checkbox" value="yes" />
+                </div>
+                <div class="comment-form-cookies-consent">
+                    <label for="wp-comment-cookies-consent02"><img src="~/Content/Web/images/icon13.png" alt="" /></label><br />
+                    <input id="wp-comment-cookies-consent02" name="wp-comment-cookies-consent02" type="checkbox" value="yes" />
+                </div>
+                <div class="comment-form-cookies-consent">
+                    <label for="wp-comment-cookies-consent03"><img src="~/Content/Web/images/icon14.png" alt="" /></label><br />
+                    <input id="wp-comment-cookies-consent03" name="wp-comment-cookies-consent03" type="checkbox" value="yes" />
+                </div>
+                <div class="comment-form-cookies-consent">
+                    <label for="wp-comment-cookies-consent04"><img src="~/Content/Web/images/icon15.png" alt="" /></label><br />
+                    <input id="wp-comment-cookies-consent04" name="wp-comment-cookies-consent04" type="checkbox" value="yes" />
+                </div>
+                <div class="comment-form-cookies-consent">
+                    <label for="wp-comment-cookies-consent05"><img src="~/Content/Web/images/icon16.png" alt="" /></label><br />
+                    <input id="wp-comment-cookies-consent05" name="wp-comment-cookies-consent05" type="checkbox" value="yes" />
+                </div>
+            </div>-->
+                    <!-- // -->
+                    <!--<div class="col-lg-6 col-md-4 col-12">
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-12">
+                <select class="select2">
+                    <option value="1">Company Size</option>
+                    <option value="2">Option 2</option>
+                    <option value="3">Option 3</option>
+                    <option value="4">Option 4</option>
+                    <option value="5">Option 5</option>
+                    <option value="6">Option 6</option>
+                    <option value="7">Option 7</option>
+                    <option value="8">Option 8</option>
+                </select>
+            </div>
+            <div class="col-lg-4 col-md-4 col-12">
+                <select class="select2">
+                    <option value="1">User Role</option>
+                    <option value="2">Option 2</option>
+                    <option value="3">Option 3</option>
+                    <option value="4">Option 4</option>
+                    <option value="5">Option 5</option>
+                    <option value="6">Option 6</option>
+                    <option value="7">Option 7</option>
+                    <option value="8">Option 8</option>
+                </select>
+            </div>
+            <div class="col-lg-4 col-md-4 col-12">
+                <select class="select2">
+                    <option value="1">For Category</option>
+                    <option value="2">Option 2</option>
+                    <option value="3">Option 3</option>
+                    <option value="4">Option 4</option>
+                    <option value="5">Option 5</option>
+                    <option value="6">Option 6</option>
+                    <option value="7">Option 7</option>
+                    <option value="8">Option 8</option>
+                </select>
+            </div>
+            <div class="col-lg-4 col-md-4 col-12">
+                <select class="select2">
+                    <option value="1">All Industries</option>
+                    <option value="2">Option 2</option>
+                    <option value="3">Option 3</option>
+                    <option value="4">Option 4</option>
+                    <option value="5">Option 5</option>
+                    <option value="6">Option 6</option>
+                    <option value="7">Option 7</option>
+                    <option value="8">Option 8</option>
+                </select>
+            </div>
+            <div class="col-lg-4 col-md-4 col-12">
+                <select class="select2">
+                    <option value="1">Region</option>
+                    <option value="2">Option 2</option>
+                    <option value="3">Option 3</option>
+                    <option value="4">Option 4</option>
+                    <option value="5">Option 5</option>
+                    <option value="6">Option 6</option>
+                    <option value="7">Option 7</option>
+                    <option value="8">Option 8</option>
+                </select>
+            </div>
+        </div>
+    </div>-->
+                    <!-- // -->
+                    <!--<div class="col-lg-3 col-md-4 col-12">
+        <div class="form-group mr-2" style="display: inline-block;">
+            <input type="checkbox" id="check61" />
+            <label for="check61">Text Reviews</label>
+        </div>
+        <div class="form-group" style="display: inline-block;">
+            <input type="checkbox" id="check62" />
+            <label for="check62">Video Reviews</label>
+        </div>
+    </div>-->
+                    <!-- // -->
+                    <!--</div>
+        </div>
+    </div>-->
+                    <!-- // -->
+
+                </div>
+            </li>
+
+            <li>
+                <a class="toggle" href=#>Freatures <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+                <div class="selected_features inner">
+                    
+                        <div class="r_box">
+                            <h5>@Model.ProductName Features</h5>
+                            <div class="row">
+                                @{
+                                    if (Model.Features1 != null && Model.Features1.Count > 0)
+                                    {
+                                        <div class="col-lg-12">
+                                            <h4 class="small_font01">Platform</h4>
+
+                                            <div class="row">
+
+
+                                                @foreach (var i in Model.Features1)
+                                                {
+                                                    <div class="col-lg-4 col-md-4 col-12 mb-0">
+                                                        <ul>
+                                                            <li>@i</li>
+
+                                                        </ul>
+                                                    </div>
+                                                }
+
+                                            </div>
+
+                                        </div>
+                                    }
+
+
+                                }
+                                @{
+                                    if (Model.Features2 != null && Model.Features2.Count > 0)
+                                    {
+                                        <div class="col-lg-12">
+                                            <h4 class="small_font01">Signature Process</h4>
+                                            <div class="row">
+
+
+                                                @foreach (var a in Model.Features2)
+                                                {
+                                                    <div class="col-lg-4 col-md-4 col-12 mb-0">
+                                                        <ul>
+                                                            <li>@a</li>
+
+                                                        </ul>
+                                                    </div>
+                                                }
+
+                                            </div>
+                                        </div>
+                                    }
+
+
+                                }
+                                @{
+                                    if (Model.Features3 != null && Model.Features3.Count > 0)
+                                    {
+                                        <div class="col-lg-12">
+                                            <h4 class="small_font01">Feature Category 3</h4>
+                                            <div class="row">
+
+
+                                                @foreach (var r in Model.Features3)
+                                                {
+                                                    <div class="col-lg-4 col-md-4 col-12 mb-0">
+                                                        <ul>
+                                                            <li>@r</li>
+
+                                                        </ul>
+                                                    </div>
+                                                }
+
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                            </div>
+
+                        </div>
+                    
+                    <!-- // -->
+                    <!--<div class="col-lg-3">
+    <div class="l_box">
+        <div class="user_ratings">
+            <h5>Docusign User Ratings</h5>
+            <span class="small_font02">Ease of Use</span>
+            <div class="progressWrapper progressColor">
+                <span class="tooltip"></span>
+                <progress max="100" value="0" data-value="56" class="progressColor"></progress>
+            </div>
+            <span class="small_font02">Quality of Support</span>
+            <div class="progressWrapper progressColor">
+                <span class="tooltip"></span>
+                <progress max="100" value="0" data-value="78" class="progressColor"></progress>
+            </div>
+            <span class="small_font02">Ease of Setup</span>
+            <div class="progressWrapper progressColor">
+                <span class="tooltip"></span>
+                <progress max="100" value="0" data-value="40" class="progressColor"></progress>
+            </div>
+        </div>-->
+                    <!-- // -->
+                    <!--<div class="user_ratings">
+    <h5>Similar Software Recommendations</h5>
+    <div class="software_card">
+        <div class="software_card_l">
+            <img src="~/Content/Web/images/software01.png" alt="" />
+        </div>
+        <div class="software_card_r">
+            <h6>Software Name</h6>
+            <p class="paragraph para04">Sub heading here</p>
+        </div>
+    </div>-->
+                    <!-- // -->
+                    <!--<div class="software_card">
+        <div class="software_card_l">
+            <img src="~/Content/Web/images/software01.png" alt="" />
+        </div>
+        <div class="software_card_r">
+            <h6>Software Name</h6>
+            <p class="paragraph para04">Sub heading here</p>
+        </div>
+    </div>-->
+                    <!-- // -->
+                    <!--<div class="software_card">
+        <div class="software_card_l">
+            <img src="~/Content/Web/images/software01.png" alt="" />
+        </div>
+        <div class="software_card_r">
+            <h6>Software Name</h6>
+            <p class="paragraph para04">Sub heading here</p>
+        </div>
+    </div>-->
+                    <!-- // -->
+                    <!--<div class="software_card">
+        <div class="software_card_l">
+            <img src="~/Content/Web/images/software01.png" alt="" />
+        </div>
+        <div class="software_card_r">
+            <h6>Software Name</h6>
+            <p class="paragraph para04">Sub heading here</p>
+        </div>
+    </div>-->
+                    <!-- // -->
+                    <!--<div class="software_card">
+                    <div class="software_card_l">
+                        <img src="~/Content/Web/images/software01.png" alt="" />
+                    </div>
+                    <div class="software_card_r">
+                        <h6>Software Name</h6>
+                        <p class="paragraph para04">Sub heading here</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>-->
+                </div>
+            </li>
+
+            <li>
+                <a class="toggle" href=#>Pricing <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+                <div class="r_box product_info inner price007">
+                    <!-- // -->
+                    <div class="row" id="reviewSec">
+                        <div class="col-lg-12 mb-0">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-4 col-12">
+                                    <h4 class="small_font01" style="color: #0193d9;">@Model.ProductName Pricing</h4>
+                                </div>
+
+                                @*<div class="col-lg-6 col-md-4 col-12" align="right">
+                        <a href="#" class="request_btn mt-2">Get a Custom Quote</a>
+                    </div>*@
+                            </div>
+                        </div>
+                    </div>
+                    <!-- // -->
+                    <div class="price_area">
+                        <div class="show-grid" style="margin: 0 auto; text-align: center;">
+                            @*@if (Model.productMaster.subscriptions != null && Model.productMaster.subscriptions.Count > 0)
+                {
+                    foreach (Apparent.Model.subscription subscription in Model.productMaster.subscriptions)
+                    {
+                        <div class="price_card "><div class="price_card_top"><h5 id="plan">@subscription.Plan_Name</h5></div><h2 id="price"> $@subscription.Price<br /><span id="tenure">@subscription.Plan_tenure</span></h2><div class="price_card_btm"><a href="javascript:void(0);" class="cancel_bg mt-2" id="hide01">Cancel</a></div></div>
+                    }
+                }*@
+
+                            @if (Model.subscriptions != null && Model.subscriptions.Count > 0)
+                            {
+
+
+                                for (int i = 0; Model.subscriptions.Count > i; i++)
+                                {
+
+
+
+
+                                    if (Model.subscriptions[i].Price > 0)
+                                    {
+                                                <div class="price_card">
+                                                    <div class="price_card_top">
+                                                        <h5>@Model.subscriptions[i].Plan_Name</h5>
+                                                    </div>
+                                                    <h2>
+                                                        $@Model.subscriptions[i].Price<small style="font-size: 28%;">USD</small>
+                                                    </h2>
+
+                                                    <span><b>@Model.subscriptions[i].Plan_tenure</b></span>
+                                                    <p class="pl-2 pr-2">@Model.subscriptions[i].Description</p>
+                                                    <div class="price_card_btm mt-3">
+                                                        @*<small style="color: #878787;">For One Person</small><br />*@
+                                                        <a href="https://my.apparent.software/" class="request_btn mt-2 mb-3">Buy Now</a>
+                                                    </div>
+                                                </div>
+                                    }
+                                    else
+                                    {
+                                                <div class="price_card">
+                                                    <div class="price_card_top">
+                                                        <h5>@Model.subscriptions[i].Plan_Name</h5>
+                                                    </div>
+                                                    <h2>
+                                                        $@Model.subscriptions[i].Price<small style="font-size: 28%;">USD</small>
+                                                    </h2>
+
+                                                    <span><b>@Model.subscriptions[i].Plan_tenure</b></span>
+                                                    <p class="pl-2 pr-2">@Model.subscriptions[i].Description</p>
+                                                    <div class="price_card_btm mt-3">
+                                                        @*<small style="color: #878787;">For One Person</small><br />*@
+                                                        <a href="https://my.apparent.software/" class="request_btn mt-2 mb-3">Try Now</a>
+                                                    </div>
+                                                </div>
+                                    }
+
+                                }
+
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+            
+        </ul>
+    </div>
+</section>
+<!-- // responsive view new end -->
+<!-- ====================================================================================================
+  start blue_bar
+====================================================================================================== -->
+<!--<section class="blue_bar">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 col-md-6 col-12 mb-0">
+                <h2 class="heading02 text-white mb-0">Already using DocuSign?</h2>
+            </div>
+            <div class="col-lg-6 col-md-6 col-12 mb-0" align="right">
+                <a href="#" class="request_btn white_btn mt-2">Write a review</a>
+            </div>
+        </div>
+    </div>
+</section>-->
+<!-- ====================================================================================================
+  start title_review
+====================================================================================================== -->
+<!--<section class="title_review">
+    <div class="container">
+        <div class="review_row mb-3">
+            <div class="review_top">
+                <div class="row align-items-center">
+                    <div class="col-lg-3 col-md-4 col-12 mb-0">
+                        <div class="review_circle">
+                            <img src="~/Content/Web/images/client02.png" alt="" />
+                        </div>
+                        <h5>User Name</h5>
+                        <h6>User Profession/Designation</h6>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-12 mb-0 p_01">
+                        <ul class="nav">
+                            <li>
+                                <a href="javascript:void(0);">Verified User &nbsp;<i class="fa-solid fa-circle-check"></i></a>
+                            </li>
+
+                            <li class="mr-0"><a href="javascript:void(0);">Lorem ipsum dolor</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-6 col-md-4 col-12 mb-0" id="addSection">
+                        <ul>
+                            <li>
+                                <a href="javascript:void(0);"><i class="fa-solid fa-envelope"></i> Request Contact</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);"><i class="fa-solid fa-thumbs-up"></i> Helpful?</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);"><img src="~/Content/Web/images/comment.png" alt="" /> Add Comment</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);"><i class="fa-solid fa-share"></i> Share</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>-->
+<!-- // -->
+<!--<ul>
+        <li class="pr_01"><img src="~/Content/Web/images/icon17.png" alt="" /></li>
+        <li class="pr_01"><img src="~/Content/Web/images/icon18.png" alt="" /></li>
+        <li class="pr_01"><img src="~/Content/Web/images/icon19.png" alt="" /></li>
+        <li class="pr_01"><img src="~/Content/Web/images/icon20.png" alt="" /></li>
+        <li class="pr_01"><img src="~/Content/Web/images/icon21.png" alt="" /></li>
+        <li>24 june 2023</li>
+    </ul>
+    <h3>Title of the review</h3>
+    <p class="small_para02">What do you like best?</p>
+    <p class="paragraph">
+        DocuSign makes it easy and fast to get your documents signed. Whether you need to close a big sales contract, keep your company trade secrets safe with an NDA or buy a home, DocuSign eSignature helps you get a
+        signature anytime, anywhere, on any device.
+    </p>
+
+    <p class="small_para02">What do you dislike?</p>
+    <p class="paragraph">
+        Lorem ipsum dolor sit amet, cons ectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper
+        suscipit lobortis nisl ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet.
+    </p>
+
+    <p class="small_para02">Recommendations to others considering the product:</p>
+    <p class="paragraph">
+        Lorem ipsum dolor sit amet, cons ectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper
+        suscipit lobortis nisl ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetuer adipiscing elit,.
+    </p>
+
+    <p class="small_para02">What problems are you solving with the product? What benefits have you realized?</p>
+    <p class="paragraph">
+        Lorem ipsum dolor sit amet, cons ectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper
+        suscipit lobortis nisl ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetuer adipiscing elit,.
+    </p>
+</div>-->
+<!-- // -->
+<!--<div class="pagination_row">
+            <div class="pagination">
+                <div class="page-numbers">
+                    <button class="btn-page btn-selected">1</button>
+                    <button class="btn-page">2</button>
+                    <button class="btn-page">3</button>
+                    <button class="btn-page">4</button>
+                    <button class="btn-page">5</button>
+                    <span class="dots">...</span>
+                    <button class="btn-page">20</button>
+                </div>
+                <button class="btn-nav right-btn">Next</button>
+                <button class="btn-nav left-btn">Previous</button>
+            </div>
+        </div>
+    </div>
+</section>-->
+@*<div class="modal" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <iframe src="/Content/Web/VideoFile/@Model.VideoList.Rows[0]["FilePath"].ToString()"
+                            title="YouTube video player"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </div>*@
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.21.0/slimselect.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".progressWrapper progress").each(function () {
+            var prgsVal = $(this).data("value");
+            var maxN = $(this).attr("max");
+            var pop = (prgsVal / maxN) * 100;
+
+            $(this)
+                .prev()
+                .css("left", pop + "%")
+                .text(prgsVal);
+            $(this).val(prgsVal);
+        });
+
+
+        //$("#pricesecactive").click(function () {
+        //    $("li[rel='tab3']").click();
+           
+         
+        //});
+    });
+
+
+    function pricefun(companyid) {
+
+        if (companyid != null && companyid != "") {
+            $("li[rel='tab3']").click();
+            $(".price007").addClass("show");
+            $(".price007").css("display", "block");
+        }
+        else {
+            window.location = "/SignUp/customer_signup";
+        }
+
+    }
+</script>
+<!-- // progress bar end -->
+<!-- // select dropdown start -->
+<script>
+    $(document).ready(function () {
+        $(".select2").select2();
+    });
+</script>
+<!-- // select dropdown end -->
+<!-- // btn active start -->
+<script>
+    var selector = ".nav li";
+
+    $(selector).on("click", function () {
+        $(selector).removeClass("active");
+        $(this).addClass("active");
+    });
+</script>
+
+<!-- // responsive view accordion start -->
+<script>
+    $('.toggle').click(function (e) {
+        e.preventDefault();
+
+        let $this = $(this);
+
+        if ($this.next().hasClass('show')) {
+            $this.next().removeClass('show');
+            $this.next().slideUp(350);
+        } else {
+            $this.parent().parent().find('li .inner').removeClass('show');
+            $this.parent().parent().find('li .inner').slideUp(350);
+            $this.next().toggleClass('show');
+            $this.next().slideToggle(350);
+        }
+    });
+    $(".toggle").click(function () {
+        $(this).toggleClass("down");
+    });
+</script>
+<!-- // responsive view accordion end -->
+
+<script>
+
+    function openTab(tabId) {
+        // Set the display property of the tab content to "block"
+        document.getElementById(tabId).style.display = "block";
+
+        // Optionally, you can also close other tabs if needed
+
+        // Prevent the default behavior of the anchor tag
+        return false;
+    }
+
+    function subscriptionsubmit(ProductId, Plan_Name, Price, Plan_tenure)
+    const fd = new FormData();
+
+
+    fd.append('ProductId', ProductId);
+    fd.append('Plan_Name', Plan_Name);
+    fd.append('Price', Price);
+    fd.append('Plan_tenure', Plan_tenure);
+
+    $.ajax({
+        url: '/Payment/Index',
+        method: 'POST',
+        async: true,
+        contentType: false,
+        cache: false,
+        processData: false,
+        data: fd,
+        success: function (data, textStatus, xhr) {
+
+            if (data.code == 200) {
+
+
+
+            }
+            else if (data.code == 400) {
+                swal({
+                    title: "OOPS!",
+                    text: "something went wrong!",
+                    type: "error"
+                });
+            }
+            else if (data.code == 500) {
+                swal({
+                    title: "OOPS!",
+                    text: "something went wrong!",
+                    type: "error"
+                }, function () {
+                    window.location = data.url;
+                });
+            }
+
+        },
+        error: function (xhr, textStatus, errorThrown) {
+
+            swal({
+                title: "OOPS!",
+                text: "something went wrong!",
+                type: "error"
+            });
+        }
+    })
+</script>
+
+@if (TempData["FreeTrialErrorMSG"] !=null && TempData["FreeTrialErrorMSG"].ToString() == "Internal Server Error. Try After Some Times")
+            {
+                <script>
+                    swal({
+                        title: "Error!",
+                        text: "something went wrong! Try after some times.",
+                        type: "error"
+                    });
+                </script>
+            }
+

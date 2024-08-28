@@ -1,0 +1,364 @@
+﻿
+
+@{
+    Layout = null;
+    int currentYear = DateTime.Now.Year;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE" />
+    <title>Apparent</title>
+    <link href="~/Content/Web/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/Web/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="~/Content/Web/css/all.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet" type="text/css" />
+    <!-- <link href="assets/css/font-awesome.min.css" rel="stylesheet" type="text/css"/> -->
+    <link href="~/Content/web/css/responsive.css" rel="stylesheet" type="text/css" />
+    <script src="https://kit.fontawesome.com/91cafd3f0a.js" crossorigin="anonymous"></script>
+    <link rel="shortcut icon" type="image/png" href="~/Content/Web/images/favi.png">
+</head>
+
+<body>
+    <!-- ====================================================================================================
+      start signin
+    ====================================================================================================== -->
+    @*<section class="signin">
+            <div class="container">
+                <a href="~/Home"> <img src="~/Content/Web/images/main_logo.png" class="mb-4" alt="" /> </a>
+                <div class="row align-items-center">
+                    <div class="col-lg-7 col-md-6 col-12">
+                        <img src="~/Content/Web/images/signin.png" alt="" />
+                    </div>
+                    <div class="col-lg-5 col-md-6 col-12">
+                        <div class="signin_right">
+                            <h2 class="heading02">Reset Password</h2>
+                            <ul>
+                            </ul>
+                            <form id="logfrm01">
+                                <input type="password" class="form-control field01 field04 rounded-0 mb-3 eyePadding" placeholder="Enter New password" name="Password" id="Password" />
+                                <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password3"></span>
+                                <input id="ConfirmPassword" type="password" class="form-control field01 field04 rounded-0 mb-3 eyePadding" name="Password" placeholder="Enter Confirm Password" />
+                                <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password2"></span>
+                                <input type="hidden" value="@ViewBag.Outh" id="CompanyEmail" />
+                                <button type="button" onclick="passwordsubmit()" id="Btn02" class="submit01 save_btn w-100 mt-0 mb-3" style="float: none;">Submit</button>
+                            </form>
+                        </div>
+                        <p class="paragraph">Copyright &copy; 2021 Apparent. All Rights Reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </section>*@
+    <section class="signinNew">
+        <div class="container">
+            <a href="/Home"> <img class="signinNewlogo" src="~/Content/Web/images/Apparent-Software-Colored-H-200px.png" alt="" /> </a>
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-md-6 col-12">
+                    <img src="~/Content/Web/images/ResetPaswordPic.jpg" alt="" />
+                    @*<span class="terms createAccount"><a href="/SignIn">I have already an account</a></span>*@
+                </div>
+                <div class="col-lg-6 col-md-6 col-12">
+                    <div class="signinNew_right">
+                        <h2 class="heading02">Enter New Password</h2>
+                        <form id="frm1">
+                            <div class="txt_field">
+                                <input type="password" id="Password" name="Password" placeholder="New Password" required />
+                                <span></span>
+                                <i class="fas fa-lock toggle-password" data-target="Password"></i>
+
+                            </div>
+                            <span class="red charlength_validate">
+                                Password must be minimum of 8 characters
+                            </span>
+                            <span class="red capital_validate">
+                                Password must include at-least one uppercase letter e.g.
+                                ABC
+                            </span>
+                            <span class="red smallcase_validate">
+                                Password must include at-least one lowercase letter e.g. abc
+                            </span>
+                            <span class="red numeric_validate">Password must include at-least one number e.g. 123 </span>
+                            <span class="red special_validate">Password must include at-least one symbol e.g. @@!#$? </span>
+
+                            <div class="txt_field">
+                                <input type="password" id="ConfirmPassword" name="Confirmpassword" placeholder="Repeat Your Password" required />
+                                <span></span>
+                                <i class="fas fa-lock toggle-password" data-target="ConfirmPassword"></i>
+                            </div>
+                            <span class="red cnfrm_and_check">
+                                Password and Repeat password must need to matched
+                            </span>
+                            <input type="hidden" value="@ViewBag.Outh" id="CompanyEmail" />
+                            <input type="button" onclick="passwordsubmit()" value="Continue" />
+
+                        </form>
+                    </div>
+                    <p class="paragraph">Copyright &copy; @currentYear.ToString() Apparent. All Rights Reserved.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="row text-center">
+            <div class="loader_box" id="loder01">
+                <div class="d-flex justify-content-center align-items-center ">
+                    <div class="loader-content">
+                        <div class="loader_title">Please Wait</div>
+                        <div class="loader--spinner">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ====================================================================================================
+      start script
+    ====================================================================================================== -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="~/Content/Web//js/bootstrap.bundle.min.js"></script>
+    <script src="~/Content/Web/js/myScript.js"></script>
+</body>
+</html>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
+<script>
+
+    $(document).ready(function () {
+        ($("#loder01").css("display", "block"));
+        $("#loder01").hide()
+        $(document).ajaxStart(function () {
+            ($("#loder01").css("display", "block"));
+        });
+
+        $(document).ajaxStop(function () {
+            $("#loder01").hide()
+        });
+
+    })
+
+
+
+    function passwordsubmit() {
+
+        var CompanyEmail = $("#CompanyEmail").val();
+
+        var Password = $("#Password").val();
+        var Password2 = $("#ConfirmPassword").val();
+        if (Password == "") {
+            swal({
+                title: "Information!",
+                text: "Please new enter password",
+                type: "info"
+            });
+            return;
+        }
+        else if (Password2 == "") {
+            swal({
+                title: "Information!",
+                text: "Please confirm enter password",
+                type: "info"
+            });
+            return;
+        }
+        else if (Password2 != Password) {
+            swal({
+                title: "Information!",
+                text: "Password doesn't  match",
+                type: "info"
+            });
+            return;
+        }
+
+
+        var formData = new FormData();
+        formData.append('Email', CompanyEmail);
+        formData.append('Password', Password);
+        $.ajax({
+            url: '/ResetPassword/password_update',
+            method: 'POST',
+            contentType: false,
+            cache: false,
+            processData: false,
+            data: formData,
+            success: function (data) {
+
+                if (data.code == 200) {
+
+                    swal({
+                        title: "Success",
+                        text: data.msg,
+                        type: "success"
+                    }, function () {
+                        var url = "/SignIn";
+                        window.location = url;
+                    });
+                }
+                else if (data.code == 400) {
+                    swal({
+                        title: "Oops!",
+                        text: data.msg,
+                        type: "error"
+                    }, function () {
+                        var url = "/SignIn";
+                        window.location = url;
+                    });
+                }
+            },
+            error: function (xhr, textStatus, errorThrown) {
+
+                swal({
+                    title: "Oops!",
+                    text: "Something went wrong!",
+                    type: "error"
+                }, function () {
+                    var url = "/SignIn";
+                    window.location = url;
+                });
+            }
+        });
+    }
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const togglePasswordIcons = document.querySelectorAll(".toggle-password");
+
+        togglePasswordIcons.forEach(icon => {
+            icon.addEventListener("click", function () {
+                const targetId = this.getAttribute("data-target");
+                const targetInput = document.getElementById(targetId);
+                if (targetInput.type === "password") {
+
+                    targetInput.type = "text";
+                    this.classList.remove("fa-lock");
+                    this.classList.add("fa-unlock-alt");
+                } else {
+                    targetInput.type = "password";
+                    this.classList.remove("fa-unlock-alt");
+                    this.classList.add("fa-lock");
+                }
+            });
+        });
+    });
+</script>
+
+<script>
+
+    document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById('Password').addEventListener('keyup', validatePassword);
+        document.getElementById('ConfirmPassword').addEventListener('keyup', validatePassword);
+    });
+    function validatePassword() {
+        var password = document.getElementById('Password').value;
+        var confirmPassword = document.getElementById('ConfirmPassword').value;
+        var charLengthError = document.querySelector('.charlength_validate');
+        var capitalError = document.querySelector('.capital_validate');
+        var smallcaseError = document.querySelector('.smallcase_validate');
+        var numericError = document.querySelector('.numeric_validate');
+        var specialError = document.querySelector('.special_validate');
+        var confirmPasswordError = document.querySelector('.cnfrm_and_check');
+
+        charLengthError.style.display = 'none';
+        capitalError.style.display = 'none';
+        smallcaseError.style.display = 'none';
+        numericError.style.display = 'none';
+        specialError.style.display = 'none';
+        confirmPasswordError.style.display = 'none';
+
+        if (password === '') {
+            return;
+        }
+
+        if (password !== confirmPassword && confirmPassword.length > 0) {
+            confirmPasswordError.style.display = 'block';
+            return;
+        }
+        var minLength = 8;
+        var hasUpperCase = /[A-Z]/.test(password);
+        var hasLowerCase = /[a-z]/.test(password);
+        var hasNumber = /\d/.test(password);
+        var hasSpecialChar = /[!@@#$%^&*(),.?":{}|<>]/.test(password);
+
+        if (password.length < minLength) {
+            charLengthError.style.display = 'block';
+        }
+
+        if (!hasUpperCase) {
+            capitalError.style.display = 'block';
+        }
+
+        if (!hasLowerCase) {
+            smallcaseError.style.display = 'block';
+        }
+
+        if (!hasNumber) {
+            numericError.style.display = 'block';
+        }
+
+        if (!hasSpecialChar) {
+            specialError.style.display = 'block';
+        }
+    }
+</script>
+
+
+@if (TempData["SignUpMSG"] != null && TempData["SignUpMSG"].ToString() == "Selller Signup Successful")
+{
+    <script>
+        swal({
+            title: "Success",
+            text: "Selller signup successful",
+            type: "success"
+        });
+    </script>
+}
+
+@if (TempData["SignUpExistsMSG"] != null && TempData["SignUpExistsMSG"].ToString() == "Selller Already Exists")
+{
+    <script>
+        swal({
+            title: "Oops!",
+            text: "Seller already exists",
+            type: "error"
+        });
+    </script>
+}
+@if (TempData["ErrorMsg"] != null && TempData["ErrorMsg"].ToString() == "Username  or password does not match")
+{
+    <script>
+        swal({
+            title: "Oops!",
+            text: "Email or password does not match",
+            type: "error"
+        });
+    </script>
+}
+
+@if (TempData["CompanyExist"] != null && TempData["CompanyExist"].ToString() == "Company already Exsist")
+{
+    <script>
+        swal({
+            title: "Oops!",
+            text: "Company already Exsist",
+            type: "error"
+        });
+    </script>
+}

@@ -1,0 +1,382 @@
+﻿@model Apparent.Model.ProductMaster
+@{
+    ViewBag.Title = "product_earnings";
+}
+<div class="user_page">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 pt-3 m_h" style="box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);">
+                <div class="profile-pic-wrapper">
+                    <div class="pic-holder">
+                        <img id="profilePic" class="pic" src="@(Session["CompanyIcon"]!= ""? Session["CompanyIcon"].ToString():"/Content/Web/images/company.png")">
+                        <Input class="uploadProfileInput" type="file" name="profile_pic" id="newProfilePhoto" accept="image/*" style="opacity: 0;" />
+                        <label for="newProfilePhoto" class="upload-file-block">
+                            <div class="text-center">
+                                <div class="mb-2">
+                                    <i class="fa fa-camera fa-2x"></i>
+                                </div>
+                                <div class="text_uppercase">
+                                    Update <br /> Profile Photo
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                    <h4>@(Session["CompanyName"] != null? Session["CompanyName"].ToString():"")</h4>
+                   
+                </div>
+                <br />
+                <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                  
+                    <a class="nav-link" id="v-pills-profile-tab" href="~/Profile" role="tab" aria-controls="v-pills-profile" aria-selected="false"> <i class="fa-solid fa-address-card"></i> Profile Details </a>
+                    <a class="nav-link" id="v-pills-messages-tab" href="~/Product/review" role="tab" aria-controls="v-pills-messages" aria-selected="false">
+                        <i class="fa fa-star-o" aria-hidden="true"></i> Reviews
+                    </a>
+                    <a class="nav-link" id="v-pills-products-tab" href="~/Product/Getproducts" role="tab" aria-controls="v-pills-products" aria-selected="false"> <i class="fa fa-cog" aria-hidden="true"></i> Products </a>
+                    <a class="nav-link" id="v-pills-products-tab" href="~/Category/Index" role="tab" aria-controls="v-pills-products" aria-selected="false"> <i class="fa fa-th-large" aria-hidden="true"></i> Category </a>
+                    <a class="nav-link active" id="v-pills-products-tab" href="~/Sales/Index" role="tab" aria-controls="v-pills-products" aria-selected="false"><i class="fa fa-line-chart" aria-hidden="true"></i> Sales </a>
+                </div>
+            </div>
+            <!-- /.col -->
+
+            <div class="col-md-9" id="salesdetails">
+                <div class="tab-content" id="v-pills-tabContent">
+                   
+                    <!-- /.tab-pane -->
+                    <div class="card tab-pane fade active" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+                        <a data-toggle="collapse" href="#v-collapse-messages" aria-expanded="false" aria-controls="v-collapse-messages">
+                            <div class="card-header" role="tab" id="v-collapse-heading-messages">Reviews <i class="fa fa-angle-down" aria-hidden="true"></i></div>
+                        </a>
+                        <div id="v-collapse-messages" class="collapse" role="tabpanel" aria-labelledby="v-collapse-heading-messages" data-parent="#v-pills-tabContent">
+                            <div class="card-body">
+                                <!-- // -->
+                                <h4 class="mb-4">Product Earnings</h4>
+
+                                <div class="details_page">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="row align-items-center">
+                                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                                    <div class="center_pic">
+                                                        <img style="width: 100%;" src="@Model.ProductIcon" alt="" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                                    <h2>@Model.ProductName</h2>
+                                                    <h4 class="mt-4">About Product</h4>
+                                                    <p class="para_color">
+                                                        @Model.AboutProduct
+                                                    </p>
+                                                    <h4 class="mt-4">Commission</h4>
+                                                    <p class="para_color">
+                                                        @Model.Mergin%
+                                                    </p>
+
+
+                                                    @* <div class="btnRow"><a href="~/Admin/Approval?productid=@(Model.ProductId)" class="view_btn mr-2">Approval</a> <a href="~/Home/Product" class="view_btn">Rejection</a></div>*@
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- // -->
+                                <div class="details_btm">
+                                    <div class="row">
+                                        <div class="col-md-12 mt-5">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="text-left">Subscription</th>
+                                                        <th>Price</th>
+                                                        <th>Total Tokens</th>
+                                                        <th>Used Tokens</th>
+                                                       
+                                                        <th>Total Earnings</th>
+
+                                                       
+
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                    @{
+
+
+                                                        decimal Sub_Total = 0;
+                                                        decimal Grand_Total = 0;
+
+                                                        for (int i = 0; Model.subscriptions.Count > i; i++)
+                                                        {
+
+                                                            decimal Subscription_price = Model.subscriptions[i].Price;
+                                                            int sold_count = Model.subscriptions[i].Sold_Count;
+                                                            int total_tokens = @Model.subscriptions[i].Token_Count;
+                                                            int Remains_Tokens = total_tokens - sold_count;
+                                                            decimal Tolat_earnings = Subscription_price * sold_count;
+                                                            int commssion = Convert.ToInt32(Model.Mergin);
+                                                            double total_commission = (double)Tolat_earnings * commssion / 100;
+
+                                                            double Earnings = (double)Tolat_earnings - total_commission;
+
+
+                                                            <tr>
+                                                                <td>@Model.subscriptions[i].Plan_Name</td>
+                                                                <td class="text-center">$@Model.subscriptions[i].Price</td>
+                                                                <td class="text-center">@Model.subscriptions[i].Token_Count</td>
+                                                                <td class="text-center">@Model.subscriptions[i].Sold_Count</td>
+                                                                
+                                                                <td class="text-center">$@Earnings</td>
+                                                                
+
+                                                            </tr>
+
+                                                            Sub_Total += (decimal)Earnings;
+
+                                                           
+
+                                                        }
+
+                                                        <tr>
+                                                            <td scope="row"></td>
+                                                            <td colspan="1"></td>
+                                                            <td><b></b></td>
+                                                            
+
+                                                            <td class="fs_13 text-center"><b>Total</b></td>
+                                                            <td class="fs_13 text-center"><b>$@Sub_Total</b></td>
+                                                            
+                                                        </tr>
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.tab-pane -->
+                   
+                </div>
+                <!-- /.tab-pane -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.21.0/slimselect.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
+
+
+
+<!--  progress script -->
+<script>
+    const progress = document.querySelector(".progress-done");
+
+    progress.style.width = progress.getAttribute("data-done") + "%";
+    progress.style.opacity = 1;
+</script>
+
+<!--  tab script -->
+<script>
+    const tabsBtns = Array.from(document.querySelectorAll("[data-tab-id]"));
+    const tabs = Array.from(document.querySelectorAll("[data-tab]"));
+
+    let selectedTab = tabsBtns[0].dataset.tabId;
+
+    const hideTabs = () => {
+        tabs
+            .filter((tab) => tab.dataset.tab !== selectedTab)
+            .forEach((tab) => {
+                tab.classList.add("tabs__tab--hide");
+            });
+
+        tabsBtns
+            .filter((tab) => tab.dataset.tabId !== selectedTab)
+            .forEach((tab) => {
+                tab.classList.add("tabs__tab-btn--not-selected");
+            });
+    };
+    hideTabs();
+
+    const handleSelectTab = (e) => {
+        selectedTab = e.target.dataset.tabId;
+
+        tabs.forEach((tab) => {
+            tab.classList.remove("tabs__tab--hide");
+        });
+
+        tabsBtns.forEach((tab) => {
+            tab.classList.remove("tabs__tab-btn--not-selected");
+        });
+
+        hideTabs();
+    };
+
+    tabsBtns.forEach((btn) => {
+        btn.addEventListener("click", handleSelectTab);
+    });
+
+</script>
+
+<script>
+    $(document).on("change", ".uploadProfileInput", function () {
+        var triggerInput = this;
+        var currentImg = $(this).closest(".pic-holder").find(".pic").attr("src");
+        var holder = $(this).closest(".pic-holder");
+        var wrapper = $(this).closest(".profile-pic-wrapper");
+        $(wrapper).find('[role="alert"]').remove();
+        triggerInput.blur();
+        var files = !!this.files ? this.files : [];
+        if (!files.length || !window.FileReader) {
+            return;
+        }
+        if (/^image/.test(files[0].type)) {
+            // only image file
+            var reader = new FileReader(); // instance of the FileReader
+            reader.readAsDataURL(files[0]); // read the local file
+
+            reader.onloadend = function () {
+                $(holder).addClass("uploadInProgress");
+                $(holder).find(".pic").attr("src", this.result);
+                $(holder).append(
+                    '<div class="upload-loader"><div class="spinner-border text-primary" role="status"><span class="sr-only">Loading...</span></div></div>'
+                );
+
+                // Dummy timeout; call API or AJAX below
+                setTimeout(() => {
+                    $(holder).removeClass("uploadInProgress");
+                    $(holder).find(".upload-loader").remove();
+                    // If upload successful
+                    if (Math.random() < 0.9) {
+                        $(wrapper).append(
+                            '<div class="snackbar show" role="alert"><i class="fa fa-check-circle text-success"></i> Profile image updated successfully</div>'
+                        );
+
+                        // Clear input after upload
+                        $(triggerInput).val("");
+
+                        setTimeout(() => {
+                            $(wrapper).find('[role="alert"]').remove();
+                        }, 3000);
+                    } else {
+                        $(holder).find(".pic").attr("src", currentImg);
+                        $(wrapper).append(
+                            '<div class="snackbar show" role="alert"><i class="fa fa-times-circle text-danger"></i> There is an error while uploading! Please try again later.</div>'
+                        );
+
+                        // Clear input after upload
+                        $(triggerInput).val("");
+                        setTimeout(() => {
+                            $(wrapper).find('[role="alert"]').remove();
+                        }, 3000);
+                    }
+                }, 1500);
+            };
+        } else {
+            $(wrapper).append(
+                '<div class="alert alert-danger d-inline-block p-2 small" role="alert">Please choose the valid image.</div>'
+            );
+            setTimeout(() => {
+                $(wrapper).find('role="alert"').remove();
+            }, 3000);
+        }
+    });
+
+</script>
+<script>
+    function productremove(id) {
+        const fd = new FormData();
+        fd.append('productid', id);
+
+
+
+
+        swal({
+            title: "Are you sure?",
+            text: "you want to remove this product!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes",
+            cancelButtonText: "No",
+            closeOnConfirm: true,
+            closeOnCancel: true,
+        },
+            function (isConfirm) {
+                if (isConfirm) {
+
+                    $.ajax({
+                        url: '/Product/Remove',
+                        method: 'POST',
+                        async: true,
+                        contentType: false,
+                        cache: false,
+                        processData: false,
+                        data: fd,
+                        success: function (data, textStatus, xhr) {
+                            debugger;
+                            if (data.code == 200) {
+                                swal({
+                                    title: "Success",
+                                    text: data.msg,
+                                    type: "success"
+                                }, function () {
+                                    window.location.reload();
+                                });
+                            }
+                            else if (data.code == 400) {
+                                swal({
+                                    title: "Oops!",
+                                    text: data.msg,
+                                    type: "error"
+                                });
+                            }
+                            else if (data.code == 500) {
+                                swal({
+                                    title: "Oops!",
+                                    text: data.msg,
+                                    type: "error"
+                                }, function () {
+                                    var url = "/SignIn"
+                                    window.location = url;
+                                });
+                            }
+
+                        },
+                        error: function (xhr, textStatus, errorThrown) {
+
+                            swal({
+                                title: "Oops!",
+                                text: "Something  wrong!",
+                                type: "error"
+                            });
+                        }
+                    });
+
+
+                }
+
+
+            });
+
+    }
+</script>
+@if (TempData["updatemsg"] != null && TempData["updatemsg"].ToString() == "Product updated successful")
+{
+
+    <script>
+
+        swal({
+            title: "Success",
+            text: "Product updated successful",
+            type: "success"
+        })
+    </script>
+
+}
+

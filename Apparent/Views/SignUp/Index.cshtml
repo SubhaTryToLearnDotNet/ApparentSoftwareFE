@@ -1,0 +1,606 @@
+﻿@{
+    Layout = null;
+    int currentYear = DateTime.Now.Year;
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE" />
+    <title>Apparent</title>
+    <link href="~/Content/Web/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/Web/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="~/Content/Web/css/all.css" rel="stylesheet" type="text/css" media="all" />
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.21.0/slimselect.css" rel="stylesheet" type="text/css" />
+    <!-- <link href="assets/css/font-awesome.min.css" rel="stylesheet" type="text/css"/> -->
+    <link href="~/Content/web/css/responsive.css" rel="stylesheet" type="text/css" />
+ 
+    <script src="https://kit.fontawesome.com/91cafd3f0a.js" crossorigin="anonymous"></script>
+    <link rel="shortcut icon" type="image/png" href="~/Content/Web/images/favi.png">
+   
+    <style>
+        select-wrapper {
+            position: relative;
+        }
+
+        .select-wrapper select {
+            width: calc(100% - 35px); /* Increase width to accommodate the arrow */
+            padding: 10px 10px 10px 40px; /* Increase right padding to accommodate the arrow */
+            border-radius: 5px;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-color: #fff;
+            z-index: 1; /* Ensure select is above the arrow */
+        }
+
+            .select-wrapper select:focus {
+                outline: none;
+            }
+
+        .select-wrapper::after {
+            content: '\25BC';
+            position: absolute;
+            top: 50%;
+            right: 10px; /* Adjust the distance of the arrow from the select element */
+            transform: translateY(-50%);
+            pointer-events: none;
+            z-index: 0; /* Ensure arrow is below the select */
+        }
+
+    </style>
+</head>
+<body>
+    <!-- ====================================================================================================
+      start signin
+    ====================================================================================================== -->
+    @*<section class="signin">
+            <div class="container">
+                <a href="~/Home"> <img src="~/Content/Web/images/main_logo.png" class="mb-4" alt="" /> </a>
+                <div class="row align-items-center">
+                    <div class="col-lg-7 col-md-6 col-12">
+                        <img src="~/Content/Web/images/signin.png" alt="" />
+                    </div>
+                    <div class="col-lg-5 col-md-6 col-12">
+                        <div class="signin_right">
+                            <h2 class="heading02">Seller Sign Up</h2>
+
+                            <form id="frm1" method="post" action="~/SignUp/Submit" enctype="multipart/form-data">
+
+                                <input type="text" class="field01 field04 rounded-0 mb-3" placeholder="Company" name="CompanyName" id="CompanyName" />
+                                <input type="text" class="field01 field04 rounded-0 mb-3" placeholder="Company Email" name="CompanyEmail" id="CompanyEmail" />
+
+                                <input id="Password" type="password" class="field01 field04 rounded-0 mb-3 eyePadding" name="Password" placeholder="Password" />
+                                <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password1"></span>
+
+                                <input id="Confirmpassword" type="password" class="field01 field04 rounded-0 mb-3 eyePadding" name="Confirmpassword" placeholder="Confirm Password" />
+                                <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password2"></span>
+
+
+                                <button type="button" id="Btn01" onclick="fromvaild()" class="submit01 save_btn w-100 mt-0 mb-3" style="float: none;">Sign Up</button>
+
+
+                            </form>
+                        </div>
+                        <p class="paragraph">Copyright &copy; @currentYear.ToString() Apparent. All Rights Reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </section>*@
+    <section class="signinNew">
+        <div class="container">
+            <a href="/Home"> <img class="signinNewlogo" src="~/Content/Web/images/Apparent-Software-Colored-H-200px.png" alt="" /> </a>
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-md-6 col-12">
+                    <img src="~/Content/Web/images/Seller_SigmUp_Pic01.jpg" alt="" />
+                    <span class="terms createAccount"><a href="/SignIn">I have already an account</a></span>
+                </div>
+                <div class="col-lg-6 col-md-6 col-12">
+                    <div class="signinNew_right">
+                        <h2 class="heading02">Seller Registration</h2>
+                        <form id="frm1" action="~/SignUp/submit" method="post" enctype="multipart/form-data">
+                            <div class="txt_field">
+                                <input type="text" name="CompanyName" id="CompanyName" placeholder="Company Name" required />
+                                <span></span>
+                                <i class="fas fa-building"></i>
+                            </div>
+                            <div class="txt_field">
+                                <input type="text" id="CompanyEmail" name="CompanyEmail" placeholder="Email" required />
+                                <span></span>
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="txt_field">
+                                <div class="select-wrapper">
+                                    <select id="Country" name="Country" required>
+                                        <option value="">Select Country</option>
+                                        <option value="AF/AFG">Afghanistan</option>
+                                        <option value="AL/ALB">Albania</option>
+                                        <option value="DZ/DZA">Algeria</option>
+                                        <option value="AS/ASM">American Samoa</option>
+                                        <option value="AD/AND">Andorra</option>
+                                        <option value="AO/AGO">Angola</option>
+                                        <option value="AI/AIA">Anguilla</option>
+                                        <option value="AQ/ATA">Antarctica</option>
+                                        <option value="AG/ATG">Antigua and Barbuda</option>
+                                        <option value="AR/ARG">Argentina</option>
+                                        <option value="AM/ARM">Armenia</option>
+                                        <option value="AW/ABW">Aruba</option>
+                                        <option value="AU/AUS">Australia</option>
+                                        <option value="AT/AUT">Austria</option>
+                                        <option value="AZ/AZE">Azerbaijan</option>
+                                        <option value="BS/BHS">Bahamas</option>
+                                        <option value="BH/BHR">Bahrain</option>
+                                        <option value="BD/BGD">Bangladesh</option>
+                                        <option value="BB/BRB">Barbados</option>
+                                        <option value="BY/BLR">Belarus</option>
+                                        <option value="BE/BEL">Belgium</option>
+                                        <option value="BZ/BLZ">Belize</option>
+                                        <option value="BJ/BEN">Benin</option>
+                                        <option value="BM/BMU">Bermuda</option>
+                                        <option value="BT/BTN">Bhutan</option>
+                                        <option value="BO/BOL">Bolivia</option>
+                                        <option value="BA/BIH">Bosnia and Herzegovina</option>
+                                        <option value="BW/BWA">Botswana</option>
+                                        <option value="BR/BRA">Brazil</option>
+                                        <option value="IO/IOT">British Indian Ocean Territory</option>
+                                        <option value="BN/BRN">Brunei</option>
+                                        <option value="BG/BGR">Bulgaria</option>
+                                        <option value="BF/BFA">Burkina Faso</option>
+                                        <option value="BI/BDI">Burundi</option>
+                                        <option value="VG/VGB">British Virgin Islands</option>
+                                        <option value="KH/KHM">Cambodia</option>
+                                        <option value="CM/CMR">Cameroon</option>
+                                        <option value="CA/CAN">Canada</option>
+                                        <option value="CV/CPV">Cape Verde</option>
+                                        <option value="KY/CYM">Cayman Islands</option>
+                                        <option value="CF/CAF">Central African Republic</option>
+                                        <option value="TD/TCD">Chad</option>
+                                        <option value="CL/CHL">Chile</option>
+                                        <option value="CN/CHN">China</option>
+                                        <option value="CX/CXR">Christmas Island</option>
+                                        <option value="CC/CCK">Cocos (Keeling) Islands</option>
+                                        <option value="CO/COL">Colombia</option>
+                                        <option value="KM/COM">Comoros</option>
+                                        <option value="Congo">Congo</option>
+                                        <option value="CK/COK">Cook Islands</option>
+                                        <option value="CR/CRI">Costa Rica</option>
+                                        <option value="Cote D'ivoire">Cote D'ivoire</option>
+                                        <option value="HR/HRV">Croatia</option>
+                                        <option value="CU/CUB">Cuba</option>
+                                        <option value="CY/CYP">Cyprus</option>
+                                        <option value="CZ/CZE">Czech Republic</option>
+                                        <option value="DK/DNK">Denmark</option>
+                                        <option value="DJ/DJI">Djibouti</option>
+                                        <option value="DM/DMA">Dominica</option>
+                                        <option value="DO/DOM">Dominican Republic</option>
+                                        <option value="EC/ECU">Ecuador</option>
+                                        <option value="EG/EGY">Egypt</option>
+                                        <option value="SV/SLV">El Salvador</option>
+                                        <option value="GQ/GNQ">Equatorial Guinea</option>
+                                        <option value="ER/ERI">Eritrea</option>
+                                        <option value="EE/EST">Estonia</option>
+                                        <option value="ET/ETH">Ethiopia</option>
+                                        <option value="FK/FLK">Falkland Islands (Malvinas)</option>
+                                        <option value="FO/FRO">Faroe Islands</option>
+                                        <option value="FJ/FJI">Fiji</option>
+                                        <option value="FI/FIN">Finland</option>
+                                        <option value="FR/FRA">France</option>
+                                        <option value="French Guiana">French Guiana</option>
+                                        <option value="PF/PYF">French Polynesia</option>
+                                        <option value="GA/GAB">Gabon</option>
+                                        <option value="GM/GMB">Gambia</option>
+                                        <option value="GE/GEO">Georgia</option>
+                                        <option value="DE/DEU">Germany</option>
+                                        <option value="GH/GHA">Ghana</option>
+                                        <option value="GI/GIB">Gibraltar</option>
+                                        <option value="GR/GRC">Greece</option>
+                                        <option value="GL/GRL">Greenland</option>
+                                        <option value="GD/GRD">Grenada</option>
+                                        <option value="GU/GUM">Guam</option>
+                                        <option value="GT/GTM">Guatemala</option>
+                                        <option value="GN/GIN">Guinea</option>
+                                        <option value="GW/GNB">Guinea-bissau</option>
+                                        <option value="GY/GUY">Guyana</option>
+                                        <option value="HT/HTI">Haiti</option>
+                                        <option value="HN/HND">Honduras</option>
+                                        <option value="HK/HKG">Hong Kong</option>
+                                        <option value="HU/HUN">Hungary</option>
+                                        <option value="IS/ISL">Iceland</option>
+                                        <option value="IN/IND">India</option>
+                                        <option value="ID/IDN">Indonesia</option>
+                                        <option value="IR/IRN">Iran, Islamic Republic of</option>
+                                        <option value="IQ/IRQ">Iraq</option>
+                                        <option value="IE/IRL">Ireland</option>
+                                        <option value="IL/ISR">Israel</option>
+                                        <option value="IT/ITA">Italy</option>
+                                        <option value="JM/JAM">Jamaica</option>
+                                        <option value="JP/JPN">Japan</option>
+                                        <option value="JO/JOR">Jordan</option>
+                                        <option value="KG/KGZ">Kazakhstan</option>
+                                        <option value="KE/KEN">Kenya</option>
+                                        <option value="KI/KIR">Kiribati</option>
+                                        <option value="KW/KWT">Kuwait</option>
+                                        <option value="KG/KGZ">Kyrgyzstan</option>
+                                        <option value="LA/LAO">Laos</option>
+                                        <option value="LV/LVA">Latvia</option>
+                                        <option value="LB/LBN">Lebanon</option>
+                                        <option value="LS/LSO">Lesotho</option>
+                                        <option value="LR/LBR">Liberia</option>
+                                        <option value="LY/LBY">Libya</option>
+                                        <option value="LI/LIE">Liechtenstein</option>
+                                        <option value="LT/LTU">Lithuania</option>
+                                        <option value="LU/LUX">Luxembourg</option>
+                                        <option value="MO/MAC">Macau</option>
+                                        <option value="MK/MKD">Macedonia, The Former Yugoslav Republic of</option>
+                                        <option value="MG/MDG">Madagascar</option>
+                                        <option value="MW/MWI">Malawi</option>
+                                        <option value="MY/MYS">Malaysia</option>
+                                        <option value="MV/MDV">Maldives</option>
+                                        <option value="ML/MLI">Mali</option>
+                                        <option value="MT/MLT">Malta</option>
+                                        <option value="MH/MHL">Marshall Islands</option>
+                                        <option value="MR/MRT">Mauritania</option>
+                                        <option value="MU/MUS">Mauritius</option>
+                                        <option value="YT/MYT">Mayotte</option>
+                                        <option value="MX/MEX">Mexico</option>
+                                        <option value="FM/FSM">Micronesia, Federated States of</option>
+                                        <option value="MD/MDA">Moldova, Republic of</option>
+                                        <option value="MC/MCO">Monaco</option>
+                                        <option value="MN/MNG">Mongolia</option>
+                                        <option value="ME/MNE">Montenegro</option>
+                                        <option value="MS/MSR">Montserrat</option>
+                                        <option value="MA/MAR">Morocco</option>
+                                        <option value="MZ/MOZ">Mozambique</option>
+                                        <option value="MM/MMR">Myanmar</option>
+                                        <option value="NA/NAM">Namibia</option>
+                                        <option value="NR/NRU">Nauru</option>
+                                        <option value="NP/NPL">Nepal</option>
+                                        <option value="AN/ANT">Netherlands</option>
+                                        <option value="AN/ANT">Netherlands Antilles</option>
+                                        <option value="NC/NCL">New Caledonia</option>
+                                        <option value="NZ/NZL">New Zealand</option>
+                                        <option value="NI/NIC">Nicaragua</option>
+                                        <option value="NE/NER">Niger</option>
+                                        <option value="NG/NGA">Nigeria</option>
+                                        <option value="NU/NIU">Niue</option>
+                                        <option value="KP/PRK">North Korea</option>
+                                        <option value="MP/MNP">Northern Mariana Islands</option>
+                                        <option value="NO/NOR">Norway</option>
+                                        <option value="OM/OMN">Oman</option>
+                                        <option value="PK/PAK">Pakistan</option>
+                                        <option value="PW/PLW">Palau</option>
+                                        <option value="PS/PSE">Palestinian Territory, Occupied</option>
+                                        <option value="PA/PAN">Panama</option>
+                                        <option value="PG/PNG">Papua New Guinea</option>
+                                        <option value="PY/PRY">Paraguay</option>
+                                        <option value="PE/PER">Peru</option>
+                                        <option value="PH/PHL">Philippines</option>
+                                        <option value="PN/PCN">Pitcairn</option>
+                                        <option value="PL/POL">Poland</option>
+                                        <option value="PT/PRT">Portugal</option>
+                                        <option value="PR/PRI">Puerto Rico</option>
+                                        <option value="QA/QAT">Qatar</option>
+                                        <option value="CG/COG">Republic of the Congo</option>
+                                        <option value="RE/REU">Reunion</option>
+                                        <option value="RO/ROU">Romania</option>
+                                        <option value="RU/RUS">Russian Federation</option>
+                                        <option value="RW/RWA">Rwanda</option>
+                                        <option value="SH/SHN">Saint Helena</option>
+                                        <option value="KN/KNA">Saint Kitts and Nevis</option>
+                                        <option value="LC/LCA">Saint Lucia</option>
+                                        <option value="PM/SPM">Saint Pierre and Miquelon</option>
+                                        <option value="VC/VCT">Saint Vincent and The Grenadines</option>
+                                        <option value="WS/WSM">Samoa</option>
+                                        <option value="SM/SMR">San Marino</option>
+                                        <option value="ST/STP">Sao Tome and Principe</option>
+                                        <option value="SA/SAU">Saudi Arabia</option>
+                                        <option value="SN/SEN">Senegal</option>
+                                        <option value="RS/SRB">Serbia and Montenegro</option>
+                                        <option value="SC/SYC">Seychelles</option>
+                                        <option value="SL/SLE">Sierra Leone</option>
+                                        <option value="SG/SGP">Singapore</option>
+                                        <option value="SK/SVK">Slovakia</option>
+                                        <option value="SI/SVN">Slovenia</option>
+                                        <option value="SB/SLB">Solomon Islands</option>
+                                        <option value="SO/SOM">Somalia</option>
+                                        <option value="ZA/ZAF">South Africa</option>
+                                        <option value="KR/KOR">South Korea</option>
+                                        <option value="SS/SSD">South Sudan</option>
+                                        <option value="ES/ESP">Spain</option>
+                                        <option value="LK/LKA">Sri Lanka</option>
+                                        <option value="SD/SDN">Sudan</option>
+                                        <option value="SR/SUR">Suriname</option>
+                                        <option value="SJ/SJM">Svalbard and Jan Mayen</option>
+                                        <option value="SZ/SWZ">Swaziland</option>
+                                        <option value="SE/SWE">Sweden</option>
+                                        <option value="CH/CHE">Switzerland</option>
+                                        <option value="SY/SYR">Syria</option>
+                                        <option value="TW/TWN">Taiwan, Province of China</option>
+                                        <option value="TJ/TJK">Tajikistan</option>
+                                        <option value="TZ/TZA">Tanzania</option>
+                                        <option value="TH/THA">Thailand</option>
+                                        <option value="TG/TGO">Togo</option>
+                                        <option value="TK/TKL">Tokelau</option>
+                                        <option value="TO/TON">Tonga</option>
+                                        <option value="TT/TTO">Trinidad and Tobago</option>
+                                        <option value="TN/TUN">Tunisia</option>
+                                        <option value="TR/TUR">Turkey</option>
+                                        <option value="TM/TKM">Turkmenistan</option>
+                                        <option value="TC/TCA">Turks and Caicos Islands</option>
+                                        <option value="TV/TUV">Tuvalu</option>
+                                        <option value="UG/UGA">Uganda</option>
+                                        <option value="UA/UKR">Ukraine</option>
+                                        <option value="AE/ARE">United Arab Emirates</option>
+                                        <option value="GB/GBR">United Kingdom</option>
+                                        <option value="US/USA">United States</option>
+                                        <option value="UY/URY">Uruguay</option>
+                                        <option value="UZ/UZB">Uzbekistan</option>
+                                        <option value="VU/VUT">Vanuatu</option>
+                                        <option value="VE/VEN">Venezuela</option>
+                                        <option value="VN/VNM">Vietnam</option>
+                                        <option value="WF/WLF">Wallis and Futuna</option>
+                                        <option value="EH/ESH">Western Sahara</option>
+                                        <option value="YE/YEM">Yemen</option>
+                                        <option value="ZM/ZMB">Zambia</option>
+                                        <option value="ZW/ZWE">Zimbabwe</option>
+
+                                    </select>
+                                    <span></span>
+                                    <i class="fas fa-globe"></i>
+                                </div>
+                                </div>
+                                <div class="txt_field">
+                                    <input type="password" id="Password" name="Password" placeholder="Password" required />
+                                    <span></span>
+                                    <i class="fas fa-lock toggle-password" data-target="Password"></i>
+                                </div>
+                                <span class="red charlength_validate">
+                                    Password must be minimum of 8 characters
+                                </span>
+                                <span class="red capital_validate">
+                                    Password must include at-least one uppercase letter e.g.
+                                    ABC
+                                </span>
+                                <span class="red smallcase_validate">
+                                    Password must include at-least one lowercase letter e.g. abc
+                                </span>
+                                <span class="red numeric_validate">Password must include at-least one number e.g. 123 </span>
+                                <span class="red special_validate">Password must include at-least one symbol e.g. @@!#$? </span>
+                                <div class="txt_field">
+                                    <input type="password" id="Confirmpassword" name="Confirmpassword" placeholder="Repeat Your Password" required />
+                                    <span></span>
+                                    <i class="fas fa-lock toggle-password" data-target="Confirmpassword"></i>
+                                </div>
+                                <span class="red cnfrm_and_check">
+                                    Password and Repeat password must need to matched
+                                </span>
+                                <input type="button" onclick="fromvaild()" value="Register" />
+</form>
+                    </div>
+                    <p class="paragraph">Copyright &copy; @currentYear.ToString() Apparent. All Rights Reserved.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================================================================================================
+      start script
+    ====================================================================================================== -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="~/Content/Web/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Content/Web/js/myScript.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
+</body>
+</html>
+<script>
+    function fromvaild() {
+
+        var CompanyName = $("#CompanyName").val();
+        //var LastName = $("#LastName").val();
+        var CompanyEmail = $("#CompanyEmail").val();
+        /*  var Contact = $("#Contact").val();*/
+        var Password = $("#Password").val();
+        /*   var Country = $("#Country").val()*/
+        var Confirmpassword = $("#Confirmpassword").val();
+        var mailformat = /^(([^<>()[\]\\.,;:\s@@\"]+(\.[^<>()[\]\\.,;:\s@@\"]+)*)|(\".+\"))@@((\[[0-9]{1, 3}\.[0-9]{1, 3}\.[0-9]{1, 3}\.[0-9]{1, 3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+        if (CompanyName == "") {
+
+            swal({
+                title: "Information!",
+                text: "Please enter company name",
+                type: "info"
+            });
+        }
+        else if (CompanyEmail == "") {
+            swal({
+                title: "Information!",
+                text: "Please enter email",
+                type: "info"
+            });
+
+        }
+        else if (!mailformat.test(CompanyEmail)) {
+            swal({
+                title: "Information!",
+                text: "Enter a valid email",
+                type: "info"
+            });
+
+        }
+        else if ($("#Country").val() == "") {
+            swal({
+                title: "Information!",
+                text: "Select your country",
+                type: "info"
+            });
+
+        }
+
+        else if (Password == "") {
+            swal({
+                title: "Information!",
+                text: "Please enter Password",
+                type: "info"
+            });
+
+        }
+        else if (Confirmpassword == "") {
+            swal({
+                title: "Information!",
+                text: "Please repeat your password",
+                type: "info"
+            });
+
+        }
+        else if (Confirmpassword != Password) {
+            swal({
+                title: "Information!",
+                text: "Password doesn't match",
+                type: "info"
+            });
+
+        }
+        else {
+            
+                $("#frm1").submit();
+            
+        }
+
+    }
+    
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const togglePasswordIcons = document.querySelectorAll(".toggle-password");
+
+        togglePasswordIcons.forEach(icon => {
+            icon.addEventListener("click", function () {
+                const targetId = this.getAttribute("data-target");
+                const targetInput = document.getElementById(targetId);
+              
+                if (targetInput.type === "password") {
+                  
+                    targetInput.type = "text";
+                    this.classList.remove("fa-lock");
+                    this.classList.add("fa-unlock-alt");
+                } else {
+                    
+                    targetInput.type = "password";
+                    this.classList.remove("fa-unlock-alt");
+                    this.classList.add("fa-lock");
+                }
+            });
+        });
+    });
+</script>
+<script>
+
+    document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById('Password').addEventListener('keyup', validatePassword);
+        document.getElementById('Confirmpassword').addEventListener('keyup', validatePassword);
+    });
+    function validatePassword() {
+        var password = document.getElementById('Password').value;
+        var confirmPassword = document.getElementById('Confirmpassword').value;
+        var charLengthError = document.querySelector('.charlength_validate');
+        var capitalError = document.querySelector('.capital_validate');
+        var smallcaseError = document.querySelector('.smallcase_validate');
+        var numericError = document.querySelector('.numeric_validate');
+        var specialError = document.querySelector('.special_validate');
+        var confirmPasswordError = document.querySelector('.cnfrm_and_check');
+
+        charLengthError.style.display = 'none';
+        capitalError.style.display = 'none';
+        smallcaseError.style.display = 'none';
+        numericError.style.display = 'none';
+        specialError.style.display = 'none';
+        confirmPasswordError.style.display = 'none';
+
+        if (password === '') {
+            return;
+        }
+
+        if (password !== confirmPassword && confirmPassword.length > 0) {
+            confirmPasswordError.style.display = 'block';
+            return;
+        }
+        var minLength = 8;
+        var hasUpperCase = /[A-Z]/.test(password);
+        var hasLowerCase = /[a-z]/.test(password);
+        var hasNumber = /\d/.test(password);
+        var hasSpecialChar = /[!@@#$%^&*(),.?":{}|<>]/.test(password);
+
+        if (password.length < minLength) {
+            charLengthError.style.display = 'block';
+        }
+
+        if (!hasUpperCase) {
+            capitalError.style.display = 'block';
+        }
+
+        if (!hasLowerCase) {
+            smallcaseError.style.display = 'block';
+        }
+
+        if (!hasNumber) {
+            numericError.style.display = 'block';
+        }
+
+        if (!hasSpecialChar) {
+            specialError.style.display = 'block';
+        }
+    }
+</script>
+
+@if (TempData["SignUpMSG"] != null && TempData["SignUpMSG"].ToString() == "Selller Signup Successful")
+{
+    <script>
+        swal({
+            title: "Success",
+            text: "Selller signup successful",
+            type: "success"
+        });
+    </script>
+}
+@if (TempData["SignUpExistsMSG"] != null && TempData["SignUpExistsMSG"].ToString() == "Selller Already Exists")
+{
+    <script>
+        swal({
+            title: "Oops!",
+            text: "Seller already exists",
+            type: "error"
+        });
+    </script>
+}
+@if (TempData["ErrorMsg"] != null && TempData["ErrorMsg"].ToString() == "Username  or password does not match")
+{
+    <script>
+        swal({
+            title: "Oops!",
+            text: "Username or password does not match",
+            type: "error"
+        });
+    </script>
+}
+
+@if (ViewBag.Message != null)
+{
+    <script>
+        swal({
+            title: "Oops!",
+            text: "@ViewBag.Message",
+            type: "error"
+        });
+    </script>
+
+}
+
+

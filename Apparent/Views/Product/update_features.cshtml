@@ -1,0 +1,892 @@
+﻿@model ViewModel
+<style type="text/css">
+    .features_row .fa-plus-circle {
+        font-size: 18px;
+        color: #0193D9;
+        vertical-align: text-bottom
+        /*float: right;
+                position: absolute;
+                right: 20px;
+                top: 5px;*/;
+    }
+
+    .features_row .fa-times-circle {
+        font-size: 18px;
+        color: red;
+        margin-left: 10px;
+    }
+
+    .features_row .field04 {
+        padding: 5px 10px 5px 10px;
+        margin-bottom: 15px;
+        width: 45%;
+    }
+
+    .form-group {
+        position: relative;
+    }
+
+    .form_box01 {
+        width: 100%;
+        margin-top: 0px;
+    }
+
+    .add_field_button, .add_field_button02, .add_field_button03 {
+        padding: 0;
+        margin: 0 0 10px 15px;
+        /*position: absolute;
+        right: 20px;
+        top: 160px;*/
+        background-color: transparent;
+    }
+
+    .input_fields_wrap .remove_field {
+        position: relative;
+        z-index: 11;
+    }
+
+    .input_margin {
+        margin-bottom: 5px !important;
+    }
+</style>
+
+@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="row text-center">
+        <div class="loader_box" id="loder01">
+            <div class="d-flex justify-content-center align-items-center ">
+                <div class="loader-content">
+                    <div class="loader_title">Please Wait</div>
+                    <div class="loader--spinner">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="banner" style="background-position: 0px 350px;">
+    <div class="container">
+        <!--<div class="row align-items-center">
+        <div class="col-lg-5 col-md-6 col-12 order-2 order-md-1 mt_05">
+            <h1 class="heading01">Welcome!</h1>
+            <p class="paragraph banner_para">You are just a few steps away, Please fill out the required information fields to start selling</p>
+            <p class="paragraph small_para">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+            <a href="#" class="request_btn mt-3">Contact Us</a>
+        </div>-->
+        <!-- // -->
+        <!--<div class="col-lg-7 col-md-6 col-12 order-1 order-md-2">
+                <img src="~/Content/Web/Images/seller_banner03.png" alt="" />
+            </div>
+        </div>-->
+        <!-- // -->
+        @if (@Model.productMaster.FeaturesComment != null)
+        {
+            <div class="features_row" style="background-color: #0193d9b8; ">
+                <h6 class="text-white">Admin suggestion</h6>
+
+                <p class="paragraph text-white" style="font-size: 14px;">@Model.productMaster.FeaturesComment</p>
+
+
+            </div>
+        }
+        <div class="features_row">
+            <div class="row">
+                <div class="col-lg-12">
+                    <ul class="progressbar">
+                        <li class="active">Product Details</li>
+                        <li>Features</li>
+                        <li>Pricing/Packages</li>
+                    </ul>
+                </div>
+            </div>
+            <h5>Product Features</h5>
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-12">
+                    <h6>Feature group 1</h6>
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-12">
+                            <div class="form-group">
+                                <input type="checkbox" name="FeatureGroup1" value="Notification alert system" id="check27" />
+                                <label for="check27">Notification alert system</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-12">
+                            <div class="form-group">
+                                <input type="checkbox" name="FeatureGroup1" value="Dark mode" id="check28" />
+                                <label for="check28">Dark mode</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-12">
+                            <div class="form-group">
+                                <input type="checkbox" name="FeatureGroup1" value="Voice recognition" id="check29" />
+                                <label for="check29">Voice recognition</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-12">
+                            <div class="form-group">
+                                <input type="checkbox" name="FeatureGroup1" value="Voice commands" id="check30" />
+                                <label for="check30">Voice commands</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-12">
+                            <div class="form-group">
+                                <input type="checkbox" name="FeatureGroup1" value="Automation" id="check31" />
+                                <label for="check31">Automation</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-12">
+                            <div class="form-group">
+                                <input type="checkbox" name="FeatureGroup1" value="Usability" id="check32" />
+                                <label for="check32">Usability</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-12">
+                            <div class="form-group">
+                                <input type="checkbox" name="FeatureGroup1" value="Safety" id="check33" />
+                                <label for="check33">Safety</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-12">
+                            <div class="form-group">
+                                <input type="checkbox" name="FeatureGroup1" value="Security" id="check34" />
+                                <label for="check34">Security</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-12">
+                            <div class="form-group">
+                                <input type="checkbox" name="FeatureGroup1" value="Portability" id="check35" />
+                                <label for="check35">Portability</label>
+                            </div>
+                        </div>
+                        <div class="form_box01">
+                            <div class="input_fields_wrap" id="addFeatures01">
+                                <button class="add_field_button" id="btn01"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add More</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- // -->
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-12">
+                    <h6>Feature group 2</h6>
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-12">
+                            <div class="form-group">
+                                <input type="checkbox" name="FeatureGroup2" value="An assistant powered by AI " id="check36" />
+                                <label for="check36">An assistant powered by AI </label>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-12">
+                            <div class="form-group">
+                                <input type="checkbox" name="FeatureGroup2" value="Maintainability" id="check37" />
+                                <label for="check37">Maintainability</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-12">
+                            <div class="form-group">
+                                <input type="checkbox" name="FeatureGroup2" value="Usability" id="check38" />
+                                <label for="check38">Usability</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-12">
+                            <div class="form-group">
+                                <input type="checkbox" name="FeatureGroup" value="Search and filter options" id="check39" />
+                                <label for="check39">Search and filter options</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-12">
+                            <div class="form-group">
+                                <input type="checkbox" name="FeatureGroup2" value="Design Vision" id="check40" />
+                                <label for="check40">Design Vision</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-12">
+                            <div class="form-group">
+                                <input type="checkbox" name="FeatureGroup2" value="Technical Architecture" id="check41" />
+                                <label for="check41">Technical Architecture</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-12">
+                            <div class="form-group">
+                                <input type="checkbox" name="FeatureGroup2" value="Digital dash buttons" id="check42" />
+                                <label for="check42">Digital dash buttons</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-12">
+                            <div class="form-group">
+                                <input type="checkbox" name="FeatureGroup2" value="Enrollement Information" id="check43" />
+                                <label for="check43">Enrollement Information</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-12">
+                            <div class="form-group">
+                                <input type="checkbox" name="FeatureGroup2" value="Smart user interface" id="check44" />
+                                <label for="check44">Smart user interface</label>
+                            </div>
+                        </div>
+                        <div class="form_box01">
+                            <div class="input_fields_wrap" id="addFeatures02">
+                                <button class="add_field_button" id="btn02"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add More</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- // -->
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-12">
+                    <h6>Feature group 3</h6>
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-12">
+                            <div class="form-group">
+                                <input type="checkbox" name="FeatureGroup3" value="Customer Service" id="check45" />
+                                <label for="check45">Customer Service</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-12">
+                            <div class="form-group">
+                                <input type="checkbox" name="FeatureGroup3" value="Visual appeal" id="check46" />
+                                <label for="check46">Visual appeal</label>
+                            </div>
+                        </div>
+                        @*<div class="col-lg-4 col-md-4 col-12">
+                            <div class="form-group">
+                                <input type="checkbox" name="FeatureGroup3" value="Select Feature 20" id="check47" />
+                                <label for="check47">Select Feature 20</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-12">
+                            <div class="form-group">
+                                <input type="checkbox" name="FeatureGroup3" value="Select Feature 21" id="check48" />
+                                <label for="check48">Select Feature 21</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-12">
+                            <div class="form-group">
+                                <input type="checkbox" name="FeatureGroup3" value="Select Feature 22" id="check49" />
+                                <label for="check49">Select Feature 22</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-12">
+                            <div class="form-group">
+                                <input type="checkbox" name="FeatureGroup3" value="Select Feature 23" id="check50" />
+                                <label for="check50">Select Feature 23</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-12">
+                            <div class="form-group">
+                                <input type="checkbox" name="FeatureGroup3" value="Select Feature 24" id="check51" />
+                                <label for="check51">Select Feature 24</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-12">
+                            <div class="form-group">
+                                <input type="checkbox" name="FeatureGroup3" value="Select Feature 25" id="check52" />
+                                <label for="check52">Select Feature 25</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-12">
+                            <div class="form-group">
+                                <input type="checkbox" name="FeatureGroup3" value="Select Feature 26" id="check53" />
+                                <label for="check53">Select Feature 26</label>
+                            </div>
+                        </div>*@
+                        <div class="form_box01">
+                            <div class="input_fields_wrap" id="addFeatures03">
+                                <button class="add_field_button" id="btn03"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add More</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <input type="hidden" id="ProductId" name="ProductId" value="@Model.productMaster.ProductId" />
+            </div>
+            @*<div class="row">
+                    <div class="col-lg-12 col-md-12 col-12">
+
+                        <label class="software_label">Comment</label>
+                        <textarea class="field01 field03 rounded-0 mb-0" name="Features_Commentgroup" id="Features_Commentgroup" placeholder="Write here"></textarea>
+
+                    </div>
+                </div>*@
+            <!-- // -->
+        </div>
+        <button type="button" id="submitFeatures" class="submit01 save_btn">Update</button>
+    </div>
+</section>
+<!-- // footer chat box -->
+<button class="open-button" onclick="openForm()"><img src="~/Content/Web/images/comment02.png" alt="" /></button>
+<div class="chat-popup" id="myForm">
+    <form class="form-container">
+        <div class="chathead">
+            <h3>Feature Comments</h3>
+            <button type="button" class="cancel" onclick="closeForm()"><img src="~/Content/Web/images/close.png" alt="" /></button>
+        </div>
+        <div class="chatbody featur">
+            @*<div class="in_avtar">B</div>
+            <div class="incoming">
+                <div class="bubble">
+                    <p>Hey, Father's Day is coming up..</p>
+                </div>
+                <small class="timeSec">01:15 PM</small>
+                <div class="bubble">
+                    <p>What are you getting.. Oh, oops sorry dude.</p>
+                </div>
+                <small class="timeSec">01:15 PM</small>
+            </div>
+            <div class="out_avtar">B</div>
+            <div class="outgoing">
+                <div class="bubble lower">
+                    <p>Nah, it's cool.</p>
+                </div>
+                <small class="timeSec02">01:15 PM</small>
+                <div class="bubble">
+                    <p>Well you should get your Dad a cologne. Here smell it. Oh wait! ...</p>
+                </div>
+                <small class="timeSec02">01:15 PM</small>
+            </div>
+            <div class="in_avtar">B</div>
+            <div class="incoming">
+                <div class="bubble">
+                    <p>Hey, Father's Day is coming up..</p>
+                </div>
+                <div class="bubble">
+                    <p>What are you getting.. Oh, oops sorry dude.</p>
+                </div>
+            </div>
+            <div class="typing">
+                <div class="bubble">
+                    <div class="ellipsis dot_1"></div>
+                    <div class="ellipsis dot_2"></div>
+                    <div class="ellipsis dot_3"></div>
+                </div>
+            </div>*@
+        </div>
+
+        <div class="foot">
+            <input type="hidden" name="features_comment" id="features_comment" />
+            <input type="text" id="txtChatbox" class="msg" placeholder="Type a message..." />
+            <button type="button" onclick="featureschatButtonClick()" class="cmnt_send"><img src="~/Content/Web/images/send.png" alt="" /></button>
+        </div>
+
+        <!-- <label for="msg">Message</label>
+            <textarea placeholder="Type message.." name="msg" required></textarea> -->
+        <!-- <button type="submit" class="btn">Send</button>
+            <button type="button" class="btn cancel" onclick="closeForm()">Close</button> -->
+    </form>
+</div>
+<!-- // footer chat box -->
+
+<div class="container">
+    <!-- The Modal -->
+    <div class="modal" id="successModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <!-- <div class="modal-header">
+                    <h4 class="modal-title">Modal Heading</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div> -->
+                <!-- Modal body -->
+                <div class="modal-body pt_40">
+                    @*<center><img src="assets/images/success.png" alt="" /></center>
+                        <div class="progress mt-4">
+                            <div class="progress-bar progress-bar-danger" style="width: 100%;"></div>
+                        </div>*@
+
+                    <ul class="progressbar">
+                        <li class="active">Product Details</li>
+                        <li class="active">Features</li>
+                        <li>Pricing/Packages</li>
+                    </ul>
+
+                    <h4 class="modal-title text-center mt-4 mb-3">SUCCESS</h4>
+                    <p class="text-center">Features Updated Successful</p>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer pb_50">
+                    <button type="button" class="btn okBtn" onclick="featuresfun()">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
+<script>
+
+
+    $(document).ready(function () {
+        ($("#loder01").css("display", "block"));
+        $("#loder01").hide()
+        $(document).ajaxStart(function () {
+            ($("#loder01").css("display", "block"));
+        });
+
+        $(document).ajaxStop(function () {
+            $("#loder01").hide()
+        });
+
+    })
+
+    var selectfeaturesgroup1 = [];
+
+    var selectfeaturesgroup2 = [];
+    var selectfeaturesgroup3 = [];
+    var addedfeaturesgroup1 = [];
+    var addedfeaturesgroup2 = [];
+    var addedfeaturesgroup3 = [];
+
+    var featurescom = {};
+    var featurescommlist = [];
+</script>
+@{
+    if (Model.productMaster.Features1 != null && Model.productMaster.Features1.Count > 0)
+    {
+        foreach (var items1 in Model.productMaster.Features1)
+        {
+            <script>
+            selectfeaturesgroup1.push('@items1')
+            </script>
+        }
+    }
+
+
+    if (Model.productMaster.Features2 != null && Model.productMaster.Features2.Count > 0)
+    {
+        foreach (var items2 in Model.productMaster.Features2)
+        {
+            <script>
+            selectfeaturesgroup2.push('@items2')
+            </script>
+        }
+    }
+
+    if (Model.productMaster.Features3 != null && Model.productMaster.Features3.Count > 0)
+    {
+        foreach (var items3 in Model.productMaster.Features3)
+        {
+            <script>
+            selectfeaturesgroup3.push('@items3')
+            </script>
+        }
+    }
+    if (Model.productMaster.featuresg1_Added != null && Model.productMaster.featuresg1_Added.Count > 0)
+    {
+        foreach (var items4 in Model.productMaster.featuresg1_Added)
+        {
+            <script>
+            addedfeaturesgroup1.push('@items4')
+            </script>
+        }
+    }
+    if (Model.productMaster.featuresg2_Added != null && Model.productMaster.featuresg2_Added.Count > 0)
+    {
+        foreach (var items5 in Model.productMaster.featuresg2_Added)
+        {
+            <script>
+            addedfeaturesgroup2.push('@items5')
+            </script>
+        }
+    }
+    if (Model.productMaster.featuresg3_Added != null && Model.productMaster.featuresg3_Added.Count > 0)
+    {
+        foreach (var items6 in Model.productMaster.featuresg3_Added)
+        {
+            <script>
+            addedfeaturesgroup3.push('@items6')
+            </script>
+        }
+    }
+
+    foreach (Apparent.Model.Features_Comment features_Comment in Model.productMaster.GetFeatures_Comments)
+    {
+        <script>
+            featurescom = {
+                comments: '@(features_Comment.Comment)',
+                seller_id: '@(features_Comment.Seller_ID)',
+                admin_id: '@(features_Comment.Admin_ID)',
+                time: '@(features_Comment.Comment_Time)'
+            }
+            featurescommlist.push(featurescom);
+
+        </script>
+    }
+
+}
+
+
+<script>
+    $(document).ready(function () {
+        $("input[name = 'FeatureGroup1']").each(function () {
+
+            var checkboxValue = $(this).val()
+            if (selectfeaturesgroup1.includes(checkboxValue)) {
+                $(this).prop('checked', true);
+            } else {
+                $(this).prop('checked', false);
+            }
+
+
+        });
+
+        $("input[name = 'FeatureGroup2']").each(function () {
+
+            var checkboxValue1 = $(this).val()
+            if (selectfeaturesgroup2.includes(checkboxValue1)) {
+                $(this).prop('checked', true);
+            } else {
+                $(this).prop('checked', false);
+            }
+
+
+        });
+        $("input[name = 'FeatureGroup3']").each(function () {
+
+            var checkboxValue2 = $(this).val()
+            if (selectfeaturesgroup3.includes(checkboxValue2)) {
+                $(this).prop('checked', true);
+            } else {
+                $(this).prop('checked', false);
+            }
+
+
+        });
+
+        for (var i = 0; featurescommlist.length > i; i++) {
+
+            var featr = featurescommlist[i];
+        
+            if (featr.admin_id != "") {
+                var swel = document.createElement("div");
+                swel.className = "in_avtar";
+                swel.textContent = "A";
+                var newincoming = document.createElement("div");
+                newincoming.className = "incoming";
+                var newBubble = document.createElement("div");
+                newBubble.className = "bubble";
+                var newP = document.createElement("p");
+                newP.textContent = featr.comments;
+                // Append the new elements to the existing 'incoming' div
+                newBubble.appendChild(newP);
+                newincoming.appendChild(newBubble);
+                document.querySelector(".featur").appendChild(swel);
+                document.querySelector(".featur").appendChild(newincoming);
+            }
+
+
+            else {
+                var avver = document.createElement("div");
+                avver.className = "out_avtar";
+                avver.textContent = "S";
+                var newincoming = document.createElement("div");
+                newincoming.className = "outgoing";
+                var newBubble = document.createElement("div");
+                newBubble.className = "bubble";
+                var newP = document.createElement("p");
+                newP.textContent = featr.comments;
+                // Append the new elements to the existing 'incoming' div
+                newBubble.appendChild(newP);
+                newincoming.appendChild(newBubble);
+                document.querySelector(".featur").appendChild(avver);
+                document.querySelector(".featur").appendChild(newincoming);
+
+            }
+        }
+
+
+    });
+
+    function featureschatButtonClick() {
+        pValues = [];
+        // Create a new div element with the specified content
+        var msg = $("#txtChatbox").val();
+        var avver = document.createElement("div");
+        avver.className = "out_avtar";
+        avver.textContent = "S";
+
+        var newoutgoing = document.createElement("div");
+        newoutgoing.className = "outgoing otgfutres";
+        var newBubble = document.createElement("div");
+        newBubble.className = "bubble";
+
+        var newP = document.createElement("p");
+        newP.textContent = msg;
+
+        // Append the new elements to the existing 'incoming' div
+        newBubble.appendChild(newP);
+        newoutgoing.appendChild(newBubble);
+        document.querySelector(".featur").appendChild(avver);
+        document.querySelector(".featur").appendChild(newoutgoing);
+
+        $(".otgfutres p").each(function () {
+            pValues.push($(this).text());
+        });
+
+        var comtext = pValues.join("~");
+
+        $("#txtChatbox").val("");
+        $("#features_comment").val(comtext);
+     
+        console.log(comtext);
+    }
+</script>
+
+@*//features add*@
+<script>
+    $(document).ready(function () {
+        var max_fields = 6; //maximum input boxes allowed
+        var wrapper = $("#addFeatures01"); //Fields wrapper
+
+        var add_button = $("#btn01"); //Add button ID
+
+        var x = 1; //initlal text box count
+        var y = 1;
+        var z = 1;
+        if (addedfeaturesgroup1.length > 0) {
+            $.each(addedfeaturesgroup1, function (index, value) {
+                $(wrapper).append('<div><span class="form-label"><input type="text" value="' + value + '" name="grop1" class="field01 field04 rounded-0 ml-3" placeholder="Describe" name=""><label for="username"></label></span><a href="#" class="remove_field"><i class="fa fa-times-circle" aria-hidden="true"></i></a></div>'); //add input box
+                x++;
+            })
+        }
+
+        if (addedfeaturesgroup2.length > 0) {
+            $.each(addedfeaturesgroup2, function (index, value) {
+                $("#addFeatures02").append('<div><span class="form-label"><input type="text" value="' + value + '" name="grop2" class="field01 field04 rounded-0 ml-3" placeholder="Describe" name=""><label for="username"></label></span><a href="#" class="remove_field"><i class="fa fa-times-circle" aria-hidden="true"></i></a></div>'); //add input box
+                y++;
+            })
+
+        }
+        if (addedfeaturesgroup3.length > 0) {
+            $.each(addedfeaturesgroup3, function (index, value) {
+                $("#addFeatures03").append('<div><span class="form-label"><input type="text" value="' + value + '" name="grop3" class="field01 field04 rounded-0 ml-3" placeholder="Describe" name=""><label for="username"></label></span><a href="#" class="remove_field"><i class="fa fa-times-circle" aria-hidden="true"></i></a></div>'); //add input box
+                z++;
+            })
+
+        }
+
+
+
+
+
+
+
+        $(add_button).click(function (e) { //on add input button click
+            e.preventDefault();
+            if (x < max_fields) { //max input box allowed
+
+                //text box increment
+                $(wrapper).append('<div><span class="form-label"><input type="text" name="grop1" class="field01 field04 rounded-0 ml-3" placeholder="Describe" name=""><label for="username"></label></span><a href="#" class="remove_field"><i class="fa fa-times-circle" aria-hidden="true"></i></a></div>'); //add input box
+                x++;
+            }
+        });
+
+        $("#btn02").click(function (e) { //on add input button click
+            e.preventDefault();
+            if (y < max_fields) { //max input box allowed
+
+                //text box increment
+                $("#addFeatures02").append('<div><span class="form-label"><input type="text" name="grop2" class="field01 field04 rounded-0 ml-3" placeholder="Describe" name=""><label for="username"></label></span><a href="#" class="remove_field"><i class="fa fa-times-circle" aria-hidden="true"></i></a></div>'); //add input box
+                y++;
+            }
+        });
+        $("#btn03").click(function (e) { //on add input button click
+            e.preventDefault();
+            if (z < max_fields) { //max input box allowed
+
+                //text box increment
+                $("#addFeatures03").append('<div><span class="form-label"><input type="text" name="grop3" class="field01 field04 rounded-0 ml-3" placeholder="Describe" name=""><label for="username"></label></span><a href="#" class="remove_field"><i class="fa fa-times-circle" aria-hidden="true"></i></a></div>'); //add input box
+                z++;
+            }
+        });
+
+        $(wrapper).on("click", ".remove_field", function (e) { //user click on remove text
+
+            e.preventDefault();
+            $(this).parent('div').remove();
+            x--;
+        })
+
+        $("#addFeatures03").on("click", ".remove_field", function (e) { //user click on remove text
+
+            e.preventDefault();
+            $(this).parent('div').remove();
+            z--;
+        })
+        $("#addFeatures02").on("click", ".remove_field", function (e) { //user click on remove text
+
+            e.preventDefault();
+            $(this).parent('div').remove();
+            y--;
+        })
+    });
+</script>
+@*add features end*@
+<script>
+
+    var locurl;
+    $(document).ready(function () {
+        $("#submitFeatures").click(function () {
+            var arr = [];
+            var arr2 = [];
+            var addfer = [];
+            var arr3 = [];
+
+
+
+            $.each($("input[name='FeatureGroup1']:checked"), function () {
+                arr.push($(this).val());
+            });
+
+            $("input[name='grop1']").each(function () {
+
+                addfer.push($(this).val());
+            })
+            var FeaturesGroup1;
+            var Add_featuresg1;
+            if (arr.length > 0) {
+                FeaturesGroup1 = arr.join("&");
+            }
+            if (addfer.length > 0) {
+                Add_featuresg1 = addfer.join("&")
+            }
+
+            /* 2nd features group*/
+
+
+            var addfer2 = [];
+            $.each($("input[name='FeatureGroup2']:checked"), function () {
+                arr2.push($(this).val());
+            });
+
+            $("input[name='grop2']").each(function () {
+
+                addfer2.push($(this).val());
+            })
+
+            var FeaturesGroup2;
+            var Add_featuresg2
+            if (arr2.length > 0) {
+                FeaturesGroup2 = arr2.join("&")
+            }
+            if (addfer2.length > 0) {
+                Add_featuresg2 = addfer2.join("&")
+            }
+
+
+            /* end 2nd features group*/
+
+
+            /* 3nd features group*/
+
+
+            var addfer3 = [];
+            $.each($("input[name='FeatureGroup3']:checked"), function () {
+                arr3.push($(this).val());
+            });
+            $("input[name='grop3']").each(function () {
+
+                addfer3.push($(this).val());
+            })
+
+            var FeaturesGroup3;
+            var Add_featuresg3
+            if (arr3.length > 0) {
+                FeaturesGroup3 = arr3.join("&");
+            }
+            if (addfer3.length > 0) {
+                Add_featuresg3 = addfer3.join("&")
+            }
+
+
+            /*end 3nd features group*/
+
+            var id = $('#ProductId').val();
+            var Features_Commentgroup = $('#features_comment').val();
+
+
+
+            
+            $.ajax({
+                url: "/Product/udatefeaturesDetails",
+                type: "POST",
+                data: {
+                    id: id,
+                    FeaturesGroup1: FeaturesGroup1,
+                    FeaturesGroup2: FeaturesGroup2,
+                    FeaturesGroup3: FeaturesGroup3,
+                    Add_featuresg3: Add_featuresg3,
+                    Add_featuresg2: Add_featuresg2,
+                    Add_featuresg1: Add_featuresg1,
+                    Features_Commentgroup: Features_Commentgroup
+                },
+
+                cache: false,
+                success: function (data) {
+
+                    if (data.code == 200) {
+                        locurl = data.url;
+                       
+                        $('#successModal').modal('toggle');
+
+                    }
+                    else if (data.code == 400) {
+                        swal({
+                            title: "Oops!",
+                            text: data.msg,
+                            type: "error"
+                        });
+                    }
+
+
+                },
+
+                error: function (xhr, textStatus, errorThrown) {
+
+                    swal({
+                        title: "Oops!",
+                        text: "Something  wrong!",
+                        type: "error"
+                    });
+                }
+            });
+        });
+    });
+
+    function featuresfun() {
+        $('#successModal').modal('hide');
+
+        window.location = locurl;;
+
+    }
+
+</script>
+<script>
+    function openForm() {
+        document.getElementById("myForm").style.display = "block";
+    }
+
+    function closeForm() {
+        document.getElementById("myForm").style.display = "none";
+    }
+</script>
+
+

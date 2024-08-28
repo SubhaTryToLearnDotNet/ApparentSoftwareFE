@@ -1,0 +1,221 @@
+﻿
+@{
+    int currentYear = DateTime.Now.Year;
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE" />
+    <title>Apparent</title>
+    <link href="~/Content/Web/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/Web/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="~/Content/Web/css/all.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.21.0/slimselect.css" rel="stylesheet" type="text/css" />
+    <!-- <link href="assets/css/font-awesome.min.css" rel="stylesheet" type="text/css"/> -->
+    <link href="~/Content/Web/css/responsive.css" rel="stylesheet" type="text/css" />
+
+    <script src="https://kit.fontawesome.com/91cafd3f0a.js" crossorigin="anonymous"></script>
+    <link rel="shortcut icon" type="image/png" href="~/Content/Web/images/favi.png">
+</head>
+
+<body>
+    <!-- ====================================================================================================
+      start header
+    ====================================================================================================== -->
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-header">
+                <div class="logo">
+                    <a href="~/Home"> <img src="~/Content/Web/images/AppPayHFLogo (2).png" alt="" /> </a>
+                </div>
+            </div>
+
+            <input type="checkbox" id="menu-toggle" />
+
+            <!-- <div class="m_view" align="right">
+                <a href="#" class="request_btn" data-toggle="modal" data-target="#myModal">Request A Demo</a>
+            </div> -->
+            <!-- <div class="m_view">
+                <div class="enmenuwrap">
+                    <a class="enmenu" href="#">
+                        <div class="prfle"><img src="assets/images/profile.svg" /></div>
+                    </a>
+                    <div class="ensettings">
+                        <ul>
+                            <li>
+                                <a href="#"><i class="fa fa-user"></i> User CP</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-envelope"></i> Inbox</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-users"></i> Buddy List</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-power-off"></i> Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div> -->
+            <label for="menu-toggle" class="menu-show"><i class="fa fa-bars"></i></label>
+
+
+          
+        </div>
+    </nav>
+
+
+    @RenderBody()
+
+    <footer style="background: none; padding: 0;">
+        <div class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="footer_box">
+                            <div class="white_logo">
+                                <a href="index.html"><img src="~/Content/Web/images/Apparent-pay-logo_White.png" alt="" /></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-12">
+                        <div class="footer_box pt-3">
+                            <h4>About Us</h4>
+                            <p class="paragraph color03">
+                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
+                                ullamcorper suscipit lobortis nisl ut aliquip ex ea
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-12">
+                        <div class="footer_box pl01">
+                            <h4>Useful Links</h4>
+                            <ul style="display: inherit;float:none;">
+                                <li><a href="index.html"> About Us </a></li>
+                                <li><a href="#"> How It works </a></li>
+                                <li><a href="blog.html"> Write a Review </a></li>
+                                    <li><a href="~/SignUp"> Sign Up </a></li>
+                                
+                            </ul>
+                        </div>
+                    </div>
+                    @*<div class="col-lg-4 col-md-4 col-sm-6 col-12">
+                            <div class="footer_box">
+                                <h4>Follow Us</h4>
+                                <div class="social">
+                                    <a href="#"> <i class="fa-brands fa-facebook-f"></i> </a>
+                                    <a href="#"> <i class="fa-brands fa-twitter"></i> </a>
+                                    <a href="#"> <i class="fa-brands fa-linkedin-in"></i> </a>
+                                </div>
+                            </div>
+                        </div>*@
+                </div>
+            </div>
+        </div>
+        <!-- // -->
+        <div class="copyright">
+            <p class="paragraph">Copyright &copy; @currentYear.ToString() Apparent Pay . All Rights Reserved.</p>
+            <p class="paragraph">ABN : 57665322261</p>
+        </div>
+    </footer>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="~/Content/Web/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Content/Web/js/myScript.js"></script>
+    <script src="~/Content/Web/js/util.js"></script>
+    @*<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" async></script>*@
+    <!-- // profile dropdown -->
+    <script>
+        $(document).ready(function () {
+            $('.admin_content').on('click', function (event) {
+                event.preventDefault();
+                $(this).closest('.header_dropdown').find('.account_dropdown').toggle();
+            });
+            $(document).on('click', function (e) {
+                if ($(e.target).closest('.header_dropdown').length === 0) {
+                    $('.account_dropdown').hide();
+                }
+            });
+
+        });
+
+        function CustomerAC(value) {
+
+            const fd = new FormData();
+            fd.append('Accountvalue', value);
+            $.ajax({
+                url: '/Account/SwitchAccount',
+                method: 'POST',
+                async: true,
+                contentType: false,
+                cache: false,
+                processData: false,
+                data: fd,
+                success: function (data, textStatus, xhr) {
+
+                    if (data.Msg == "Seller") {
+                        window.location = data.url;
+                    }
+                    else if (data.Msg == "Customer") {
+                        window.location = data.url;
+                    }
+
+                },
+                error: function (xhr, textStatus, errorThrown) {
+
+                    swal({
+                        title: "Oops!",
+                        text: "Something went wrong!",
+                        type: "error"
+                    });
+                }
+            })
+
+        }
+        function SellerAC(value) {
+
+            const fd = new FormData();
+            fd.append('Accountvalue', value);
+            $.ajax({
+                url: '/Account/SwitchAccount',
+                method: 'POST',
+                async: true,
+                contentType: false,
+                cache: false,
+                processData: false,
+                data: fd,
+                success: function (data, textStatus, xhr) {
+                    if (data.Msg == "Seller") {
+                        window.location = data.url;
+                    }
+                    else if (data.Msg == "Customer") {
+                        window.location = data.url;
+                    }
+                },
+                error: function (xhr, textStatus, errorThrown) {
+
+                    swal({
+                        title: "Oops!",
+                        text: "Something went wrong!",
+                        type: "error"
+                    });
+                }
+            })
+
+        }
+
+    </script>
+
+    @RenderSection("Scripts", required: false)
+
+</body>
+</html>

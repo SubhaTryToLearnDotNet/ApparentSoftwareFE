@@ -1,0 +1,267 @@
+﻿@model ViewModel
+@{
+    ViewBag.Title = "GetProducts";
+    var CompanyName = Session["CompanyName"].ToString();
+}
+
+
+<div class="user_page">
+    <div class="container">
+        <div class="row">
+            @Html.Partial("~/Views/Shared/Components/_SellerProfile.cshtml", Model)
+
+            @*<div class="col-md-3 pt-3 m_h" style="box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);">
+                    <div class="profile-pic-wrapper">
+                        @{
+                            if (Model.Products != null && Model.Products.Count > 0 && Model.Products.FirstOrDefault().CompanyIcon != "")
+                            {
+                                <div class="pic-holder">
+                                    <img id="profilePic" class="pic" src="@((Model.Products != null && Model.Products.Count > 0 && Model.Products.FirstOrDefault().CompanyIcon != "" ? Model.Products.FirstOrDefault().CompanyIcon : "/Content/Web/images/company.png"))">
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="profile-container pic-holder">
+                                    @CompanyName.Substring(0, 1)
+                                    <Input class="uploadProfileInput" type="file" name="profile_pic" id="newProfilePhoto" accept="image/*" style="opacity: 0;" />
+                                    <label for="newProfilePhoto" class="upload-file-block">
+                                        <div id="" class="text-center">
+                                            <div class="mb-2">
+                                                <i class="fa fa-camera fa-2x"></i>
+                                            </div>
+                                            <div class="text_uppercase">
+                                                Update <br /> Profile Photo
+                                            </div>
+                                        </div>
+                                    </label>
+                                </div>
+                            }
+
+
+                        }
+                        <h4>@CompanyName</h4>
+
+
+                    </div>
+                    <br />
+                    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                        <a class="nav-link " id="v-pills-profile-tab" href="~/Profile" role="tab" aria-controls="v-pills-profile" aria-selected="false"> <i class="fa-solid fa-address-card"></i> Profile Details </a>
+                        <a class="nav-link" id="v-pills-messages-tab" href="~/Product/review" role="tab" aria-controls="v-pills-messages" aria-selected="false">
+                            <i class="fa fa-star-o" aria-hidden="true"></i> Reviews
+                        </a>
+                        <a class="nav-link active" id="v-pills-products-tab" href="~/Product/Getproducts" role="tab" aria-controls="v-pills-products" aria-selected="false"> <i class="fa fa-cog" aria-hidden="true"></i> Products </a>
+                        <a class="nav-link" id="v-pills-products-tab" href="~/Category/Index" role="tab" aria-controls="v-pills-products" aria-selected="false"> <i class="fa fa-th-large" aria-hidden="true"></i> Categories </a>
+                        <a class="nav-link" id="v-pills-products-tab" href="~/Sales/Index" role="tab" aria-controls="v-pills-products" aria-selected="false"> <i class="fa fa-line-chart" aria-hidden="true"></i> Sales </a>
+                        <a class="nav-link" id="v-pills-products-tab" href="~/Profile/CompanyToken" role="tab" aria-controls="v-pills-products" aria-selected="false"> <i class="fa fa-line-chart" aria-hidden="true"></i> Token </a>
+                    </div>
+                </div>*@
+            <!-- /.col -->
+
+            <div class="col-md-9">
+                <div class="tab-content" id="v-pills-tabContent">
+                    <div class="card tab-pane fade active" id="v-pills-products" role="tabpanel" aria-labelledby="v-pills-products-tab">
+                        @*<a data-toggle="collapse" href="#v-collapse-products" aria-expanded="false" aria-controls="v-collapse-products">
+                                <div class="card-header" role="tab" id="v-collapse-heading-products">Products <i class="fa fa-angle-down" aria-hidden="true"></i></div>
+                            </a>*@
+                        @*<div id="v-collapse-products" class="collapse" role="tabpanel" aria-labelledby="v-collapse-heading-products" data-parent="#v-pills-tabContent">*@
+                        <div class="card-body">
+
+                            <h4 class="mb-4">My Products</h4>
+                            <div data-tab="home" class="tabs__tab">
+                                <div class="softRowIn">
+                                    <div class="row">
+                                        @if (Model.Products.Count > 0)
+                                        {
+                                            foreach (Apparent.Model.ProductMaster product in Model.Products)
+
+                                            {
+                                                <div class="col-lg-3 col-md-4 col-6">
+                                                    <a href="javascript:void">
+                                                        <div class="softRowBox">
+                                                            <span class="">
+                                                                @product.ProductName
+                                                                <div class="softRowBox_btm">
+                                                                    <div class="softRowBox_btm_pic">
+                                                                        <img src="@(product.ProductIcon)" alt="" />
+                                                                    </div>
+                                                                </div>
+                                                            </span>
+                                                        </div>
+                                                    </a>
+                                                    <div class="BoxShadows"><img src="~/Content/assets/images/shadow.png" alt="" /></div>
+                                                </div>
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                                @*<div class="row">
+                                        @if (Model.Products.Count > 0)
+                                        {
+                                            foreach (Apparent.Model.ProductMaster product in Model.Products)
+
+                                            {
+                                                <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                                                    <a href="/Product/Details?ProductId=@product.ProductId">
+                                                        <div class="categories_box">
+
+                                                            <div class="categories_btm">
+                                                                <div class="categories_btm_pic" style="border: 3px solid #0193d9 ">
+                                                                    <img src="@(product.ProductIcon)" class="img-fluid" alt="" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="categories_top">
+                                                                <h4 style="color: #000">@product.ProductName</h4>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            }
+                                        }
+                                    </div>*@
+                            </div>
+                            <a href="~/Product/Add" class="submit011 save_btn" style="float: none;"><i class="fa fa-plus" aria-hidden="true"></i> Add Product</a>
+                        </div>
+                        @*</div>*@
+                    </div>
+                </div>
+                <!-- /.tab-pane -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.21.0/slimselect.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
+
+
+
+<!--  progress script -->
+<script>
+    const progress = document.querySelector(".progress-done");
+
+    progress.style.width = progress.getAttribute("data-done") + "%";
+    progress.style.opacity = 1;
+</script>
+
+<!--  tab script -->
+<script>
+    const tabsBtns = Array.from(document.querySelectorAll("[data-tab-id]"));
+    const tabs = Array.from(document.querySelectorAll("[data-tab]"));
+
+    let selectedTab = tabsBtns[0].dataset.tabId;
+
+    const hideTabs = () => {
+        tabs
+            .filter((tab) => tab.dataset.tab !== selectedTab)
+            .forEach((tab) => {
+                tab.classList.add("tabs__tab--hide");
+            });
+
+        tabsBtns
+            .filter((tab) => tab.dataset.tabId !== selectedTab)
+            .forEach((tab) => {
+                tab.classList.add("tabs__tab-btn--not-selected");
+            });
+    };
+    hideTabs();
+
+    const handleSelectTab = (e) => {
+        selectedTab = e.target.dataset.tabId;
+
+        tabs.forEach((tab) => {
+            tab.classList.remove("tabs__tab--hide");
+        });
+
+        tabsBtns.forEach((tab) => {
+            tab.classList.remove("tabs__tab-btn--not-selected");
+        });
+
+        hideTabs();
+    };
+
+    tabsBtns.forEach((btn) => {
+        btn.addEventListener("click", handleSelectTab);
+    });
+
+</script>
+
+<script>
+    $(document).on("change", ".uploadProfileInput", function () {
+        var triggerInput = this;
+        var currentImg = $(this).closest(".pic-holder").find(".pic").attr("src");
+        var holder = $(this).closest(".pic-holder");
+        var wrapper = $(this).closest(".profile-pic-wrapper");
+        $(wrapper).find('[role="alert"]').remove();
+        triggerInput.blur();
+        var files = !!this.files ? this.files : [];
+        if (!files.length || !window.FileReader) {
+            return;
+        }
+        if (/^image/.test(files[0].type)) {
+            // only image file
+            var reader = new FileReader(); // instance of the FileReader
+            reader.readAsDataURL(files[0]); // read the local file
+
+            reader.onloadend = function () {
+                $(holder).addClass("uploadInProgress");
+                $(holder).find(".pic").attr("src", this.result);
+                $(holder).append(
+                    '<div class="upload-loader"><div class="spinner-border text-primary" role="status"><span class="sr-only">Loading...</span></div></div>'
+                );
+
+                // Dummy timeout; call API or AJAX below
+                setTimeout(() => {
+                    $(holder).removeClass("uploadInProgress");
+                    $(holder).find(".upload-loader").remove();
+                    // If upload successful
+                    if (Math.random() < 0.9) {
+                        $(wrapper).append(
+                            '<div class="snackbar show" role="alert"><i class="fa fa-check-circle text-success"></i> Profile image updated successfully</div>'
+                        );
+
+                        // Clear input after upload
+                        $(triggerInput).val("");
+
+                        setTimeout(() => {
+                            $(wrapper).find('[role="alert"]').remove();
+                        }, 3000);
+                    } else {
+                        $(holder).find(".pic").attr("src", currentImg);
+                        $(wrapper).append(
+                            '<div class="snackbar show" role="alert"><i class="fa fa-times-circle text-danger"></i> There is an error while uploading! Please try again later.</div>'
+                        );
+
+                        // Clear input after upload
+                        $(triggerInput).val("");
+                        setTimeout(() => {
+                            $(wrapper).find('[role="alert"]').remove();
+                        }, 3000);
+                    }
+                }, 1500);
+            };
+        } else {
+            $(wrapper).append(
+                '<div class="alert alert-danger d-inline-block p-2 small" role="alert">Please choose the valid image.</div>'
+            );
+            setTimeout(() => {
+                $(wrapper).find('role="alert"').remove();
+            }, 3000);
+        }
+    });
+
+</script>
+
+@if (TempData["ProductaddSuccess"] != null && TempData["ProductaddSuccess"].ToString() == "Product Add Successful")
+{
+    <script>
+        swal({
+            title: "Success",
+            text: "Product Added Successful",
+            type: "success"
+        })
+    </script>
+}

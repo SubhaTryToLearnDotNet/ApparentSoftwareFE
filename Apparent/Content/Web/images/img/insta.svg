@@ -1,0 +1,21 @@
+<svg id="Group_94" data-name="Group 94" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="50.405" height="50.406" viewBox="0 0 50.405 50.406">
+  <defs>
+    <radialGradient id="radial-gradient" cx="0.293" cy="1.077" r="1.325" gradientTransform="translate(0)" gradientUnits="objectBoundingBox">
+      <stop offset="0.097" stop-color="#ffd879"/>
+      <stop offset="0.154" stop-color="#fccb75"/>
+      <stop offset="0.258" stop-color="#f4aa6c"/>
+      <stop offset="0.398" stop-color="#e8745d"/>
+      <stop offset="0.449" stop-color="#e45f58"/>
+      <stop offset="0.679" stop-color="#d22a9c"/>
+      <stop offset="1" stop-color="#6968df"/>
+    </radialGradient>
+  </defs>
+  <g id="Group_44" data-name="Group 44">
+    <path id="Path_897" data-name="Path 897" d="M413.226,1092.419a10.355,10.355,0,0,1-10.353,10.353h-29.7a10.354,10.354,0,0,1-10.353-10.353v-29.7a10.355,10.355,0,0,1,10.353-10.356h29.7a10.356,10.356,0,0,1,10.353,10.356Z" transform="translate(-362.821 -1052.366)" fill="url(#radial-gradient)"/>
+    <g id="Group_43" data-name="Group 43" transform="translate(6.195 6.196)">
+      <path id="Path_898" data-name="Path 898" d="M410.744,1073.991h-14.59a11.713,11.713,0,0,0-11.713,11.714v14.588A11.712,11.712,0,0,0,396.155,1112h14.59a11.711,11.711,0,0,0,11.712-11.711v-14.588A11.712,11.712,0,0,0,410.744,1073.991Zm8.064,24.9a9.464,9.464,0,0,1-9.463,9.464h-11.79a9.463,9.463,0,0,1-9.465-9.464V1087.1a9.466,9.466,0,0,1,9.465-9.464h11.79a9.466,9.466,0,0,1,9.463,9.464Z" transform="translate(-384.442 -1073.991)" fill="#fff"/>
+      <path id="Path_899" data-name="Path 899" d="M427.623,1105.615a10.013,10.013,0,1,0,10.013,10.012A10.012,10.012,0,0,0,427.623,1105.615Zm0,16.036a6.024,6.024,0,1,1,6.024-6.024A6.024,6.024,0,0,1,427.623,1121.651Z" transform="translate(-408.106 -1096.554)" fill="#fff"/>
+      <path id="Path_900" data-name="Path 900" d="M481.294,1098.726a2.546,2.546,0,1,1-2.547-2.548A2.547,2.547,0,0,1,481.294,1098.726Z" transform="translate(-449.911 -1089.821)" fill="#fff"/>
+    </g>
+  </g>
+</svg>

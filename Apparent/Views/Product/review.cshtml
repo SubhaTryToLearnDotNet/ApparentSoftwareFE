@@ -1,0 +1,655 @@
+﻿@model ViewModel
+    @{ 
+        var CompanyIcon = Session["CompanyIcon"].ToString();
+        var CompanyName = Session["CompanyName"].ToString();
+
+
+}
+<div class="user_page">
+    <div class="container">
+        <div class="row">
+            @Html.Partial("~/Views/Shared/Components/_SellerProfile.cshtml", Model)
+            @*<div class="col-md-3 pt-3 m_h" style="box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);">
+            <div class="profile-pic-wrapper">
+                @if (CompanyIcon!="" && CompanyIcon!=null)
+                {
+                    <div class="pic-holder">
+                        <img id="profilePic" class="pic" src="@CompanyIcon">
+
+                    </div>
+                }
+                else
+                {
+                    <div class="profile-container pic-holder">
+                        @CompanyName.Substring(0, 1)
+                        <Input class="uploadProfileInput" type="file" name="profile_pic" id="newProfilePhoto" accept="image/*" style="opacity: 0;" />
+                        <label for="newProfilePhoto" class="upload-file-block">
+                            <div id="" class="text-center">
+                                <div class="mb-2">
+                                    <i class="fa fa-camera fa-2x"></i>
+                                </div>
+                                <div class="text_uppercase">
+                                    Update <br /> Profile Photo
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                }
+                <h4>@CompanyName</h4>
+
+            </div>
+            <br />
+            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+
+                <a class="nav-link " id="v-pills-profile-tab" href="~/Profile" role="tab" aria-controls="v-pills-profile" aria-selected="false"> <i class="fa-solid fa-address-card"></i> Profile Details </a>
+                <a class="nav-link active" id="v-pills-messages-tab" href="~/Product/review" role="tab" aria-controls="v-pills-messages" aria-selected="false">
+                    <i class="fa fa-star-o" aria-hidden="true"></i> Reviews
+                </a>
+                <a class="nav-link " id="v-pills-products-tab" href="~/Product/Getproducts" role="tab" aria-controls="v-pills-products" aria-selected="false"> <i class="fa fa-cog" aria-hidden="true"></i> Products </a>
+                <a class="nav-link" id="v-pills-products-tab" href="~/Category/Index" role="tab" aria-controls="v-pills-products" aria-selected="false"> <i class="fa fa-th-large" aria-hidden="true"></i> Category </a>
+                <a class="nav-link" id="v-pills-products-tab" href="~/Sales/Index" role="tab" aria-controls="v-pills-products" aria-selected="false"> <i class="fa fa-line-chart" aria-hidden="true"></i> Sales </a>
+                <a class="nav-link" id="v-pills-products-tab" href="~/Profile/CompanyToken" role="tab" aria-controls="v-pills-products" aria-selected="false"> <i class="fa fa-line-chart" aria-hidden="true"></i> Token </a>
+            </div>
+        </div>*@
+            <!-- /.col -->
+
+            <div class="col-md-9">
+                <div class="tab-content" id="v-pills-tabContent">
+                    @*<div class="card tab-pane fade show" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                    <a data-toggle="collapse" href="#v-collapse-home" data-parent="#v-pills-tabContent" aria-expanded="true" aria-controls="v-collapse-home">
+                        <div class="card-header" role="tab" id="v-collapse-heading-home">Activity Center <i class="fa fa-angle-down" aria-hidden="true"></i></div>
+                    </a>
+                    <div id="v-collapse-home" class="collapse show" role="tabpanel" aria-labelledby="v-collapse-heading-home" data-parent="#v-pills-tabContent">
+                        <div class="card-body">
+                            <p>fgjfg</p>
+                        </div>
+                    </div>
+                </div>*@
+
+                    <!-- /.tab-pane -->
+                    <!--<div class="card tab-pane fade active" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                <a data-toggle="collapse" href="#v-collapse-profile" data-parent="#v-pills-tabContent" aria-expanded="false" aria-controls="v-collapse-profile">
+                    <div class="card-header" role="tab" id="v-collapse-heading-profile">Profile Details <i class="fa fa-angle-down" aria-hidden="true"></i></div>
+                </a>
+                <div id="v-collapse-profile" class="collapse" role="tabpanel" aria-labelledby="v-collapse-heading-profile" data-parent="#v-pills-tabContent">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-7">
+                                <h4 class="mb-4">Profile Details</h4>
+                                <h5 class="mb-3">Personal</h5>
+                                <form>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <label for="exampleTextarea">First Name</label>
+                                            <input class="field01 field04 rounded-0" placeholder="" type="text" />
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <label for="exampleTextarea">Last Name</label>
+                                            <input class="field01 field04 rounded-0" placeholder="" type="text" />
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <label for="exampleTextarea">Email</label>
+                                            <input class="field01 field04 rounded-0" placeholder="" type="text" />
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <label for="exampleTextarea">Pronouns</label>
+                                            <input class="field01 field04 rounded-0" placeholder="" type="text" />
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <label for="exampleTextarea">Headline</label>
+                                            <input class="field01 field04 rounded-0" placeholder="" type="text" />
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <label for="exampleTextarea">Summary</label>
+                                            <textarea class="field01 field04 rounded-0 field03" placeholder=""></textarea>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <label for="exampleTextarea">Region</label>
+                                            <select name="cat" id="original" class="postform">
+                                                <option value="-1">Select Country</option>
+                                                <option class="level-0" value="29">2007</option>
+                                                <option class="level-0" value="26">2008</option>
+                                                <option class="level-0" value="23">2009</option>
+                                                <option class="level-0" value="20">2010</option>
+                                                <option class="level-0" value="17">2011</option>
+                                                <option class="level-0" value="14">2012</option>
+                                                <option class="level-0" value="11">2013</option>
+                                                <option class="level-0" value="8">2014</option>
+                                                <option class="level-0" value="5">2015</option>
+                                                <option class="level-0" value="2">2016</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-12 mb-0">
+                                            <h5>Professional</h5>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <label for="exampleTextarea">Industry</label>
+                                            <select name="cat" id="original" class="postform">
+                                                <option value="-1">Select Country</option>
+                                                <option class="level-0" value="29">2007</option>
+                                                <option class="level-0" value="26">2008</option>
+                                                <option class="level-0" value="23">2009</option>
+                                                <option class="level-0" value="20">2010</option>
+                                                <option class="level-0" value="17">2011</option>
+                                                <option class="level-0" value="14">2012</option>
+                                                <option class="level-0" value="11">2013</option>
+                                                <option class="level-0" value="8">2014</option>
+                                                <option class="level-0" value="5">2015</option>
+                                                <option class="level-0" value="2">2016</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <label for="exampleTextarea">Title</label>
+                                            <input class="field01 field04 rounded-0" placeholder="" type="text" />
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <label for="exampleTextarea">Company Name</label>
+                                            <input class="field01 field04 rounded-0" placeholder="" type="text" />
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <label for="exampleTextarea">Company Size</label>
+                                            <select name="cat" id="original" class="postform">
+                                                <option value="-1">Select Country</option>
+                                                <option class="level-0" value="29">2007</option>
+                                                <option class="level-0" value="26">2008</option>
+                                                <option class="level-0" value="23">2009</option>
+                                                <option class="level-0" value="20">2010</option>
+                                                <option class="level-0" value="17">2011</option>
+                                                <option class="level-0" value="14">2012</option>
+                                                <option class="level-0" value="11">2013</option>
+                                                <option class="level-0" value="8">2014</option>
+                                                <option class="level-0" value="5">2015</option>
+                                                <option class="level-0" value="2">2016</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-12 mb-0">
+                                            <h5>Social</h5>
+                                            <h6>Profile URL</h6>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <label for="exampleTextarea">users</label>
+                                            <input class="field01 field04 rounded-0" placeholder="" type="text" />
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <p>Profile URL must contain 3-100 characters and can only include letters, numbers, '_' and '-'. Other special characters are not allowed.</p>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <label for="exampleTextarea">LinkedIn Profile URL</label>
+                                            <input class="field01 field04 rounded-0" placeholder="" type="text" />
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <label for="exampleTextarea">Twitter Profile URL</label>
+                                            <input class="field01 field04 rounded-0" placeholder="" type="text" />
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <button type="button" class="save_btn">Save</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-5">-->
+                    @*<div class="addProfile">
+                    <h5>Add Your Profile Details</h5>
+                    <div class="progress">
+                        <div class="progress-done" data-done="70">
+                            70%
+                        </div>
+                    </div>
+                    <img src="~/Content/Web/images/progress_file.png" alt="" />
+                    <div class="star_panel">
+                        <div class="items_center">
+                            <img src="~/Content/Web/images/progress_star.png" alt="" /><br />
+                            <p>Provide Your Personal Details</p>
+                        </div>
+                        <div class="items_center">
+                            <img src="~/Content/Web/images/progress_star.png" alt="" /><br />
+                            <p>Add Your Professional Role</p>
+                        </div>
+                        <div class="items_center">
+                            <img src="~/Content/Web/images/progress_star.png" alt="" /><br />
+                            <p>Save Your Changes</p>
+                        </div>
+                    </div>
+                </div>*@
+                    <!--</div>
+                        </div>
+                    </div>
+                </div>
+            </div>-->
+                    <!-- /.tab-pane -->
+                    <div class="card tab-pane fade active" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+                        @*<a data-toggle="collapse" href="#v-collapse-messages" aria-expanded="false" aria-controls="v-collapse-messages">
+                        <div class="card-header" role="tab" id="v-collapse-heading-messages">Reviews <i class="fa fa-angle-down" aria-hidden="true"></i></div>
+                    </a>*@
+                        @*<div id="v-collapse-messages" class="collapse" role="tabpanel" aria-labelledby="v-collapse-heading-messages" data-parent="#v-pills-tabContent">*@
+                        <div class="card-body">
+                            <!-- // -->
+                            <h4 class="mb-4">Product Review</h4>
+                            <div class="col-md-12 pl-0 pr-0">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-left">Product</th>
+                                                <th class="text-left">Product Name</th>
+                                                <th>Status</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (Apparent.Model.ProductMaster product in Model.Products)
+                                            {
+                                                <tr>
+                                                    <td> <div class="table_img"> <img src="@(product.ProductIcon)" alt="" /></div></td>
+                                                    <td>
+                                                        <span style="color: #0193D9; font-weight: 600; ">@product.ProductName</span><br />
+                                                        <p class="para05">It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
+                                                    </td>
+                                                    <td>
+                                                        @if (product.Admin_Approval == "Approved" && product.Request_status == "Comment")
+                                                        {
+                                                            @*<a href="#" class="requirements_btn light_btn">Approved</a>*@
+
+                                                            <span class="badge badge-pill bg-yellow">Pending</span>
+                                                        }
+                                                        else if (product.Admin_Approval == "Approved" && product.Request_status == "Success")
+                                                        {
+
+                                                            @*<a href="javascript:void(0)" class="requirements_btn light_btn">Approved</a>*@
+                                                            <span class="badge badge-pill badge-success">Approved</span>
+
+                                                        }
+                                                        else
+                                                        {
+                                                            @*<a href="javascript:void(0)" class="requirements_btn light_btn mr-0">Declined</a>*@
+                                                            <span class="badge badge-pill badge-danger">Declined</span>
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        @if (product.Admin_Approval == "Approved" && product.Request_status == "Comment")
+                                                        {
+
+                                                            <a href="~/Product/update?id=@product.ProductId" class="requirements_btn mr-0">Edit</a>
+
+                                                        }
+                                                        else if (product.Admin_Approval == "Approved" && product.Request_status == "Success")
+                                                        {
+
+                                                            <a href="~/Product/update?id=@product.ProductId" class="requirements_btn mr-0">Update</a>
+
+                                                        }
+                                                        else
+                                                        {
+
+                                                            <a href="~/Product/update?id=@product.ProductId" class="requirements_btn mr-0">Edit</a>
+
+                                                        }
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- // -->
+                            @*<div class="row" id="categoriesEdit">
+                        @if (Model.Products.Count > 0)
+                        {
+                            foreach (Apparent.Model.ProductMaster product in Model.Products)
+                            {*@
+                            @*<div class="col-lg-4 col-md-4 col-sm-6 col-12">
+                            <div class="reviewsBox">
+                                <img src="~/Content/Web/ProductLogo/@product.ProductIcon">
+                                @if (product.Admin_Approval == "Approved" && product.Request_status == "Comment")
+                                {
+                                    <div class="reviewsBotm">
+                                        <a href="#" class="requirements_btn light_btn">Approved</a> <a href="~/Product/update?id=@product.ProductId" class="requirements_btn mr-0">Edit Requirement</a>
+                                    </div>
+                                }
+                                else if (product.Admin_Approval == "Approved" && product.Request_status == "Success")
+                                {
+                                    <div class="reviewsBotm">
+                                        <a href="javascript:void(0)" class="requirements_btn light_btn">Approved</a> <a href="javascript:void(0)" onclick="productremove('@product.ProductId');" class="requirements_btn mr-0">Remove</a>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="reviewsBotm">
+                                        <a href="javascript:void(0)" class="requirements_btn light_btn">Declined</a><a href="javascript:void(0)" onclick="productremove('@product.ProductId');" class="requirements_btn mr-0">Remove</a>
+                                    </div>
+                                }
+                            </div>
+                        </div>*@
+
+
+
+
+                            @*<div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                            <a href="#">
+                                <div class="categories_box" style="background-color: #61ccff36; ">
+                                    <div class="categories_top">
+                                        <h4 style="color:#000;">@product.ProductName</h4>
+
+
+                                    </div>
+                                    <div class="categories_btm">
+                                        <div class="categories_btm_pic">
+                                            <img src="@(product.ProductIcon)" class="img-fluid" alt="" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                            @if (product.Admin_Approval == "Approved" && product.Request_status == "Comment")
+                            {
+                                <div class="reviewsBotm">
+                                    <a href="#" class="requirements_btn light_btn">Approved</a> <a href="~/Product/update?id=@product.ProductId" class="requirements_btn mr-0">Edit Requirement</a>
+                                </div>
+                            }
+                            else if (product.Admin_Approval == "Approved" && product.Request_status == "Success")
+                            {
+                                <div class="reviewsBotm">
+                                    <a href="javascript:void(0)" class="requirements_btn light_btn">Approved</a> <a href="~/Product/update?id=@product.ProductId" class="requirements_btn mr-0">Update</a>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="reviewsBotm">
+                                    <a href="javascript:void(0)" class="requirements_btn light_btn">Declined</a><a href="~/Product/update?id=@product.ProductId" class="requirements_btn mr-0">Edit</a>
+                                </div>
+                            }
+
+                        </div>*@
+
+
+                            @*}
+                            }
+                        </div>*@
+
+
+
+                        </div>
+                        @*</div>*@
+                    </div>
+                    <!-- /.tab-pane -->
+                    <!--<div class="card tab-pane fade active" id="v-pills-products" role="tabpanel" aria-labelledby="v-pills-products-tab">
+                <a data-toggle="collapse" href="#v-collapse-products" aria-expanded="false" aria-controls="v-collapse-products">
+                    <div class="card-header" role="tab" id="v-collapse-heading-products">Products <i class="fa fa-angle-down" aria-hidden="true"></i></div>
+                </a>
+                <div id="v-collapse-products" class="collapse" role="tabpanel" aria-labelledby="v-collapse-heading-products" data-parent="#v-pills-tabContent">
+                    <div class="card-body">
+                        <div class="tabs__buttons--container">
+                            <button class="tabs__tab-btn" data-tab-id="home">My Products</button>
+                        </div>
+
+                        <div data-tab="home" class="tabs__tab">
+                            <div class="row">
+
+                                        <div class="col-lg-3 col-md-3 col-6">
+                                            <a href="/Product/Details?ProductId="><img src="~/Content/Web/ProductLogo/" alt="" /></a>
+                                        </div>
+
+
+                            </div>
+                        </div>-->
+                    @*<div data-tab="contact" class="tabs__tab">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-6">
+                            <img src="~/Content/Web/images/brand01.png" alt="" />
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-6">
+                            <img src="~/Content/Web/images/brand02.png" alt="" />
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-6">
+                            <img src="~/Content/Web/images/brand03.png" alt="" />
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-6">
+                            <img src="~/Content/Web/images/brand04.png" alt="" />
+                        </div>
+                    </div>
+                </div>
+
+                <div data-tab="about" class="tabs__tab">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-6">
+                            <img src="~/Content/Web/images/brand01.png" alt="" />
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-6">
+                            <img src="~/Content/Web/images/brand02.png" alt="" />
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-6">
+                            <img src="~/Content/Web/images/brand03.png" alt="" />
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-6">
+                            <img src="~/Content/Web/images/brand04.png" alt="" />
+                        </div>
+                    </div>
+                </div>*@   <!--<a href="~/Product/Add" class="submit01 save_btn" style="float: left;"><i class="fa fa-plus" aria-hidden="true"></i> Add Product</a>-->
+                    @*<button type="button" onclick="vaildation()" class="submit01 save_btn" style="float: left;"><i class="fa fa-plus" aria-hidden="true"></i> Add Product</button>*@
+                    @*<a class="nav-link" id="v-pills-messages-tab" href="~/Product/Add" role="tab" aria-controls="v-pills-messages">
+                    + Add Product
+                </a>*@
+                    <!--</div>
+                </div>
+            </div>-->
+                </div>
+                <!-- /.tab-pane -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.21.0/slimselect.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
+
+
+
+<!--  progress script -->
+<script>
+    const progress = document.querySelector(".progress-done");
+
+    progress.style.width = progress.getAttribute("data-done") + "%";
+    progress.style.opacity = 1;
+</script>
+
+<!--  tab script -->
+<script>
+    const tabsBtns = Array.from(document.querySelectorAll("[data-tab-id]"));
+    const tabs = Array.from(document.querySelectorAll("[data-tab]"));
+
+    let selectedTab = tabsBtns[0].dataset.tabId;
+
+    const hideTabs = () => {
+        tabs
+            .filter((tab) => tab.dataset.tab !== selectedTab)
+            .forEach((tab) => {
+                tab.classList.add("tabs__tab--hide");
+            });
+
+        tabsBtns
+            .filter((tab) => tab.dataset.tabId !== selectedTab)
+            .forEach((tab) => {
+                tab.classList.add("tabs__tab-btn--not-selected");
+            });
+    };
+    hideTabs();
+
+    const handleSelectTab = (e) => {
+        selectedTab = e.target.dataset.tabId;
+
+        tabs.forEach((tab) => {
+            tab.classList.remove("tabs__tab--hide");
+        });
+
+        tabsBtns.forEach((tab) => {
+            tab.classList.remove("tabs__tab-btn--not-selected");
+        });
+
+        hideTabs();
+    };
+
+    tabsBtns.forEach((btn) => {
+        btn.addEventListener("click", handleSelectTab);
+    });
+
+</script>
+
+<script>
+    $(document).on("change", ".uploadProfileInput", function () {
+        var triggerInput = this;
+        var currentImg = $(this).closest(".pic-holder").find(".pic").attr("src");
+        var holder = $(this).closest(".pic-holder");
+        var wrapper = $(this).closest(".profile-pic-wrapper");
+        $(wrapper).find('[role="alert"]').remove();
+        triggerInput.blur();
+        var files = !!this.files ? this.files : [];
+        if (!files.length || !window.FileReader) {
+            return;
+        }
+        if (/^image/.test(files[0].type)) {
+            // only image file
+            var reader = new FileReader(); // instance of the FileReader
+            reader.readAsDataURL(files[0]); // read the local file
+
+            reader.onloadend = function () {
+                $(holder).addClass("uploadInProgress");
+                $(holder).find(".pic").attr("src", this.result);
+                $(holder).append(
+                    '<div class="upload-loader"><div class="spinner-border text-primary" role="status"><span class="sr-only">Loading...</span></div></div>'
+                );
+
+                // Dummy timeout; call API or AJAX below
+                setTimeout(() => {
+                    $(holder).removeClass("uploadInProgress");
+                    $(holder).find(".upload-loader").remove();
+                    // If upload successful
+                    if (Math.random() < 0.9) {
+                        $(wrapper).append(
+                            '<div class="snackbar show" role="alert"><i class="fa fa-check-circle text-success"></i> Profile image updated successfully</div>'
+                        );
+
+                        // Clear input after upload
+                        $(triggerInput).val("");
+
+                        setTimeout(() => {
+                            $(wrapper).find('[role="alert"]').remove();
+                        }, 3000);
+                    } else {
+                        $(holder).find(".pic").attr("src", currentImg);
+                        $(wrapper).append(
+                            '<div class="snackbar show" role="alert"><i class="fa fa-times-circle text-danger"></i> There is an error while uploading! Please try again later.</div>'
+                        );
+
+                        // Clear input after upload
+                        $(triggerInput).val("");
+                        setTimeout(() => {
+                            $(wrapper).find('[role="alert"]').remove();
+                        }, 3000);
+                    }
+                }, 1500);
+            };
+        } else {
+            $(wrapper).append(
+                '<div class="alert alert-danger d-inline-block p-2 small" role="alert">Please choose the valid image.</div>'
+            );
+            setTimeout(() => {
+                $(wrapper).find('role="alert"').remove();
+            }, 3000);
+        }
+    });
+
+</script>
+<script>
+    function productremove(id) {
+        const fd = new FormData();
+        fd.append('productid', id);
+        
+
+
+
+        swal({
+            title: "Are you sure?",
+            text: "you want to remove this product!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes",
+            cancelButtonText: "No",
+            closeOnConfirm: true,
+            closeOnCancel: true,
+        },
+            function (isConfirm) {
+                if (isConfirm) {
+
+                    $.ajax({
+                        url: '/Product/Remove',
+                        method: 'POST',
+                        async: true,
+                        contentType: false,
+                        cache: false,
+                        processData: false,
+                        data: fd,
+                        success: function (data, textStatus, xhr) {
+                            debugger;
+                            if (data.code == 200) {
+                                swal({
+                                    title: "Success",
+                                    text: data.msg,
+                                    type: "success"
+                                }, function () {
+                                    window.location.reload();
+                                });
+                            }
+                            else if (data.code == 400) {
+                                swal({
+                                    title: "Oops!",
+                                    text: data.msg,
+                                    type: "error"
+                                });
+                            }
+                            else if (data.code == 500) {
+                                swal({
+                                    title: "Oops!",
+                                    text: data.msg,
+                                    type: "error"
+                                }, function () {
+                                    var url = "/SignIn"
+                                    window.location = url;
+                                });
+                            }
+
+                        },
+                        error: function (xhr, textStatus, errorThrown) {
+
+                            swal({
+                                title: "Oops!",
+                                text: "Something  wrong!",
+                                type: "error"
+                            });
+                        }
+                    });
+
+
+                }
+               
+
+            });
+
+    }
+</script>
+@if (TempData["updatemsg"]!=null && TempData["updatemsg"].ToString() == "Product updated successful")
+{
+
+                    <script>
+
+                        swal({
+                            title: "Success",
+                            text: "Product updated successful",
+                        type: "success"
+                                    })
+                </script>
+                
+            }

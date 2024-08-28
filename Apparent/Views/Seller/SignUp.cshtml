@@ -1,0 +1,268 @@
+﻿@model List<Apparent.Model.Country>
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE" />
+    <title>Sign In</title>
+    <link href="~/Content/Web/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/Web/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="~/Content/Web/css/all.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.21.0/slimselect.css" rel="stylesheet" type="text/css" />
+    <!-- <link href="assets/css/font-awesome.min.css" rel="stylesheet" type="text/css"/> -->
+    <link href="~/Content/Admin/css/responsive.css" rel="stylesheet" type="text/css" />
+    <script src="https://kit.fontawesome.com/91cafd3f0a.js" crossorigin="anonymous"></script>
+    <style>
+        .drop-zone {
+            border-radius: 6px;
+            width: 220px;
+        }
+
+        #mySelect {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        /* Style for the filtered options */
+            #mySelect .filtered-option {
+                display: none;
+            }
+    </style>
+</head>
+
+<body>
+    <!-- ====================================================================================================
+      start signin
+    ====================================================================================================== -->
+
+    <section class="signin">
+        <div class="container">
+            <a href="index.html"> <img src="~/Content/Web/images/main_logo.svg" class="mb-4" alt="" /> </a>
+            <div class="row align-items-center">
+                <div class="col-lg-7 col-md-6 col-12">
+                    <img src="~/Content/Web/images/signin.png" alt="" />
+                </div>
+                <div class="col-lg-5 col-md-6 col-12">
+                    <div class="signin_right">
+                        <h2 class="heading02">Seller Sign Up</h2>
+
+                        <form id="frm1" method="post" action="~/Seller/Submit" enctype="multipart/form-data">
+                            @*<div class="drop-zone mb-3">
+                                <span class="drop-zone__prompt">
+                                    <img id="IdImg" src="~/Content/Seller/images/ProfilePic.png" alt="" /> <br />
+                                    Upload Profile Picture
+                                </span>
+                                <input type="file" name="SellerPic" id="SellerPic" accept="image/png, image/gif, image/jpeg" class="drop-zone__input" />
+                            </div>*@
+                            <input type="text" class="field01 field04 rounded-0 mb-3" placeholder="Company" name="CompanyName" id="CompanyName" />
+                            <!--<input type="text" class="field01 field04 rounded-0 mb-3" placeholder="Last Name" name="LastName" id="LastName" />
+                            
+                                <select class="field01 field04 rounded-0 mb-3" id="Country" name="Id">
+                                    <option value="0">Select Country</option>
+                                    @foreach(var country in Model)
+            {
+                        <option value="@country.Id">@country.Country_Name</option>
+            }-->
+                                   
+                                    <!-- Add more options here -->
+                                <!--</select>-->
+                            
+                           
+                                    @*<input type="text" class="field01 field04 rounded-0 mb-3" placeholder="Mobile" name="Contact" id="Contact" />*@
+                                    <input type="text" class="field01 field04 rounded-0 mb-3" placeholder="Company Email" name="CompanyEmail" id="CompanyEmail" />
+
+                                    <input id="Password" type="password" class="form-control field01 field04 rounded-0 mb-3 eyePadding" name="Password" placeholder="Password" />
+                                    <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password1"></span>
+
+                                    @*<input id="Confirmpassword" type="password" class="form-control field01 field04 rounded-0 mb-3 eyePadding" name="Confirmpassword" placeholder="Confirm Password" />
+                                    <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password2"></span>*@
+
+                                    @*<textarea style="height:70px;" class="field01 field04 rounded-0 mb-3" name="About" id="About" placeholder="About Seller"></textarea>*@
+                                    <button type="button" id="Btn01" onclick="fromvaild()" class="submit01 save_btn w-100 mt-0 mb-3" style="float: none;">Sign Up</button>
+                                    <a href="~/Login/SellerLogin/"><button type="button" id="Btn44" class="submit01 save_btn w-100 mt-0 mb-3" style="float: none;">Sign In</button></a>
+
+                        </form>
+                    </div>
+                    <p class="paragraph">Copyright &copy; 2021 Apparent. All Rights Reserved.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================================================================================================
+      start script
+    ====================================================================================================== -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="~/Content/Web/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Content/Web/js/myScript.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
+</body>
+</html>
+
+
+
+<script>
+   
+
+
+
+    $(document).ready(function () {
+
+
+
+
+        $('#SellerPic').change(function () {
+
+            var file = $(this)[0].files[0];
+
+            if (file) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    var imageSrc = e.target.result;
+                    $('#IdImg').attr('src', imageSrc);
+                };
+
+                reader.readAsDataURL(file);
+            } else {
+                // Handle the case when no file is selected
+                $('#IdImg').removeAttr('src');
+            }
+        });
+});
+    function fromvaild() {
+
+    var FirstName = $("#FirstName").val();
+    var LastName = $("#LastName").val();
+    var Eamil = $("#Email").val();
+    var Contact = $("#Contact").val();
+        var Password = $("#Password").val();
+    var Country = $("#Country").val()
+    var Confirmpassword = $("#Confirmpassword").val();
+    var mailformat = /^(([^<>()[\]\\.,;:\s@@\"]+(\.[^<>()[\]\\.,;:\s@@\"]+)*)|(\".+\"))@@((\[[0-9]{1, 3}\.[0-9]{1, 3}\.[0-9]{1, 3}\.[0-9]{1, 3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        var SellerPic = $("#SellerPic")[0].files[0];
+
+
+        if (SellerPic == "") {
+            swal({
+                title: "OOPS!",
+                text: " Please Upload A Profile Picture ",
+                type: "error"
+            });
+
+    }
+
+        else  if (FirstName == "") {
+
+            swal({
+                title: "OOPS!",
+                text: " Please Enter First Name",
+                type: "error"
+            });
+
+    }
+        else if (LastName == "") {
+            swal({
+                title: "OOPS!",
+                text: " Please Enter Last Name",
+                type: "error"
+            });
+
+        }
+        else if (Country == 0) {
+            swal({
+                title: "OOPS!",
+                text: " Please Select Country",
+                type: "error"
+            });
+
+        }
+        else if (Contact == "") {
+            swal({
+                title: "OOPS!",
+                text: " Please Enter Contact",
+                type: "error"
+            });
+
+
+    }
+
+        else if (Eamil == "") {
+            swal({
+                title: "OOPS!",
+                text: " Please Enter Email ",
+                type: "error"
+            });
+
+    }
+
+        else if (Password == "") {
+            swal({
+                title: "OOPS!",
+                text: " Please Enter Password ",
+                type: "error"
+            });
+
+    }
+        else if (Confirmpassword == "") {
+            swal({
+                title: "OOPS!",
+                text: " Please Enter Confirm Password ",
+                type: "error"
+            });
+
+    }
+        else if (Confirmpassword != Password) {
+            swal({
+                title: "OOPS!",
+                text: "Password doesn't  match",
+                type: "error"
+            });
+
+    }
+
+
+
+        else {
+            $("#frm1").submit();
+    }
+
+}
+
+
+
+</script>
+<script type="text/javascript">
+    $(".toggle-password1").click(function () {
+
+        $(this).toggleClass("fa-eye fa-eye-slash");
+    var input = $("#Password");
+    if (input.attr("type") === "password") {
+        input.attr("type", "text");
+} else {
+        input.attr("type", "password");
+}
+});
+
+    $(".toggle-password2").click(function () {
+
+        $(this).toggleClass("fa-eye fa-eye-slash");
+    var input = $("#Confirmpassword");
+    if (input.attr("type") === "password") {
+        input.attr("type", "text");
+} else {
+        input.attr("type", "password");
+}
+});
+</script>

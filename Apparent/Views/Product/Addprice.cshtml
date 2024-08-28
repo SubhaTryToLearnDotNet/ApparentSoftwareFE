@@ -1,0 +1,741 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .price-heading {
+        text-align: left;
+        padding-left: 7px;
+        font-weight: 800;
+    }
+    .bg-yellow {
+        background-color: #ffc107;
+        font-size: 21px;
+        font-weight: 600;
+        width: 72%;
+        margin: auto;
+    }
+    .banner {
+        display: inherit;
+    }
+</style>
+<div class="container">
+    <div class="row text-center">
+        <div class="loader_box" id="loder01">
+            <div class="d-flex justify-content-center align-items-center ">
+                <div class="loader-content">
+                    <div class="loader_title">Please Wait</div>
+                    <div class="loader--spinner">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="banner" style="background-position: 0px 350px;">
+    <div class="container">
+        <!--<div class="row align-items-center">
+            <div class="col-lg-5 col-md-6 col-12 order-2 order-md-1 mt_05">
+                <h1 class="heading01">Welcome!</h1>
+                <p class="paragraph banner_para">You are just a few steps away, Please fill out the required information fields to start selling</p>
+                <p class="paragraph small_para">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+                <a href="#" class="request_btn mt-3">Contact Us</a>
+            </div>-->
+        <!-- // -->
+        <!--<div class="col-lg-7 col-md-6 col-12 order-1 order-md-2">
+                <img src="~/Content/Web/images/seller_banner03.png" alt="" />
+            </div>
+        </div>-->
+        <!-- // -->
+        <div class="features_row upload_software">
+            <div class="row" style="display: block;">
+                <form id="frmprice">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <ul class="progressbar">
+                                <li class="active">Product Details</li>
+                                <li class="active">Features</li>
+                                <li>Pricing/Packages</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="r_box product_info">
+                            <!-- // -->
+                            <div class="row" id="reviewSec">
+                                <div class="col-lg-12 mb-0">
+                                    <h4 class="small_font01" style="color: #0193d9;">Pricing/Packages</h4>
+                                </div>
+                            </div>
+                            <!-- // -->
+                            <div class="price_area">
+                                <div class="price_pkg">
+                                    <div class="package-container" id="addsubscription">
+                                        @*<div class="packages">
+                                            <h1>Basic</h1>
+                                            <h2 class="text1">
+                                                &dollar;9.99/<span><sub>Month</sub></span>
+                                            </h2>
+                                            <ul class="list">
+                                                <li class="first"><i class="fa-solid fa-check"></i> 2000 Subscribers</li>
+                                                <li><i class="fa-solid fa-check"></i> 12,000 Emails/month</li>
+                                                <li><i class="fa-solid fa-check"></i> Multi-User Accounts</li>
+                                                <li><i class="fa-solid fa-check"></i> Email Support</li>
+                                                <li><i class="fa-solid fa-check"></i> Multi-User Accounts</li>
+                                            </ul>
+                                            <a href="#" class="button button1">Start Now</a>
+                                        </div>*@
+                                    </div>
+                                </div>
+                            </div>
+
+                            @*<div id="addPrice">
+                                <div class="price_area mb-5">
+                                    <div class="show-grid" style="margin: 0 auto; text-align: center;" id="addsubscription">
+                                    </div>
+                                </div>
+                            </div>*@
+
+                            <div class="col-lg-12 mb-0">
+                                <a href="javascript:void(0);" class="price_btn mr-2" data-toggle="modal" data-target="#myModal">Add Packages</a>
+                                @*<a href="javascript:void(0);" class="price_btn">Remove Packages</a>*@
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- // -->
+                    <div class="col-lg-12 mt-4">
+
+                        <label class="software_label">Apparent Commision</label>
+                        <div class="percentRow">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="button">
+                                        <input type="radio" id="a25" value="25" name="check-substitution-2" />
+                                        <label class="btn btn-default" for="a25"><span></span>Bronze</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="button">
+                                        <input type="radio" id="a50" value="25" name="check-substitution-2" />
+                                        <label class="btn btn-default" for="a50"><span></span>Silver</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="button">
+                                        <input type="radio" id="a75" value="25" name="check-substitution-2" />
+                                        <label class="btn btn-default" for="a75"><span></span>Gold</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <label class="software_label">Product Access Url</label>
+                        <input type="text" class="field01 field04 rounded-0 mb-3" placeholder="" value="" name="Product_Url" id="Product_Url" />
+
+
+                        @*<label class="software_label">Comment</label>
+                            <textarea class="field01 field03 rounded-0 mb-0" name="price_comment" id="price_comment" placeholder="Write here"></textarea>*@
+                        <input type="hidden" name="price_comment" id="price_comment" />
+                    </div>
+
+                    <input type="hidden" value="@ViewBag.ProductId" id="ProductId" name="ProductId" />
+                    <div class="col-lg-12">
+                        <button type="button" @*id="pkg*@" onclick="addsubscription();" class="submit011 save_btn mt-0">Save</button>
+                        <!--<button type="button"--> @*id="pkg"*@ <!--onclick="demo();" class="submit01 save_btn mt-0">demo</button>-->
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="modal" id="myModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body" id="subsPlan" style="line-height: normal;">
+                        <h4 class="modal-title mb-2">Add New Plan</h4>
+                        <input type="text" class="pricefield01" placeholder="" id="subscription_name" name="subscription_name" />
+                        <h6 class="mt-3 mb-2">Subscription Plan Details</h6>
+                        <div class="subscriptionPlan"> 
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <h5>Duration</h5>
+                                </div>
+                                <div class="col-lg-9">
+                                    <div class="row">
+                                        <div class="col-lg-4 mb-0">
+                                            <select id="select-month">
+                                                <option value="Per Month">Per Month</option>
+                                                <option value="Per Year">Per Year</option>
+                                                <option value="Life Time">Life Time</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <h5>Price</h5>
+                                </div>
+                                <div class="col-lg-9">
+                                    <div class="row">
+                                        <div class="col-lg-6 mb-0">
+                                            <input type="number" class="pricefield01 pricefield02 usd_width" placeholder="" id="price" name="price" value="" /> <span>USD</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 mt-3">
+                                    <p style="color: red;">Maximum 7 important subscription features to be add</p>
+                                </div>
+                            </div>
+                            <!-- New Input Field Section -->
+                            <div id="additionalFields"></div>
+                            <button type="button" class="btn btn-secondary mt-3" id="addMoreBtn" onclick="addNewInputField()">Add</button>
+                            <!-- End New Input Field Section -->
+                        </div>
+                        <button type="button" class="save_btn mb-4" data-dismiss="modal" id="show">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+<!-- // footer chat box -->
+<button class="open-button" onclick="openForm()"><img src="~/Content/Web/images/comment02.png" alt="" /></button>
+<div class="chat-popup" id="myForm">
+    <form class="form-container">
+        <div class="chathead">
+            <h3>Pricing/Packages Comments</h3>
+            <button type="button" class="cancel" onclick="closeForm()"><img src="~/Content/Web/images/close.png" alt="" /></button>
+        </div>
+        <div class="chatbody price">
+            @*<div class="in_avtar">B</div>
+            <div class="incoming">
+                <div class="bubble">
+                    <p>Hey, Father's Day is coming up..</p>
+                </div>
+                <small class="timeSec">01:15 PM</small>
+                <div class="bubble">
+                    <p>What are you getting.. Oh, oops sorry dude.</p>
+                </div>
+                <small class="timeSec">01:15 PM</small>
+            </div>
+            <div class="out_avtar">B</div>
+            <div class="outgoing">
+                <div class="bubble lower">
+                    <p>Nah, it's cool.</p>
+                </div>
+                <small class="timeSec02">01:15 PM</small>
+                <div class="bubble">
+                    <p>Well you should get your Dad a cologne. Here smell it. Oh wait! ...</p>
+                </div>
+                <small class="timeSec02">01:15 PM</small>
+            </div>
+            <div class="in_avtar">B</div>*@
+            @*<div class="incoming">*@
+                @*<div class="bubble">
+                    <p>Hey, Father's Day is coming up..</p>
+                </div>
+                <div class="bubble">
+                    <p>What are you getting.. Oh, oops sorry dude.</p>
+                </div>*@
+            @*</div>*@
+            @*<div class="typing">
+                <div class="bubble">
+                    <div class="ellipsis dot_1"></div>
+                    <div class="ellipsis dot_2"></div>
+                    <div class="ellipsis dot_3"></div>
+                </div>
+            </div>*@
+        </div>
+
+        <div class="foot">
+            <input type="hidden" name="pricing_comment" id="pricing_comment" />
+            <input type="text" id="pricingchatbox" class="msg" placeholder="Type a message..." />
+            <button type="button" onclick="pricechatButtonClick()" class="cmnt_send"><img src="~/Content/Web/images/send.png" alt="" /></button>
+        </div>
+
+        <!-- <label for="msg">Message</label>
+            <textarea placeholder="Type message.." name="msg" required></textarea> -->
+        <!-- <button type="submit" class="btn">Send</button>
+            <button type="button" class="btn cancel" onclick="closeForm()">Close</button> -->
+    </form>
+</div>
+<!-- // footer chat box -->
+<div class="container">
+    <!-- The Modal -->
+    <div class="modal" id="successModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <!-- <div class="modal-header">
+                    <h4 class="modal-title">Modal Heading</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div> -->
+                <!-- Modal body -->
+                <div class="modal-body pt_40">
+                    @*<center><img src="assets/images/success.png" alt="" /></center>
+                        <div class="progress mt-4">
+                            <div class="progress-bar progress-bar-danger" style="width: 100%;"></div>
+                        </div>*@
+
+                    <ul class="progressbar">
+                        <li class="active">Product Details</li>
+                        <li class="active">Features</li>
+                        <li class="active">Pricing/Packages</li>
+                    </ul>
+
+                    <h4 class="modal-title text-center mt-4 mb-3">Success</h4>
+                    <p class="text-center">Product added  successful</p>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer pb_50">
+                    <button type="button" class="btn okBtn" onclick="pricefun()">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.21.0/slimselect.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
+<script>
+    var maxFields = 7; // Maximum number of fields allowed
+    var currentFields = 0; // Current number of fields
+    var SubscriptionFeaturesList = [];
+
+    function addNewInputField(){
+        if (currentFields < maxFields) {
+            var additionalFieldsDiv = document.getElementById("additionalFields");
+            var newInputField = document.createElement("div");
+            var inputFieldHTML = '<div class="input-group mt-2">';
+            inputFieldHTML += '<input type="text" class="form-control" placeholder="Write here" onchange="addToSubscriptionFeaturesList(this.value)">';
+            inputFieldHTML += '<div class="input-group-append">';
+            inputFieldHTML += '<button class="btn btn-danger" type="button" onclick="removeInputField(this)">Cancel</button>';
+            inputFieldHTML += '</div></div>';
+            newInputField.innerHTML = inputFieldHTML;
+            additionalFieldsDiv.appendChild(newInputField);
+            currentFields++;
+            checkFieldLimit();
+            
+            if (currentFields === 1) {
+                document.getElementById("addMoreBtn").textContent = "Add";
+            }
+        }
+    }
+
+    function addToSubscriptionFeaturesList(value) {
+        SubscriptionFeaturesList.push(value);
+    }
+
+    function removeInputField(btn) {
+        var inputGroup = btn.parentNode.parentNode;
+        var inputValue = inputGroup.querySelector("input").value;
+        var index = SubscriptionFeaturesList.indexOf(inputValue);
+        if (index !== -1) {
+            SubscriptionFeaturesList.splice(index, 1); 
+        }
+        inputGroup.parentNode.removeChild(inputGroup);
+        currentFields--;
+        checkFieldLimit();
+    }
+
+    function checkFieldLimit() {
+        var addMoreBtn = document.getElementById("addMoreBtn");
+        if (currentFields >= maxFields) {
+            addMoreBtn.style.display = "none";
+        } else {
+            addMoreBtn.style.display = "block";
+        }
+    } 
+</script>
+<script>
+
+    
+    $(document).ready(function () {
+        ($("#loder01").css("display", "block"));
+        $("#loder01").hide()
+        $(document).ajaxStart(function () {
+            ($("#loder01").css("display", "block"));
+        });
+
+        $(document).ajaxStop(function () {
+            $("#loder01").hide()
+        });
+
+    })
+    $(document).ready(function () {
+
+
+        $("#hide").click(function () {
+            $("#addPrice").hide();
+        });
+    });
+
+    var locurl;
+    var x = 1;
+    var tokenarray = ''; 
+    var tokenlistwith_packges = [];
+    tokenlist = {
+        'plan_type': '',
+        'price':'',
+        'token':'',
+        'plan_uniqueid': '',
+        'plan_tenure': ''
+    }
+    function token_add() {
+        var adtoken = $('#token').val();
+        $('#addedtokens').append('<mark class="bg-yellow mb-2">'+adtoken+'</mark>')
+        tokenarray+=adtoken+',';
+        $('#token').val("");
+        
+    }
+    
+    $(document).ready(function () {
+
+
+        $('#show').click(function (e) {
+            //on add input button click
+
+            var max_fields = 4; //maximum input boxes allowed
+
+
+            console.log(SubscriptionFeaturesList)
+
+            if ($('#subscription_name').val() == "") {
+                swal({
+                    title: "Information!",
+                    text: "Please enter subscription name",
+                    type: "info"
+                });
+                return;
+
+            }
+            //else if ($('#Description').val() == "") {
+            //    swal({
+            //        title: "Information!",
+            //        text: "Please enter description",
+            //        type: "info"
+            //    });
+            //    return
+            //}
+            else if ($('#price').val() == "") {
+                swal({
+                    title: "Information!",
+                    text: "Please enter price",
+                    type: "info"
+                });
+                return
+            }
+            else if ($('#select-month').val() == "") {
+                swal({
+                    title: "Information!",
+                    text: "Select time duration",
+                    type: "info"
+                });
+
+            }        
+            var plan = $('#subscription_name').val();
+            var price = $('#price').val();
+            var tenure = $('#select-month').val();
+            var Description = $('#Description').val();
+            
+
+            e.preventDefault();
+            if (x < max_fields) { //max input box allowed
+                var uniqueid = Math.random().toString(36).substr(2, 9);
+
+                // Assuming Description is an array
+                var descriptionHtml = '';
+                SubscriptionFeaturesList.forEach(function (item, index) {
+                    var listItemClass = index === 0 ? 'first' : '';
+                    descriptionHtml += '<li class="' + listItemClass + '"><i class="fa-solid fa-check"></i>' + item + '</li>';
+                });
+                SubscriptionFeaturesList = []
+                // Appending HTML with Description values
+                $('#addsubscription').append(`
+                        <div class="packages">
+                            <h1 id="plan` + x +`">` + plan + `</h1>
+                            <h2 class="text1" id="price` + x +`" >
+                                &dollar;` + price + `/<span><sub id="tenure` + x + `">` + tenure + `</sub></span>
+                            </h2>
+                            <ul class="list" id="Description` + x +`" >
+                                ` + descriptionHtml + `
+                            </ul>
+                            <span class="badge badge-pill bg-yellow d-none" id="uniqueid` + x +`">` +uniqueid+`</span>
+                            <a href="javascript:void(0);" class="button button1" id="removeprice">Cancel</a>
+                        </div>
+                    </div>`);
+             
+                x++;
+                var additionalFieldsDiv = document.getElementById("additionalFields");
+                additionalFieldsDiv.innerHTML = ""; 
+                currentFields = 0; 
+                checkFieldLimit();
+                document.getElementById("addMoreBtn").textContent = "Add";
+                checkFieldLimit(); 
+                $('#subscription_name').val("");
+                $('#price').val("");
+                $('#Description').val("");
+            }
+        });
+        $('#addsubscription').on("click", '#removeprice', function (e) { //user click on remove text
+
+            e.preventDefault();
+            $(this).closest('.packages').remove();
+            x--;
+        })
+
+
+
+
+        //$('#pkg').click(function () {
+
+        //    var subscription = {};
+        //    var pircelist = [];
+        //    for (var i = 1; x > i; i++) {
+        //        var priceText = $('#price' + i).text();
+               
+        //        var priceValue = priceText.replace(/[^\d.]/g, '');
+                
+        //        priceValue = parseFloat(priceValue).toFixed(2); 
+                
+        //        var description = $('#Description' + i + ' li').map(function () {
+        //            return $(this).text();
+        //        }).get().join('#');
+        //        subscription = {
+        //            Plan_Name: $(`#plan${i}`).text(),
+        //            Description: description.trim(),
+        //            Price: priceValue,
+        //            Plan_tenure: $(`#tenure${i}`).text(),
+        //            Plan_uniqueId: $(`#uniqueid${i}`).text()
+        //        }
+        //        pircelist.push(subscription);
+        //    }
+            
+        //})
+
+
+    });
+
+
+
+    
+
+
+
+
+    function addsubscription() {
+
+        var subscription = {};
+        var pircelist = [];
+        for (var i = 1; x > i; i++) {
+            var priceText = $('#price' + i).text();
+
+            var priceValue = priceText.replace(/[^\d.]/g, '');
+
+            priceValue = parseFloat(priceValue).toFixed(2);
+
+            var description = $('#Description' + i + ' li').map(function () {
+                return $(this).text();
+            }).get().join('#');
+            subscription = {
+                Plan_Name: $(`#plan${i}`).text(),
+                Description: description.trim(),
+                Price: priceValue,
+                Plan_tenure: $(`#tenure${i}`).text(),
+                Plan_uniqueId: $(`#uniqueid${i}`).text()
+            }
+            pircelist.push(subscription);
+        }
+
+        var radioButtons = document.getElementsByName("check-substitution-2");
+
+        for (var i = 0; i < radioButtons.length; i++) {
+            if (radioButtons[i].checked) {
+                var selectedValue = radioButtons[i].value;
+                var selectedLabel = document.querySelector('label[for="' + radioButtons[i].id + '"]').textContent;
+                console.log(selectedLabel);
+                console.log(selectedValue)
+            }
+        }
+        console.log(selectedValue)
+
+        
+       if (pircelist.length == 0) {
+            swal({
+                title: "Information!",
+                text: "Add poduct price!",
+                type: "info"
+            });
+            return;
+        }
+      else  if (selectedValue == undefined) {
+            swal({
+                title: "Information!",
+                text: "Please select apparent commision!",
+                type: "info"
+            });
+            return;
+        }
+
+        else if ($('#Product_Url').val() == "") {
+            swal({
+                title: "Information!",
+                text: "Please put the product access api base url !",
+                type: "info"
+            });
+            return;
+        }
+
+
+        const fd = new FormData();
+            fd.append('Mergin', selectedValue);
+        fd.append('Product_Url', $('#Product_Url').val());
+        fd.append('id', $('#ProductId').val());
+        fd.append('subscription_comment',$('#pricing_comment').val());
+        fd.append('subcrp', JSON.stringify(pircelist))
+       /* fd.append('token_master', JSON.stringify(tokenlistwith_packges))*/
+        $.ajax({
+            url: '/Product/Price',
+            method: 'POST',
+            async: true,
+            contentType: false,
+            cache: false,
+            processData: false,
+            data: fd,
+            success: function (data) {
+
+                if (data.code == 200) {
+                    locurl = data.url;
+                 
+                    $('#successModal').modal('toggle');
+
+
+                }
+                else if (data.code == 400) {
+                    swal({
+                        title: "Oops!",
+                        text: data.msg,
+                        type: "error"
+                    });
+                }
+
+            }
+        });
+
+
+
+    }
+
+    function pricefun() {
+        $('#successModal').modal('hide');
+
+        window.location = locurl;
+
+    }
+</script>
+<script>
+    function openForm() {
+        document.getElementById("myForm").style.display = "block";
+    }
+
+    function closeForm() {
+        document.getElementById("myForm").style.display = "none";
+    }
+
+    function pricechatButtonClick() {
+        pValues = [];
+        // Create a new div element with the specified content
+        var msg = $("#pricingchatbox").val();
+        var avver = document.createElement("div");
+        avver.className = "out_avtar";
+        avver.textContent = "S";
+
+        var newoutgoing = document.createElement("div");
+        newoutgoing.className = "outgoing otgpric";
+        var newBubble = document.createElement("div");
+        newBubble.className = "bubble";
+
+        var newP = document.createElement("p");
+        newP.textContent = msg;
+
+        // Append the new elements to the existing 'incoming' div
+        newBubble.appendChild(newP);
+        newoutgoing.appendChild(newBubble);
+        document.querySelector(".price").appendChild(avver);
+        document.querySelector(".price").appendChild(newoutgoing);
+
+        $(".otgpric p").each(function () {
+            pValues.push($(this).text());
+        });
+
+        var comtext = pValues.join("~");
+
+        $("#pricingchatbox").val("");
+        $("#pricing_comment").val(comtext);
+        console.log(comtext);
+    }
+
+    //function chatButtonClick() {
+    //    pValues = "";
+    //    // Create a new div element with the specified content
+    //    var msg = $("#txtChatbox").val();
+    //    var newBubble = document.createElement("div");
+    //    newBubble.className = "bubble";
+    //    var newP = document.createElement("p");
+    //    newP.textContent = msg;
+
+    //    // Append the new elements to the existing 'incoming' div
+    //    newBubble.appendChild(newP);
+    //    document.querySelector(".incoming").appendChild(newBubble);
+
+    //    $(".incoming p").each(function () {
+    //        pValues = $(this).text();
+    //    });
+    //    $("#txtChatbox").val("");
+    //    $("#price_comment").val(pValues);
+    //    console.log(pValues);
+    //}
+</script>
+<script>
+    function check() {
+        var checkBox = document.getElementById("checbox");
+        var text1 = document.getElementsByClassName("text1");
+        var text2 = document.getElementsByClassName("text2");
+
+        for (var i = 0; i < text1.length; i++) {
+            if (checkBox.checked == true) {
+                text1[i].style.display = "block";
+                text2[i].style.display = "none";
+            } else if (checkBox.checked == false) {
+                text1[i].style.display = "none";
+                text2[i].style.display = "block";
+            }
+        }
+    }
+    check();
+</script>

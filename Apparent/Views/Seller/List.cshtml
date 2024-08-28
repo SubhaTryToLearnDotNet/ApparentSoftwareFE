@@ -1,0 +1,116 @@
+﻿@model Apparent.Model.SellerMaster
+@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<!-- ====================================================================================================
+  start banner
+====================================================================================================== -->
+
+<section class="single_seller" style="background-image: url(/Content/Web/images/banner.png);">
+</section>
+<!-- // -->
+<div class="seller_box">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-4 col-md-4 col-12 mb-0">
+
+            </div>
+            <div class="col-lg-4 col-md-4 col-12 mb-0 ">
+                <!--<div class="seller_name">-->
+                <!--<img src="assets/images/seller.png" alt="" />-->
+                <!--</div>-->
+                <h3>Seller List</h3>
+            </div>
+            <div class="col-lg-4 col-md-4 col-12 mb-0">
+                <a href="#" class="request_btn  mt-2 align_right"></a>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="software_sec">
+    <div class="container">
+        <div class="col-lg-12">
+            <div class="r_box">
+                <h5>Seller information</h5>
+                <div class="top_ten mt-3">
+                    <div id="container">
+                        <div class="list" id="one">
+                            <!--<h4 class="small_font01">Products</h4>-->
+
+                            @for (int r = 0; r < Model.SellerList.Rows.Count; r++)
+                            {
+                                string image = Model.SellerList.Rows[r]["Imagepath"].ToString();
+                                string serverPath = System.Web.Hosting.HostingEnvironment.MapPath("/Content/Seller/Images/" + image);
+                                if (!string.IsNullOrEmpty(image))
+                                {
+                                    if (!File.Exists(serverPath))
+                                    {
+                                        image = "photo_icon.jpg";
+                                    }
+                                }
+                                else
+                                {
+                                    image = "photo_icon.jpg";
+                                }
+                            <div class="sort_panel_box">
+                                <div class="sort_panel_box_l">
+                                    <div class="l_pic">
+                                       <a href="~/Seller/SellerProduct?SellerId=@Model.SellerList.Rows[r]["SellerId"].ToString()"> <img src="~/Content/Seller/Images/@image" alt="" /></a>
+</div>
+                                </div>
+                                <div class="sort_panel_box_r">
+                                  <a href="~/Seller/SellerProduct?SellerId=@Model.SellerList.Rows[r]["SellerId"].ToString()" > <h6 class="mt_06">@Model.SellerList.Rows[r]["FirstName"].ToString() @Model.SellerList.Rows[r]["LastName"].ToString() </h6></a>
+                                    <span>
+                                        <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-regular fa-star-half-stroke"></i> &nbsp;
+                                        <h6 class="small_text01">(1,592) 4.5 out of 5</h6>
+                                    </span>
+                                    <br />
+                                    <h6 class="small_text01"> <span style="color: #0193d9;">Seller Information</span></h6>
+                                    <p class="paragraph para02">
+                                        @Model.SellerList.Rows[r]["About"].ToString() <a href="#">Show More</a>
+                                    </p>
+
+                                </div>
+                            </div>
+                            }
+
+
+
+
+                        </div>
+                    </div>
+
+                    <!-- // -->
+                    <div class="pagination_row">
+                        <div class="pagination">
+
+                            <div class="page-numbers">
+                                <button class="btn-page btn-selected">1</button>
+                                <button class="btn-page">2</button>
+                                <button class="btn-page">3</button>
+                                <button class="btn-page">4</button>
+                                <button class="btn-page">5</button>
+                                <span class="dots">...</span>
+                                <button class="btn-page">20</button>
+                            </div>
+                            <button class="btn-nav right-btn">Next</button>
+                            <button class="btn-nav left-btn">Previous</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="~/Content/Web/js/bootstrap.bundle.min.js"></script>
+<script src="~/Content/Web/js/myScript.js"></script>
+
+
