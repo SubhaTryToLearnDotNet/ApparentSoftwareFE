@@ -1,32 +1,6 @@
 @charset "utf-8";
 /* CSS Document */
 
-/*@media only screen and (max-device-width : 2560px) {
-	.account_dropdown {
-		top: 90px;
-		right: 260px;
-	}
-
-
-}
-
-@media only screen and (max-device-width : 2360px) {
-	.account_dropdown {
-		top: 90px;
-		right: 255px;
-	}
-
-}
-
-@media only screen and (max-width: 1920px) {
-	.account_dropdown {
-		right: 245px;
-	}
-	
-	
-
-}*/
-
 @media only screen and (max-device-width : 3840px) {
 
 	.container-fluid {
@@ -41,6 +15,29 @@
 		margin: 0 auto;
 		padding-right: 15px;
 		padding-left: 15px;
+	}
+	.list-reset a {
+		font-size: 20px;
+		padding: 25px 15px;
+	}
+	.join {
+		font-size: 20px !important;
+	}
+	.para01, .joinNow_in .para01, .sec03 .para01, .weOfferIn .para01 {
+		font-size: 22px;
+		padding-bottom: 15px;
+	}
+	.footr ul li a {
+		font-size: 22px;
+	}
+	.copyRight p {
+		font-size: 22px;
+	}
+	.sec01Right ul li {
+		font-size: 18px;
+	}
+	.sec01Right ul li::before {
+		top: 8px;
 	}
 }
 
@@ -70,10 +67,10 @@
 		padding-bottom: 50px;
 	}
 
-	.list-reset a {
+	/*.list-reset a {
 		font-size: 17px;
 		padding: 25px 10px;
-	}
+	}*/
 
 	.account_dropdown {
 		top: 90px;
@@ -126,6 +123,23 @@
 	.buyApparen_right {
 		padding-right: 70px;
 	}
+	.list-reset a {
+		font-size: 18px;
+		padding: 25px 15px;
+	}
+
+	.join {
+		font-size: 18px !important;
+	}
+	
+	.para01, .joinNow_in .para01, .sec03 .para01, .weOfferIn .para01 {
+		font-size: 18px;
+		padding-bottom: 15px;
+	}
+	.footr ul li a, .copyRight p {
+		font-size: 17px;
+	}
+	
 }
 
 
@@ -155,8 +169,8 @@
 @media only screen and (max-width: 1600px) {
 	.container-fluid { width: 100%; }
 	.list-reset a { padding: 25px 15px; }
-	.brandRow_btm_pic { width: 100px; height: 100px; }
-	.show-grid [class^=col-] span, .show-grid [class^=col-] { height: 190px; }
+	.brandRow_btm_pic { width: 140px; height: 140px; }
+	.show-grid [class^=col-] span, .show-grid [class^=col-] { height: 240px; }
 	.shadows { bottom: -17px; }
 	.everyoneSec .para01 { font-size: 20px; }
 	.buyApparen_right {  width: 90%; }
@@ -273,6 +287,17 @@
 	#sidenav .list-reset a { padding: 0;  width: 100%; display: block;}
 	#sidenav .bg-gray { background-color: #000; }
 	#sidenav img { width: 50%; }
+	.brandRow_btm_pic {
+		width: 120px;
+		height: 120px;
+	}
+
+	.show-grid [class^=col-] span, .show-grid [class^=col-] {
+		height: 220px;
+	}
+	.show-grid [class^=col-] span, .show-grid [class^=col-] {
+		font-size: 16px;
+	}
 
 
 	

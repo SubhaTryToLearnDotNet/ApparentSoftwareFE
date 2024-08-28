@@ -21,6 +21,8 @@
     <!-- // -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet" type="text/css" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.21.0/slimselect.css" rel="stylesheet" type="text/css" />
+    <!-- // swiper slide // -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
     <!-- <link href="~/Content/assets/css/font-awesome.min.css" rel="stylesheet" type="text/css"/> -->
 
     <script src="https://kit.fontawesome.com/91cafd3f0a.js" crossorigin="anonymous"></script>
@@ -375,6 +377,8 @@
     @*<script src="~/Content/assets/js/bootstrap.bundle.min.js"></script>*@
     <!-- // -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.js"></script>
+    <!-- // swiper -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
     <!-- // -->
     @*<script src="~/Content/assets/js/myScript.js"></script>*@
     <script src="~/Content/Web/js/bootstrap.bundle.min.js"></script>
@@ -516,6 +520,34 @@
         }
 
     </script>
+
+    <script>
+        $(document).ready(function () {
+            $('.customer-logos').slick({
+                slidesToShow: 6,
+                slidesToScroll: 1,
+                autoplay: true,
+                autoplaySpeed: 1500,
+                arrows: true,
+                dots: false,
+                prevArrow: '<button type="button" class="slick-prev"><i class="fa fa-angle-left"></i></button>', // Add left arrow
+                nextArrow: '<button type="button" class="slick-next"><i class="fa fa-angle-right"></i></button>', // Add right arrow
+                pauseOnHover: false,
+                responsive: [{
+                    breakpoint: 768,
+                    settings: {
+                        slidesToShow: 4
+                    }
+                }, {
+                    breakpoint: 520,
+                    settings: {
+                        slidesToShow: 3
+                    }
+                }]
+            });
+        });
+    </script>
+
 
     @RenderSection("Scripts", required: false)
 

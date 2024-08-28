@@ -216,7 +216,7 @@ hr {
 }
 
 .paragraph {
-	font-family: "ProximaNova-Regular";
+	font-family: "Montserrat", sans-serif;
 	font-size: 24px;
 	color: #000;
 	line-height: 32px;
@@ -352,14 +352,14 @@ nav,
 	float: left;
 }
 
-.navbar .nav-links .nav-item .nav-link {
-	font-family: "ProximaNova-Regular";
-	padding: 10px 20px !important;
-	display: block;
-	text-decoration: none;
-	color: #707070;
-	font-size: 18px !important;
-}
+	.navbar .nav-links .nav-item .nav-link {
+		font-family: "Montserrat", sans-serif;
+		padding: 10px 20px !important;
+		display: block;
+		text-decoration: none;
+		color: #707070;
+		font-size: 18px !important;
+	}
 
 .navbar .menu-show,
 .menu-hide {
@@ -532,7 +532,7 @@ nav,
 }
 
 .request_btn, .white_btn {
-	font-family: "ProximaNova-Regular" !important;
+	font-family: "Montserrat", sans-serif;
 	font-size: 18px !important;
 	padding: 8px 20px !important;
 	color: #fff !important;
@@ -701,7 +701,7 @@ nav,
 
 .sec01 .nav-pills .nav-link {
 	border-radius: 0;
-	font-family: "ProximaNova-Regular";
+	font-family: "Montserrat", sans-serif;
 	font-size: 18px;
 	color: #fff;
 }
@@ -1064,23 +1064,23 @@ ul.tabs {
 	width: 100%;
 }
 
-ul.tabs li {
-	float: left;
-	margin: 0;
-	cursor: pointer;
-	padding: 10px 30px;
-	height: 60px;
-	line-height: 42px;
-	border-top: none;
-	border-left: none;
-	border-bottom: none;
-	background-color: transparent;
-	font-family: "ProximaNova-Regular";
-	font-size: 18px;
-	color: #1F1F1F;
-	overflow: hidden;
-	position: relative;
-}
+	ul.tabs li {
+		float: left;
+		margin: 0;
+		cursor: pointer;
+		padding: 10px 30px;
+		height: 60px;
+		line-height: 42px;
+		border-top: none;
+		border-left: none;
+		border-bottom: none;
+		background-color: transparent;
+		font-family: "Montserrat", sans-serif;
+		font-size: 18px;
+		color: #1F1F1F;
+		overflow: hidden;
+		position: relative;
+	}
 
 .tab_last {
 	border-right: none;
@@ -1448,7 +1448,7 @@ ul.tabs li.active::before {
 }
 
 .small_text01 {
-	font-family: "ProximaNova-Regular" !important;
+	font-family: "Montserrat", sans-serif;
 	font-size: 18px !important;
 	color: #626262 !important;
 	display: inline-block;
@@ -1735,14 +1735,14 @@ ul.tabs li.active::before {
 	background-color: #0193D9;
 }
 
-.features_row .form-group label {
-	font-family: "ProximaNova-Regular";
-	position: relative;
-	cursor: pointer;
-	font-size: 16px;
-	color: #1F1F1F;
-	margin-bottom: 0;
-}
+	.features_row .form-group label {
+		font-family: "Montserrat", sans-serif;
+		position: relative;
+		cursor: pointer;
+		font-size: 16px;
+		color: #1F1F1F;
+		margin-bottom: 0;
+	}
 
 .features_row .form-group label:before {
 	content: '';
@@ -1946,7 +1946,7 @@ ul.tabs li.active::before {
 }
 
 .software_label {
-	font-family: "ProximaNova-Regular" !important;
+	font-family: "Montserrat", sans-serif;
 	display: inline-block !important;
 	margin-bottom: 10px !important;
 	font-size: 18px !important;
@@ -2259,12 +2259,12 @@ ul.tabs li.active::before {
 	display: inline-block;
 }
 
-.single_seller a {
-	font-family: "ProximaNova-Regular";
-	font-size: 18px;
-	color: #626262;
-	text-decoration: none;
-}
+	.single_seller a {
+		font-family: "Montserrat", sans-serif;
+		font-size: 18px;
+		color: #626262;
+		text-decoration: none;
+	}
 
 .seller_box {
 	width: 100%;
@@ -2440,14 +2440,14 @@ ul.tabs li.active::before {
 	list-style: none;
 }
 
-.selected_features ul li {
-	list-style: none;
-	position: relative;
-	padding: 0 0 10px 30px;
-	font-family: "ProximaNova-Regular";
-	font-size: 16px;
-	color: #1F1F1F;
-}
+	.selected_features ul li {
+		list-style: none;
+		position: relative;
+		padding: 0 0 10px 30px;
+		font-family: "Montserrat", sans-serif;
+		font-size: 16px;
+		color: #1F1F1F;
+	}
 
 .selected_features ul li::before {
 	content: "";
@@ -2634,7 +2634,7 @@ ul.tabs li.active::before {
 }
 
 .para04 {
-	font-family: "ProximaNova-Regular";
+	font-family: "Montserrat", sans-serif;
 	font-size: 12px !important;
 	color: #000 !important;
 	margin: 0;
@@ -2662,16 +2662,16 @@ b, strong {
 	margin-bottom: 10px;
 }
 
-.details_panel h6 {
-	font-family: "ProximaNova-Regular" !important;
-	font-size: 18px !important;
-	color: #000 !important;
-	display: flex;
-	-ms-flex-align: start;
-	align-items: flex-start;
-	text-align: left;
-	gap: 15px;
-}
+	.details_panel h6 {
+		font-family: "Montserrat", sans-serif;
+		font-size: 18px !important;
+		color: #000 !important;
+		display: flex;
+		-ms-flex-align: start;
+		align-items: flex-start;
+		text-align: left;
+		gap: 15px;
+	}
 
 .details_panel h6 a {
 	color: #0193D9 !important;
@@ -2797,7 +2797,7 @@ b, strong {
 
 #reviewSec select.select2 {
 	width: 100%;
-	font-family: "ProximaNova-Regular";
+	font-family: "Montserrat", sans-serif;
 	color: #000;
 	line-height: 28px;
 	background: #fff;
@@ -2812,7 +2812,7 @@ b, strong {
 }
 
 #reviewSec .select2-container--default .select2-selection--single .select2-selection__rendered {
-	font-family: "ProximaNova-Regular";
+	font-family: "Montserrat", sans-serif;
 	color: #000;
 	line-height: 28px;
 	background: #fff;
@@ -2933,7 +2933,7 @@ b, strong {
 }
 
 .review_top h6 {
-	font-family: "ProximaNova-Regular";
+	font-family: "Montserrat", sans-serif;
 	font-size: 16px;
 	color: #707070;
 }
@@ -2944,13 +2944,13 @@ b, strong {
 	list-style: none;
 }
 
-.title_review ul li {
-	font-family: "ProximaNova-Regular";
-	font-size: 14px;
-	color: #707070;
-	display: inline-block;
-	margin-right: 6px;
-}
+	.title_review ul li {
+		font-family: "Montserrat", sans-serif;
+		font-size: 14px;
+		color: #707070;
+		display: inline-block;
+		margin-right: 6px;
+	}
 
 .title_review li.active {
 	background: #0193D93b;
@@ -2958,7 +2958,7 @@ b, strong {
 
 .title_review ul li a {
 	display: inline-block;
-	font-family: "ProximaNova-regular";
+	font-family: "Montserrat", sans-serif;
 	font-size: 14px;
 	padding: 8px 8px;
 	color: #626262;
@@ -2987,15 +2987,15 @@ b, strong {
 	display: inline-block;
 }
 
-#addSection ul li a {
-	font-family: "ProximaNova-Regular";
-	font-size: 14px;
-	padding: 0;
-	color: #707070;
-	background-color: transparent !important;
-	border: none !important;
-	margin-left: 12px;
-}
+	#addSection ul li a {
+		font-family: "Montserrat", sans-serif;
+		font-size: 14px;
+		padding: 0;
+		color: #707070;
+		background-color: transparent !important;
+		border: none !important;
+		margin-left: 12px;
+	}
 
 #addSection ul li a i {
 	color: #bfbfbf;
@@ -3162,11 +3162,11 @@ b, strong {
 	line-height: normal;
 }
 
-.price_card h2 span {
-	font-family: "ProximaNova-Regular";
-	font-size: 16px;
-	color: #8B8B8B;
-}
+	.price_card h2 span {
+		font-family: "Montserrat", sans-serif;
+		font-size: 16px;
+		color: #8B8B8B;
+	}
 
 .price_card_btm {
 	width: 100%;
@@ -3233,11 +3233,11 @@ b, strong {
 	color: #fff !important;
 }
 
-.cat label input + span {
-	font-family: "ProximaNova-Regular";
-	font-size: 18px;
-	color: #fff;
-}
+	.cat label input + span {
+		font-family: "Montserrat", sans-serif;
+		font-size: 18px;
+		color: #fff;
+	}
 
 .cat input:checked + span {
 	color: #ffffff;
@@ -3571,19 +3571,19 @@ b, strong {
 	margin-right: 10px;
 }
 
-.rate_selection ul li a {
-	display: inline-block;
-	font-family: "ProximaNova-regular";
-	font-size: 16px;
-	padding: 8px 25px;
-	color: #626262;
-	background-color: transparent;
-	border: 1px solid #c7c7c7;
-	position: relative;
-	display: inline-block;
-	border-radius: 0px;
-	transition: all 0.4s ease;
-}
+	.rate_selection ul li a {
+		display: inline-block;
+		font-family: "Montserrat", sans-serif;
+		font-size: 16px;
+		padding: 8px 25px;
+		color: #626262;
+		background-color: transparent;
+		border: 1px solid #c7c7c7;
+		position: relative;
+		display: inline-block;
+		border-radius: 0px;
+		transition: all 0.4s ease;
+	}
 
 .rate_selection li a.active {
 	background-color: #0193D9;
@@ -4250,7 +4250,7 @@ b, strong {
 	}
 
 	.mail_vari h2 {
-		font-family: "ProximaNova-Light";
+		font-family: "Montserrat", sans-serif;
 		font-size: 42px;
 		color: #606060;
 		font-weight: 400;
@@ -4794,7 +4794,7 @@ b, strong {
 }
 
 	.categories_top h4 {
-		font-family: "ProximaNova-Regular";
+		font-family: "Montserrat", sans-serif;
 		font-size: 20px;
 		color: #fff;
 		margin-bottom: 0;
@@ -4825,12 +4825,12 @@ b, strong {
 }
 .categories_btm_pic img {
 	width: 100%;
-	height: 100%;
+	/*height: 100%;*/
 	overflow: hidden;
 }
 /*price sec date 14.10.2023*/
 .price_btn {
-	font-family: "ProximaNova-Regular" !important;
+	font-family: "Montserrat", sans-serif;
 	font-size: 18px !important;
 	padding: 8px 20px !important;
 	color: #fff !important;
@@ -4857,7 +4857,7 @@ b, strong {
 }
 
 .priceTextarea {
-	font-family: "ProximaNova-Light";
+	font-family: "Montserrat", sans-serif;
 	width: 100%;
 	background-color: transparent;
 	border: 1px solid #c7c7c7;
@@ -4876,19 +4876,19 @@ b, strong {
 }
 
 #subsPlan h5 {
-	font-family: "ProximaNova-Regular";
+	font-family: "Montserrat", sans-serif;
 	font-size: 16px;
 	color: #000;
 }
 
 .pricefield02 {
-	font-family: "ProximaNova-Regular";
+	font-family: "Montserrat", sans-serif;
 	font-size: 16px;
 	color: #000;
 }
 
 #select-month {
-	font-family: "ProximaNova-Light";
+	font-family: "Montserrat", sans-serif;
 	width: 100%;
 	background-color: transparent;
 	border: 1px solid #c7c7c7;
@@ -4989,7 +4989,7 @@ b, strong {
 		}
 
 .cancel_bg {
-	font-family: "ProximaNova-Regular" !important;
+	font-family: "Montserrat", sans-serif;
 	font-size: 13px !important;
 	padding: 5px 15px !important;
 	color: #fff !important;
@@ -5049,7 +5049,7 @@ b, strong {
 }
 
 .okBtn {
-	font-family: "ProximaNova-Regular" !important;
+	font-family: "Montserrat", sans-serif;
 	font-size: 18px !important;
 	padding: 6px 15px !important;
 	color: #fff !important;
@@ -5170,7 +5170,7 @@ b, strong {
 }
 
 	.chathead h3 {
-		font-family: "ProximaNova-Regular";
+		font-family: "Montserrat", sans-serif;
 		font-size: 16px;
 		color: #fff;
 		margin: 0;
@@ -5677,7 +5677,7 @@ b, strong {
 		}
 
 			.percentRow .button label > span {
-				font-family: "ProximaNova-Regular";
+				font-family: "Montserrat", sans-serif;
 				font-size: 18px;
 				font-weight: 400;
 			}
