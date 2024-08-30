@@ -566,6 +566,11 @@ header .bg-white {
 	color: var(--color-blue);
 }
 
+.topHead {
+	width: 95%;
+	margin: 0 auto !important;
+}
+
 /*-// add menu accordion------------------------------------*/
 
 .accordion {
@@ -689,10 +694,11 @@ header .bg-white {
 /* ============================================================================================ */
 
 .sec01 {
-	width: 100%;
+	width: 95%;
 	padding: 80px 0;
 	display: block;
 	position: relative;
+	margin: 0 auto;
 }
 
 .sec01 img {
@@ -740,7 +746,7 @@ header .bg-white {
 .sec02 {
 	width: 100%;
 	background-color: var(--bg-ofblue);
-	padding: 80px 0;
+	padding: 80px 60px;
 	display: block;
 	position: relative;
 }
@@ -976,7 +982,7 @@ header .bg-white {
 
 .sec03 {
 	width: 100%;
-	padding: 80px 0;
+	padding: 80px 60px;
 	display: block;
 	position: relative;
 }
@@ -1011,9 +1017,10 @@ header .bg-white {
 .sec04 {
 	width: 100%;
 	background-color: var(--bg-ofblue);
-	padding: 80px 0;
+	padding: 80px 60px;
 	display: block;
 	position: relative;
+	margin: 0 auto;
 }
 
 .sec04In {
@@ -1060,12 +1067,11 @@ header .bg-white {
 /* ============================================================================================ */
 
 .footr {
-	width: 100%;
+	width: 95%;
 	padding: 80px 0 20px;
 	display: block;
-	border-top: 1px solid #d2d2d2;
-	border-bottom: 1px solid #d2d2d2;
 	position: relative;
+	margin: 0 auto;
 }
 
 .f_media {
@@ -1121,7 +1127,7 @@ header .bg-white {
 .copyRight {
 	width: 100%;
 	padding: 20px;
-/*	border-top: 1px solid #d2d2d2;*/
+	border-top: 1px solid #d2d2d2;
 	text-align: center;
 }
 
@@ -1232,7 +1238,7 @@ header .bg-white {
 	display: block;
 	padding: 10px;
 	text-align: center;
-	height: 260px;
+	height: 240px;
 	background-color: #fff;
 	text-align: center;
 	border: 1px solid #e9e9e9;
@@ -1271,7 +1277,7 @@ header .bg-white {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	margin: 30px auto 0;
+	margin: 10px auto 0;
 	text-align: center;
 }
 
@@ -1353,10 +1359,11 @@ header .bg-white {
 .joinNow {
 	width: 100%;
 	background-color: var(--bg-blue);
-	padding: 80px 0;
+	padding: 80px 60px;
 	display: flex;
 	align-items: center;
 	position: relative;
+	margin: 0 auto;
 }
 
 .joinNow .heading02 {
@@ -1387,7 +1394,7 @@ header .bg-white {
 .weOffer {
 	width: 100%;
 	background-color: var(--bg-gray);
-	padding: 80px 0;
+	padding: 80px 60px;
 	text-align: center;
 	display: block;
 	position: relative;
@@ -1577,13 +1584,13 @@ header .bg-white {
 
 .slick-prev {
 	position: absolute;
-    left: -25px;
+    left: 0px;
     top: 65px;
 }
 
 .slick-next {
 	position: absolute;
-    right: -25px;
+    right: 0px;
     top: 65px;
 }
 
@@ -1643,7 +1650,7 @@ header .bg-white {
 }
 
 .accoRow {
-	width: 75%;
+	width: 95%;
 	margin: 0 auto;
 }
 
@@ -1879,7 +1886,7 @@ header .bg-white {
 
 .blog_panel {
 	width: 100%;
-	padding: 80px 0;
+	padding: 80px 60px;
 	display: block;
 	position: relative;
 }
@@ -2023,7 +2030,7 @@ header .bg-white {
 
 .blogDetail {
 	width: 100%;
-	padding: 0 0 80px;
+	padding: 0 50px 80px;
 	margin-top: -230px;
 	display: block;
 	position: relative;
@@ -2051,7 +2058,7 @@ header .bg-white {
 
 .contactUs {
 	width: 100%;
-	padding: 80px 0;
+	padding: 80px 60px;
 	display: block;
 	position: relative;
 }
