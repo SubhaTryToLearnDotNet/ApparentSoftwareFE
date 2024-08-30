@@ -44,14 +44,13 @@
     <!-- ====================================================================================================
       start header
     ====================================================================================================== -->
-
-    <header class="topHead py1 m0">
-        <!-- <div class="burger pointer flex flex-column justify-between mr2 d-none">
-                <span class="bg-white"></span>
-                <span class="bg-white"></span>
-                <span class="bg-white"></span>
-            </div> -->
-        <div class="container-fluid">
+    <div class="container-fluid">
+        <header class="topHead py1 m0">
+            <!-- <div class="burger pointer flex flex-column justify-between mr2 d-none">
+            <span class="bg-white"></span>
+            <span class="bg-white"></span>
+            <span class="bg-white"></span>
+        </div> -->
             <!-- <a class="white caps text-decoration-none h3 bold" href="#">Logo</a> -->
 
             <nav class="menus" id="dynamic-menu">
@@ -120,46 +119,46 @@
                                 @*<div class="admin_data">*@
                                 <!-- <div class="image"> <img src="images/logo.jpg" width="40" height="40"> </div> -->
                                 @*<div class="admin_name">
-                                        @{
-                                            var Name = Session["FirstName"].ToString();
-                                            var CompanyIcon = Session["CompanyIcon"].ToString();
-                                            if (CompanyIcon != null && CompanyIcon != "")
-                                            {
-                                                <a href="javascript:void(0);">
-                                                    <div class="userPicD">
-                                                        <img src="@CompanyIcon" alt="" />
-                                                    </div>
-                                                </a>
-                                            }
-                                            else
-                                            {
-                                                <div class="lyprofile-container userPicD">
-                                                    @Name.Substring(0, 1)
+                                    @{
+                                        var Name = Session["FirstName"].ToString();
+                                        var CompanyIcon = Session["CompanyIcon"].ToString();
+                                        if (CompanyIcon != null && CompanyIcon != "")
+                                        {
+                                            <a href="javascript:void(0);">
+                                                <div class="userPicD">
+                                                    <img src="@CompanyIcon" alt="" />
                                                 </div>
-                                            }
+                                            </a>
                                         }
-                                    </div>*@
+                                        else
+                                        {
+                                            <div class="lyprofile-container userPicD">
+                                                @Name.Substring(0, 1)
+                                            </div>
+                                        }
+                                    }
+                                </div>*@
                                 <!-- <div class="admin_dropdown_icon">
-                                  <i class="fas fa-sort-down"></i>
-                                </div> -->
+                              <i class="fas fa-sort-down"></i>
+                            </div> -->
                                 @*</div>
-                                    </div>*@
+                                </div>*@
                                 <!--<div class="account_dropdown">
-                                <div class="account_dropdown_body">
-                                    <div class="account_dropdown_item">
-                                        <a href="~/Home">Home</a>
-                                    </div>
-                                    <div class="account_dropdown_item">
-                                        <a href="~/Profile/customerprof">Profile</a>
-                                    </div>-->
-                                @*<div class="account_dropdown_item">
-                                        <a href="#">Setting</a>
-                                    </div>*@
-                                <!--<div class="account_dropdown_item">
-                                            <a href="~/SignOut/Index">Sign Out</a>
-                                        </div>
-                                    </div>
+                            <div class="account_dropdown_body">
+                                <div class="account_dropdown_item">
+                                    <a href="~/Home">Home</a>
+                                </div>
+                                <div class="account_dropdown_item">
+                                    <a href="~/Profile/customerprof">Profile</a>
                                 </div>-->
+                                @*<div class="account_dropdown_item">
+                                    <a href="#">Setting</a>
+                                </div>*@
+                                <!--<div class="account_dropdown_item">
+                                        <a href="~/SignOut/Index">Sign Out</a>
+                                    </div>
+                                </div>
+                            </div>-->
                             </div>
 
 
@@ -198,51 +197,51 @@
                                     </ul>
                                 </div>
                                 <!--<div class="admin_content">
-                                <div class="admin_data">
-                                    <!-- <div class="image"> <img src="images/logo.jpg" width="40" height="40"> </div> -->
+                            <div class="admin_data">
+                                <!-- <div class="image"> <img src="images/logo.jpg" width="40" height="40"> </div> -->
                                 <!--<div class="admin_name">
-                                    @{
-                                        //var CompanyName = Session["CompanyName"].ToString();
-                                        //var CompanyIcon = Session["CompanyIcon"].ToString();
-                                        //if (CompanyIcon != "" && CompanyIcon != null)
-                                        //{
-                                            <a href="javascript:void(0);">
-                                                <div class="userPicD">
+                                @{
+                                    //var CompanyName = Session["CompanyName"].ToString();
+                                    //var CompanyIcon = Session["CompanyIcon"].ToString();
+                                    //if (CompanyIcon != "" && CompanyIcon != null)
+                                    //{
+                                        <a href="javascript:void(0);">
+                                            <div class="userPicD">
 
-                                                    <img src="@CompanyIcon" alt="" />
+                                                <img src="@CompanyIcon" alt="" />
 
-                                                </div>
-                                            </a>
-                                        }
-                                        else
-                                        {
-                                            <div class="lyprofile-container userPicD">
-                                                @CompanyName.Substring(0, 1)
                                             </div>
-                                        }
+                                        </a>
                                     }
-                                </div>-->
+                                    else
+                                    {
+                                        <div class="lyprofile-container userPicD">
+                                            @CompanyName.Substring(0, 1)
+                                        </div>
+                                    }
+                                }
+                            </div>-->
                                 <!-- <div class="admin_dropdown_icon">
-                                  <i class="fas fa-sort-down"></i>
-                                </div> -->
+                              <i class="fas fa-sort-down"></i>
+                            </div> -->
                                 <!--</div>
-                                </div>
-                                <div class="account_dropdown">
-                                    <div class="account_dropdown_body">
-                                        <div class="account_dropdown_item">
-                                            <a href="~/Home">Home</a>
-                                        </div>
-                                        <div class="account_dropdown_item">
-                                            <a href="~/Profile/Index">Profile</a>
-                                        </div>
-                                        <div class="account_dropdown_item">
-                                                <a href="#">Setting</a>
-                                            </div>
-                                        <div class="account_dropdown_item">
-                                            <a href="~/SignOut/Index">Sign Out</a>
-                                        </div>
+                            </div>
+                            <div class="account_dropdown">
+                                <div class="account_dropdown_body">
+                                    <div class="account_dropdown_item">
+                                        <a href="~/Home">Home</a>
                                     </div>
-                                </div>-->
+                                    <div class="account_dropdown_item">
+                                        <a href="~/Profile/Index">Profile</a>
+                                    </div>
+                                    <div class="account_dropdown_item">
+                                            <a href="#">Setting</a>
+                                        </div>
+                                    <div class="account_dropdown_item">
+                                        <a href="~/SignOut/Index">Sign Out</a>
+                                    </div>
+                                </div>
+                            </div>-->
                             </div>
                         }
                         else
@@ -282,8 +281,9 @@
                     </div>
                 </div>
             </nav>
-        </div>
-    </header>
+
+        </header>
+    </div>
 
     <div id="overlay" class="fixed z3 top-0 left-0 bg-darken-4"></div>
 
@@ -323,52 +323,55 @@
     @RenderBody()
 
 
-    <footer>
+<footer>
+    <div class="container-fluid" style="border-top: 1px solid #d2d2d2;">
         <div class="footr">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                        <a href="#"><img src="~/Content/assets/images/main_logo.svg" alt="" /></a>
-                        <div class="f_media">
-                            <a href="#"><img src="~/Content/assets/images/media01.png" alt="" /></a>
-                            <a href="#"><img src="~/Content/assets/images/media02.png" alt="" /></a>
-                            <a href="#"><img src="~/Content/assets/images/media03.png" alt="" /></a>
-                            <a href="#"><img src="~/Content/assets/images/media04.png" alt="" /></a>
-                            <a href="#"><img src="~/Content/assets/images/media05.png" alt="" /></a>
-                        </div>
+
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                    <a href="#"><img src="~/Content/assets/images/main_logo.svg" alt="" /></a>
+                    <div class="f_media">
+                        <a href="#"><img src="~/Content/assets/images/media01.png" alt="" /></a>
+                        <a href="#"><img src="~/Content/assets/images/media02.png" alt="" /></a>
+                        <a href="#"><img src="~/Content/assets/images/media03.png" alt="" /></a>
+                        <a href="#"><img src="~/Content/assets/images/media04.png" alt="" /></a>
+                        <a href="#"><img src="~/Content/assets/images/media05.png" alt="" /></a>
                     </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                        <h6>Important Links</h6>
-                        <div class="underline01"></div>
-                        <ul>
-                            <li><a href="#">Artists</a></li>
-                            <li><a href="/blog">Blog</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                        <h6>For Sellers</h6>
-                        <div class="underline01"></div>
-                        <ul>
-                            <li><a href="#">Join</a></li>
-                            <li><a href="#">How it works</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                        <h6>For Buyers</h6>
-                        <div class="underline01"></div>
-                        <ul>
-                            <li><a href="#">Uploads</a></li>
-                            <li><a href="#">Account Settings</a></li>
-                        </ul>
-                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                    <h6>Important Links</h6>
+                    <div class="underline01"></div>
+                    <ul>
+                        <li><a href="#">Artists</a></li>
+                        <li><a href="/blog">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                    <h6>For Sellers</h6>
+                    <div class="underline01"></div>
+                    <ul>
+                        <li><a href="#">Join</a></li>
+                        <li><a href="#">How it works</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                    <h6>For Buyers</h6>
+                    <div class="underline01"></div>
+                    <ul>
+                        <li><a href="#">Uploads</a></li>
+                        <li><a href="#">Account Settings</a></li>
+                    </ul>
                 </div>
             </div>
         </div>
-        <!-- // -->
+    </div>
+    <!-- // -->
+    <div class="container-fluid">
         <div class="copyRight">
             <p>Copyright &copy; @currentYear.ToString() Apparent Software. All rights reserved.</p>
         </div>
-    </footer>
+        </div>
+</footer>
 
     <!-- ====================================================================================================
       start script

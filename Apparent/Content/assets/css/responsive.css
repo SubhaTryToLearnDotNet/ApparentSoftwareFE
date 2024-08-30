@@ -6,8 +6,8 @@
 	.container-fluid {
 		width: 1600px;
 		margin: 0 auto;
-		padding-right: 15px;
-		padding-left: 15px;
+		padding-right: 0;
+		padding-left: 0;
 	}
 
 	.buyApparen .container-fluid {
@@ -43,12 +43,12 @@
 
 @media only screen and (max-device-width : 2560px) {
 
-	.container-fluid {
+	/*.container-fluid {
 		width: 1600px;
 		margin: 0 auto;
 		padding-right: 15px;
 		padding-left: 15px;
-	}
+	}*/
 
 	.buyApparen .container-fluid {
 		width: 1600px;
@@ -99,8 +99,10 @@
 	.container-fluid {
 		width: 100% !important;
 		margin: 0 auto;
-		padding-right: 45px;
-		padding-left: 45px;
+		padding-right: 0px;
+		padding-left: 0px;
+		margin-right: 0;
+		margin-left: 0;
 	}
 
 	.buyApparen .container-fluid {
@@ -411,7 +413,7 @@
 	.copyRight p { font-size: 14px; }
 	.buyApparen .container-fluid { padding-right: 15px; padding-left: 15px; }
 	.buyApparen_right, .buyApparen_left { padding-left: 0; padding-right: 0; }
-	.show-grid [class^=col-] span, .show-grid [class^=col-] { height: 160px; }
+	.show-grid [class^=col-] span, .show-grid [class^=col-] { height: 200px; }
 	.banner { min-height: 200px; }
 	.weOfferIn .card { min-height: 290px; }
 	.swiper-horizontal { margin-top: -120px; }
