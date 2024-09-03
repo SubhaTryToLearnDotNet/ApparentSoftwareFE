@@ -2013,7 +2013,8 @@ header .bg-white {
 .blogBnr {
 	width: 100%;
 	min-height: 475px;
-	padding-top: 80px;
+	padding-top: 30px;
+	margin-top: 100px;
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;

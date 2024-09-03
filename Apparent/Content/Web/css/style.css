@@ -4332,7 +4332,7 @@ b, strong {
 
 .user_page {
 	width: 100%;
-	padding: 80px 0;
+	padding: 80px 60px;
 	display: inline-block;
 }
 
@@ -6548,7 +6548,7 @@ font-size: 14px !important;
 
 .signinNew .txt_field input {
 	width: 100%;
-	padding: 0 15px 0 40px;
+	padding: 0 40px 0 15px;
 	height: 40px;
 	font-size: 16px;
 	border: none;
@@ -6642,7 +6642,7 @@ signinNew .txt_field select{
 .signinNew i {
 	position: absolute;
 	top: 12px;
-	left: 10px;
+	right: 10px;
 }
 
 .signinNew .heading02 {
@@ -6723,7 +6723,7 @@ signinNew .txt_field select{
 .signinNew .createAccount {
 	width: 100%;
 	display: block;
-	text-align: center;
+	text-align: right;
 	font-size: 18px;
 	margin-top: 5%;
 }
@@ -7027,11 +7027,11 @@ signinNew .txt_field select{
 	display: block;
 	padding: 10px;
 	text-align: center;
-	height: 220px;
+	height: 230px;
 	background-color: #fff;
 	text-align: center;
 	border: 1px solid #e9e9e9;
-	font-size: 13px;
+	font-size: 20px;
 	color: #000;
 	font-weight: 500;
 	position: relative;
@@ -7044,13 +7044,13 @@ signinNew .txt_field select{
 }
 
 .softRowBox_btm_pic {
-	width: 120px;
-	height: 120px;
+	width: 160px;
+	height: 160px;
 	overflow: hidden;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	margin: 30px auto 0;
+	margin: 10px auto 0;
 	text-align: center;
 }
 
@@ -7080,4 +7080,13 @@ signinNew .txt_field select{
 
 .dropdown-toggle::after {
 	display: none;
+}
+
+@media only screen and (max-device-width : 3840px) {
+	.signinNew .container-fluid {
+		width: 1600px;
+		margin: 0 auto;
+		padding-right: 15px;
+		padding-left: 15px;
+	}
 }

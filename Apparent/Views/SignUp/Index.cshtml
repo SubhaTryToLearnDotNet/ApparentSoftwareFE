@@ -31,7 +31,7 @@
 
         .select-wrapper select {
             width: calc(100% - 35px); /* Increase width to accommodate the arrow */
-            padding: 10px 10px 10px 40px; /* Increase right padding to accommodate the arrow */
+            padding: 10px 40px 10px 10px; /* Increase right padding to accommodate the arrow */
             border-radius: 5px;
             appearance: none;
             -webkit-appearance: none;
@@ -48,10 +48,11 @@
             content: '\25BC';
             position: absolute;
             top: 50%;
-            right: 10px; /* Adjust the distance of the arrow from the select element */
+            right: 10px;
             transform: translateY(-50%);
             pointer-events: none;
-            z-index: 0; /* Ensure arrow is below the select */
+            z-index: 0;
+            font-size: 30px;
         }
 
     </style>
@@ -94,16 +95,17 @@
             </div>
         </section>*@
     <section class="signinNew">
-        <div class="container">
+        <div class="container-fluid">
             <a href="/Home"> <img class="signinNewlogo" src="~/Content/Web/images/Apparent-Software-Colored-H-200px.png" alt="" /> </a>
             <div class="row align-items-center">
                 <div class="col-lg-6 col-md-6 col-12">
                     <img src="~/Content/Web/images/Seller_SigmUp_Pic01.jpg" alt="" />
-                    <span class="terms createAccount"><a href="/SignIn">I have already an account</a></span>
+                    @*<span class="terms createAccount"><a href="/SignIn">I have already an account</a></span>*@
                 </div>
                 <div class="col-lg-6 col-md-6 col-12">
                     <div class="signinNew_right">
                         <h2 class="heading02">Seller Registration</h2>
+                        <span class="terms createAccount"><a href="/SignIn">I have already an account</a></span>
                         <form id="frm1" action="~/SignUp/submit" method="post" enctype="multipart/form-data">
                             <div class="txt_field">
                                 <input type="text" name="CompanyName" id="CompanyName" placeholder="Company Name" required />
@@ -352,36 +354,38 @@
 
                                     </select>
                                     <span></span>
-                                    <i class="fas fa-globe"></i>
+                                    @*<i class="fas fa-globe"></i>*@
                                 </div>
-                                </div>
-                                <div class="txt_field">
-                                    <input type="password" id="Password" name="Password" placeholder="Password" required />
-                                    <span></span>
-                                    <i class="fas fa-lock toggle-password" data-target="Password"></i>
-                                </div>
-                                <span class="red charlength_validate">
-                                    Password must be minimum of 8 characters
-                                </span>
-                                <span class="red capital_validate">
-                                    Password must include at-least one uppercase letter e.g.
-                                    ABC
-                                </span>
-                                <span class="red smallcase_validate">
-                                    Password must include at-least one lowercase letter e.g. abc
-                                </span>
-                                <span class="red numeric_validate">Password must include at-least one number e.g. 123 </span>
-                                <span class="red special_validate">Password must include at-least one symbol e.g. @@!#$? </span>
-                                <div class="txt_field">
-                                    <input type="password" id="Confirmpassword" name="Confirmpassword" placeholder="Repeat Your Password" required />
-                                    <span></span>
-                                    <i class="fas fa-lock toggle-password" data-target="Confirmpassword"></i>
-                                </div>
-                                <span class="red cnfrm_and_check">
-                                    Password and Repeat password must need to matched
-                                </span>
-                                <input type="button" onclick="fromvaild()" value="Register" />
-</form>
+                            </div>
+                            <div class="txt_field">
+                                <input type="password" id="Password" name="Password" placeholder="Password" required />
+                                <span></span>
+                                @*<i class="fas fa-lock toggle-password" data-target="Password"></i>*@
+                                <i class="toggle-password fa fa-fw fa-eye-slash"></i>
+                            </div>
+                            <span class="red charlength_validate">
+                                Password must be minimum of 8 characters
+                            </span>
+                            <span class="red capital_validate">
+                                Password must include at-least one uppercase letter e.g.
+                                ABC
+                            </span>
+                            <span class="red smallcase_validate">
+                                Password must include at-least one lowercase letter e.g. abc
+                            </span>
+                            <span class="red numeric_validate">Password must include at-least one number e.g. 123 </span>
+                            <span class="red special_validate">Password must include at-least one symbol e.g. @@!#$? </span>
+                            <div class="txt_field">
+                                <input type="password" id="Confirmpassword" name="Confirmpassword" placeholder="Repeat Your Password" required />
+                                <span></span>
+                                @*<i class="fas fa-lock toggle-password" data-target="Confirmpassword"></i>*@
+                                <i class="toggle-password fa fa-fw fa-eye-slash"></i>
+                            </div>
+                            <span class="red cnfrm_and_check">
+                                Password and Repeat password must need to matched
+                            </span>
+                            <input type="button" onclick="fromvaild()" value="Register" />
+                        </form>
                     </div>
                     <p class="paragraph">Copyright &copy; @currentYear.ToString() Apparent. All Rights Reserved.</p>
                 </div>
@@ -499,6 +503,17 @@
                 }
             });
         });
+    });
+</script>
+<script>
+    $(".toggle-password").click(function () {
+        $(this).toggleClass("fa-eye fa-eye-slash");
+        input = $(this).parent().find("input");
+        if (input.attr("type") == "password") {
+            input.attr("type", "text");
+        } else {
+            input.attr("type", "password");
+        }
     });
 </script>
 <script>

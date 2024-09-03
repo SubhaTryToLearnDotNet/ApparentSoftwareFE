@@ -34,8 +34,8 @@
         }
 
         #register .request_btn {
-            font-family: "ProximaNova-Regular" !important;
-            font-size: 18px !important;
+            font-family: "Montserrat", sans-serif;
+            font-size: 16px !important;
             padding: 10px 20px !important;
             color: #fff !important;
             background-color: #0193D9 !important;
@@ -48,6 +48,7 @@
             text-align: center;
             min-width: 125px;
             line-height: normal;
+            font-weight: 500;
         }
         .registerRow {
             width: 80%;
@@ -62,8 +63,8 @@
         }
 
         #register .request_btn, #forgotPass .request_btn {
-            font-family: "ProximaNova-Regular" !important;
-            font-size: 18px !important;
+            font-family: "Montserrat", sans-serif;
+            font-size: 16px !important;
             padding: 12px 20px !important;
             color: #fff !important;
             background-color: #0193D9 !important;
@@ -76,6 +77,7 @@
             text-align: center;
             min-width: 125px;
             line-height: normal;
+            font-weight: 500;
         }
 
         #forgotPass .registerRow img {
@@ -136,16 +138,17 @@
             </div>
         </section>*@
     <section class="signinNew">
-        <div class="container">
+        <div class="container-fluid">
             <a href="/"> <img class="signinNewlogo" src="~/Content/Web/images/Apparent-Software-Colored-H-200px.png" alt="" /> </a>
             <div class="row align-items-center">
                 <div class="col-lg-6 col-md-6 col-12">
                     <img src="~/Content/Web/images/login.png" alt="" />
-                    <span class="terms createAccount"><a href="#" class="text-primary" style="text-align:right" data-toggle="modal" data-target="#register">Create an account</a></span>
+                    @*<span class="terms createAccount"><a href="#" class="text-primary" style="text-align:right" data-toggle="modal" data-target="#register">Create an account</a></span>*@
                 </div>
                 <div class="col-lg-6 col-md-6 col-12">
                     <div class="signinNew_right">
                         <h2 class="heading02">Sign In</h2>
+                        <span class="terms createAccount"><a href="#" class="text-primary" style="text-align:right" data-toggle="modal" data-target="#register">Create an account</a></span>
                         <form id="logfrm01" method="post" action="~/Signin/signin">
                             <div class="txt_field">
                                 <input type="text" name="CompanyEmail" id="CompanyEmail" placeholder="Email" required />
@@ -157,23 +160,24 @@
                                 <input type="password" name="Password" id="Password" placeholder="Password" required />
                                 <span></span>
                                 <!-- <label>Password</label> -->
-                                <i class="fas fa-lock toggle-password" data-target="Password"></i>
+                                @*<i class="fas fa-lock toggle-password" data-target="Password"></i>*@
+                                <i class="toggle-password fa fa-fw fa-eye-slash"></i>
                             </div>
                             <!-- <div class="pass">Forgot Password</div> -->
                             <div class="comment-form-cookies-consent mb-3 text-right">
                                 @*<input id="wp-comment-cookies-consent" name="wp-comment-cookies-consent" type="checkbox" value="yes" />
-                                    <label for="wp-comment-cookies-consent">Remember me </label>*@
+                <label for="wp-comment-cookies-consent">Remember me </label>*@
                                 <a href="javascript:void(0);" class="text-primary" data-toggle="modal" data-target="#forgotPass">Forgot password?</a>
                             </div>
 
                             <input type="button" id="Btn02" value="Login" />
                             @*<div class="media_box">
-                                    <h6>Or sign in with</h6>
-                                    <a href="#"><img src="assets/images/media01.png" alt="" /></a>
-                                    <a href="#"><img src="assets/images/media02.png" alt="" /></a>
-                                    <a href="#"><img src="assets/images/media03.png" alt="" /></a>
-                                    <a href="#"><img src="assets/images/media04.png" alt="" /></a>
-                                </div>*@
+                <h6>Or sign in with</h6>
+                <a href="#"><img src="assets/images/media01.png" alt="" /></a>
+                <a href="#"><img src="assets/images/media02.png" alt="" /></a>
+                <a href="#"><img src="assets/images/media03.png" alt="" /></a>
+                <a href="#"><img src="assets/images/media04.png" alt="" /></a>
+            </div>*@
                             <!-- <div class="sigunup_link">Not a member?<a href="#">Signup</a></div> -->
                         </form>
                     </div>
@@ -392,6 +396,17 @@
                 $("#logfrm01").submit();
         }
     }
+</script>
+<script>
+    $(".toggle-password").click(function () {
+        $(this).toggleClass("fa-eye fa-eye-slash");
+        input = $(this).parent().find("input");
+        if (input.attr("type") == "password") {
+            input.attr("type", "text");
+        } else {
+            input.attr("type", "password");
+        }
+    });
 </script>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
