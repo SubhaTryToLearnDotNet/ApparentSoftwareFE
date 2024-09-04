@@ -203,6 +203,26 @@
 	.categories_btm { margin: 10px auto 0; width: 90px; height: 90px;}
 	.categories_box { height: 190px; }
 	.sec02 .nav-pills .nav-link { font-size: 22px; }
+/**/
+	.topHead {
+		width: 100%;
+	}
+	.show-grid [class^=col-] span, .show-grid [class^=col-] {
+		height: 220px;
+		font-size: 16px;
+	}
+	.brandRow {
+		min-height: 300px;
+	}
+	.footr {
+		width: 100%;
+	}
+	.joinNow {
+		width: 100%;
+		padding: 80px 0px;
+	}
+
+
 	
 
 
@@ -293,12 +313,20 @@
 		width: 120px;
 		height: 120px;
 	}
-
 	.show-grid [class^=col-] span, .show-grid [class^=col-] {
 		height: 220px;
 	}
 	.show-grid [class^=col-] span, .show-grid [class^=col-] {
 		font-size: 16px;
+	}
+	.menuPoint {
+		gap: 15px;
+	}
+	.show-grid [class^=col-] span, .show-grid [class^=col-] {
+		height: 190px;
+	}
+	.f_media a {
+		margin-right: 5px;
 	}
 
 
@@ -375,6 +403,9 @@
 	.sec02 .tab-pane { margin-bottom: 10px; }
 	.sec02 .card { border-radius: 5px !important; }
 	.sec02Top { margin-bottom: 10px; }
+	.menuPoint .menu-hide {
+		display: none;
+	}
 
 
 }
