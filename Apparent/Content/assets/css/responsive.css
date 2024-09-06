@@ -180,12 +180,22 @@
 	.buyApparen_left { padding-left: 60px; }
 	.sec02 .nav-pills .nav-link { font-size: 24px; }
 	.categories_box { height: 210px; }
+	ul.tabs li {
+		padding: 10px 15px;
+		font-size: 18px;
+	}
+	.single_seller a {
+		left: 8%;
+	}
+	.softRowBox {
+		font-size: 16px;
+	}
 	
 
 }
 
 @media only screen and (max-width : 1440px) {
-	.container-fluid{ width:100%; padding-right: 50px; padding-left: 50px;}
+	/*.container-fluid{ width:100%; padding-right: 50px; padding-left: 50px;}*/
 	.buyApparen_right { width: 100%; padding-right: 50px;}
 	.buyApparen_left { padding-left: 50px; width: 100%;}
 	.heading01 { font-size: 50px; }
@@ -194,7 +204,7 @@
 	.brandRowIn { width: 100%; }
 	.joinNow_in .para01 { width: 80%; }
 	.weOfferIn .card { min-height: 370px; padding: 30px 15px;}
-	.weOfferIn .para01 { font-size: 17px; line-height: 22px;}
+	.weOfferIn .para01 { font-size: 16px; line-height: 22px;}
 	.heading05 { font-size: 22px; }
 	.slide_row_l { padding: 35px 15px 35px 25px; }
 	.slide_row { width: 80%; }
@@ -219,7 +229,24 @@
 	}
 	.joinNow {
 		width: 100%;
-		padding: 80px 0px;
+		padding: 80px 30px;
+	}
+	/*.footr {
+		width: 95%;
+	}*/
+
+	.menus {
+		padding: 15px 30px;
+	}
+	.slide_row .para02, .mel-content .para02 {
+		font-size: 16px !important;
+		line-height: 24px;
+	}
+	.heading02 {
+		font-size: 42px;
+	}
+	.video-upload, .video_pic {
+		height: 210px !important;
 	}
 
 
@@ -241,6 +268,9 @@
 	.account_dropdown {
 		top: 86px;
 		right: 145px;
+	}
+	.video-upload, .video_pic {
+		height: 190px !important;
 	}
 
 
@@ -267,11 +297,11 @@
 }
 
 @media only screen  and (max-width: 1024px) {
-	.container-fluid { width: 100%; padding-right: 15px; padding-left: 15px; }
-	.everyoneSec, .buyApparen, .joinNow, .sec03, .weOffer, .blog_panel, .contactUs, .sec01, .sec04, .sec02, .faqRow { padding: 60px 0; }
+	/*.container-fluid { width: 100%; padding-right: 15px; padding-left: 15px; }*/
+	/*.everyoneSec, .buyApparen, .joinNow, .sec03, .weOffer, .blog_panel, .contactUs, .sec01, .sec04, .sec02, .faqRow { padding: 60px 0; }*/
 	.logoSlide {padding: 60px 0 0;}
 	.blogDetail { padding: 0 0 60px; }
-	.footr { padding: 60px 0 20px; }
+	.footr { padding: 60px 15px 20px; }
 	.heading01 { font-size: 42px; }
 	.everyoneSec .para01 { width: 100%; }
 	.buyApparen_right { padding-left: 30px; padding-right: 30px;}
@@ -284,7 +314,7 @@
 	.common_btn01 { min-width: 150px; }
 	.sellApparen { padding: 0 0 60px !important; }
 	.joinNow_in .para01 { font-size: 16px; line-height: 26px; width: 90%;}
-	.weOfferIn .card { min-height: 380px; }
+	.weOfferIn .card { min-height: 450px; }
 	.banner { min-height: 250px; }
 	.swiper-horizontal { margin-top: -200px; }
 	.slide_row { width: 95%; }
@@ -328,6 +358,46 @@
 	.f_media a {
 		margin-right: 5px;
 	}
+	.sec03 .para01 {
+		font-size: 16px;
+		width: 100%;
+		line-height: 24px;
+	}
+	.weOffer .heading04 {
+		width: 100%;
+	}
+
+	.brandRowIn .row {
+		flex-wrap: nowrap;
+	}
+
+	.brandRowIn {
+		width: 100% !important;
+	}
+	.sec04In_card .para01 {
+		line-height: 24px;
+	}
+	.blog_panel {
+		padding: 80px 15px;
+	}
+	.contactUs {
+		padding: 80px 15px;
+	}
+	.single_seller a {
+		top: 5%;
+	}
+	.user_page {
+		padding: 80px 15px;
+	}
+
+	.user_page .nav-pills .nav-link {
+		font-size: 16px;
+	}
+
+
+
+
+
 
 
 	
@@ -339,9 +409,20 @@
 	.weOffer .heading04 { width: 70%; }
 	.weOfferIn { margin-top: 60px; }
 	.weOfferIn .card { min-height: 300px; }
-	.weOfferIn .picture01 { margin: 0 auto 25px; }
+	.weOfferIn .picture01 { margin: 0 auto 10px; }
 	.weOffer .heading04 { width: 100%; }
 	.mel-content h4 { font-size: 22px; }
+	.sec03 {
+		width: 95%;
+		padding: 80px 0px;
+		margin: 0 auto;
+	}
+	.brandRowIn .row {
+		flex-wrap: wrap;
+	}
+	.m_h {
+		height: auto !important;
+	}
 
 	
 
@@ -384,7 +465,68 @@
 	.blogDetail { margin-top: -80px; }
 	.para04 { font-size: 20px !important; line-height: 28px !important; }
 	.slick-slide img { width: 100%; }
-	
+	.brandRow {
+		min-height: auto;
+	}
+	.sec02, .sec04 {
+		padding: 60px 15px;
+	}
+	.footr {
+		padding: 60px 15px 20px;
+	}
+	.accoRow .accordion-header h4 {
+		font-size: 20px;
+	}
+
+	.accoRow .accordion-body p {
+		line-height: 24px;
+	}
+	.slide_row .heading04 {
+		font-size: 22px;
+	}
+	.field01, .formBox select, .formBox label {
+		font-size: 15px;
+	}
+	.address ul li {
+		font-size: 16px;
+	}
+
+	.single_seller {
+		height: 300px;
+	}
+
+	.seller_box h3 {
+		font-size: 20px;
+	}
+
+	.minus_margin {
+		margin-top: -160px;
+	}
+
+	.seller_name {
+		width: 180px;
+		height: 180px;
+	}
+	.tabCenter {
+		left: 0;
+		transform: translate(10%, -50%);
+	}
+	ul.tabs li {
+		font-size: 16px;
+	}
+	.software_sec {
+		padding: 50px 15px;
+	}
+	.video-upload, .video_pic {
+		height: 150px !important;
+	}
+
+
+
+
+
+
+
 
 
 
@@ -405,6 +547,15 @@
 	.sec02Top { margin-bottom: 10px; }
 	.menuPoint .menu-hide {
 		display: none;
+	}
+	.joinNow {
+		padding: 80px 20px;
+	}
+	.footr ul li a, .copyRight p {
+		font-size: 15px;
+	}
+	.video-upload, .video_pic {
+		height: 210px !important;
 	}
 
 
@@ -437,7 +588,14 @@
 }
 
 @media only screen  and (max-width: 480px) {
-	.everyoneSec, .buyApparen, .joinNow, .sec03, .weOffer, .blog_panel, .contactUs, .sec01, .sec04, .sec02, .faqRow { padding: 50px 0; }
+	.container-fluid {
+		width: 100%;
+		padding-right: 15px;
+		padding-left: 15px;
+		margin-right: auto;
+		margin-left: auto;
+	}
+	.everyoneSec, .buyApparen, .joinNow, .sec03, .weOffer, .blog_panel, .contactUs, .sec01, .sec04, .sec02, .faqRow { padding: 50px 15px; }
 	.blogDetail { padding: 0 0 50px; }
 	.buyApparen_right, .buyApparen_left { padding-left: 15px; padding-right: 15px; }
 	.common_btn01 { padding: 10px 15px !important; }
@@ -461,15 +619,90 @@
 	.categories_box { height: 145px; }
 	.brandRow_btm_pic { margin: 12px auto 0; }
 	.list-reset a { font-size: 16px; }
-	.join { font-size: 14px !important; padding: 10px 5px !important;}
+	.join { font-size: 12px !important; padding: 10px 0px !important;}
 	.join img { width: 30px; }
-	.menus img { width: 75%; }
+	.menus img { width: 65%; }
 	.footr img { width: 38%; }
-	.join  img { width: 22%; }
+	.join  img { width: 18%; }
 	.f_media img { width: 27px; }
 	.address ul li { font-size: 16px; }
+	.brandRow_btm_pic {
+		width: 90px;
+		height: 90px;
+	}
+	.show-grid [class^=col-] span, .show-grid [class^=col-] {
+		height: 155px;
+	}
+	.menus {
+		padding: 15px 0;
+	}
+	.weOffer, .sec03, .joinNow {
+		padding: 50px 15px;
+	}
+	.sec01, .sec03 {
+		width: 100%;
+	}
+	.sec04In_card {
+		padding: 0;
+	}
+	.join img {
+		padding-left: 5px;
+	}
+	.footr {
+		padding: 60px 0px 20px;
+	}
+	.buyApparen {
+		padding: 50px 0px;
+	}
+	/*.menuPoint {
+		width: 55%;
+	}*/
+	.buyApparen, .sec01, .sec03, .faqRow, .blog_panel, .contactUs {
+		padding: 50px 0px;
+	}
+	.swiper-horizontal {
+		margin-top: -50px;
+	}
+	.single_seller {
+		height: 200px;
+	}
+	.minus_margin {
+		margin-top: -110px;
+	}
 
+	.seller_name {
+		width: 120px;
+		height: 120px;
+	}
 
+	.seller_box h3 {
+		font-size: 16px;
+	}
+	.request_btn, .white_btn {
+		font-size: 16px !important;
+		padding: 8px 15px !important;
+	}
+	.header_dropdown img {
+		width: 100%;
+	}
+	.py1 {
+		padding-top: 0;
+		padding-bottom: 0;
+	}
+	.software_sec {
+		padding: 50px 0px;
+	}
+	.user_page {
+		padding: 50px 0px;
+	}
+
+	.user_page .table thead th, #salesdetails .table thead th {
+		font-size: 14px;
+	}
+	.progressbar li {
+		font-size: 14px;
+		word-wrap: break-word;
+	}
 
 	
 
@@ -477,7 +710,10 @@
 }
 
 @media only screen  and (max-width: 430px) {
-	
+
+	.heading04, .heading02, .heading05 {
+		font-size: 22px;
+	}
 
 	
 }
@@ -499,7 +735,7 @@
 @media only screen  and (max-width: 390px) {
 	.weOfferIn .card { min-height: 320px; }
 	.blogDetail { margin-top: -40px; }
-	.menuPoint { width: 60%; }
+	.menuPoint { width: 45%; }
 
 	
 	
@@ -507,6 +743,9 @@
 
 @media only screen  and (max-width: 384px) {
 	.shadows { bottom: -16px; }
+	.menuPoint {
+		gap: 8px;
+	}
 	
 
 }
@@ -517,7 +756,7 @@
 }
 
 @media only screen  and (max-width: 360px) {
-	.menuPoint { width: 65%; }
+	
 	
 
 }

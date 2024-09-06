@@ -7082,6 +7082,12 @@ signinNew .txt_field select{
 	display: none;
 }
 
+.tabBoxLft {
+	width: 100%;
+	padding: 15px;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
 @media only screen and (max-device-width : 3840px) {
 	.signinNew .container-fluid {
 		width: 1600px;

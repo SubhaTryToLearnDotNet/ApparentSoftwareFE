@@ -5,37 +5,39 @@
 <div class="user_page">
     <div class="container">
         <div class="row">
-            <div class="col-md-3 pt-3 m_h" style="box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);">
-                <div class="profile-pic-wrapper">
-                    <div class="pic-holder">
-                        <img id="profilePic" class="pic" src="@(Session["CompanyIcon"]!= ""? Session["CompanyIcon"].ToString():"/Content/Web/images/company.png")">
-                        <Input class="uploadProfileInput" type="file" name="profile_pic" id="newProfilePhoto" accept="image/*" style="opacity: 0;" />
-                        <label for="newProfilePhoto" class="upload-file-block">
-                            <div class="text-center">
-                                <div class="mb-2">
-                                    <i class="fa fa-camera fa-2x"></i>
+            <div class="col-md-3 pt-3 m_h">
+                <div class="tabBoxLft">
+                    <div class="profile-pic-wrapper">
+                        <div class="pic-holder">
+                            <img id="profilePic" class="pic" src="@(Session["CompanyIcon"]!= ""? Session["CompanyIcon"].ToString():"/Content/Web/images/company.png")">
+                            <Input class="uploadProfileInput" type="file" name="profile_pic" id="newProfilePhoto" accept="image/*" style="opacity: 0;" />
+                            <label for="newProfilePhoto" class="upload-file-block">
+                                <div class="text-center">
+                                    <div class="mb-2">
+                                        <i class="fa fa-camera fa-2x"></i>
+                                    </div>
+                                    <div class="text_uppercase">
+                                        Update <br /> Profile Photo
+                                    </div>
                                 </div>
-                                <div class="text_uppercase">
-                                    Update <br /> Profile Photo
-                                </div>
-                            </div>
-                        </label>
+                            </label>
+                        </div>
+                        <h4>@(Session["CompanyName"] != null? Session["CompanyName"].ToString():"")</h4>
+
                     </div>
-                    <h4>@(Session["CompanyName"] != null? Session["CompanyName"].ToString():"")</h4>
-                   
+                    <br />
+                    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+
+                        <a class="nav-link" id="v-pills-profile-tab" href="~/Profile" role="tab" aria-controls="v-pills-profile" aria-selected="false"> <i class="fa-solid fa-address-card"></i> Profile Details </a>
+                        <a class="nav-link" id="v-pills-messages-tab" href="~/Product/review" role="tab" aria-controls="v-pills-messages" aria-selected="false">
+                            <i class="fa fa-star-o" aria-hidden="true"></i> Reviews
+                        </a>
+                        <a class="nav-link" id="v-pills-products-tab" href="~/Product/Getproducts" role="tab" aria-controls="v-pills-products" aria-selected="false"> <i class="fa fa-cog" aria-hidden="true"></i> Products </a>
+                        <a class="nav-link" id="v-pills-products-tab" href="~/Category/Index" role="tab" aria-controls="v-pills-products" aria-selected="false"> <i class="fa fa-th-large" aria-hidden="true"></i> Category </a>
+                        <a class="nav-link active" id="v-pills-products-tab" href="~/Sales/Index" role="tab" aria-controls="v-pills-products" aria-selected="false"><i class="fa fa-line-chart" aria-hidden="true"></i> Sales </a>
+                    </div>
+                    </div>
                 </div>
-                <br />
-                <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                  
-                    <a class="nav-link" id="v-pills-profile-tab" href="~/Profile" role="tab" aria-controls="v-pills-profile" aria-selected="false"> <i class="fa-solid fa-address-card"></i> Profile Details </a>
-                    <a class="nav-link" id="v-pills-messages-tab" href="~/Product/review" role="tab" aria-controls="v-pills-messages" aria-selected="false">
-                        <i class="fa fa-star-o" aria-hidden="true"></i> Reviews
-                    </a>
-                    <a class="nav-link" id="v-pills-products-tab" href="~/Product/Getproducts" role="tab" aria-controls="v-pills-products" aria-selected="false"> <i class="fa fa-cog" aria-hidden="true"></i> Products </a>
-                    <a class="nav-link" id="v-pills-products-tab" href="~/Category/Index" role="tab" aria-controls="v-pills-products" aria-selected="false"> <i class="fa fa-th-large" aria-hidden="true"></i> Category </a>
-                    <a class="nav-link active" id="v-pills-products-tab" href="~/Sales/Index" role="tab" aria-controls="v-pills-products" aria-selected="false"><i class="fa fa-line-chart" aria-hidden="true"></i> Sales </a>
-                </div>
-            </div>
             <!-- /.col -->
 
             <div class="col-md-9" id="salesdetails">

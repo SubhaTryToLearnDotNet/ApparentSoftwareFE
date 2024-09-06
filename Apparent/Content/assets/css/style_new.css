@@ -1067,9 +1067,11 @@ header .bg-white {
 /* ============================================================================================ */
 
 .footr {
-	width: 95%;
-	padding: 80px 0 20px;
+	width: 100%;
+	padding: 80px 60px 20px;
 	display: block;
+	border-top: 1px solid #d2d2d2;
+	/*border-bottom: 1px solid #d2d2d2;*/
 	position: relative;
 	margin: 0 auto;
 }
@@ -1183,7 +1185,7 @@ header .bg-white {
 }
 
 .brandRowIn {
-	width: 85%;
+	width: 85% !important;
 	margin: 0 auto;
 }
 
@@ -1461,8 +1463,9 @@ header .bg-white {
 /* ============================================================================================ */
 
 .logoSlide {
-	width: 100%;
+	width: 95%;
 	padding: 80px 0 0;
+	margin: 0 auto;
 	text-align: center;
 	display: block;
 	position: relative;
@@ -2144,9 +2147,17 @@ header .bg-white {
 	transition: 0.9s;
 }
 
+.tabBoxLft {
+	width: 100%;
+	padding: 15px;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
 
-
-
+.tabBoxLft {
+	width: 100%;
+	padding: 15px;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
 
 
 

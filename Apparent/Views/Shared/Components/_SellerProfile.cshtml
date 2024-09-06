@@ -41,252 +41,254 @@
 <link rel="stylesheet" href="https://unpkg.com/cropperjs/dist/cropper.css">
 
 @model ViewModel
-<div class="col-lg-3 col-md-12 col-sm-12 col-12 pt-3 m_h" style="box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);">
-    <div class="profile-pic-wrapper">
-        @if (Model.company.CompanyIcon != ""  & Model.company.CompanyIcon != null)
-        {
-            <div class="pic-holder">
-                <img id="profilePic" class="pic" src="@(Model.company.CompanyIcon != "" ? Model.company.CompanyIcon : "/Content/Web/images/company.png")">
-                <Input class="uploadProfileInput" type="file" name="profile_pic" id="newProfilePhoto" accept="image/*" style="opacity: 0;" />
-                <label for="newProfilePhoto" class="upload-file-block">
-                    <div id="" class="text-center">
-                        <div class="mb-2">
-                            <i class="fa fa-camera fa-2x"></i>
+<div class="col-lg-3 col-md-12 col-sm-12 col-12  m_h">
+    <div class="tabBoxLft">
+        <div class="profile-pic-wrapper">
+            @if (Model.company.CompanyIcon != "" & Model.company.CompanyIcon != null)
+            {
+                <div class="pic-holder">
+                    <img id="profilePic" class="pic" src="@(Model.company.CompanyIcon != "" ? Model.company.CompanyIcon : "/Content/Web/images/company.png")">
+                    <Input class="uploadProfileInput" type="file" name="profile_pic" id="newProfilePhoto" accept="image/*" style="opacity: 0;" />
+                    <label for="newProfilePhoto" class="upload-file-block">
+                        <div id="" class="text-center">
+                            <div class="mb-2">
+                                <i class="fa fa-camera fa-2x"></i>
+                            </div>
+                            <div class="text_uppercase">
+                                Update <br /> Profile Photo
+                            </div>
                         </div>
-                        <div class="text_uppercase">
-                            Update <br /> Profile Photo
-                        </div>
-                    </div>
-                </label>
-            </div>
-        }
-        else
-        {
-            <div class="profile-container pic-holder">
-                @Model.company.CompanyName.Substring(0, 1)
-                <Input class="uploadProfileInput" type="file" name="profile_pic" id="newProfilePhoto" accept="image/*" style="opacity: 0;" />
-                <label for="newProfilePhoto" class="upload-file-block">
-                    <div id="" class="text-center">
-                        <div class="mb-2">
-                            <i class="fa fa-camera fa-2x"></i>
-                        </div>
-                        <div class="text_uppercase">
-                            Update <br /> Profile Photo
-                        </div>
-                    </div>
-                </label>
-            </div>
-        }
-        <h4>@Model.company.CompanyName</h4>
-    </div>
-    <br />
-    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-        <a class="nav-link @((Model.company.ActionName == "Profile") ? "active" : "")" id="v-pills-profile-tab" href="~/Profile" role="tab" aria-controls="v-pills-profile" aria-selected="false"> <i class="fa-solid fa-address-card"></i> Profile Details </a>
-        <a class="nav-link  @((Model.company.ActionName == "review") ? "active" : "")" id="v-pills-messages-tab" href="~/Product/review" role="tab" aria-controls="v-pills-messages" aria-selected="false">
-            <i class="fa fa-star-o" aria-hidden="true"></i> Reviews
-        </a>
-        <a class="nav-link @((Model.company.ActionName == "GetProducts") ? "active" : "")" id="v-pills-products-tab" href="~/Product/GetProducts" role="tab" aria-controls="v-pills-products" aria-selected="false"> <i class="fa fa-cube" aria-hidden="true"></i> Products </a>
-        <a class="nav-link @((Model.company.ActionName == "Category") ? "active" : "")" id="v-pills-products-tab" href="~/Category/Index" role="tab" aria-controls="v-pills-products" aria-selected="false"><i class="fa fa-th-large" aria-hidden="true"></i> Categories </a>
-        <a class="nav-link @((Model.company.ActionName == "Sales") ? "active" : "")" id="v-pills-products-tab" href="~/Sales/Index" role="tab" aria-controls="v-pills-products" aria-selected="false"> <i class="fa fa-line-chart" aria-hidden="true"></i> Sales </a>
-        <a class="nav-link @((Model.company.ActionName == "CompanyToken") ? "active" : "")" id="v-pills-products-tab" href="~/Profile/CompanyToken" role="tab" aria-controls="v-pills-products" aria-selected="false"> <i class="fa fa-ticket" aria-hidden="true"></i> Token </a>
-        <a class="nav-link" id="v-pills-products-tab" href="https://apparent-1.gitbook.io/apparent.world" target="_blank" role="tab" aria-controls="v-pills-products" aria-selected="false"> <i class="fa fa-file-text" aria-hidden="true"></i> Developer Tool </a>
-    </div>
-</div>
-<div id="customModal">
-    <div class="modal-500" id="modalContent">
-        <div class="image-preview">
-            <img id="croppedImage" src="" alt="Cropped Image">
-        </div>
-        <input type="button" class="save_btn" style="float: none;" id="cropImage" value="Crop & Save" />
-        <button type="button" class="save_btn btn-danger" style="float: none;" id="cropImagehide">Cancel</button>
-    </div>
-</div>
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="~/Content/Web//js/bootstrap.bundle.min.js"></script>
-<script src="~/Content/Web/js/myScript.js"></script>
-<script src="https://unpkg.com/cropperjs/dist/cropper.js"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.21.0/slimselect.js"></script>
-<script>
-    $(document).ready(function () {
-
-        $("#cropImagehide").click(function () {
-            $("#customModal").hide();
-        });
-
-    })
-</script>
-<script>
-    var imageFile
-    const imageInput = document.getElementById('newProfilePhoto');
-    const croppedImage = document.getElementById('croppedImage');
-    let cropper;
-    let fileTarget;
-    // Initialize Cropper.js when an image is selected
-    imageInput.addEventListener('change', function (e) {
-        fileTarget = e.target;
-        const file = this.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                if (cropper) {
-                    cropper.destroy();
-                }
-                croppedImage.src = e.target.result;
-                cropper = new Cropper(croppedImage, {
-                    aspectRatio: 1, // You can set the aspect ratio you need
-                });
-            };
-            reader.readAsDataURL(file);
-        }
-        $('#customModal').fadeIn();
-    });
-    $('#cropImage').click(function () {
-        const croppedCanvas = cropper.getCroppedCanvas();
-        const imageData = croppedCanvas.toDataURL('image/jpeg');
-        console.log(fileTarget);
-        var triggerInput = fileTarget;
-        var currentImg = $(fileTarget).closest(".pic-holder").find(".pic").attr("src");
-        var holder = $(fileTarget).closest(".pic-holder");
-        var wrapper = $(fileTarget).closest(".profile-pic-wrapper");
-        $(wrapper).find('[role="alert"]').remove();
-        triggerInput.blur();
-        var files = !!fileTarget.files ? fileTarget.files : [];
-        if (!files.length || !window.FileReader) {
-            return;
-        }
-        if (/^image/.test(files[0].type)) {
-            // only image file
-            var reader = new FileReader(); // instance of the FileReader
-            reader.readAsDataURL(files[0]); // read the local file
-
-            reader.onloadend = function () {
-                $('#customModal').fadeOut();
-                $(holder).addClass("uploadInProgress");
-                $(holder).find(".pic").attr("src", imageData);
-                $(holder).append(
-                    '<div class="upload-loader"><div class="spinner-border text-primary" role="status"><span class="sr-only">Loading...</span></div></div>'
-                );
-
-                //Dummy timeout; call API or AJAX below
-                //setTimeout(() => {
-                //    $(holder).removeClass("uploadInProgress");
-                //    $(holder).find(".upload-loader").remove();
-                //    // If upload successful
-                //    if (Math.random() < 0.9) {
-                //        $(wrapper).append(
-                //            '<div class="snackbar show" role="alert"><i class="fa fa-check-circle text-success"></i> Profile image updated successfully</div>'
-                //        );
-
-                //        // Clear input after upload
-                //        $(triggerInput).val("");
-                //        setTimeout(() => {
-                //            $(wrapper).find('[role="alert"]').remove();
-                //        }, 3000);
-                //    } else {
-                //        $(holder).find(".pic").attr("src", currentImg);
-                //        $(wrapper).append(
-                //            '<div class="snackbar show" role="alert"><i class="fa fa-times-circle text-danger"></i> There is an error while uploading! Please try again later.</div>'
-                //        );
-
-                //        // Clear input after upload
-                //        $(triggerInput).val("");
-                //        setTimeout(() => {
-                //            $(wrapper).find('[role="alert"]').remove();
-                //        }, 3000);
-                //    }
-                //}, 1500);
-            };
-
-        } else {
-            $(wrapper).append(
-                '<div class="alert alert-danger d-inline-block p-2 small" role="alert">Please choose the valid image.</div>'
-            );
-            setTimeout(() => {
-                $(wrapper).find('role="alert"').remove();
-            }, 3000);
-        }
-
-        console.log(imageData)
-
-        var base64Image = imageData.split(",")[1]; // Remove the "data:image/jpeg;base64," prefix
-
-        // Convert base64 data to a blob
-        var blob = dataURItoBlob(base64Image);
-        var file = new File([blob], Date.now() + ".jpg");
-
-        // Set the File object as the value of the file input
-        imageFile = file;
-
-        var formData = new FormData();
-        formData.append('CompanyImage', imageFile);
-
-
-        $.ajax({
-            url: '/Profile/SaveImage', // Use the appropriate URL for your route
-            type: 'POST',
-            data: formData,
-            cache: false,
-            contentType: false,
-            enctype: 'multipart/form-data',
-            processData: false,
-            success: function (response) {
-                if (response.code == 200) {
-                    $(holder).removeClass("uploadInProgress");
-                    $(holder).find(".upload-loader").remove();
-                    $(wrapper).append(
-                        '<div class="snackbar show" role="alert"><i class="fa fa-check-circle text-success"></i> Profile image updated successfully</div>'
-                    );
-                    $(triggerInput).val("");
-                    setTimeout(() => {
-                        $(wrapper).find('[role="alert"]').remove();
-                    }, 3000);
-                    window.location.reload();
-                }
-                else if (response.code == 400) {
-                    $(holder).removeClass("uploadInProgress");
-                    $(holder).find(".upload-loader").remove();
-                    $(holder).find(".pic").attr("src", currentImg);
-                    $(wrapper).append(
-                        '<div class="snackbar show" role="alert"><i class="fa fa-times-circle text-danger"></i> There is an error while uploading! Please try again later.</div>'
-                    );
-                    $(triggerInput).val("");
-                    setTimeout(() => {
-                        $(wrapper).find('[role="alert"]').remove();
-                    }, 3000);
-                }
-
-                else {
-                    $(holder).removeClass("uploadInProgress");
-                    $(holder).find(".upload-loader").remove();
-                    $(holder).find(".pic").attr("src", currentImg);
-                    $(wrapper).append(
-                        '<div class="snackbar show" role="alert"><i class="fa fa-times-circle text-danger"></i> There is an error while uploading! Please try again later.</div>'
-                    );
-                    $(triggerInput).val("");
-                    setTimeout(() => {
-                        $(wrapper).find('[role="alert"]').remove();
-                    }, 3000);
-                }
-            },
-            error: function (error) {
-                // Handle any errors that occur during the AJAX request
+                    </label>
+                </div>
             }
+            else
+            {
+                <div class="profile-container pic-holder">
+                    @Model.company.CompanyName.Substring(0, 1)
+                    <Input class="uploadProfileInput" type="file" name="profile_pic" id="newProfilePhoto" accept="image/*" style="opacity: 0;" />
+                    <label for="newProfilePhoto" class="upload-file-block">
+                        <div id="" class="text-center">
+                            <div class="mb-2">
+                                <i class="fa fa-camera fa-2x"></i>
+                            </div>
+                            <div class="text_uppercase">
+                                Update <br /> Profile Photo
+                            </div>
+                        </div>
+                    </label>
+                </div>
+            }
+            <h4>@Model.company.CompanyName</h4>
+        </div>
+        <br />
+        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+            <a class="nav-link @((Model.company.ActionName == "Profile") ? "active" : "")" id="v-pills-profile-tab" href="~/Profile" role="tab" aria-controls="v-pills-profile" aria-selected="false"> <i class="fa-solid fa-address-card"></i> Profile Details </a>
+            <a class="nav-link  @((Model.company.ActionName == "review") ? "active" : "")" id="v-pills-messages-tab" href="~/Product/review" role="tab" aria-controls="v-pills-messages" aria-selected="false">
+                <i class="fa fa-star-o" aria-hidden="true"></i> Reviews
+            </a>
+            <a class="nav-link @((Model.company.ActionName == "GetProducts") ? "active" : "")" id="v-pills-products-tab" href="~/Product/GetProducts" role="tab" aria-controls="v-pills-products" aria-selected="false"> <i class="fa fa-cube" aria-hidden="true"></i> Products </a>
+            <a class="nav-link @((Model.company.ActionName == "Category") ? "active" : "")" id="v-pills-products-tab" href="~/Category/Index" role="tab" aria-controls="v-pills-products" aria-selected="false"><i class="fa fa-th-large" aria-hidden="true"></i> Categories </a>
+            <a class="nav-link @((Model.company.ActionName == "Sales") ? "active" : "")" id="v-pills-products-tab" href="~/Sales/Index" role="tab" aria-controls="v-pills-products" aria-selected="false"> <i class="fa fa-line-chart" aria-hidden="true"></i> Sales </a>
+            <a class="nav-link @((Model.company.ActionName == "CompanyToken") ? "active" : "")" id="v-pills-products-tab" href="~/Profile/CompanyToken" role="tab" aria-controls="v-pills-products" aria-selected="false"> <i class="fa fa-ticket" aria-hidden="true"></i> Token </a>
+            <a class="nav-link" id="v-pills-products-tab" href="https://apparent-1.gitbook.io/apparent.world" target="_blank" role="tab" aria-controls="v-pills-products" aria-selected="false"> <i class="fa fa-file-text" aria-hidden="true"></i> Developer Tool </a>
+        </div>
+    </div>
+</div>
+    <div id="customModal">
+        <div class="modal-500" id="modalContent">
+            <div class="image-preview">
+                <img id="croppedImage" src="" alt="Cropped Image">
+            </div>
+            <input type="button" class="save_btn" style="float: none;" id="cropImage" value="Crop & Save" />
+            <button type="button" class="save_btn btn-danger" style="float: none;" id="cropImagehide">Cancel</button>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="~/Content/Web//js/bootstrap.bundle.min.js"></script>
+    <script src="~/Content/Web/js/myScript.js"></script>
+    <script src="https://unpkg.com/cropperjs/dist/cropper.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.21.0/slimselect.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            $("#cropImagehide").click(function () {
+                $("#customModal").hide();
+            });
+
+        })
+    </script>
+    <script>
+        var imageFile
+        const imageInput = document.getElementById('newProfilePhoto');
+        const croppedImage = document.getElementById('croppedImage');
+        let cropper;
+        let fileTarget;
+        // Initialize Cropper.js when an image is selected
+        imageInput.addEventListener('change', function (e) {
+            fileTarget = e.target;
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    if (cropper) {
+                        cropper.destroy();
+                    }
+                    croppedImage.src = e.target.result;
+                    cropper = new Cropper(croppedImage, {
+                        aspectRatio: 1, // You can set the aspect ratio you need
+                    });
+                };
+                reader.readAsDataURL(file);
+            }
+            $('#customModal').fadeIn();
         });
-        //You can send the canvas data to your server for saving.
-        //Example: croppedCanvas.toDataURL('image/jpeg')
-    });
+        $('#cropImage').click(function () {
+            const croppedCanvas = cropper.getCroppedCanvas();
+            const imageData = croppedCanvas.toDataURL('image/jpeg');
+            console.log(fileTarget);
+            var triggerInput = fileTarget;
+            var currentImg = $(fileTarget).closest(".pic-holder").find(".pic").attr("src");
+            var holder = $(fileTarget).closest(".pic-holder");
+            var wrapper = $(fileTarget).closest(".profile-pic-wrapper");
+            $(wrapper).find('[role="alert"]').remove();
+            triggerInput.blur();
+            var files = !!fileTarget.files ? fileTarget.files : [];
+            if (!files.length || !window.FileReader) {
+                return;
+            }
+            if (/^image/.test(files[0].type)) {
+                // only image file
+                var reader = new FileReader(); // instance of the FileReader
+                reader.readAsDataURL(files[0]); // read the local file
+
+                reader.onloadend = function () {
+                    $('#customModal').fadeOut();
+                    $(holder).addClass("uploadInProgress");
+                    $(holder).find(".pic").attr("src", imageData);
+                    $(holder).append(
+                        '<div class="upload-loader"><div class="spinner-border text-primary" role="status"><span class="sr-only">Loading...</span></div></div>'
+                    );
+
+                    //Dummy timeout; call API or AJAX below
+                    //setTimeout(() => {
+                    //    $(holder).removeClass("uploadInProgress");
+                    //    $(holder).find(".upload-loader").remove();
+                    //    // If upload successful
+                    //    if (Math.random() < 0.9) {
+                    //        $(wrapper).append(
+                    //            '<div class="snackbar show" role="alert"><i class="fa fa-check-circle text-success"></i> Profile image updated successfully</div>'
+                    //        );
+
+                    //        // Clear input after upload
+                    //        $(triggerInput).val("");
+                    //        setTimeout(() => {
+                    //            $(wrapper).find('[role="alert"]').remove();
+                    //        }, 3000);
+                    //    } else {
+                    //        $(holder).find(".pic").attr("src", currentImg);
+                    //        $(wrapper).append(
+                    //            '<div class="snackbar show" role="alert"><i class="fa fa-times-circle text-danger"></i> There is an error while uploading! Please try again later.</div>'
+                    //        );
+
+                    //        // Clear input after upload
+                    //        $(triggerInput).val("");
+                    //        setTimeout(() => {
+                    //            $(wrapper).find('[role="alert"]').remove();
+                    //        }, 3000);
+                    //    }
+                    //}, 1500);
+                };
+
+            } else {
+                $(wrapper).append(
+                    '<div class="alert alert-danger d-inline-block p-2 small" role="alert">Please choose the valid image.</div>'
+                );
+                setTimeout(() => {
+                    $(wrapper).find('role="alert"').remove();
+                }, 3000);
+            }
+
+            console.log(imageData)
+
+            var base64Image = imageData.split(",")[1]; // Remove the "data:image/jpeg;base64," prefix
+
+            // Convert base64 data to a blob
+            var blob = dataURItoBlob(base64Image);
+            var file = new File([blob], Date.now() + ".jpg");
+
+            // Set the File object as the value of the file input
+            imageFile = file;
+
+            var formData = new FormData();
+            formData.append('CompanyImage', imageFile);
 
 
-    function dataURItoBlob(dataURI) {
-        var byteString = atob(dataURI);
-        var ab = new ArrayBuffer(byteString.length);
-        var ia = new Uint8Array(ab);
-        for (var i = 0; i < byteString.length; i++) {
-            ia[i] = byteString.charCodeAt(i);
+            $.ajax({
+                url: '/Profile/SaveImage', // Use the appropriate URL for your route
+                type: 'POST',
+                data: formData,
+                cache: false,
+                contentType: false,
+                enctype: 'multipart/form-data',
+                processData: false,
+                success: function (response) {
+                    if (response.code == 200) {
+                        $(holder).removeClass("uploadInProgress");
+                        $(holder).find(".upload-loader").remove();
+                        $(wrapper).append(
+                            '<div class="snackbar show" role="alert"><i class="fa fa-check-circle text-success"></i> Profile image updated successfully</div>'
+                        );
+                        $(triggerInput).val("");
+                        setTimeout(() => {
+                            $(wrapper).find('[role="alert"]').remove();
+                        }, 3000);
+                        window.location.reload();
+                    }
+                    else if (response.code == 400) {
+                        $(holder).removeClass("uploadInProgress");
+                        $(holder).find(".upload-loader").remove();
+                        $(holder).find(".pic").attr("src", currentImg);
+                        $(wrapper).append(
+                            '<div class="snackbar show" role="alert"><i class="fa fa-times-circle text-danger"></i> There is an error while uploading! Please try again later.</div>'
+                        );
+                        $(triggerInput).val("");
+                        setTimeout(() => {
+                            $(wrapper).find('[role="alert"]').remove();
+                        }, 3000);
+                    }
+
+                    else {
+                        $(holder).removeClass("uploadInProgress");
+                        $(holder).find(".upload-loader").remove();
+                        $(holder).find(".pic").attr("src", currentImg);
+                        $(wrapper).append(
+                            '<div class="snackbar show" role="alert"><i class="fa fa-times-circle text-danger"></i> There is an error while uploading! Please try again later.</div>'
+                        );
+                        $(triggerInput).val("");
+                        setTimeout(() => {
+                            $(wrapper).find('[role="alert"]').remove();
+                        }, 3000);
+                    }
+                },
+                error: function (error) {
+                    // Handle any errors that occur during the AJAX request
+                }
+            });
+            //You can send the canvas data to your server for saving.
+            //Example: croppedCanvas.toDataURL('image/jpeg')
+        });
+
+
+        function dataURItoBlob(dataURI) {
+            var byteString = atob(dataURI);
+            var ab = new ArrayBuffer(byteString.length);
+            var ia = new Uint8Array(ab);
+            for (var i = 0; i < byteString.length; i++) {
+                ia[i] = byteString.charCodeAt(i);
+            }
+            return new Blob([ab], { type: "image/jpeg" });
         }
-        return new Blob([ab], { type: "image/jpeg" });
-    }
-</script>
+    </script>
