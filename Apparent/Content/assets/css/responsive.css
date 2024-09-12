@@ -23,22 +23,22 @@
 	.join {
 		font-size: 20px !important;
 	}
-	.para01, .joinNow_in .para01, .sec03 .para01, .weOfferIn .para01 {
+	/*.para01, .joinNow_in .para01, .sec03 .para01, .weOfferIn .para01 {
 		font-size: 22px;
 		padding-bottom: 15px;
-	}
-	.footr ul li a {
+	}*/
+	/*.footr ul li a {
 		font-size: 22px;
-	}
-	.copyRight p {
+	}*/
+	/*.copyRight p {
 		font-size: 22px;
-	}
-	.sec01Right ul li {
+	}*/
+	/*.sec01Right ul li {
 		font-size: 18px;
 	}
 	.sec01Right ul li::before {
 		top: 8px;
-	}
+	}*/
 }
 
 @media only screen and (max-device-width : 2560px) {
@@ -134,13 +134,13 @@
 		font-size: 18px !important;
 	}
 	
-	.para01, .joinNow_in .para01, .sec03 .para01, .weOfferIn .para01 {
+	/*.para01, .joinNow_in .para01, .sec03 .para01, .weOfferIn .para01 {
 		font-size: 18px;
 		padding-bottom: 15px;
-	}
-	.footr ul li a, .copyRight p {
+	}*/
+	/*.footr ul li a, .copyRight p {
 		font-size: 17px;
-	}
+	}*/
 	
 }
 

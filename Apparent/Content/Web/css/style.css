@@ -1077,7 +1077,7 @@ ul.tabs {
 		border-bottom: none;
 		background-color: transparent;
 		font-family: "Montserrat", sans-serif;
-		font-size: 20px;
+		font-size: 18px;
 		color: #1F1F1F;
 		overflow: hidden;
 		position: relative;
@@ -1094,7 +1094,7 @@ ul.tabs li:hover {
 
 ul.tabs li.active {
 	background-color: transparent;
-	color: #333;
+	color: #000;
 	font-weight: 600;
 	border-bottom: none;
 	display: block;
@@ -1139,8 +1139,10 @@ ul.tabs li.active::before {
 	line-height: 26px !important;
 }*/
 .software_sec .tab_content p {
-	font-size: 15px !important;
-	line-height: 20px !important;
+	font-size: 20px;
+	color: #58595A;
+	margin-bottom: 15px;
+	/*line-height: 20px !important;*/
 }
 
 @media screen and (max-width: 480px) {
@@ -1278,11 +1280,12 @@ ul.tabs li.active::before {
 	width: 100%;
 }
 
-.r_box h5 {
-	font-size: 20px;
-	color: #0193D9;
-	margin-bottom: 15px;
-}
+	.r_box h5 {
+		font-size: 30px;
+		color: #0193D9;
+		font-weight: bold;
+		margin-bottom: 15px;
+	}
 
 .top_ten {
 	width: 100%;
@@ -1293,7 +1296,8 @@ ul.tabs li.active::before {
 .small_font01 {
 	font-family: "Montserrat", sans-serif;
 	font-size: 20px;
-	color: #1F1F1F;
+	color: #000;
+	font-weight: bold;
 	margin-bottom: 15px;
 	padding-bottom: 15px;
 	position: relative;
@@ -2250,14 +2254,15 @@ ul.tabs li.active::before {
 
 /* ============================================================================================ */
 .single_seller {
-	width: 100%;
+	width: 95%;
 	height: 420px;
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center;
 	position: relative;
 	padding: 70px 0;
-	display: inline-block;
+	margin: 0 auto;
+	display: table;
 }
 
 	.single_seller a {
@@ -2266,14 +2271,14 @@ ul.tabs li.active::before {
 		color: #626262;
 		text-decoration: none;
 		position: absolute;
-		left: 18%;
+		left: 5%;
 	}
 
 .seller_box {
-	width: 100%;
+	width: 95%;
 	background-color: #0193D9;
 	padding: 15px 25px;
-	margin-top: -10px;
+	margin: 0px auto;
 }
 
 .seller_box i {
@@ -2299,6 +2304,7 @@ ul.tabs li.active::before {
 .seller_box h3 {
 	font-size: 28px;
 	color: #fff;
+	font-weight: 600;
 	text-align: center;
 	margin-top: 10px !important;
 }
@@ -2451,6 +2457,7 @@ ul.tabs li.active::before {
 		font-family: "Montserrat", sans-serif;
 		font-size: 16px;
 		color: #1F1F1F;
+		font-weight: 500;
 	}
 
 .selected_features ul li::before {
@@ -2669,7 +2676,7 @@ b, strong {
 	.details_panel h6 {
 		font-family: "Montserrat", sans-serif;
 		font-size: 18px !important;
-		color: #000 !important;
+		color: #0193D9 !important;
 		display: flex;
 		-ms-flex-align: start;
 		align-items: flex-start;
@@ -7096,3 +7103,24 @@ signinNew .txt_field select{
 		padding-left: 15px;
 	}
 }
+
+
+.fs04 {
+	font-size: 16px !important;
+	color: #1F1F1F !important;
+	line-height: 24px;
+}
+
+.software_sec .tab_content p strong {
+	font-size: 20px;
+	color: #000;
+	font-weight: bold !important;
+	margin-bottom: 25px;
+	line-height: 20px !important;
+}
+
+
+
+
+
+
