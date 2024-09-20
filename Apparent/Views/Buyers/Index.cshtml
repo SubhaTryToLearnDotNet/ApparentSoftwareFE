@@ -6,7 +6,7 @@
     <div class="banner" style="background-image: url(Content/assets/images/banner.png);">
 
         <h1 class="heading01 fs01"><span>For</span> Buyers</h1>
-</div>
+    </div>
 </div>
 
 <!-- ====================================================================================================
@@ -37,7 +37,7 @@
                 </div>
             </div>
         </div>
-</div>
+    </div>
 </div>
 
 <!-- ====================================================================================================
@@ -58,32 +58,32 @@
         </div>
         <!-- // -->
         <div class="brandRow" style="min-height: auto;">
-            
-                <div class="brandRowIn">
-                    <div class="row show-grid">
-                        @for (int s = 0; s < Model.DtProductList.Rows.Count; s++)
-                        {
-                            string image = Model.DtProductList.Rows[s]["ProductIcon"].ToString();
-                            <div class="col-sm-6 col-md-4-5 col-lg-1-5">
 
-                                <a href="/Product/Details?ProductId=@Model.DtProductList.Rows[s]["ProductId"].ToString()">
-                                    <span class="">
-                                        @Model.DtProductList.Rows[s]["ProductName"].ToString()
-                                        <div class="brandRow_btm">
-                                            <div class="brandRow_btm_pic">
-                                                <img src="@image" alt="" />
-                                            </div>
+            <div class="brandRowIn">
+                <div class="row show-grid">
+                    @for (int s = 0; s < Model.DtProductList.Rows.Count; s++)
+                    {
+                        string image = Model.DtProductList.Rows[s]["ProductIcon"].ToString();
+                        <div class="col-sm-6 col-md-4-5 col-lg-1-5">
+
+                            <a href="/Product/Details?ProductId=@Model.DtProductList.Rows[s]["ProductId"].ToString()">
+                                <span class="">
+                                    @Model.DtProductList.Rows[s]["ProductName"].ToString()
+                                    <div class="brandRow_btm">
+                                        <div class="brandRow_btm_pic">
+                                            <img src="@image" alt="" />
                                         </div>
-                                    </span>
-                                </a>
-                                <div class="shadows"><img src="~/Content/assets/images/shadow.png" alt="" /></div>
-                            </div>
-                        }
-                    </div>
+                                    </div>
+                                </span>
+                            </a>
+                            <div class="shadows"><img src="~/Content/assets/images/shadow.png" alt="" /></div>
+                        </div>
+                    }
                 </div>
-            
+            </div>
+
         </div>
-</div>
+    </div>
 </div>
 
 <!-- ====================================================================================================
@@ -94,11 +94,11 @@
 
         <h2 class="heading02 text-center">Why <span>Choose Us</span>?</h2>
         <div class="sec03In">
-            <div class="row align-items-center">
+            <div class="row align-items-center text-left">
                 <div class="col-lg-6 col-md-6 col-12 order-2 order-md-1">
                     <div class="sec01Right">
                         <h4 class="heading04">Sed Ut Perspiciatis <span>Unde Omnis Iste</span></h4>
-                        <p class="para01 fs03">
+                        <p class="para01  fs03">
                             Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et
                             ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est.
                         </p>
@@ -114,7 +114,7 @@
                 </div>
             </div>
         </div>
-</div>
+    </div>
 </div>
 
 <!-- ====================================================================================================
@@ -188,6 +188,6 @@
                 <!-- // -->
             </div>
         </div>
-</div>
+    </div>
 </div>
 
