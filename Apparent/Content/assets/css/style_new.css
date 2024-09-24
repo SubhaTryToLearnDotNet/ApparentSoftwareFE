@@ -654,7 +654,7 @@ header .bg-white {
 	}
 
 	.list-reset a {
-		color: #fff;
+		/*color: #fff;*/
 		padding: 0;
 	}
 }
@@ -1313,7 +1313,7 @@ header .bg-white {
 	background-color: #fff;
 	text-align: center;
 	border: 1px solid #e9e9e9;
-	font-size: 20px;
+	font-size: 18px;
 	color: #000;
 	font-weight: 500;
 	position: relative;
@@ -1511,7 +1511,7 @@ header .bg-white {
 	padding: 50px 35px;
 	border-radius: 8px;
 	text-align: center;
-	min-height: 460px;
+	min-height: 420px;
 	transition: box-shadow .3s;
 }
 

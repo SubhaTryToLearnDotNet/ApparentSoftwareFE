@@ -207,7 +207,7 @@
 	}
 
 	.weOfferIn .card {
-		min-height: 385px;
+		min-height: 410px;
 		padding: 30px 15px;
 	}
 
@@ -288,6 +288,9 @@
 
 	.sec03 .para01 {
 		width: 100%;
+	}
+	.weOffer .heading04 {
+		width: 60%;
 	}
 }
 
@@ -527,9 +530,9 @@
 	}
 
 	.sec03 .para01 {
-		font-size: 16px;
+		font-size: 18px !important;
 		width: 100%;
-		line-height: 24px;
+		line-height: 26px;
 	}
 
 	.weOffer .heading04 {
@@ -585,6 +588,30 @@
 	.joinNow {
 		padding: 80px 30px;
 	}
+	.list-reset a {
+		font-size: 16px;
+	}
+	.sec03 .sec01Right {
+		padding-right: 0;
+	}
+	.weOfferIn .picture01 {
+		margin: 0 auto 30px;
+	}
+	.weOfferIn .card {
+		min-height: 410px;
+		padding: 25px 10px;
+	}
+
+	.heading05 {
+		font-size: 24px;
+	}
+
+	.weOfferIn .para01 {
+		font-size: 16px;
+		line-height: 24px;
+	}
+
+
 }
 
 @media only screen and (max-width: 991px) {
@@ -797,6 +824,12 @@
 	.shadows {
 		bottom: -16px;
 	}
+	.weOfferIn .card {
+		min-height: 330px;
+	}
+	.weOffer {
+		padding: 80px 30px;
+	}
 }
 
 @media only screen and (max-width: 767px) {
@@ -806,7 +839,6 @@
 
 	.sec03In {
 		margin-top: 80px;
-		text-align: center;
 	}
 
 	.weOfferIn .card {
@@ -879,6 +911,12 @@
 	.footr {
 		padding: 50px 30px 20px;
 	}
+	.sec03 {
+		padding: 50px 0;
+	}
+	.weOffer {
+		padding: 50px 30px;
+	}
 }
 
 @media only screen and (max-width: 720px) {
@@ -911,6 +949,10 @@
 	.brandRowIn [class^=col-] {
 		margin-bottom: 20px;
 	}
+	.fs01 {
+		font-size: 44px !important;
+		margin-bottom: 0 !important
+	}
 }
 
 @media only screen and (max-width: 600px) {
@@ -918,7 +960,7 @@
 
 @media only screen and (max-width: 568px) {
 	.heading01 {
-		font-size: 34px;
+		font-size: 34px !important;
 	}
 
 	.heading02 {
@@ -987,7 +1029,7 @@
 	}
 
 	.weOfferIn .card {
-		min-height: 290px;
+		min-height: auto;
 	}
 
 	.swiper-horizontal {
@@ -1057,7 +1099,7 @@
 
 	.join {
 		font-size: 12px !important;
-		padding: 10px 0px !important;
+		padding: 0 !important;
 	}
 
 		.join img {
@@ -1069,11 +1111,11 @@
 	}
 
 	.footr img {
-		width: 38%;
+		width: 35%;
 	}
 
 	.join img {
-		width: 18%;
+		width: 20%;
 	}
 
 	.f_media img {
@@ -1178,13 +1220,53 @@
 		font-size: 14px;
 		word-wrap: break-word;
 	}
+	.everyoneSec .para01 {
+		font-size: 16px;
+		line-height: 24px;
+	}
+	.common_btn01 {
+		font-size: 16px;
+		min-width: 125px;
+	}
+	.brandRowIn {
+		padding: 0 15px;
+	}
+	.buyApparen .heading01 {
+		font-size: 30px;
+	}
+	.buyApparen .para01 {
+		font-size: 16px;
+		line-height: 24px;
+	}
+	.joinNow .heading02 {
+		font-size: 34px;
+	}
+	.joinNow_in .para01 {
+		font-size: 16px;
+		line-height: 24px;
+		width: 100%;
+	}
+	.menus .mLogo {
+		width: 50%;
+	}
+	.fs02 {
+		font-size: 16px !important;
+	}
+	.sec03 .para01 {
+		font-size: 16px !important;
+		line-height: 24px;
+	}
+
+
+
+
 }
 
 @media only screen and (max-width: 430px) {
 
-	.heading04, .heading02, .heading05 {
+	/*.heading04, .heading02, .heading05 {
 		font-size: 22px;
-	}
+	}*/
 }
 
 @media only screen and (max-width: 425px) {
@@ -1197,10 +1279,7 @@
 }
 
 @media only screen and (max-width: 390px) {
-	.weOfferIn .card {
-		min-height: 320px;
-	}
-
+	
 	.blogDetail {
 		margin-top: -40px;
 	}
@@ -1218,12 +1297,22 @@
 	.menuPoint {
 		gap: 8px;
 	}
+	.show-grid [class^=col-] span, .show-grid [class^=col-] {
+		padding: 10px 5px;
+	}
+		.show-grid [class^=col-] span, .show-grid [class^=col-] {
+			font-size: 13px;
+		}
+
+
+
+
+
+
 }
 
 @media only screen and (max-width: 375px) {
-	.weOfferIn .card {
-		min-height: 340px;
-	}
+	
 }
 
 @media only screen and (max-width: 360px) {
