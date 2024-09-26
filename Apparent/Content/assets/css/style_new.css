@@ -261,8 +261,8 @@ hr {
 	font-family: "Montserrat", sans-serif;
 	font-size: 18px;
 	font-weight: 500;
-	padding: 12px 20px !important;
-	min-width: 140px;
+	padding: 10px 15px !important;
+	min-width: 125px;
 	text-align: center;
 	color: #fff !important;
 	background-color: var(--btn-color);
@@ -2217,7 +2217,7 @@ header .bg-white {
 		width: 100%;
 		display: inline-block;
 		margin-bottom: .5rem;
-		font-weight: 600;
+		font-weight: 500;
 	}
 
 	.formBox .small, .formBox small {
@@ -2262,7 +2262,7 @@ header .bg-white {
 
 .formBox b, .formBox strong {
 	font-size: 14px;
-	font-weight: 600 !important;
+	font-weight: 500 !important;
 }
 
 .py1 {
