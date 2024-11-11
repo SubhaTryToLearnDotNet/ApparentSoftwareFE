@@ -81,8 +81,8 @@
                                         <h4 class="mb-0">User Info</h4>
                                     </div>
                                     <div class="field full">
-                                        <label for="name">Full Name</label>
-                                        @Html.TextBoxFor(model => model.User_Name, new { @id = "User_Name", placeholder = "Enter Full Name Here" })
+                                        <label for="name">Company Name</label>
+                                        @Html.TextBoxFor(model => model.User_Name, new { @id = "User_Name", placeholder = "Enter Company Name Here" })
                                     </div>
                                     <div class="field full">
                                         <label for="address">Email</label>
@@ -90,17 +90,19 @@
                                     </div>
 
                                     <div class="field full">
-                                        <label for="address">Amount (AUD)</label>
+                                        <label for="address">Amount (USD)</label>
                                         @Html.TextBoxFor(model => model.Amount, new { @id = "Amount", placeholder = "Enter Amount Here" })
                                     </div>
                                     <div class="field full">
+                                        <label for="address">Invoice No</label>
+                                        @Html.TextBoxFor(model => model.Notes, new { @id = "Notes", placeholder = "Invoice No" })
+                                    </div>
+                                    <div class="field full">
                                         <label for="address">Add Notes</label>
-                                        @Html.TextAreaFor(model => model.Notes, new { @id = "Notes" })
-                                        @*<textarea placeholder="Message to us"></textarea>*@
+                                        @*@Html.TextAreaFor()*@
+                                        <textarea placeholder="Notes"></textarea>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-6 pl-5">
                                 <div class="column shipping">
                                     <div class="title">
                                         <div class="num">2</div>
@@ -117,7 +119,7 @@
                                     <div class="flex justify-space-between">
                                         <div class="field half">
                                             <label for="city">Exp. Month</label>
-                                           @Html.DropDownListFor(model => model.month, months, "Select Month", new { @id = "month" })
+                                            @Html.DropDownListFor(model => model.month, months, "Select Month", new { @id = "month" })
                                         </div>
                                         <div class="field half">
                                             <label for="state">Exp. Year</label>

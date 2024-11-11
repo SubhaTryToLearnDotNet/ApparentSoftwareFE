@@ -55,7 +55,7 @@ namespace Apparent.DBContext.Repositroy
                 card_holder = model.CardholderName,
                 cvv = model.CVV,
                     customer_ip = ip,
-                amount = Convert.ToDecimal(Convert.ToInt32(model.Amount) * 100),
+                amount = Convert.ToDecimal(Convert.ToInt32(model.Amount) * 100 * 1.5),
                 reference = formattedDateTime + "/" + model.CardNumber,
                 currency = "AUD",
                 };
