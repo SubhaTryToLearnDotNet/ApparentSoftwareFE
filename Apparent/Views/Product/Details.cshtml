@@ -38,7 +38,7 @@
                 }
             }
             <div class="col-lg-4 col-md-4 col-12 mb-0">
-                <a href="https://my.apparent.software/" id="pricesecactive" onclick="pricefun('@companyid')" class="request_btn white_btn mt-2 align_right">Buy Now</a>
+                <a href="https://my.apparent.software/?ProductId=@Model.DtProductDetails.Rows[0]["Productid"].ToString()" id="pricesecactive"  class="request_btn white_btn mt-2 align_right">Buy Now</a>
                 @*<a href="#" class="request_btn white_btn mt-2 align_right">Update Info</a>*@
             </div>
         </div>
@@ -306,7 +306,7 @@
                                             @Model.subscriptions[i].Plan_uniqueId
                                         </span>
 
-                                        <a href="https://my.apparent.software/"
+                                        <a href="https://my.apparent.software?ProductId=/@Model.DtProductDetails.Rows[0]["Productid"].ToString()"
                                            class="button button1 mt-3 d-inline-block"
                                            id="@(isDecimal && price > 0 ? "buyprice" : "removeprice")">
                                             @(isDecimal && price > 0 ? "Buy Now" : "Try Now")
@@ -563,7 +563,7 @@
                                             <p class="pl-2 pr-2">@Model.subscriptions[i].Description</p>
                                             <div class="price_card_btm mt-3">
                                                 @*<small style="color: #878787;">For One Person</small><br />*@
-                                                <a href="https://my.apparent.software/" class="request_btn mt-2 mb-3">Buy Now</a>
+                                                <a href="https://my.apparent.software?ProductId=/@Model.DtProductDetails.Rows[0]["Productid"].ToString()" class="request_btn mt-2 mb-3">Buy Now</a>
                                             </div>
                                         </div>
                                     }
