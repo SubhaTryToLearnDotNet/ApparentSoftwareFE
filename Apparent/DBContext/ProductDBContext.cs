@@ -620,7 +620,7 @@ namespace Apparent.DBContext
 					{
 						Plan_Name = dataRow["Plan_Name"].ToString(),
 						Plan_tenure = dataRow["Plan_tenure"].ToString(),
-						Price = (decimal)dataRow["Price"],
+						Price = dataRow["Price"].ToString(),
 						Description = dataRow["Description"].ToString(),
 						Plan_uniqueId = dataRow["Plan_uniqueId"].ToString()
 					});
@@ -869,7 +869,7 @@ namespace Apparent.DBContext
 					{
 						Plan_Name = dataRow["plan_type"].ToString(),
 
-						Price = (decimal)dataRow["Price"],
+						Price = dataRow["Price"].ToString(),
 						Token_Count = (int)dataRow["Token_Count"],
 						Sold_Count = (int)dataRow["Sold_Count"]
 					});

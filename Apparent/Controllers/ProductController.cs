@@ -187,117 +187,132 @@ namespace Apparent.Controllers
 
 		}
 
-		public ActionResult Details(string ProductId)
-		{
-			try
-			{
-				ProductDBContext obj = new ProductDBContext();
-				ProductMaster model = new ProductMaster();
-				var Tables = obj.ProducDetails(ProductId);
-				model.DtProductDetails = Tables.Tables[0];
-				model.VideoList = Tables.Tables[1];
-				model.ImagesList = Tables.Tables[2];
-				model.Features = Tables.Tables[3];
-				model.ProductName = Tables.Tables[0].Rows[0]["ProductName"].ToString();
-				foreach (DataRow dataRow in Tables.Tables[4].Rows)
-				{
-					var Description = dataRow["Description"].ToString();
-					model.subscriptions.Add(new subscription
-					{
-						Plan_Name = dataRow["Plan_Name"].ToString(),
-						Plan_tenure = dataRow["Plan_tenure"].ToString(),
-						Price = (decimal)dataRow["Price"],
-						AdditionalFeatures = Description.Split('#'),
-						Plan_uniqueId = dataRow["Plan_uniqueId"].ToString(),
-						//token = dataRow["token"].ToString()
-					});
-				}
-				model.Features1 = new List<string>();
-				string FeaturesGroup1 = "";
-				model.Features2 = new List<string>();
-				string FeaturesGroup2 = "";
-				model.Features3 = new List<string>();
-				string FeaturesGroup3 = "";
+        public ActionResult Details(string ProductId)
+        {
+            try
+            {
+                ProductDBContext obj = new ProductDBContext();
+                ProductMaster model = new ProductMaster();
+                var Tables = obj.ProducDetails(ProductId);
+                model.DtProductDetails = Tables.Tables[0];
+                model.VideoList = Tables.Tables[1];
+                model.ImagesList = Tables.Tables[2];
+                model.Features = Tables.Tables[3];
+                model.ProductName = Tables.Tables[0].Rows[0]["ProductName"].ToString();
+                foreach (DataRow dataRow in Tables.Tables[4].Rows)
+                {
+                    var Description = dataRow["Description"].ToString();
+                    model.subscriptions.Add(new subscription
+                    {
+                        Plan_Name = dataRow["Plan_Name"].ToString(),
+                        Plan_tenure = dataRow["Plan_tenure"].ToString(),
+                        Price = dataRow["Price"].ToString(),
+                        AdditionalFeatures = Description.Split('#'),
+                        Plan_uniqueId = dataRow["Plan_uniqueId"].ToString(),
+                        //token = dataRow["token"].ToString()
+                    });
+                }
+                //DataTable dt = obj.GetCancelationDetailsForProductPage(ProductId);
 
-				if (Tables.Tables[3].Rows[0]["FeaturesGroup1"] != null && !string.IsNullOrWhiteSpace(Tables.Tables[3].Rows[0]["FeaturesGroup1"].ToString()))
-				{
-					//set features table to list
-					FeaturesGroup1 = Tables.Tables[3].Rows[0]["FeaturesGroup1"].ToString();
-				}
-				if (Tables.Tables[3].Rows[0]["Add_featuresg1"] != null && !string.IsNullOrWhiteSpace(Tables.Tables[3].Rows[0]["Add_featuresg1"].ToString()))
-				{
-					string Add_features1 = Tables.Tables[3].Rows[0]["Add_featuresg1"].ToString();
+                //if (dt.Rows.Count > 0 && dt != null)
+                //{
+                //    foreach (DataRow dr in dt.Rows)
+                //    {
+                //        model.Link1 = dr["Link1"].ToString();
+                //        model.Link2 = dr["Link2"].ToString();
+                //        model.description1 = dr["description1"].ToString();
+                //        model.description2 = dr["description2"].ToString();
+                //        model.CancellationPolicy = dr["CancellationPolicy"].ToString();
+                //        model.CancellationImage = dr["CancellationImage"].ToString();
+                //        model.CancellationPDF = dr["CancellationPDF"].ToString();
+                //    }
+                //}
+                model.Features1 = new List<string>();
+                string FeaturesGroup1 = "";
+                model.Features2 = new List<string>();
+                string FeaturesGroup2 = "";
+                model.Features3 = new List<string>();
+                string FeaturesGroup3 = "";
 
-					if (FeaturesGroup1 != null && FeaturesGroup1.Trim() != string.Empty)
-					{
-						FeaturesGroup1 = FeaturesGroup1 + "& " + Add_features1;
-					}
-					else
-					{
-						FeaturesGroup1 = Add_features1;
-					}
-				}
+                if (Tables.Tables[3].Rows[0]["FeaturesGroup1"] != null && !string.IsNullOrWhiteSpace(Tables.Tables[3].Rows[0]["FeaturesGroup1"].ToString()))
+                {
+                    //set features table to list
+                    FeaturesGroup1 = Tables.Tables[3].Rows[0]["FeaturesGroup1"].ToString();
+                }
+                if (Tables.Tables[3].Rows[0]["Add_featuresg1"] != null && !string.IsNullOrWhiteSpace(Tables.Tables[3].Rows[0]["Add_featuresg1"].ToString()))
+                {
+                    string Add_features1 = Tables.Tables[3].Rows[0]["Add_featuresg1"].ToString();
+
+                    if (FeaturesGroup1 != null && FeaturesGroup1.Trim() != string.Empty)
+                    {
+                        FeaturesGroup1 = FeaturesGroup1 + "& " + Add_features1;
+                    }
+                    else
+                    {
+                        FeaturesGroup1 = Add_features1;
+                    }
+                }
 
 
-				string[] frtgrps1 = FeaturesGroup1.Split('&');
-				model.Features1.AddRange(frtgrps1);
+                string[] frtgrps1 = FeaturesGroup1.Split('&');
+                model.Features1.AddRange(frtgrps1);
 
-				if (Tables.Tables[3].Rows[0]["FeaturesGroup2"] != null && !string.IsNullOrWhiteSpace(Tables.Tables[3].Rows[0]["FeaturesGroup2"].ToString()))
-				{
+                if (Tables.Tables[3].Rows[0]["FeaturesGroup2"] != null && !string.IsNullOrWhiteSpace(Tables.Tables[3].Rows[0]["FeaturesGroup2"].ToString()))
+                {
 
 
-					FeaturesGroup2 = Tables.Tables[3].Rows[0]["FeaturesGroup2"].ToString();
-				}
-				if (Tables.Tables[3].Rows[0]["Add_featuresg2"] != null && !string.IsNullOrWhiteSpace(Tables.Tables[3].Rows[0]["Add_featuresg2"].ToString()))
-				{
+                    FeaturesGroup2 = Tables.Tables[3].Rows[0]["FeaturesGroup2"].ToString();
+                }
+                if (Tables.Tables[3].Rows[0]["Add_featuresg2"] != null && !string.IsNullOrWhiteSpace(Tables.Tables[3].Rows[0]["Add_featuresg2"].ToString()))
+                {
 
-					string Add_features2 = Tables.Tables[3].Rows[0]["Add_featuresg2"].ToString();
-					if (FeaturesGroup2 != null && FeaturesGroup2.Trim() != string.Empty)
-					{
-						FeaturesGroup2 = FeaturesGroup2 + "& " + Add_features2;
-					}
-					else
-					{
-						FeaturesGroup2 = Add_features2;
-					}
+                    string Add_features2 = Tables.Tables[3].Rows[0]["Add_featuresg2"].ToString();
+                    if (FeaturesGroup2 != null && FeaturesGroup2.Trim() != string.Empty)
+                    {
+                        FeaturesGroup2 = FeaturesGroup2 + "& " + Add_features2;
+                    }
+                    else
+                    {
+                        FeaturesGroup2 = Add_features2;
+                    }
 
-				}
+                }
 
-				string[] frtgrps2 = FeaturesGroup2.Split('&');
-				model.Features2.AddRange(frtgrps2);
-				if (Tables.Tables[3].Rows[0]["FeaturesGroup3"] != null && !string.IsNullOrWhiteSpace(Tables.Tables[3].Rows[0]["FeaturesGroup3"].ToString()))
-				{
+                string[] frtgrps2 = FeaturesGroup2.Split('&');
+                model.Features2.AddRange(frtgrps2);
+                if (Tables.Tables[3].Rows[0]["FeaturesGroup3"] != null && !string.IsNullOrWhiteSpace(Tables.Tables[3].Rows[0]["FeaturesGroup3"].ToString()))
+                {
 
-					FeaturesGroup3 = Tables.Tables[3].Rows[0]["FeaturesGroup3"].ToString();
-				}
-				if (Tables.Tables[3].Rows[0]["Add_featuresg3"] != null && !string.IsNullOrWhiteSpace(Tables.Tables[3].Rows[0]["Add_featuresg3"].ToString()))
-				{
+                    FeaturesGroup3 = Tables.Tables[3].Rows[0]["FeaturesGroup3"].ToString();
+                }
+                if (Tables.Tables[3].Rows[0]["Add_featuresg3"] != null && !string.IsNullOrWhiteSpace(Tables.Tables[3].Rows[0]["Add_featuresg3"].ToString()))
+                {
 
-					string Add_features3 = Tables.Tables[3].Rows[0]["Add_featuresg3"].ToString();
+                    string Add_features3 = Tables.Tables[3].Rows[0]["Add_featuresg3"].ToString();
 
-					if (FeaturesGroup3 != null && FeaturesGroup3.Trim() != string.Empty)
-					{
-						FeaturesGroup3 = FeaturesGroup3 + "& " + Add_features3;
-					}
-					else
-					{
-						FeaturesGroup3 = Add_features3;
-					}
-				}
+                    if (FeaturesGroup3 != null && FeaturesGroup3.Trim() != string.Empty)
+                    {
+                        FeaturesGroup3 = FeaturesGroup3 + "& " + Add_features3;
+                    }
+                    else
+                    {
+                        FeaturesGroup3 = Add_features3;
+                    }
+                }
 
-				string[] frtgrps3 = FeaturesGroup3.Split('&');
-				model.Features3.AddRange(frtgrps3);
-				return View(model);
-			}
-			catch
-			{
+                string[] frtgrps3 = FeaturesGroup3.Split('&');
+                model.Features3.AddRange(frtgrps3);
+                return View(model);
+            }
+            catch
+            {
 
-			}
-			return RedirectToAction("Index", "Home");
+            }
+            return RedirectToAction("Index", "Home");
 
-		}
+        }
 
-		public ActionResult Addfeatures(string ProductId)
+        public ActionResult Addfeatures(string ProductId)
 		{
 
 			ViewBag.ProductId = ProductId;
@@ -812,8 +827,8 @@ namespace Apparent.Controllers
 						},
 						Subscription = new Subscription
 						{
-							ProductId = Convert.ToInt32(companyMaster.ProductId),
-							PlanId = Convert.ToInt32(companyMaster.GetSubscription.Plan_uniqueId),
+							ProductId = "0",
+							PlanId = "0",
 							PlanName = companyMaster.GetSubscription.Plan_Name,
 						}
 					};

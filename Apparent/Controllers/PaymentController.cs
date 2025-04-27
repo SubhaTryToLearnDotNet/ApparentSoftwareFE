@@ -328,8 +328,8 @@ namespace Apparent.Controllers
 					},
 					Subscription = new Subscription
 					{
-						ProductId = Convert.ToInt32(dsProduct.ProductId),
-						PlanId = Convert.ToInt32(dsProduct.GetSubscription.Plan_uniqueId),
+						ProductId = "Convert.ToInt32(dsProduct.ProductId),",
+						PlanId = "Convert.ToInt32(dsProduct.GetSubscription.Plan_uniqueId",
 						PlanName = dsProduct.GetSubscription.Plan_Name,
 
 					}
@@ -379,9 +379,9 @@ namespace Apparent.Controllers
 					},
 					Subscription = new Subscription
 					{
-						ProductId = Convert.ToInt32(dsProduct.ProductId),
-						PlanId = Convert.ToInt32(dsProduct.GetSubscription.Plan_uniqueId),
-						PlanName = dsProduct.GetSubscription.Plan_Name,
+						ProductId = "0",
+						PlanId = "0",
+                        PlanName = dsProduct.GetSubscription.Plan_Name,
 					}
 				};
 				#endregion

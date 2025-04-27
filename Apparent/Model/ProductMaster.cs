@@ -25,24 +25,28 @@ namespace Apparent.Model
     }
     public class ProductMaster : CompanyMaster
     {
-         public ProductMaster() 
-         {
+        public ProductMaster()
+        {
             Product_imagesFile = new List<ProductImage>();
             Product_videosFile = new List<Video>();
             subscriptions = new List<subscription>();
             Getcategory = new List<string>();
             GetProduct_Comments = new List<Product_Comment>();
             GetPrice_Comments = new List<Price_Comment>();
-            GetFeatures_Comments =   new List<Features_Comment>();
+            GetFeatures_Comments = new List<Features_Comment>();
 
             subscription_Tokens = new List<subscription_token>();
-         }
-        public int id { get; set; } 
+        }
+        public int id { get; set; }
         public string FirstName { get; set; }
+        public string CustomerID { get; set; }
+        public string planId { get; set; }
+        public string PlanName { get; set; }
+
         public string LastName { get; set; }
         public string Company_Email { get; set; }
         public string ProductId { get; set; }
-        public string SellerId { get;set; }
+        public string SellerId { get; set; }
         public List<string> Getcategory { get; set; }
         public string AboutProduct { get; set; }
         public string SupportLanguages { get; set; }
@@ -55,22 +59,29 @@ namespace Apparent.Model
         public string token { get; set; }
         public DataTable ProductVideo { get; set; }
         public DataTable SellerDeatils { get; set; }
-
+        public string PhoneCountryCode { get; set; }
         public string VideoFile { get; set; }
         public HttpPostedFileBase ProductImage { get; set; }
         public string ProductIcon { get; set; }
-        public HttpPostedFileBase[]  ScreenshotFile { get; set; }
+        public HttpPostedFileBase[] ScreenshotFile { get; set; }
         public string Images { get; set; }
 
         //public HttpPostedFileBase[] PDF { get; set; }
         //public string PdfId { get; set; }
-       
-
+        public HttpPostedFileBase[] ProductCancellationPDF { get; set; }
+        public HttpPostedFileBase[] ProductCancellationImage { get; set; }
+        public string Link1 { get; set; }
+        public string description1 { get; set; }
+        public string Link2 { get; set; }
+        public string description2 { get; set; }
+        public string CancellationPolicy { get; set; }
+        public string CancellationImage { get; set; }
+        public string CancellationPDF { get; set; }
         public string ThumbnailId { get; set; }
         public DataTable DtProductList { get; set; }
         public DataTable PdfFileList { get; set; }
         public DataTable DtProductDetails { get; set; }
-        public DataTable VideoList { get;set;}
+        public DataTable VideoList { get; set; }
         public DataTable ImagesList { get; set; }
         public DataTable Token_List { get; set; }
         public DataTable Features { get; set; }
@@ -91,7 +102,7 @@ namespace Apparent.Model
         public string respons_result { get; set; }
 
         public string ImagesComment { get; set; }
-        public string PricingComment { get; set;}
+        public string PricingComment { get; set; }
         public string FeaturesComment { get; set; }
         public List<ProductImage> Product_imagesFile { get; set; }
         public List<Video> Product_videosFile { get; set; }
@@ -107,19 +118,20 @@ namespace Apparent.Model
         public string token_master { get; set; }
         public string subscription_comment { get; set; }
         public List<subscription> subscriptions { get; set; }
+        public List<PackageModel> Packagedeatls { get; set; } = new List<PackageModel>();
         public List<subscription_token> subscription_Tokens { get; set; }
         public List<Product_Comment> GetProduct_Comments { get; set; }
         public List<Price_Comment> GetPrice_Comments { get; set; }
-        public List<Features_Comment>GetFeatures_Comments  { get; set; }
+        public List<Features_Comment> GetFeatures_Comments { get; set; }
         public string CategoryValue { get; set; }
         public string LanguageValue { get; set; }
         public string[] AllBlobImgAddress { get; set; }
         public string[] AllBlobVideoAddress { get; set; }
         public string Product_Url { get; set; }
-        public subscription GetSubscription {  get; set; }  = new subscription();
+        public subscription GetSubscription { get; set; } = new subscription();
 
 
-	}
+    }
 
 
 
@@ -134,13 +146,11 @@ namespace Apparent.Model
 
         public string Features_Commentgroup { get; set; }
     }
-        public class ProductImage
+    public class ProductImage
     {
         public int ImageId { get; set; }
         public string ImagesPath { get; set; }
         public string Product_Id { get; set; }
-        
-
     }
     public class Video
     {
@@ -151,11 +161,11 @@ namespace Apparent.Model
     public class subscription
     {
         public string Plan_Name { get; set; }
-        public decimal Price { get; set; }
+        public string Price { get; set; }
         public string Plan_tenure { get; set; }
         public string Description { get; set; }
         public string Plan_uniqueId { get; set; }
-        public string  token { get; set; }
+        public string token { get; set; }
         public int Token_Count { get; set; }
         public int Sold_Count { get; set; }
         public string[] AdditionalFeatures { get; set; }
@@ -169,9 +179,9 @@ namespace Apparent.Model
         public string Type { get; set; }
         public DateTime Comment_Time { get; set; }
     }
-    public class Price_Comment: Product_Comment
+    public class Price_Comment : Product_Comment
     {
-        
+
     }
     public class Features_Comment : Product_Comment
     {
@@ -194,14 +204,24 @@ namespace Apparent.Model
     public class Subscription
     {
         [Required]
-        public int ProductId { get; set; } 
+        public string ProductId { get; set; }
 
-		[Required]
-		public int PlanId { get; set; } =0;
+        [Required]
+        public string PlanId { get; set; }
 
-		[Required]
-		public string PlanName { get; set; } = string.Empty;
+        [Required]
+        public string PlanName { get; set; } = string.Empty;
 
+    }
+
+    public class PackageModel
+    {
+        public string PlanId { get; set; }
+        public string Plan { get; set; }
+        public decimal Price { get; set; }
+        public string Duration { get; set; }
+        public string Description { get; set; }
+        public int Index { get; set; }
     }
 
 }
