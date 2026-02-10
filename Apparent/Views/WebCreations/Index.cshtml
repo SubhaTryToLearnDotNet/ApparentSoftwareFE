@@ -1,0 +1,248 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+    /* Hero Section */
+    .hero {
+        background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("https://images.unsplash.com/photo-1521791136064-7986c2920216") center/cover no-repeat;
+        color: white;
+        height: 60vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 0 1rem;
+    }
+
+        .hero h1 {
+            font-weight: 700;
+            font-size: 2.2rem;
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .hero a {
+            margin-top: 15px;
+        }
+
+    /* Sections */
+    section {
+        padding: 60px 15px;
+    }
+
+    .section-title {
+        font-weight: 700;
+        color: #0d6efd;
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+
+    /* About Us */
+    .about-img img {
+        width: 100%;
+        border-radius: 15px;
+        object-fit: cover;
+    }
+
+    /* Portfolio Scrollable */
+    .portfolio-container {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        scroll-behavior: smooth;
+        gap: 20px;
+        padding-bottom: 10px;
+    }
+
+        .portfolio-container::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .portfolio-container::-webkit-scrollbar-thumb {
+            background: #0d6efd;
+            border-radius: 10px;
+        }
+
+    .portfolio-item {
+        min-width: 280px;
+        max-width: 320px;
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        overflow: hidden;
+        flex-shrink: 0;
+        transition: transform 0.3s;
+    }
+
+        .portfolio-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 180px;
+            object-fit: contain; /* keep aspect ratio */
+            object-position: center; /* center the image */
+            background-color: #f0f0f0; /* optional: placeholder bg */
+        }
+
+        .portfolio-item div {
+            padding: 15px;
+        }
+
+        .portfolio-item h3 {
+            margin-bottom: 8px;
+        }
+
+    /* Motivation */
+    .motivation {
+        background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url("https://images.unsplash.com/photo-1504384308090-c894fdcc538d") center/cover no-repeat;
+        color: #fff;
+        text-align: center;
+        padding: 80px 20px;
+        border-radius: 10px;
+    }
+
+        .motivation h2 {
+            font-size: 1.8rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+    /* Testimonials */
+    .testimonial {
+        background: #f8f9fa;
+        border-radius: 10px;
+        padding: 25px;
+        transition: all 0.3s ease-in-out;
+    }
+
+        .testimonial:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+    /* Contact */
+    .contact {
+        background: #0d6efd;
+        color: white;
+        text-align: center;
+        padding: 80px 20px;
+    }
+
+        .contact a {
+            color: #fff;
+            text-decoration: underline;
+        }
+
+    .contact-form input, .contact-form textarea {
+        border-radius: 8px;
+        border: none;
+        padding: 12px;
+        width: 100%;
+    }
+
+    .contact-form button {
+        background: #fff;
+        color: #0193d9;
+        border: none;
+        padding: 10px 30px;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: all 0.3s ease-in-out;
+    }
+
+        .contact-form button:hover {
+            background: #f8f9fa;
+            transform: scale(1.05);
+        }
+</style>
+
+
+<!-- ====================================================================================================
+  start faqRow
+====================================================================================================== -->
+
+<section class="faqRow">
+
+
+
+    <!-- Hero -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Let us build your website</h1>
+            <p>We design, develop, and deliver high-performing digital products using .NET, React, and Azure Cloud.</p>
+            <a href="#portfolio" class="btn btn-primary mt-3 px-4 py-2">View Our Work</a>
+        </div>
+    </section>
+
+    <!-- About Us -->
+    <section id="about">
+        <div class="container">
+            
+            <div class="row align-items-center mt-4 g-4">
+                <div class="col-md-6 about-img">
+                    <img src="~/Content/Web/images/aboutUs.jpg" alt="Office">
+                </div>
+                <div class="col-md-6">
+                    <h3>We Build Future-Ready IT Solutions</h3>
+                    <p>Founded in Brisbane, <strong>Apparent</strong> is a team of passionate developers, designers, and cloud experts helping businesses embrace digital transformation.</p>
+                    <p>We specialize in building scalable enterprise applications using .NET, Azure, and modern JavaScript frameworks.</p>
+                    <ul class="list-unstyled mt-3">
+                        <li>✅ 25+ Years of Experience in Enterprise Development</li>
+                        <li>✅ 50+ Successful Projects Across Australia & Global Clients</li>
+                        <li>✅ Microsoft Azure & AWS Certified Engineers</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio -->
+    <section id="portfolio">
+        <div class="container">
+            <h2 class="section-title">Our Portfolio</h2>
+            <div class="portfolio-container">
+                <div class="portfolio-item">
+                    <img src="~/Content/Web/images/TrueArt.png" />
+                    <div><h3>TrueArt.io</h3><p>Online art marketplace built with .NET and React.</p></div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="~/Content/Web/images/Apparent-Software.png" />
+                    <div><h3>Apparent</h3><p>Digital software sales built in .Net</p></div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="~/Content/Web/images/VeridocSign.jpg" />
+                    <div><h3>Veridoc Sign</h3><p>Digital sign</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Motivation -->
+    <section class="motivation">
+        <h2>"Innovation isn’t about technology — it’s about transforming ideas into impact."</h2>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="reviews" class="text-center">
+        <div class="container">
+            <h2 class="section-title">What Our Clients Say</h2>
+            <div class="row mt-4 g-4 justify-content-center">
+                <div class="col-md-4"><div class="testimonial shadow-sm"><p>“The team delivered outstanding quality and support.”</p><strong>– James W., Melbourne</strong></div></div>
+                <div class="col-md-4"><div class="testimonial shadow-sm"><p>“Our sales grew 200% post-launch. Great experience.”</p><strong>– Sophia L., Sydney</strong></div></div>
+                <div class="col-md-4"><div class="testimonial shadow-sm"><p>“Professional, responsive, and creative — they turned our vision into reality.”</p><strong>– Aaron B., Perth</strong></div></div>
+            </div>
+        </div>
+    </section>
+
+
+</section>

@@ -64,12 +64,6 @@
     <Reference Include="Mandrill, Version=3.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Mandrill.3.1.0\lib\netstandard1.1\Mandrill.dll</HintPath>
     </Reference>
-    <Reference Include="MaxMind.Db, Version=4.0.0.0, Culture=neutral, PublicKeyToken=66afa4cc5ae853ac, processorArchitecture=MSIL">
-      <HintPath>..\packages\MaxMind.Db.4.1.0\lib\netstandard2.0\MaxMind.Db.dll</HintPath>
-    </Reference>
-    <Reference Include="MaxMind.GeoIP2, Version=4.0.0.0, Culture=neutral, PublicKeyToken=66afa4cc5ae853ac, processorArchitecture=MSIL">
-      <HintPath>..\packages\MaxMind.GeoIP2.5.2.0\lib\netstandard2.0\MaxMind.GeoIP2.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.AspNetCore.Cors, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNetCore.Cors.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Cors.dll</HintPath>
     </Reference>
@@ -372,6 +366,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="CommonService\StorageService.cs" />
+    <Compile Include="Controllers\WebCreationsController.cs" />
     <Compile Include="Controllers\AboutUsController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
@@ -592,6 +587,7 @@
     <Content Include="Content\Web\css\style.css" />
     <Content Include="Content\Web\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\Web\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\Web\images\aboutUs.jpg" />
     <Content Include="Content\Web\images\American-Express.png" />
     <Content Include="Content\Web\images\Apparent-pay-logo_White.png" />
     <Content Include="Content\Web\images\Apparent-Software-Colored-H-200px.png" />
@@ -684,9 +680,11 @@
     <Content Include="Content\Web\images\software03.png" />
     <Content Include="Content\Web\images\software04.png" />
     <Content Include="Content\Web\images\token.png" />
+    <Content Include="Content\Web\images\TrueArt.png" />
     <Content Include="Content\Web\images\vector01.png" />
     <Content Include="Content\Web\images\vector02.png" />
     <Content Include="Content\Web\images\vector03.png" />
+    <Content Include="Content\Web\images\VeridocSign.jpg" />
     <Content Include="Content\Web\images\video.png" />
     <Content Include="Content\Web\images\video_pic.jpg" />
     <Content Include="Content\Web\images\visa.png" />
@@ -806,6 +804,7 @@
     <Content Include="Views\Blog\Index.cshtml" />
     <Content Include="Views\Blog\BlogDetails.cshtml" />
     <Content Include="Views\AboutUs\Index.cshtml" />
+    <Content Include="Views\WebCreations\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

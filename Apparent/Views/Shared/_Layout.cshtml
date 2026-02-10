@@ -26,13 +26,13 @@
     <!-- <link href="~/Content/assets/css/font-awesome.min.css" rel="stylesheet" type="text/css"/> -->
 
     <script src="https://kit.fontawesome.com/91cafd3f0a.js" crossorigin="anonymous"></script>
-    <link href="~/Content/Web/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="~/Content/Web/css/style.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="~/Content/Web/css/all.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="~/Content/assets/css/all.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="~/Content/assets/css/style_new.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="~/Content/assets/css/ace.min.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="~/Content/assets/css/responsive.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/Web/css/bootstrap.min.css" asp-append-version="true" rel="stylesheet" type="text/css" />
+    <link href="~/Content/Web/css/style.css" asp-append-version="true" rel="stylesheet" type="text/css" media="all" />
+    <link href="~/Content/Web/css/all.css" asp-append-version="true" rel="stylesheet" type="text/css" media="all" />
+    <link href="~/Content/assets/css/all.css" asp-append-version="true" rel="stylesheet" type="text/css" media="all" />
+    <link href="~/Content/assets/css/style_new.css" asp-append-version="true" rel="stylesheet" type="text/css" media="all" />
+    <link href="~/Content/assets/css/ace.min.css" asp-append-version="true" rel="stylesheet" type="text/css" media="all" />
+    <link href="~/Content/assets/css/responsive.css" asp-append-version="true" rel="stylesheet" type="text/css" />
     <style>
         .nav-link.active {
             color: darkgray;
@@ -69,14 +69,17 @@
                     <li class="inline-block nav-item">
                         <a class="nav-link" href="/sellers">For Sellers</a>
                     </li>
-                    <li class="inline-block nav-item">
+                    @*<li class="inline-block nav-item">
                         <a class="nav-link" href="/faq">FAQ</a>
-                    </li>
+                    </li>*@
                     <li class="inline-block nav-item">
                         <a class="nav-link" href="/blog">Blog</a>
                     </li>
                     <li class="inline-block nav-item">
                         <a class="nav-link" href="/contact">Contact us</a>
+                    </li>
+                    <li class="inline-block nav-item">
+                        <a class="nav-link" href="/WebCreations">Web Creations</a>
                     </li>
 
 
@@ -115,50 +118,7 @@
                                         </li>
                                     </ul>
                                 </div>
-                                @*<div class="admin_content">*@
-                                @*<div class="admin_data">*@
-                                <!-- <div class="image"> <img src="images/logo.jpg" width="40" height="40"> </div> -->
-                                @*<div class="admin_name">
-                                    @{
-                                        var Name = Session["FirstName"].ToString();
-                                        var CompanyIcon = Session["CompanyIcon"].ToString();
-                                        if (CompanyIcon != null && CompanyIcon != "")
-                                        {
-                                            <a href="javascript:void(0);">
-                                                <div class="userPicD">
-                                                    <img src="@CompanyIcon" alt="" />
-                                                </div>
-                                            </a>
-                                        }
-                                        else
-                                        {
-                                            <div class="lyprofile-container userPicD">
-                                                @Name.Substring(0, 1)
-                                            </div>
-                                        }
-                                    }
-                                </div>*@
-                                <!-- <div class="admin_dropdown_icon">
-                              <i class="fas fa-sort-down"></i>
-                            </div> -->
-                                @*</div>
-                                </div>*@
-                                <!--<div class="account_dropdown">
-                            <div class="account_dropdown_body">
-                                <div class="account_dropdown_item">
-                                    <a href="~/Home">Home</a>
-                                </div>
-                                <div class="account_dropdown_item">
-                                    <a href="~/Profile/customerprof">Profile</a>
-                                </div>-->
-                                @*<div class="account_dropdown_item">
-                                    <a href="#">Setting</a>
-                                </div>*@
-                                <!--<div class="account_dropdown_item">
-                                        <a href="~/SignOut/Index">Sign Out</a>
-                                    </div>
-                                </div>
-                            </div>-->
+                              
                             </div>
 
 
@@ -196,52 +156,7 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <!--<div class="admin_content">
-                            <div class="admin_data">
-                                <!-- <div class="image"> <img src="images/logo.jpg" width="40" height="40"> </div> -->
-                                <!--<div class="admin_name">
-                                @{
-                                    //var CompanyName = Session["CompanyName"].ToString();
-                                    //var CompanyIcon = Session["CompanyIcon"].ToString();
-                                    //if (CompanyIcon != "" && CompanyIcon != null)
-                                    //{
-                                        <a href="javascript:void(0);">
-                                            <div class="userPicD">
-
-                                                <img src="@CompanyIcon" alt="" />
-
-                                            </div>
-                                        </a>
-                                    }
-                                    else
-                                    {
-                                        <div class="lyprofile-container userPicD">
-                                            @CompanyName.Substring(0, 1)
-                                        </div>
-                                    }
-                                }
-                            </div>-->
-                                <!-- <div class="admin_dropdown_icon">
-                              <i class="fas fa-sort-down"></i>
-                            </div> -->
-                                <!--</div>
-                            </div>
-                            <div class="account_dropdown">
-                                <div class="account_dropdown_body">
-                                    <div class="account_dropdown_item">
-                                        <a href="~/Home">Home</a>
-                                    </div>
-                                    <div class="account_dropdown_item">
-                                        <a href="~/Profile/Index">Profile</a>
-                                    </div>
-                                    <div class="account_dropdown_item">
-                                            <a href="#">Setting</a>
-                                        </div>
-                                    <div class="account_dropdown_item">
-                                        <a href="~/SignOut/Index">Sign Out</a>
-                                    </div>
-                                </div>
-                            </div>-->
+                               
                             </div>
                         }
                         else
@@ -298,25 +213,25 @@
         <ul class="list-reset m0">
             <!-- // add menu accordion start -->
             <!-- <div class="accordion">
+        <ul>
+            <li class="pagenav">
+                <h4><a href="javascript:void(0);">Services</a> <i class="fa fa-angle-right"></i></h4>
                 <ul>
-                    <li class="pagenav">
-                        <h4><a href="javascript:void(0);">Services</a> <i class="fa fa-angle-right"></i></h4>
-                        <ul>
-                            <li class="page_item"><a href="#">Action</a></li>
-                            <li class="page_item"><a href="#">Another action</a></li>
-                            <li class="page_item"><a href="#">Something else here</a></li>
-                        </ul>
-                    </li>
+                    <li class="page_item"><a href="#">Action</a></li>
+                    <li class="page_item"><a href="#">Another action</a></li>
+                    <li class="page_item"><a href="#">Something else here</a></li>
                 </ul>
-            </div> -->
+            </li>
+        </ul>
+    </div> -->
             <!-- // add menu accordion end -->
             <li class="pointer"><a href="/" class="m_menu">Home</a></li>
             <li class="pointer"><a href="/aboutus" class="m_menu">About us</a></li>
             <li class="pointer"><a href="/buyers" class="m_menu">For Buyers</a></li>
             <li class="pointer"><a href="/sellers" class="m_menu">For Sellers</a></li>
-            <li class="pointer"><a href="/faq" class="m_menu">FAQ</a></li>
             <li class="pointer"><a href="/blog" class="m_menu">Blog</a></li>
             <li class="pointer"><a href="/contact" class="m_menu">Contact us</a></li>
+            <li class="pointer"><a href="/WebCreations" class="m_menu">Web Creations</a></li>
         </ul>
     </div>
 

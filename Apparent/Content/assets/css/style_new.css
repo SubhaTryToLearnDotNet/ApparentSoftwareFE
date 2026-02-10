@@ -165,7 +165,7 @@ hr {
 	display: block;
 	-webkit-animation: fadeInUp 400ms;
 	animation: fadeInUp 400ms;
-	margin-top: .-1rem;
+	margin-top: -1rem;
 }
 
 ::-webkit-input-placeholder {
@@ -277,10 +277,6 @@ hr {
 		background-color: var(--btn-hover);
 		box-shadow: 0px 17px 10px -10px rgba(0,0,0,0.4);
 		transform: translate3d(0, -1px, 0);
-		/*-webkit-transform: translate3d(0, -1px, 0);
-	transform: translate3d(0, -1px, 0);
-	-webkit-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);*/;
 	}
 
 
@@ -1720,7 +1716,7 @@ header .bg-white {
 
 .faqRow {
 	width: 100%;
-	padding: 80px 0;
+	padding: 20px 0;
 	text-align: center;
 	display: block;
 	position: relative;

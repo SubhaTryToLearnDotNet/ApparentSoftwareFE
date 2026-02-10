@@ -132,7 +132,7 @@ namespace Apparent.Controllers
                 if (!string.IsNullOrEmpty(email))
                 {
                     EmailService emailService = new EmailService();
-                    emailService.Emailverification(email, emailverificationCode);
+                    await emailService.Emailverification(email, emailverificationCode);
 
                     return Json(new { code = 200 });
                 }

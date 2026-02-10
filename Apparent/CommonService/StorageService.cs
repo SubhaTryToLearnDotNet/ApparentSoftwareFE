@@ -56,7 +56,7 @@ namespace Apparent
                 
                 return blobResult;
             }
-            catch(Exception ex) {
+            catch(Exception) {
                 return blobResult;
             };
            

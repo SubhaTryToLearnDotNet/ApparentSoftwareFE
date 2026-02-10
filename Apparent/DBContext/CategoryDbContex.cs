@@ -18,7 +18,7 @@ namespace Apparent.DBContext
 
 
 
-        public async Task<bool> add_category(string category,string companyid)
+        public Task<bool> add_category(string category,string companyid)
         {
             try
             {
@@ -35,21 +35,21 @@ namespace Apparent.DBContext
                 con.Close();
                 if (dt.Rows[0]["result"].ToString() == "success")
                 {
-                    return true;
+                    return Task.FromResult(true);
                 }
                 else
                 {
-                    return false;
+                    return Task.FromResult(false);
                 }
             }
             catch
             {
-                return false;
+                return Task.FromResult(false);
             }
 
         }
 
-        public async Task<List<Category>> select_category(string companyid)
+        public Task<List<Category>> select_category(string companyid)
         {
             try
             {           
@@ -77,18 +77,18 @@ namespace Apparent.DBContext
                     categories.Add(category);
                 }
 
-                return categories;
+                return Task.FromResult(categories);
 
             }
             catch
             {
-                return null;
+                return Task.FromResult<List<Category>>(null);
             }
 
 
 
         }
-        public async Task<bool>update_category(Category category)
+        public Task<bool>update_category(Category category)
         {
             try
             {
@@ -105,16 +105,16 @@ namespace Apparent.DBContext
                 con.Close();
                 if (a>0)
                 {
-                    return true;
+                    return Task.FromResult(true);
                 }
                 else
                 {
-                    return false;
+                    return Task.FromResult(false);
                 }
             }
             catch
             {
-                return false;
+                return Task.FromResult(false);
             }
 
         }
