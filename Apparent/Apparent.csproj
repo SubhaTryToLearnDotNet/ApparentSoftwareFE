@@ -810,6 +810,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Content\Images\" />
     <Folder Include="Content\NewFolder1\" />
+    <Folder Include="Content\WebCreation\" />
     <Folder Include="Content\Web\NewFolder1\" />
     <Folder Include="Content\Web\ProductLogo\" />
     <Folder Include="Content\Web\ScreenShot\" />

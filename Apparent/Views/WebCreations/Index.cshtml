@@ -1,248 +1,853 @@
 ﻿
-@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<style>
-    /* Hero Section */
-    .hero {
-        background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("https://images.unsplash.com/photo-1521791136064-7986c2920216") center/cover no-repeat;
-        color: white;
-        height: 60vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        padding: 0 1rem;
-    }
-
-        .hero h1 {
-            font-weight: 700;
-            font-size: 2.2rem;
-            max-width: 900px;
-            margin: auto;
-        }
-
-        .hero p {
-            font-size: 1.1rem;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .hero a {
-            margin-top: 15px;
-        }
-
-    /* Sections */
-    section {
-        padding: 60px 15px;
-    }
-
-    .section-title {
-        font-weight: 700;
-        color: #0d6efd;
-        margin-bottom: 2rem;
-        text-align: center;
-    }
-
-    /* About Us */
-    .about-img img {
-        width: 100%;
-        border-radius: 15px;
-        object-fit: cover;
-    }
-
-    /* Portfolio Scrollable */
-    .portfolio-container {
-        display: flex;
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        scroll-behavior: smooth;
-        gap: 20px;
-        padding-bottom: 10px;
-    }
-
-        .portfolio-container::-webkit-scrollbar {
-            height: 8px;
-        }
-
-        .portfolio-container::-webkit-scrollbar-thumb {
-            background: #0d6efd;
-            border-radius: 10px;
-        }
-
-    .portfolio-item {
-        min-width: 280px;
-        max-width: 320px;
-        background: #fff;
-        border-radius: 12px;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        overflow: hidden;
-        flex-shrink: 0;
-        transition: transform 0.3s;
-    }
-
-        .portfolio-item:hover {
-            transform: translateY(-5px);
-        }
-
-        .portfolio-item img {
-            width: 100%;
-            height: 180px;
-            object-fit: contain; /* keep aspect ratio */
-            object-position: center; /* center the image */
-            background-color: #f0f0f0; /* optional: placeholder bg */
-        }
-
-        .portfolio-item div {
-            padding: 15px;
-        }
-
-        .portfolio-item h3 {
-            margin-bottom: 8px;
-        }
-
-    /* Motivation */
-    .motivation {
-        background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url("https://images.unsplash.com/photo-1504384308090-c894fdcc538d") center/cover no-repeat;
-        color: #fff;
-        text-align: center;
-        padding: 80px 20px;
-        border-radius: 10px;
-    }
-
-        .motivation h2 {
-            font-size: 1.8rem;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-    /* Testimonials */
-    .testimonial {
-        background: #f8f9fa;
-        border-radius: 10px;
-        padding: 25px;
-        transition: all 0.3s ease-in-out;
-    }
-
-        .testimonial:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-
-    /* Contact */
-    .contact {
-        background: #0d6efd;
-        color: white;
-        text-align: center;
-        padding: 80px 20px;
-    }
-
-        .contact a {
-            color: #fff;
-            text-decoration: underline;
-        }
-
-    .contact-form input, .contact-form textarea {
-        border-radius: 8px;
-        border: none;
-        padding: 12px;
-        width: 100%;
-    }
-
-    .contact-form button {
-        background: #fff;
-        color: #0193d9;
-        border: none;
-        padding: 10px 30px;
-        border-radius: 8px;
-        font-weight: 600;
-        transition: all 0.3s ease-in-out;
-    }
-
-        .contact-form button:hover {
-            background: #f8f9fa;
-            transform: scale(1.05);
-        }
-</style>
-
-
-<!-- ====================================================================================================
-  start faqRow
-====================================================================================================== -->
+@*@{
+    Layout = null;
+}*@
 
 <section class="faqRow">
-
-
-
-    <!-- Hero -->
-    <section class="hero" id="home">
-        <div class="container">
-            <h1>Let us build your website</h1>
-            <p>We design, develop, and deliver high-performing digital products using .NET, React, and Azure Cloud.</p>
-            <a href="#portfolio" class="btn btn-primary mt-3 px-4 py-2">View Our Work</a>
+    <!-- Spinner Start -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner"></div>
         </div>
-    </section>
+    <div class="container-fluid position-relative p-0">
 
-    <!-- About Us -->
-    <section id="about">
-        <div class="container">
-            
-            <div class="row align-items-center mt-4 g-4">
-                <div class="col-md-6 about-img">
-                    <img src="~/Content/Web/images/aboutUs.jpg" alt="Office">
+
+        <div id="header-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="w-100" src="~/Content/WebCreation/img/carousel-1.jpg" alt="Img">
+                    <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                        <div class="p-3" style="max-width: 900px;">
+                            <h5 class="text-white text-uppercase mb-3 animated slideInDown">Creative & Innovative</h5>
+                            <h1 class="display-1 text-white mb-md-4 animated zoomIn">Creative & Innovative Digital Solution</h1>
+                            <a href="quote.html" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Free Quote</a>
+                            <a href="" class="btn btn-outline-light py-md-3 px-md-5 animated slideInRight">Contact Us</a>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-6">
-                    <h3>We Build Future-Ready IT Solutions</h3>
-                    <p>Founded in Brisbane, <strong>Apparent</strong> is a team of passionate developers, designers, and cloud experts helping businesses embrace digital transformation.</p>
-                    <p>We specialize in building scalable enterprise applications using .NET, Azure, and modern JavaScript frameworks.</p>
-                    <ul class="list-unstyled mt-3">
-                        <li>✅ 25+ Years of Experience in Enterprise Development</li>
-                        <li>✅ 50+ Successful Projects Across Australia & Global Clients</li>
-                        <li>✅ Microsoft Azure & AWS Certified Engineers</li>
-                    </ul>
+                <div class="carousel-item">
+                    <img class="w-100" src="~/Content/WebCreation/img/carousel-2.jpg" alt="Img">
+                    <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                        <div class="p-3" style="max-width: 900px;">
+                            <h5 class="text-white text-uppercase mb-3 animated slideInDown">Creative & Innovative</h5>
+                            <h1 class="display-1 text-white mb-md-4 animated zoomIn">Creative & Innovative Digital Solution</h1>
+                            <a href="quote.html" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Free Quote</a>
+                            <a href="" class="btn btn-outline-light py-md-3 px-md-5 animated slideInRight">Contact Us</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#header-carousel"
+                    data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#header-carousel"
+                    data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+    <!-- Navbar & Carousel End -->
+    <!-- Full Screen Search Start -->
+    <div class="modal fade" id="searchModal" tabindex="-1">
+        <div class="modal-dialog modal-fullscreen">
+            <div class="modal-content" style="background: rgba(9, 30, 62, .7);">
+                <div class="modal-header border-0">
+                    <button type="button" class="btn bg-white btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body d-flex align-items-center justify-content-center">
+                    <div class="input-group" style="max-width: 600px;">
+                        <input type="text" class="form-control bg-transparent border-primary p-3" placeholder="Type search keyword">
+                        <button class="btn btn-primary px-4"><i class="bi bi-search"></i></button>
+                    </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+    <!-- Full Screen Search End -->
 
-    <!-- Portfolio -->
-    <section id="portfolio">
-        <div class="container">
-            <h2 class="section-title">Our Portfolio</h2>
-            <div class="portfolio-container">
-                <div class="portfolio-item">
-                    <img src="~/Content/Web/images/TrueArt.png" />
-                    <div><h3>TrueArt.io</h3><p>Online art marketplace built with .NET and React.</p></div>
+  
+
+
+    <!-- Facts Start -->
+    <div class="container-fluid facts py-5 pt-lg-0">
+        <div class="container py-5 pt-lg-0">
+            <div class="row gx-0">
+                <div class="col-lg-4 wow zoomIn" data-wow-delay="0.1s">
+                    <div class="bg-primary shadow d-flex align-items-center justify-content-center p-4" style="height: 150px;">
+                        <div class="bg-white d-flex align-items-center justify-content-center rounded mb-2" style="width: 60px; height: 60px;">
+                            <i class="fa fa-users text-primary"></i>
+                        </div>
+                        <div class="ps-4">
+                            <h5 class="text-white mb-0">Happy Clients</h5>
+                            <h1 class="text-white mb-0" data-toggle="counter-up">12345</h1>
+                        </div>
+                    </div>
                 </div>
-                <div class="portfolio-item">
-                    <img src="~/Content/Web/images/Apparent-Software.png" />
-                    <div><h3>Apparent</h3><p>Digital software sales built in .Net</p></div>
+                <div class="col-lg-4 wow zoomIn" data-wow-delay="0.3s">
+                    <div class="bg-light shadow d-flex align-items-center justify-content-center p-4" style="height: 150px;">
+                        <div class="bg-primary d-flex align-items-center justify-content-center rounded mb-2" style="width: 60px; height: 60px;">
+                            <i class="fa fa-check text-white"></i>
+                        </div>
+                        <div class="ps-4">
+                            <h5 class="text-primary mb-0">Projects Done</h5>
+                            <h1 class="mb-0" data-toggle="counter-up">12345</h1>
+                        </div>
+                    </div>
                 </div>
-                <div class="portfolio-item">
-                    <img src="~/Content/Web/images/VeridocSign.jpg" />
-                    <div><h3>Veridoc Sign</h3><p>Digital sign</p></div>
+                <div class="col-lg-4 wow zoomIn" data-wow-delay="0.6s">
+                    <div class="bg-primary shadow d-flex align-items-center justify-content-center p-4" style="height: 150px;">
+                        <div class="bg-white d-flex align-items-center justify-content-center rounded mb-2" style="width: 60px; height: 60px;">
+                            <i class="fa fa-award text-primary"></i>
+                        </div>
+                        <div class="ps-4">
+                            <h5 class="text-white mb-0">Win Awards</h5>
+                            <h1 class="text-white mb-0" data-toggle="counter-up">12345</h1>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+    <!-- Facts Start -->
 
-    <!-- Motivation -->
-    <section class="motivation">
-        <h2>"Innovation isn’t about technology — it’s about transforming ideas into impact."</h2>
-    </section>
-
-    <!-- Testimonials -->
-    <section id="reviews" class="text-center">
-        <div class="container">
-            <h2 class="section-title">What Our Clients Say</h2>
-            <div class="row mt-4 g-4 justify-content-center">
-                <div class="col-md-4"><div class="testimonial shadow-sm"><p>“The team delivered outstanding quality and support.”</p><strong>– James W., Melbourne</strong></div></div>
-                <div class="col-md-4"><div class="testimonial shadow-sm"><p>“Our sales grew 200% post-launch. Great experience.”</p><strong>– Sophia L., Sydney</strong></div></div>
-                <div class="col-md-4"><div class="testimonial shadow-sm"><p>“Professional, responsive, and creative — they turned our vision into reality.”</p><strong>– Aaron B., Perth</strong></div></div>
+    <!-- Features Start -->
+    <!-- Service Start -->
+    <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="container py-5">
+            <div class="section-title text-center position-relative pb-3 mb-5 mx-auto" style="max-width: 600px;">
+                <h5 class="fw-bold text-primary text-uppercase">Our Services</h5>
+                <h1 class="mb-0">Custom IT Solutions for Your Successful Business</h1>
+            </div>
+            <div class="row g-5">
+                <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.3s">
+                    <div class="service-item bg-light rounded d-flex flex-column align-items-center justify-content-center text-center">
+                        <div class="service-icon">
+                            <i class="fa fa-shield-alt text-white"></i>
+                        </div>
+                        <h4 class="mb-3">Cyber Security</h4>
+                        <p class="m-0">Amet justo dolor lorem kasd amet magna sea stet eos vero lorem ipsum dolore sed</p>
+                        <a class="btn btn-lg btn-primary rounded" href="">
+                            <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.6s">
+                    <div class="service-item bg-light rounded d-flex flex-column align-items-center justify-content-center text-center">
+                        <div class="service-icon">
+                            <i class="fa fa-chart-pie text-white"></i>
+                        </div>
+                        <h4 class="mb-3">Data Analytics</h4>
+                        <p class="m-0">Amet justo dolor lorem kasd amet magna sea stet eos vero lorem ipsum dolore sed</p>
+                        <a class="btn btn-lg btn-primary rounded" href="">
+                            <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.9s">
+                    <div class="service-item bg-light rounded d-flex flex-column align-items-center justify-content-center text-center">
+                        <div class="service-icon">
+                            <i class="fa fa-code text-white"></i>
+                        </div>
+                        <h4 class="mb-3">Web Development</h4>
+                        <p class="m-0">Amet justo dolor lorem kasd amet magna sea stet eos vero lorem ipsum dolore sed</p>
+                        <a class="btn btn-lg btn-primary rounded" href="">
+                            <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.3s">
+                    <div class="service-item bg-light rounded d-flex flex-column align-items-center justify-content-center text-center">
+                        <div class="service-icon">
+                            <i class="fab fa-android text-white"></i>
+                        </div>
+                        <h4 class="mb-3">Apps Development</h4>
+                        <p class="m-0">Amet justo dolor lorem kasd amet magna sea stet eos vero lorem ipsum dolore sed</p>
+                        <a class="btn btn-lg btn-primary rounded" href="">
+                            <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.6s">
+                    <div class="service-item bg-light rounded d-flex flex-column align-items-center justify-content-center text-center">
+                        <div class="service-icon">
+                            <i class="fa fa-search text-white"></i>
+                        </div>
+                        <h4 class="mb-3">SEO Optimization</h4>
+                        <p class="m-0">Amet justo dolor lorem kasd amet magna sea stet eos vero lorem ipsum dolore sed</p>
+                        <a class="btn btn-lg btn-primary rounded" href="">
+                            <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.9s">
+                    <div class="position-relative bg-primary rounded h-100 d-flex flex-column align-items-center justify-content-center text-center p-5">
+                        <h3 class="text-white mb-3">Call Us For Quote</h3>
+                        <p class="text-white mb-3">Clita ipsum magna kasd rebum at ipsum amet dolor justo dolor est magna stet eirmod</p>
+                        <h2 class="text-white mb-0">+012 345 6789</h2>
+                    </div>
+                </div>
             </div>
         </div>
-    </section>
+    </div>
+    <!-- Service End -->
+    <!-- Pricing Plan Start -->
+    <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="container py-5">
+            <div class="section-title text-center position-relative pb-3 mb-5 mx-auto" style="max-width: 600px;">
+                <h5 class="fw-bold text-primary text-uppercase">Pricing Plans</h5>
+                <h1 class="mb-0">We are Offering Competitive Prices for Our Clients</h1>
+            </div>
+            <div class="row g-0">
+                <div class="col-lg-4 wow slideInUp" data-wow-delay="0.6s">
+                    <div class="bg-light rounded">
+                        <div class="border-bottom py-4 px-5 mb-4">
+                            <h4 class="text-primary mb-1">Basic Plan</h4>
+                            <small class="text-uppercase">For Small Size Business</small>
+                        </div>
+                        <div class="p-5 pt-0">
+                            <h1 class="display-5 mb-3">
+                                <small class="align-top" style="font-size: 22px; line-height: 45px;">$</small>49.00<small class="align-bottom" style="font-size: 16px; line-height: 40px;">/ Month</small>
+                            </h1>
+                            <div class="d-flex justify-content-between mb-3"><span>HTML5 & CSS3</span><i class="fa fa-check text-primary pt-1"></i></div>
+                            <div class="d-flex justify-content-between mb-3"><span>Bootstrap v5</span><i class="fa fa-check text-primary pt-1"></i></div>
+                            <div class="d-flex justify-content-between mb-3"><span>Responsive Layout</span><i class="fa fa-times text-danger pt-1"></i></div>
+                            <div class="d-flex justify-content-between mb-2"><span>Cross-browser Support</span><i class="fa fa-times text-danger pt-1"></i></div>
+                            <a href="" class="btn btn-primary py-2 px-4 mt-4">Order Now</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 wow slideInUp" data-wow-delay="0.3s">
+                    <div class="bg-white rounded shadow position-relative" style="z-index: 1;">
+                        <div class="border-bottom py-4 px-5 mb-4">
+                            <h4 class="text-primary mb-1">Standard Plan</h4>
+                            <small class="text-uppercase">For Medium Size Business</small>
+                        </div>
+                        <div class="p-5 pt-0">
+                            <h1 class="display-5 mb-3">
+                                <small class="align-top" style="font-size: 22px; line-height: 45px;">$</small>99.00<small class="align-bottom" style="font-size: 16px; line-height: 40px;">/ Month</small>
+                            </h1>
+                            <div class="d-flex justify-content-between mb-3"><span>HTML5 & CSS3</span><i class="fa fa-check text-primary pt-1"></i></div>
+                            <div class="d-flex justify-content-between mb-3"><span>Bootstrap v5</span><i class="fa fa-check text-primary pt-1"></i></div>
+                            <div class="d-flex justify-content-between mb-3"><span>Responsive Layout</span><i class="fa fa-check text-primary pt-1"></i></div>
+                            <div class="d-flex justify-content-between mb-2"><span>Cross-browser Support</span><i class="fa fa-times text-danger pt-1"></i></div>
+                            <a href="" class="btn btn-primary py-2 px-4 mt-4">Order Now</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 wow slideInUp" data-wow-delay="0.9s">
+                    <div class="bg-light rounded">
+                        <div class="border-bottom py-4 px-5 mb-4">
+                            <h4 class="text-primary mb-1">Advanced Plan</h4>
+                            <small class="text-uppercase">For Large Size Business</small>
+                        </div>
+                        <div class="p-5 pt-0">
+                            <h1 class="display-5 mb-3">
+                                <small class="align-top" style="font-size: 22px; line-height: 45px;">$</small>149.00<small class="align-bottom" style="font-size: 16px; line-height: 40px;">/ Month</small>
+                            </h1>
+                            <div class="d-flex justify-content-between mb-3"><span>HTML5 & CSS3</span><i class="fa fa-check text-primary pt-1"></i></div>
+                            <div class="d-flex justify-content-between mb-3"><span>Bootstrap v5</span><i class="fa fa-check text-primary pt-1"></i></div>
+                            <div class="d-flex justify-content-between mb-3"><span>Responsive Layout</span><i class="fa fa-check text-primary pt-1"></i></div>
+                            <div class="d-flex justify-content-between mb-2"><span>Cross-browser Support</span><i class="fa fa-check text-primary pt-1"></i></div>
+                            <a href="" class="btn btn-primary py-2 px-4 mt-4">Order Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Pricing Plan End -->
 
+    <!-- About Start -->
+    <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-lg-7">
+                    <div class="section-title position-relative pb-3 mb-5">
+                        <h5 class="fw-bold text-primary text-uppercase">About Us</h5>
+                        <h1 class="mb-0">The Best IT Solution With 10 Years of Experience</h1>
+                    </div>
+                    <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum et tempor sit. Aliqu diam amet diam et eos labore. Clita erat ipsum et lorem et sit, sed stet no labore lorem sit. Sanctus clita duo justo et tempor eirmod magna dolore erat amet</p>
+                    <div class="row g-0 mb-3">
+                        <div class="col-sm-6 wow zoomIn" data-wow-delay="0.2s">
+                            <h5 class="mb-3"><i class="fa fa-check text-primary me-3"></i>Award Winning</h5>
+                            <h5 class="mb-3"><i class="fa fa-check text-primary me-3"></i>Professional Staff</h5>
+                        </div>
+                        <div class="col-sm-6 wow zoomIn" data-wow-delay="0.4s">
+                            <h5 class="mb-3"><i class="fa fa-check text-primary me-3"></i>24/7 Support</h5>
+                            <h5 class="mb-3"><i class="fa fa-check text-primary me-3"></i>Fair Prices</h5>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center mb-4 wow fadeIn" data-wow-delay="0.6s">
+                        <div class="bg-primary d-flex align-items-center justify-content-center rounded" style="width: 60px; height: 60px;">
+                            <i class="fa fa-phone-alt text-white"></i>
+                        </div>
+                        <div class="ps-4">
+                            <h5 class="mb-2">Call to ask any question</h5>
+                            <h4 class="text-primary mb-0">+012 345 6789</h4>
+                        </div>
+                    </div>
+                    <a href="quote.html" class="btn btn-primary py-3 px-5 mt-3 wow zoomIn" data-wow-delay="0.9s">Request A Quote</a>
+                </div>
+                <div class="col-lg-5" style="min-height: 500px;">
+                    <div class="position-relative h-100">
+                        <img class="position-absolute w-100 h-100 rounded wow zoomIn" data-wow-delay="0.9s" src="~/Content/WebCreation/img/about.jpg" style="object-fit: cover;" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About End -->
+    <!-- Features Start -->
+    <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="container py-5">
+            <div class="section-title text-center position-relative pb-3 mb-5 mx-auto" style="max-width: 600px;">
+                <h5 class="fw-bold text-primary text-uppercase">Why Choose Us</h5>
+                <h1 class="mb-0">We Are Here to Grow Your Business Exponentially</h1>
+            </div>
+            <div class="row g-5">
+                <div class="col-lg-4">
+                    <div class="row g-5">
+                        <div class="col-12 wow zoomIn" data-wow-delay="0.2s">
+                            <div class="bg-primary rounded d-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                                <i class="fa fa-cubes text-white"></i>
+                            </div>
+                            <h4>Best In Industry</h4>
+                            <p class="mb-0">Magna sea eos sit dolor, ipsum amet lorem diam dolor eos et diam dolor</p>
+                        </div>
+                        <div class="col-12 wow zoomIn" data-wow-delay="0.6s">
+                            <div class="bg-primary rounded d-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                                <i class="fa fa-award text-white"></i>
+                            </div>
+                            <h4>Award Winning</h4>
+                            <p class="mb-0">Magna sea eos sit dolor, ipsum amet lorem diam dolor eos et diam dolor</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4  wow zoomIn" data-wow-delay="0.9s" style="min-height: 350px;">
+                    <div class="position-relative h-100">
+                        <img class="w-100 h-100 rounded wow zoomIn" data-wow-delay="0.1s" src="~/Content/WebCreation/img/feature.jpg" style="object-fit: cover;" alt="">
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="row g-5">
+                        <div class="col-12 wow zoomIn" data-wow-delay="0.4s">
+                            <div class="bg-primary rounded d-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                                <i class="fa fa-users-cog text-white"></i>
+                            </div>
+                            <h4>Professional Staff</h4>
+                            <p class="mb-0">Magna sea eos sit dolor, ipsum amet lorem diam dolor eos et diam dolor</p>
+                        </div>
+                        <div class="col-12 wow zoomIn" data-wow-delay="0.8s">
+                            <div class="bg-primary rounded d-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                                <i class="fa fa-phone-alt text-white"></i>
+                            </div>
+                            <h4>24/7 Support</h4>
+                            <p class="mb-0">Magna sea eos sit dolor, ipsum amet lorem diam dolor eos et diam dolor</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Quote Start -->
+    <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-lg-7">
+                    <div class="section-title position-relative pb-3 mb-5">
+                        <h5 class="fw-bold text-primary text-uppercase">Request A Quote</h5>
+                        <h1 class="mb-0">Need A Free Quote? Please Feel Free to Contact Us</h1>
+                    </div>
+                    <div class="row gx-3">
+                        <div class="col-sm-6 wow zoomIn" data-wow-delay="0.2s">
+                            <h5 class="mb-4"><i class="fa fa-reply text-primary me-3"></i>Reply within 24 hours</h5>
+                        </div>
+                        <div class="col-sm-6 wow zoomIn" data-wow-delay="0.4s">
+                            <h5 class="mb-4"><i class="fa fa-phone-alt text-primary me-3"></i>24 hrs telephone support</h5>
+                        </div>
+                    </div>
+                    <p class="mb-4">Eirmod sed tempor lorem ut dolores. Aliquyam sit sadipscing kasd ipsum. Dolor ea et dolore et at sea ea at dolor, justo ipsum duo rebum sea invidunt voluptua. Eos vero eos vero ea et dolore eirmod et. Dolores diam duo invidunt lorem. Elitr ut dolores magna sit. Sea dolore sanctus sed et. Takimata takimata sanctus sed.</p>
+                    <div class="d-flex align-items-center mt-2 wow zoomIn" data-wow-delay="0.6s">
+                        <div class="bg-primary d-flex align-items-center justify-content-center rounded" style="width: 60px; height: 60px;">
+                            <i class="fa fa-phone-alt text-white"></i>
+                        </div>
+                        <div class="ps-4">
+                            <h5 class="mb-2">Call to ask any question</h5>
+                            <h4 class="text-primary mb-0">+012 345 6789</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="bg-primary rounded h-100 d-flex align-items-center p-5 wow zoomIn" data-wow-delay="0.9s">
+                        <form>
+                            <div class="row g-3">
+                                <div class="col-xl-12">
+                                    <input type="text" class="form-control bg-light border-0" placeholder="First Name" style="height: 55px;">
+                                </div>
+
+                                 <div class="col-xl-12">
+                                    <input type="text" class="form-control bg-light border-0" placeholder="Last Name" style="height: 55px;">
+                                </div>
+
+                                <div class="col-12">
+                                    <input type="email" class="form-control bg-light border-0" placeholder="Your Email" style="height: 55px;">
+                                </div>
+                                <div class="col-6">
+                             
+                                     <select class="form-select bg-light border-0" style="height: 55px;" name="countryCode" id="">
+                                    <option data-countryCode="IN" value="91" >India (+91)</option>
+                                    <option data-countryCode="US" value="1">UK (+44)</option>
+
+                                        <option data-countryCode="DZ" value="213">Algeria (+213)</option>
+                                        <option data-countryCode="AD" value="376">Andorra (+376)</option>
+                                        <option data-countryCode="AO" value="244">Angola (+244)</option>
+                                        <option data-countryCode="AI" value="1264">Anguilla (+1264)</option>
+                                        <option data-countryCode="AG" value="1268">Antigua &amp; Barbuda (+1268)</option>
+                                        <option data-countryCode="AR" value="54">Argentina (+54)</option>
+                                        <option data-countryCode="AM" value="374">Armenia (+374)</option>
+                                        <option data-countryCode="AW" value="297">Aruba (+297)</option>
+                                        <option data-countryCode="AU" value="61" Selected>Australia (+61)</option>
+                                        <option data-countryCode="AT" value="43">Austria (+43)</option>
+                                        <option data-countryCode="AZ" value="994">Azerbaijan (+994)</option>
+                                        <option data-countryCode="BS" value="1242">Bahamas (+1242)</option>
+                                        <option data-countryCode="BH" value="973">Bahrain (+973)</option>
+                                        <option data-countryCode="BD" value="880">Bangladesh (+880)</option>
+                                        <option data-countryCode="BB" value="1246">Barbados (+1246)</option>
+                                        <option data-countryCode="BY" value="375">Belarus (+375)</option>
+                                        <option data-countryCode="BE" value="32">Belgium (+32)</option>
+                                        <option data-countryCode="BZ" value="501">Belize (+501)</option>
+                                        <option data-countryCode="BJ" value="229">Benin (+229)</option>
+                                        <option data-countryCode="BM" value="1441">Bermuda (+1441)</option>
+                                        <option data-countryCode="BT" value="975">Bhutan (+975)</option>
+                                        <option data-countryCode="BO" value="591">Bolivia (+591)</option>
+                                        <option data-countryCode="BA" value="387">Bosnia Herzegovina (+387)</option>
+                                        <option data-countryCode="BW" value="267">Botswana (+267)</option>
+                                        <option data-countryCode="BR" value="55">Brazil (+55)</option>
+                                        <option data-countryCode="BN" value="673">Brunei (+673)</option>
+                                        <option data-countryCode="BG" value="359">Bulgaria (+359)</option>
+                                        <option data-countryCode="BF" value="226">Burkina Faso (+226)</option>
+                                        <option data-countryCode="BI" value="257">Burundi (+257)</option>
+                                        <option data-countryCode="KH" value="855">Cambodia (+855)</option>
+                                        <option data-countryCode="CM" value="237">Cameroon (+237)</option>
+                                        <option data-countryCode="CA" value="1">Canada (+1)</option>
+                                        <option data-countryCode="CV" value="238">Cape Verde Islands (+238)</option>
+                                        <option data-countryCode="KY" value="1345">Cayman Islands (+1345)</option>
+                                        <option data-countryCode="CF" value="236">Central African Republic (+236)</option>
+                                        <option data-countryCode="CL" value="56">Chile (+56)</option>
+                                        <option data-countryCode="CN" value="86">China (+86)</option>
+                                        <option data-countryCode="CO" value="57">Colombia (+57)</option>
+                                        <option data-countryCode="KM" value="269">Comoros (+269)</option>
+                                        <option data-countryCode="CG" value="242">Congo (+242)</option>
+                                        <option data-countryCode="CK" value="682">Cook Islands (+682)</option>
+                                        <option data-countryCode="CR" value="506">Costa Rica (+506)</option>
+                                        <option data-countryCode="HR" value="385">Croatia (+385)</option>
+                                        <option data-countryCode="CU" value="53">Cuba (+53)</option>
+                                        <option data-countryCode="CY" value="90392">Cyprus North (+90392)</option>
+                                        <option data-countryCode="CY" value="357">Cyprus South (+357)</option>
+                                        <option data-countryCode="CZ" value="42">Czech Republic (+42)</option>
+                                        <option data-countryCode="DK" value="45">Denmark (+45)</option>
+                                        <option data-countryCode="DJ" value="253">Djibouti (+253)</option>
+                                        <option data-countryCode="DM" value="1809">Dominica (+1809)</option>
+                                        <option data-countryCode="DO" value="1809">Dominican Republic (+1809)</option>
+                                        <option data-countryCode="EC" value="593">Ecuador (+593)</option>
+                                        <option data-countryCode="EG" value="20">Egypt (+20)</option>
+                                        <option data-countryCode="SV" value="503">El Salvador (+503)</option>
+                                        <option data-countryCode="GQ" value="240">Equatorial Guinea (+240)</option>
+                                        <option data-countryCode="ER" value="291">Eritrea (+291)</option>
+                                        <option data-countryCode="EE" value="372">Estonia (+372)</option>
+                                        <option data-countryCode="ET" value="251">Ethiopia (+251)</option>
+                                        <option data-countryCode="FK" value="500">Falkland Islands (+500)</option>
+                                        <option data-countryCode="FO" value="298">Faroe Islands (+298)</option>
+                                        <option data-countryCode="FJ" value="679">Fiji (+679)</option>
+                                        <option data-countryCode="FI" value="358">Finland (+358)</option>
+                                        <option data-countryCode="FR" value="33">France (+33)</option>
+                                        <option data-countryCode="GF" value="594">French Guiana (+594)</option>
+                                        <option data-countryCode="PF" value="689">French Polynesia (+689)</option>
+                                        <option data-countryCode="GA" value="241">Gabon (+241)</option>
+                                        <option data-countryCode="GM" value="220">Gambia (+220)</option>
+                                        <option data-countryCode="GE" value="7880">Georgia (+7880)</option>
+                                        <option data-countryCode="DE" value="49">Germany (+49)</option>
+                                        <option data-countryCode="GH" value="233">Ghana (+233)</option>
+                                        <option data-countryCode="GI" value="350">Gibraltar (+350)</option>
+                                        <option data-countryCode="GR" value="30">Greece (+30)</option>
+                                        <option data-countryCode="GL" value="299">Greenland (+299)</option>
+                                        <option data-countryCode="GD" value="1473">Grenada (+1473)</option>
+                                        <option data-countryCode="GP" value="590">Guadeloupe (+590)</option>
+                                        <option data-countryCode="GU" value="671">Guam (+671)</option>
+                                        <option data-countryCode="GT" value="502">Guatemala (+502)</option>
+                                        <option data-countryCode="GN" value="224">Guinea (+224)</option>
+                                        <option data-countryCode="GW" value="245">Guinea - Bissau (+245)</option>
+                                        <option data-countryCode="GY" value="592">Guyana (+592)</option>
+                                        <option data-countryCode="HT" value="509">Haiti (+509)</option>
+                                        <option data-countryCode="HN" value="504">Honduras (+504)</option>
+                                        <option data-countryCode="HK" value="852">Hong Kong (+852)</option>
+                                        <option data-countryCode="HU" value="36">Hungary (+36)</option>
+                                        <option data-countryCode="IS" value="354">Iceland (+354)</option>
+                                        <option data-countryCode="IN" value="91">India (+91)</option>
+                                        <option data-countryCode="ID" value="62">Indonesia (+62)</option>
+                                        <option data-countryCode="IR" value="98">Iran (+98)</option>
+                                        <option data-countryCode="IQ" value="964">Iraq (+964)</option>
+                                        <option data-countryCode="IE" value="353">Ireland (+353)</option>
+                                        <option data-countryCode="IL" value="972">Israel (+972)</option>
+                                        <option data-countryCode="IT" value="39">Italy (+39)</option>
+                                        <option data-countryCode="JM" value="1876">Jamaica (+1876)</option>
+                                        <option data-countryCode="JP" value="81">Japan (+81)</option>
+                                        <option data-countryCode="JO" value="962">Jordan (+962)</option>
+                                        <option data-countryCode="KZ" value="7">Kazakhstan (+7)</option>
+                                        <option data-countryCode="KE" value="254">Kenya (+254)</option>
+                                        <option data-countryCode="KI" value="686">Kiribati (+686)</option>
+                                        <option data-countryCode="KP" value="850">Korea North (+850)</option>
+                                        <option data-countryCode="KR" value="82">Korea South (+82)</option>
+                                        <option data-countryCode="KW" value="965">Kuwait (+965)</option>
+                                        <option data-countryCode="KG" value="996">Kyrgyzstan (+996)</option>
+                                        <option data-countryCode="LA" value="856">Laos (+856)</option>
+                                        <option data-countryCode="LV" value="371">Latvia (+371)</option>
+                                        <option data-countryCode="LB" value="961">Lebanon (+961)</option>
+                                        <option data-countryCode="LS" value="266">Lesotho (+266)</option>
+                                        <option data-countryCode="LR" value="231">Liberia (+231)</option>
+                                        <option data-countryCode="LY" value="218">Libya (+218)</option>
+                                        <option data-countryCode="LI" value="417">Liechtenstein (+417)</option>
+                                        <option data-countryCode="LT" value="370">Lithuania (+370)</option>
+                                        <option data-countryCode="LU" value="352">Luxembourg (+352)</option>
+                                        <option data-countryCode="MO" value="853">Macao (+853)</option>
+                                        <option data-countryCode="MK" value="389">Macedonia (+389)</option>
+                                        <option data-countryCode="MG" value="261">Madagascar (+261)</option>
+                                        <option data-countryCode="MW" value="265">Malawi (+265)</option>
+                                        <option data-countryCode="MY" value="60">Malaysia (+60)</option>
+                                        <option data-countryCode="MV" value="960">Maldives (+960)</option>
+                                        <option data-countryCode="ML" value="223">Mali (+223)</option>
+                                        <option data-countryCode="MT" value="356">Malta (+356)</option>
+                                        <option data-countryCode="MH" value="692">Marshall Islands (+692)</option>
+                                        <option data-countryCode="MQ" value="596">Martinique (+596)</option>
+                                        <option data-countryCode="MR" value="222">Mauritania (+222)</option>
+                                        <option data-countryCode="YT" value="269">Mayotte (+269)</option>
+                                        <option data-countryCode="MX" value="52">Mexico (+52)</option>
+                                        <option data-countryCode="FM" value="691">Micronesia (+691)</option>
+                                        <option data-countryCode="MD" value="373">Moldova (+373)</option>
+                                        <option data-countryCode="MC" value="377">Monaco (+377)</option>
+                                        <option data-countryCode="MN" value="976">Mongolia (+976)</option>
+                                        <option data-countryCode="MS" value="1664">Montserrat (+1664)</option>
+                                        <option data-countryCode="MA" value="212">Morocco (+212)</option>
+                                        <option data-countryCode="MZ" value="258">Mozambique (+258)</option>
+                                        <option data-countryCode="MN" value="95">Myanmar (+95)</option>
+                                        <option data-countryCode="NA" value="264">Namibia (+264)</option>
+                                        <option data-countryCode="NR" value="674">Nauru (+674)</option>
+                                        <option data-countryCode="NP" value="977">Nepal (+977)</option>
+                                        <option data-countryCode="NL" value="31">Netherlands (+31)</option>
+                                        <option data-countryCode="NC" value="687">New Caledonia (+687)</option>
+                                        <option data-countryCode="NZ" value="64">New Zealand (+64)</option>
+                                        <option data-countryCode="NI" value="505">Nicaragua (+505)</option>
+                                        <option data-countryCode="NE" value="227">Niger (+227)</option>
+                                        <option data-countryCode="NG" value="234">Nigeria (+234)</option>
+                                        <option data-countryCode="NU" value="683">Niue (+683)</option>
+                                        <option data-countryCode="NF" value="672">Norfolk Islands (+672)</option>
+                                        <option data-countryCode="NP" value="670">Northern Marianas (+670)</option>
+                                        <option data-countryCode="NO" value="47">Norway (+47)</option>
+                                        <option data-countryCode="OM" value="968">Oman (+968)</option>
+                                        <option data-countryCode="PW" value="680">Palau (+680)</option>
+                                        <option data-countryCode="PA" value="507">Panama (+507)</option>
+                                        <option data-countryCode="PG" value="675">Papua New Guinea (+675)</option>
+                                        <option data-countryCode="PY" value="595">Paraguay (+595)</option>
+                                        <option data-countryCode="PE" value="51">Peru (+51)</option>
+                                        <option data-countryCode="PH" value="63">Philippines (+63)</option>
+                                        <option data-countryCode="PL" value="48">Poland (+48)</option>
+                                        <option data-countryCode="PT" value="351">Portugal (+351)</option>
+                                        <option data-countryCode="PR" value="1787">Puerto Rico (+1787)</option>
+                                        <option data-countryCode="QA" value="974">Qatar (+974)</option>
+                                        <option data-countryCode="RE" value="262">Reunion (+262)</option>
+                                        <option data-countryCode="RO" value="40">Romania (+40)</option>
+                                        <option data-countryCode="RU" value="7">Russia (+7)</option>
+                                        <option data-countryCode="RW" value="250">Rwanda (+250)</option>
+                                        <option data-countryCode="SM" value="378">San Marino (+378)</option>
+                                        <option data-countryCode="ST" value="239">Sao Tome &amp; Principe (+239)</option>
+                                        <option data-countryCode="SA" value="966">Saudi Arabia (+966)</option>
+                                        <option data-countryCode="SN" value="221">Senegal (+221)</option>
+                                        <option data-countryCode="CS" value="381">Serbia (+381)</option>
+                                        <option data-countryCode="SC" value="248">Seychelles (+248)</option>
+                                        <option data-countryCode="SL" value="232">Sierra Leone (+232)</option>
+                                        <option data-countryCode="SG" value="65">Singapore (+65)</option>
+                                        <option data-countryCode="SK" value="421">Slovak Republic (+421)</option>
+                                        <option data-countryCode="SI" value="386">Slovenia (+386)</option>
+                                        <option data-countryCode="SB" value="677">Solomon Islands (+677)</option>
+                                        <option data-countryCode="SO" value="252">Somalia (+252)</option>
+                                        <option data-countryCode="ZA" value="27">South Africa (+27)</option>
+                                        <option data-countryCode="ES" value="34">Spain (+34)</option>
+                                        <option data-countryCode="LK" value="94">Sri Lanka (+94)</option>
+                                        <option data-countryCode="SH" value="290">St. Helena (+290)</option>
+                                        <option data-countryCode="KN" value="1869">St. Kitts (+1869)</option>
+                                        <option data-countryCode="SC" value="1758">St. Lucia (+1758)</option>
+                                        <option data-countryCode="SD" value="249">Sudan (+249)</option>
+                                        <option data-countryCode="SR" value="597">Suriname (+597)</option>
+                                        <option data-countryCode="SZ" value="268">Swaziland (+268)</option>
+                                        <option data-countryCode="SE" value="46">Sweden (+46)</option>
+                                        <option data-countryCode="CH" value="41">Switzerland (+41)</option>
+                                        <option data-countryCode="SI" value="963">Syria (+963)</option>
+                                        <option data-countryCode="TW" value="886">Taiwan (+886)</option>
+                                        <option data-countryCode="TJ" value="7">Tajikstan (+7)</option>
+                                        <option data-countryCode="TH" value="66">Thailand (+66)</option>
+                                        <option data-countryCode="TG" value="228">Togo (+228)</option>
+                                        <option data-countryCode="TO" value="676">Tonga (+676)</option>
+                                        <option data-countryCode="TT" value="1868">Trinidad &amp; Tobago (+1868)</option>
+                                        <option data-countryCode="TN" value="216">Tunisia (+216)</option>
+                                        <option data-countryCode="TR" value="90">Turkey (+90)</option>
+                                        <option data-countryCode="TM" value="7">Turkmenistan (+7)</option>
+                                        <option data-countryCode="TM" value="993">Turkmenistan (+993)</option>
+                                        <option data-countryCode="TC" value="1649">Turks &amp; Caicos Islands (+1649)</option>
+                                        <option data-countryCode="TV" value="688">Tuvalu (+688)</option>
+                                        <option data-countryCode="UG" value="256">Uganda (+256)</option>
+
+                                        <option data-countryCode="UA" value="380">Ukraine (+380)</option>
+                                        <option data-countryCode="AE" value="971">United Arab Emirates (+971)</option>
+                                        <option data-countryCode="UY" value="598">Uruguay (+598)</option>
+
+                                        <option data-countryCode="UZ" value="7">Uzbekistan (+7)</option>
+                                        <option data-countryCode="VU" value="678">Vanuatu (+678)</option>
+                                        <option data-countryCode="VA" value="379">Vatican City (+379)</option>
+                                        <option data-countryCode="VE" value="58">Venezuela (+58)</option>
+                                        <option data-countryCode="VN" value="84">Vietnam (+84)</option>
+                                        <option data-countryCode="VG" value="84">Virgin Islands - British (+1284)</option>
+                                        <option data-countryCode="VI" value="84">Virgin Islands - US (+1340)</option>
+                                        <option data-countryCode="WF" value="681">Wallis &amp; Futuna (+681)</option>
+                                        <option data-countryCode="YE" value="969">Yemen (North)(+969)</option>
+                                        <option data-countryCode="YE" value="967">Yemen (South)(+967)</option>
+                                        <option data-countryCode="ZM" value="260">Zambia (+260)</option>
+                                        <option data-countryCode="ZW" value="263">Zimbabwe (+263)</option>
+                                </select>
+                                </div>
+                                
+                                <div class="col-6">
+      <input type="tel"
+       class="form-control bg-light border-0"
+       placeholder="Phone Number"
+       style="height: 55px;">
+                                </div>
+                                <div class="col-12">
+                                    <textarea class="form-control bg-light border-0" rows="3" placeholder="Please describe what you need help with"></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <button class="btn btn-dark w-100 py-3" type="submit">Request A Quote</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Quote End -->
+    <!-- Testimonial Start -->
+    <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="container py-5">
+            <div class="section-title text-center position-relative pb-3 mb-4 mx-auto" style="max-width: 600px;">
+                <h5 class="fw-bold text-primary text-uppercase">Testimonial</h5>
+                <h1 class="mb-0">What Our Clients Say About Our Digital Services</h1>
+            </div>
+            <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.6s">
+                <div class="testimonial-item bg-light my-4">
+                    <div class="d-flex align-items-center border-bottom pt-5 pb-4 px-5">
+                        <img class="img-fluid rounded" src="~/Content/WebCreation/img/testimonial-1.jpg" style="width: 60px; height: 60px;" alt="img">
+                        <div class="ps-4">
+                            <h4 class="text-primary mb-1">Client Name</h4>
+                            <small class="text-uppercase">Profession</small>
+                        </div>
+                    </div>
+                    <div class="pt-4 pb-5 px-5">
+                        Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam
+                    </div>
+                </div>
+                <div class="testimonial-item bg-light my-4">
+                    <div class="d-flex align-items-center border-bottom pt-5 pb-4 px-5">
+                        <img class="img-fluid rounded" src="~/Content/WebCreation/img/testimonial-2.jpg" style="width: 60px; height: 60px;" alt="img">
+                        <div class="ps-4">
+                            <h4 class="text-primary mb-1">Client Name</h4>
+                            <small class="text-uppercase">Profession</small>
+                        </div>
+                    </div>
+                    <div class="pt-4 pb-5 px-5">
+                        Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam
+                    </div>
+                </div>
+                <div class="testimonial-item bg-light my-4">
+                    <div class="d-flex align-items-center border-bottom pt-5 pb-4 px-5">
+                        <img class="img-fluid rounded" src="~/Content/WebCreation/img/testimonial-3.jpg" style="width: 60px; height: 60px;" alt="img">
+                        <div class="ps-4">
+                            <h4 class="text-primary mb-1">Client Name</h4>
+                            <small class="text-uppercase">Profession</small>
+                        </div>
+                    </div>
+                    <div class="pt-4 pb-5 px-5">
+                        Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam
+                    </div>
+                </div>
+                <div class="testimonial-item bg-light my-4">
+                    <div class="d-flex align-items-center border-bottom pt-5 pb-4 px-5">
+                        <img class="img-fluid rounded" src="~/Content/WebCreation/img/testimonial-4.jpg" style="width: 60px; height: 60px;" alt="img">
+                        <div class="ps-4">
+                            <h4 class="text-primary mb-1">Client Name</h4>
+                            <small class="text-uppercase">Profession</small>
+                        </div>
+                    </div>
+                    <div class="pt-4 pb-5 px-5">
+                        Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Testimonial End -->
+    <!-- Team Start -->
+    <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="container py-5">
+            <div class="section-title text-center position-relative pb-3 mb-5 mx-auto" style="max-width: 600px;">
+                <h5 class="fw-bold text-primary text-uppercase">Team Members</h5>
+                <h1 class="mb-0">Professional Stuffs Ready to Help Your Business</h1>
+            </div>
+            <div class="row g-5">
+                <div class="col-lg-4 wow slideInUp" data-wow-delay="0.3s">
+                    <div class="team-item bg-light rounded overflow-hidden">
+                        <div class="team-img position-relative overflow-hidden">
+                            <img class="img-fluid w-100" src="~/Content/WebCreation/img/team-1.jpg" alt="">
+                            <div class="team-social">
+                                <a class="btn btn-lg btn-primary btn-lg-square rounded" href=""><i class="fab fa-twitter fw-normal"></i></a>
+                                <a class="btn btn-lg btn-primary btn-lg-square rounded" href=""><i class="fab fa-facebook-f fw-normal"></i></a>
+                                <a class="btn btn-lg btn-primary btn-lg-square rounded" href=""><i class="fab fa-instagram fw-normal"></i></a>
+                                <a class="btn btn-lg btn-primary btn-lg-square rounded" href=""><i class="fab fa-linkedin-in fw-normal"></i></a>
+                            </div>
+                        </div>
+                        <div class="text-center py-4">
+                            <h4 class="text-primary">Full Name</h4>
+                            <p class="text-uppercase m-0">Designation</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 wow slideInUp" data-wow-delay="0.6s">
+                    <div class="team-item bg-light rounded overflow-hidden">
+                        <div class="team-img position-relative overflow-hidden">
+                            <img class="img-fluid w-100" src="~/Content/WebCreation/img/team-2.jpg" alt="">
+                            <div class="team-social">
+                                <a class="btn btn-lg btn-primary btn-lg-square rounded" href=""><i class="fab fa-twitter fw-normal"></i></a>
+                                <a class="btn btn-lg btn-primary btn-lg-square rounded" href=""><i class="fab fa-facebook-f fw-normal"></i></a>
+                                <a class="btn btn-lg btn-primary btn-lg-square rounded" href=""><i class="fab fa-instagram fw-normal"></i></a>
+                                <a class="btn btn-lg btn-primary btn-lg-square rounded" href=""><i class="fab fa-linkedin-in fw-normal"></i></a>
+                            </div>
+                        </div>
+                        <div class="text-center py-4">
+                            <h4 class="text-primary">Full Name</h4>
+                            <p class="text-uppercase m-0">Designation</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 wow slideInUp" data-wow-delay="0.9s">
+                    <div class="team-item bg-light rounded overflow-hidden">
+                        <div class="team-img position-relative overflow-hidden">
+                            <img class="img-fluid w-100" src="~/Content/WebCreation/img/team-3.jpg" alt="">
+                            <div class="team-social">
+                                <a class="btn btn-lg btn-primary btn-lg-square rounded" href=""><i class="fab fa-twitter fw-normal"></i></a>
+                                <a class="btn btn-lg btn-primary btn-lg-square rounded" href=""><i class="fab fa-facebook-f fw-normal"></i></a>
+                                <a class="btn btn-lg btn-primary btn-lg-square rounded" href=""><i class="fab fa-instagram fw-normal"></i></a>
+                                <a class="btn btn-lg btn-primary btn-lg-square rounded" href=""><i class="fab fa-linkedin-in fw-normal"></i></a>
+                            </div>
+                        </div>
+                        <div class="text-center py-4">
+                            <h4 class="text-primary">Full Name</h4>
+                            <p class="text-uppercase m-0">Designation</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Team End -->
+    <!-- Blog Start -->
+    <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="container py-5">
+            <div class="section-title text-center position-relative pb-3 mb-5 mx-auto" style="max-width: 600px;">
+                <h5 class="fw-bold text-primary text-uppercase">Latest Blog</h5>
+                <h1 class="mb-0">Read The Latest Articles from Our Blog Post</h1>
+            </div>
+            <div class="row g-5">
+                <div class="col-lg-4 wow slideInUp" data-wow-delay="0.3s">
+                    <div class="blog-item bg-light rounded overflow-hidden">
+                        <div class="blog-img position-relative overflow-hidden">
+                            <img class="img-fluid" src="~/Content/WebCreation/img/blog-1.jpg" alt="">
+                            <a class="position-absolute top-0 start-0 bg-primary text-white rounded-end mt-5 py-2 px-4" href="">Web Design</a>
+                        </div>
+                        <div class="p-4">
+                            <div class="d-flex mb-3">
+                                <small class="me-3"><i class="far fa-user text-primary me-2"></i>John Doe</small>
+                                <small><i class="far fa-calendar-alt text-primary me-2"></i>01 Jan, 2045</small>
+                            </div>
+                            <h4 class="mb-3">How to build a website</h4>
+                            <p>Dolor et eos labore stet justo sed est sed sed sed dolor stet amet</p>
+                            <a class="text-uppercase" href="">Read More <i class="bi bi-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 wow slideInUp" data-wow-delay="0.6s">
+                    <div class="blog-item bg-light rounded overflow-hidden">
+                        <div class="blog-img position-relative overflow-hidden">
+                            <img class="img-fluid" src="~/Content/WebCreation/img/blog-2.jpg" alt="">
+                            <a class="position-absolute top-0 start-0 bg-primary text-white rounded-end mt-5 py-2 px-4" href="">Web Design</a>
+                        </div>
+                        <div class="p-4">
+                            <div class="d-flex mb-3">
+                                <small class="me-3"><i class="far fa-user text-primary me-2"></i>John Doe</small>
+                                <small><i class="far fa-calendar-alt text-primary me-2"></i>01 Jan, 2045</small>
+                            </div>
+                            <h4 class="mb-3">How to build a website</h4>
+                            <p>Dolor et eos labore stet justo sed est sed sed sed dolor stet amet</p>
+                            <a class="text-uppercase" href="">Read More <i class="bi bi-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 wow slideInUp" data-wow-delay="0.9s">
+                    <div class="blog-item bg-light rounded overflow-hidden">
+                        <div class="blog-img position-relative overflow-hidden">
+                            <img class="img-fluid" src="~/Content/WebCreation/img/blog-3.jpg" alt="">
+                            <a class="position-absolute top-0 start-0 bg-primary text-white rounded-end mt-5 py-2 px-4" href="">Web Design</a>
+                        </div>
+                        <div class="p-4">
+                            <div class="d-flex mb-3">
+                                <small class="me-3"><i class="far fa-user text-primary me-2"></i>John Doe</small>
+                                <small><i class="far fa-calendar-alt text-primary me-2"></i>01 Jan, 2045</small>
+                            </div>
+                            <h4 class="mb-3">How to build a website</h4>
+                            <p>Dolor et eos labore stet justo sed est sed sed sed dolor stet amet</p>
+                            <a class="text-uppercase" href="">Read More <i class="bi bi-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Blog Start -->
+    <!-- Vendor Start -->
+    <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="container py-5 mb-5">
+            <div class="bg-white">
+                <div class="owl-carousel vendor-carousel">
+                    <img src="~/Content/WebCreation/img/vendor-1.jpg" alt="">
+                    <img src="~/Content/WebCreation/img/vendor-2.jpg" alt="">
+                    <img src="~/Content/WebCreation/img/vendor-3.jpg" alt="">
+                    <img src="~/Content/WebCreation/img/vendor-4.jpg" alt="">
+                    <img src="~/Content/WebCreation/img/vendor-5.jpg" alt="">
+                    <img src="~/Content/WebCreation/img/vendor-6.jpg" alt="">
+                    <img src="~/Content/WebCreation/img/vendor-7.jpg" alt="">
+                    <img src="~/Content/WebCreation/img/vendor-8.jpg" alt="">
+                    <img src="~/Content/WebCreation/img/vendor-9.jpg" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Vendor End -->
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded back-to-top"><i class="bi bi-arrow-up"></i></a>
 
 </section>
+
+
+
+
