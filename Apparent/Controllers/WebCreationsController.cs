@@ -15,5 +15,10 @@ namespace Apparent.Controllers
         {
             return View();
         }
+
+        public ActionResult PremiumServices()
+        {
+            return View();
+        }
     }
 }
